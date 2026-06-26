@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<title>AEO·GEO Lab — Plan de consultoría 90 días</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  --paper:#F8FAFC;
+  --paper-soft:#F1F5F9;
+  --ink:#0F172A;
+  --ink-soft:#475569;
+  --ink-faint:#94A3B8;
+  --line:#E2E8F0;
+  --shadow:0 1px 3px rgba(15,23,42,0.07),0 1px 0 rgba(15,23,42,0.04);
+
+  --void:#0F172A;
+  --void-soft:#1E293B;
+  --cyan:#0EA5E9;
+  --cyan-deep:#0369A1;
+  --cyan-pale:#E0F2FE;
+  --violet:#7C3AED;
+  --violet-deep:#5B21B6;
+  --violet-pale:#EDE9FE;
+  --emerald:#059669;
+  --emerald-pale:#ECFDF5;
+  --amber:#D97706;
+  --amber-pale:#FFFBEB;
+  --rose:#E11D48;
+  --rose-pale:#FFF1F2;
+
+  --neon-cyan:#22D3EE;
+  --neon-violet:#A78BFA;
+  --neon-grad:linear-gradient(135deg,var(--neon-cyan) 0%,var(--violet) 100%);
+  --neon-grad-soft:linear-gradient(135deg,rgba(34,211,238,0.1) 0%,rgba(124,58,237,0.1) 100%);
+  --neon-glow:0 0 0 1px rgba(124,58,237,0.3),0 0 20px rgba(124,58,237,0.15);
+  --neon-glow-cyan:0 0 0 1px rgba(34,211,238,0.4),0 0 16px rgba(34,211,238,0.2);
+  --glow-emerald:0 0 0 1px rgba(5,150,105,0.4),0 0 14px rgba(5,150,105,0.2);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  background-image:
+    radial-gradient(ellipse 900px 600px at 0% -5%,rgba(14,165,233,0.06),transparent),
+    radial-gradient(ellipse 700px 500px at 100% 10%,rgba(124,58,237,0.05),transparent);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:720px;margin:0 auto;padding:32px 20px 80px;}
+
+/* HEADER */
+.slate{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:18px;padding-bottom:20px;border-bottom:1px solid var(--line);
+}
+.slate-brand{font-weight:800;font-size:21px;letter-spacing:-0.01em;color:var(--ink);}
+.slate-brand .aeo{color:var(--cyan-deep);}
+.slate-brand .geo{color:var(--violet);}
+.slate-brand .sep{color:var(--ink-faint);font-weight:400;margin:0 1px;}
+.slate-sub{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px;}
+.slate-stats{display:flex;gap:20px;align-items:center;}
+.stat{display:flex;flex-direction:column;align-items:flex-end;}
+.stat-num{font-size:24px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-0.02em;}
+.stat-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px;}
+.stat.streak-stat{background:var(--void);border-radius:10px;padding:8px 14px 7px;align-items:center;}
+.stat-num.streak{color:var(--neon-cyan);text-shadow:0 0 16px rgba(34,211,238,0.5);}
+.stat.streak-stat .stat-label{color:var(--neon-violet);opacity:0.9;}
+
+/* COMPLIANCE BAR */
+.compliance-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border-radius:12px;padding:11px 16px;margin-bottom:20px;cursor:pointer;
+  user-select:none;font-size:12.5px;font-weight:600;transition:all 0.2s;border:1px solid;
+}
+.comp-left{display:flex;align-items:center;gap:9px;line-height:1.3;}
+.comp-icon{font-size:15px;}
+.comp-cycle{font-size:10.5px;font-weight:600;opacity:0.7;white-space:nowrap;text-transform:uppercase;letter-spacing:0.06em;}
+.compliance-bar.pendiente{background:var(--rose-pale);border-color:rgba(225,29,72,0.3);color:var(--rose);}
+.compliance-bar.enviada{background:var(--cyan-pale);border-color:rgba(3,105,161,0.3);color:var(--cyan-deep);}
+.compliance-bar.aprobada{background:var(--void);border-color:transparent;color:var(--neon-cyan);box-shadow:var(--glow-emerald);}
+.compliance-bar.aprobada .comp-cycle{color:var(--neon-violet);}
+
+/* PROGRESS RAIL */
+.rail-card{
+  background:white;border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin-bottom:20px;box-shadow:var(--shadow);
+}
+.rail-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+.rail-title{font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+.rail-pct{font-size:14px;color:var(--violet-deep);font-weight:700;}
+.rail-track{height:7px;background:var(--paper-soft);border-radius:6px;overflow:hidden;}
+.rail-fill{height:100%;background:var(--neon-grad);border-radius:6px;transition:width 0.6s cubic-bezier(.22,1,.36,1);}
+.rail-phases{display:flex;justify-content:space-between;margin-top:10px;font-size:10px;color:var(--ink-faint);gap:4px;}
+.rail-phases span{flex:1;text-align:center;}
+.rail-phases span:first-child{text-align:left;}
+.rail-phases span:last-child{text-align:right;}
+.rail-phases span.active{color:var(--violet-deep);font-weight:700;}
+
+/* MISSION CARD */
+.mission-card{
+  background:white;border:1px solid var(--line);border-radius:18px;padding:0;
+  margin-bottom:18px;box-shadow:0 4px 20px rgba(15,23,42,0.07),var(--shadow);
+  overflow:hidden;position:relative;
+}
+.mission-tape{position:absolute;top:0;left:0;right:0;height:4px;background:var(--neon-grad);}
+.mission-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0;}
+.mission-tag{
+  font-size:10.5px;font-weight:700;letter-spacing:0.1em;color:white;
+  background:var(--void);padding:5px 10px;border-radius:5px;
+  font-family:'JetBrains Mono',monospace;
+}
+.phase-tag{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cyan-deep);font-weight:600;}
+.mission-body{padding:16px 24px 24px;}
+.mission-title{
+  font-size:23px;font-weight:700;line-height:1.28;color:var(--ink);
+  margin:6px 0 10px;letter-spacing:-0.01em;
+}
+.mission-desc{font-size:14.5px;line-height:1.65;color:var(--ink-soft);margin-bottom:16px;}
+.mission-meta{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.meta-pill{
+  display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);
+  background:var(--paper-soft);padding:5px 11px;border-radius:20px;border:1px solid var(--line);
+}
+.meta-pill b{color:var(--ink);font-weight:600;}
+
+/* COLLAPSIBLE SECTION TOGGLE (tutorial + chat share base) */
+.sec-toggle{
+  display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+  user-select:none;font-size:13px;font-weight:600;padding:11px 0;margin-bottom:6px;
+  border-top:1px dashed var(--line);
+}
+.sec-toggle.tut{color:var(--cyan-deep);}
+.sec-toggle.chat{color:var(--violet-deep);border-bottom:1px dashed var(--line);}
+.sec-toggle:hover{color:var(--violet);}
+.sec-toggle-left{display:flex;align-items:center;gap:8px;}
+.sec-chevron{font-size:11px;transition:transform 0.25s;color:var(--ink-faint);}
+.sec-chevron.open{transform:rotate(180deg);}
+.mini-badge{
+  font-size:11px;color:var(--ink-faint);font-weight:600;background:var(--paper-soft);
+  padding:2px 9px;border-radius:10px;border:1px solid var(--line);transition:all 0.2s;
+}
+.mini-badge.complete{background:var(--void);color:var(--neon-cyan);border-color:transparent;box-shadow:var(--neon-glow-cyan);}
+
+.panel{display:none;}
+.panel.open{display:block;}
+
+/* TUTORIAL PANEL */
+.tutorial-panel{background:var(--paper-soft);border-radius:10px;padding:16px 16px 18px;margin-bottom:16px;}
+.level-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.level-bar-track{flex:1;height:5px;background:var(--line);border-radius:6px;overflow:hidden;}
+.level-bar-fill{height:100%;background:var(--neon-grad);border-radius:6px;transition:width 0.45s cubic-bezier(.22,1,.36,1);}
+.level-bar-label{font-size:11px;font-weight:700;color:var(--ink-soft);white-space:nowrap;}
+
+.why-box{
+  display:flex;gap:10px;background:white;border:1px solid var(--cyan-pale);
+  border-left:3px solid var(--cyan);border-radius:8px;padding:11px 14px;
+  margin-bottom:14px;font-size:13px;color:var(--ink-soft);line-height:1.55;
+}
+.why-box b{color:var(--cyan-deep);}
+
+.tutorial-step{
+  background:white;border:1px solid var(--line);border-radius:10px;
+  margin-bottom:7px;overflow:hidden;transition:border-color 0.2s,background 0.2s;
+}
+.tutorial-step.step-done{background:var(--emerald-pale);border-color:var(--emerald);}
+.tutorial-step-row{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;cursor:pointer;}
+.step-check{
+  flex-shrink:0;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--ink-faint);
+  background:white;margin-top:1px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:transparent;transition:all 0.15s;
+}
+.tutorial-step.step-done .step-check{background:var(--emerald);border-color:var(--emerald);color:white;}
+.step-main{flex:1;}
+.step-title{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.45;}
+.tutorial-step.step-done .step-title{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--ink-faint);}
+.step-title .step-num-tag{color:var(--violet);font-weight:700;margin-right:4px;}
+.step-title b{color:var(--cyan-deep);font-weight:600;}
+.step-title i,.step-detail i{font-style:italic;color:var(--ink);}
+.step-title code,.step-detail code{
+  background:var(--paper-soft);padding:1px 6px;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--violet-deep);font-style:normal;
+}
+.step-detail{
+  font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin-top:6px;
+  padding-top:8px;border-top:1px dashed var(--line);
+}
+.step-detail b{color:var(--cyan-deep);font-weight:600;}
+
+.tutorial-tip{
+  display:flex;gap:10px;background:var(--amber-pale);border-radius:8px;
+  padding:10px 14px;margin-top:10px;font-size:12.5px;color:var(--amber);
+  line-height:1.5;border:1px solid rgba(217,119,6,0.2);
+}
+.tutorial-tip b{color:var(--ink);}
+.tutorial-complete-banner{
+  display:flex;align-items:center;gap:8px;background:var(--void);color:var(--neon-cyan);
+  border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12.5px;font-weight:600;
+  box-shadow:var(--neon-glow-cyan);
+}
+
+/* CHAT PANEL */
+.chat-panel{background:var(--paper-soft);border-radius:10px;padding:14px;margin-bottom:16px;}
+.chat-connect{text-align:center;padding:6px 4px;}
+.chat-connect-title{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.chat-connect-sub{font-size:12px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
+.chat-connect-sub a{color:var(--violet-deep);font-weight:600;}
+.chat-key-row{display:flex;gap:8px;}
+.chat-key-input{
+  flex:1;border:1px solid var(--line);background:white;border-radius:8px;padding:9px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);
+}
+.chat-key-input:focus{outline:none;border-color:var(--violet);box-shadow:var(--neon-glow);}
+.chat-key-note{font-size:10.5px;color:var(--ink-faint);margin-top:9px;line-height:1.45;}
+
+.chat-log{display:flex;flex-direction:column;gap:9px;max-height:340px;overflow-y:auto;margin-bottom:10px;padding-right:2px;}
+.chat-msg{font-size:13px;line-height:1.55;border-radius:10px;padding:9px 12px;max-width:92%;}
+.chat-msg.user{align-self:flex-end;background:var(--void);color:white;border-bottom-right-radius:3px;}
+.chat-msg.assistant{align-self:flex-start;background:white;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:3px;}
+.chat-msg.assistant b{color:var(--violet-deep);}
+.chat-msg.assistant code{background:var(--paper-soft);padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--violet-deep);}
+.chat-msg.thinking{align-self:flex-start;color:var(--ink-faint);font-style:italic;font-size:12.5px;}
+.chat-msg.error{align-self:stretch;max-width:100%;background:var(--rose-pale);border:1px solid rgba(225,29,72,0.25);color:var(--rose);font-size:12px;}
+
+.chat-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.chat-chip{
+  font-size:11.5px;font-weight:500;color:var(--violet-deep);background:white;
+  border:1px solid var(--violet-pale);border-radius:16px;padding:5px 11px;cursor:pointer;transition:all 0.15s;
+}
+.chat-chip:hover{background:var(--violet);color:white;border-color:var(--violet);}
+
+.chat-input-row{display:flex;gap:8px;align-items:flex-end;}
+.chat-input{
+  flex:1;border:1px solid var(--line);background:white;border-radius:10px;padding:10px 12px;
+  font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);resize:none;min-height:42px;max-height:120px;line-height:1.5;
+}
+.chat-input:focus{outline:none;border-color:var(--violet);box-shadow:var(--neon-glow);}
+.chat-send{
+  background:var(--violet);color:white;border:none;border-radius:10px;padding:0 16px;height:42px;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s;white-space:nowrap;
+}
+.chat-send:hover{background:var(--void);box-shadow:var(--neon-glow);}
+.chat-send:disabled{opacity:0.45;cursor:not-allowed;}
+.chat-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.chat-model{font-size:10px;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;}
+.chat-key-manage{font-size:10.5px;color:var(--ink-faint);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;}
+.chat-key-manage:hover{color:var(--rose);}
+
+/* TIMER */
+.timer-zone{
+  display:flex;align-items:center;gap:16px;background:var(--paper-soft);
+  border-radius:12px;padding:14px 18px;margin-bottom:16px;border:1px solid var(--line);
+}
+.timer-display{
+  font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:600;
+  color:var(--ink);min-width:88px;letter-spacing:0.02em;
+}
+.timer-display.running{color:var(--cyan-deep);}
+.timer-controls{display:flex;gap:8px;flex:1;}
+.tbtn{
+  border:1px solid var(--line);background:white;color:var(--ink);font-family:'Inter',sans-serif;
+  font-size:12.5px;font-weight:600;padding:9px 14px;border-radius:8px;cursor:pointer;transition:all 0.15s;
+}
+.tbtn:hover{background:var(--void);color:white;border-color:var(--neon-violet);box-shadow:var(--neon-glow);}
+.tbtn:active{transform:scale(0.97);}
+.tbtn.primary{background:var(--violet);color:white;border-color:var(--violet);}
+.tbtn.primary:hover{background:var(--void);border-color:var(--neon-cyan);box-shadow:var(--neon-glow-cyan);}
+
+textarea.log-input{
+  width:100%;border:1px solid var(--line);background:white;border-radius:10px;
+  padding:12px 14px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--ink);
+  resize:vertical;min-height:62px;margin-bottom:14px;line-height:1.5;
+}
+textarea.log-input:focus{outline:none;border-color:var(--violet);box-shadow:var(--neon-glow);}
+textarea.log-input::placeholder{color:var(--ink-faint);}
+
+.action-row{display:flex;gap:10px;}
+.btn-complete{
+  flex:1;background:var(--void);color:white;border:1px solid var(--void);
+  font-family:'Inter',sans-serif;font-weight:700;font-size:14px;padding:14px;
+  border-radius:10px;cursor:pointer;transition:all 0.15s;letter-spacing:0.01em;
+}
+.btn-complete:hover{background:var(--violet);border-color:var(--violet);box-shadow:var(--neon-glow);transform:translateY(-1px);}
+.btn-complete:active{transform:translateY(0);}
+.btn-skip{
+  background:transparent;color:var(--ink-faint);border:1px solid var(--line);
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:14px 18px;
+  border-radius:10px;cursor:pointer;transition:all 0.15s;
+}
+.btn-skip:hover{color:var(--violet);border-color:var(--violet);}
+
+/* DONE STATE */
+.done-flash{text-align:center;padding:48px 24px;}
+.done-icon{font-size:40px;margin-bottom:6px;}
+.done-title{font-size:22px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em;}
+.done-sub{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px;}
+.empty-state{text-align:center;padding:56px 24px;}
+.empty-state .done-icon{font-size:46px;}
+
+/* HISTORY + GLOSSARY toggles */
+.list-toggle{
+  display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+  padding:14px 20px;background:white;border:1px solid var(--line);border-radius:14px;
+  margin-bottom:12px;user-select:none;box-shadow:var(--shadow);
+}
+.list-toggle:hover{background:var(--paper-soft);}
+.list-toggle-label{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+.list-chevron{font-size:13px;color:var(--ink-faint);transition:transform 0.25s;}
+.list-chevron.open{transform:rotate(180deg);}
+.list-panel{display:none;margin-bottom:20px;}
+.list-panel.open{display:block;}
+
+.phase-block{margin-bottom:18px;}
+.phase-block-head{
+  font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet-deep);
+  font-weight:700;margin:0 4px 8px;display:flex;justify-content:space-between;
+}
+.task-row{
+  display:flex;align-items:flex-start;gap:12px;background:white;border:1px solid var(--line);
+  border-radius:10px;padding:11px 14px;margin-bottom:6px;box-shadow:var(--shadow);
+}
+.task-row.done{opacity:0.5;}
+.task-check{
+  width:18px;height:18px;border-radius:50%;border:1.5px solid var(--ink-faint);
+  flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:transparent;
+}
+.task-row.done .task-check{background:var(--emerald);border-color:var(--emerald);color:white;}
+.task-text{flex:1;}
+.task-text-title{font-size:13.5px;color:var(--ink);font-weight:500;line-height:1.4;}
+.task-row.done .task-text-title{text-decoration:line-through;text-decoration-color:var(--ink-faint);}
+.task-note{font-size:12px;color:var(--ink-soft);margin-top:3px;font-style:italic;line-height:1.4;}
+.task-when{font-size:10.5px;color:var(--ink-faint);white-space:nowrap;margin-top:2px;}
+
+/* GLOSSARY */
+.gloss-panel{padding:2px 2px 8px;}
+.gloss-item{background:white;border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:8px;box-shadow:var(--shadow);}
+.gloss-item h4{margin:0 0 5px;font-size:13.5px;color:var(--ink);font-weight:700;}
+.gloss-item h4 .gloss-num{color:var(--violet);font-family:'JetBrains Mono',monospace;margin-right:6px;}
+.gloss-item p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.55;}
+.gloss-item p b{color:var(--cyan-deep);}
+.gloss-item code{background:var(--paper-soft);padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--violet-deep);}
+.gloss-section-label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet-deep);font-weight:700;margin:6px 4px 10px;}
+
+.reset-zone{text-align:center;margin-top:30px;padding-top:18px;border-top:1px solid var(--line);}
+.reset-link{
+  font-size:11.5px;color:var(--ink-faint);text-decoration:underline;cursor:pointer;
+  background:none;border:none;font-family:'Inter',sans-serif;
+}
+.reset-link:hover{color:var(--rose);}
+
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);
+  background:var(--void);color:white;font-size:13px;font-weight:500;padding:11px 20px;
+  border-radius:10px;opacity:0;pointer-events:none;transition:all 0.3s ease;z-index:50;
+  white-space:nowrap;box-shadow:0 0 0 1px rgba(34,211,238,0.2),0 8px 24px rgba(0,0,0,0.2);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media(max-width:480px){
+  .slate{flex-direction:column;gap:14px;}
+  .slate-stats{align-self:flex-end;}
+  .mission-title{font-size:20px;}
+  .timer-display{font-size:26px;}
+  .rail-phases{font-size:9px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+
+  <div class="slate">
+    <div>
+      <div class="slate-brand"><span class="aeo">AEO</span><span class="sep">·</span><span class="geo">GEO</span> Lab</div>
+      <div class="slate-sub">Consultoría · plan 90 días</div>
+    </div>
+    <div class="slate-stats">
+      <div class="stat streak-stat">
+        <div class="stat-num streak" id="streakNum">0</div>
+        <div class="stat-label">racha</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="doneNum">0</div>
+        <div class="stat-label">misiones</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compliance-bar" id="complianceBar">
+    <div class="comp-left"><span class="comp-icon">&#x1F6E1;&#xFE0F;</span> <span class="comp-text" id="compText"></span></div>
+    <span class="comp-cycle" id="compCycle">tocar para cambiar</span>
+  </div>
+
+  <div class="rail-card">
+    <div class="rail-top">
+      <div class="rail-title">Progreso del plan</div>
+      <div class="rail-pct" id="railPct">0%</div>
+    </div>
+    <div class="rail-track"><div class="rail-fill" id="railFill" style="width:0%"></div></div>
+    <div class="rail-phases" id="railPhases"></div>
+  </div>
+
+  <div id="missionSlot"></div>
+
+  <div class="list-toggle" id="historyToggle">
+    <span class="list-toggle-label">Ver todas las misiones del plan</span>
+    <span class="list-chevron" id="historyChevron">&#x25BE;</span>
+  </div>
+  <div class="list-panel" id="historyPanel"></div>
+
+  <div class="list-toggle" id="glossToggle">
+    <span class="list-toggle-label">Glosario AEO/GEO &mdash; consulta rápida</span>
+    <span class="list-chevron" id="glossChevron">&#x25BE;</span>
+  </div>
+  <div class="list-panel" id="glossPanel"></div>
+
+  <div class="reset-zone">
+    <button class="reset-link" id="resetBtn">reiniciar todo el progreso</button>
+  </div>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+
+// ============================================================
+// CONFIG
+// ============================================================
+// Modelo usado por el chat. claude-opus-4-8 es el más capaz (mejor para
+// dudas de compliance/estrategia). Para gastar menos por pregunta, cambia
+// la línea de abajo a 'claude-haiku-4-5' (≈5x más barato) o 'claude-sonnet-4-6'.
+const CLAUDE_MODEL = 'claude-opus-4-8';
+const KEY_STORAGE = 'aeogeo_claude_key';
+const STORAGE_KEY = 'aeogeo_plan_v2';
+
+// Contexto de negocio que se inyecta al chat para que Claude responda
+// con pleno conocimiento de tu situación.
+const BUSINESS_CONTEXT = `Abraham, 28, ingeniero industrial, Product Owner de Lending en Credicorp Capital (banca privada, Lima). Lleva pocas semanas en el rol; trabajo muy exigente por ~7 meses. Patrón propio: tiende a no terminar proyectos, así que necesita pasos secuenciales, concretos y enfocados.
+
+NEGOCIO ELEGIDO: consultoría AEO/GEO (Answer/Generative Engine Optimization) — lograr que empresas aparezcan cuando alguien le pregunta a ChatGPT/Perplexity/Claude/Gemini qué solución usar para su problema. Nicho: SaaS B2B y fintechs NO crediticias de LATAM hispanohablante (mercado casi vacío en español). Entrega 100% asíncrona: audit → video Loom (sin mostrar rostro) + reporte en Notion, enviado por email. SIN reuniones en horario laboral.
+
+CONSTRAINTS DUROS: 3h/día L-V después de las 6pm + hasta 8h sáb/dom. Capital máximo S/3,000-5,000. No mostrar rostro. Nada que requiera reuniones 9am-6pm.
+
+COMPLIANCE (CRÍTICO): el Código de Ética de Credicorp aplica 24/7. Debe DECLARAR la actividad externa a la Unidad de Cumplimiento ANTES de cobrarle al primer cliente. EVITAR clientes que sean: bancos, financieras, cajas, cooperativas, fintechs de crédito/factoring/lending, casas de cambio, AFP, seguros, SAB, o cualquier entidad regulada por SBS/SMV. Cada cliente nuevo se evalúa individualmente. Si una pregunta roza el sector financiero regulado, recuérdaselo.
+
+5 FACTORES TÉCNICOS DE AEO/GEO: (1) Citaciones en fuentes autoritativas (G2, Capterra, GetApp, Trustpilot, Crunchbase, LinkedIn, medios sectoriales); (2) Schema markup JSON-LD (Organization, SoftwareApplication, Product, FAQPage, Review; validar en schema.org/validator); (3) Contenido tipo Q&A (formato pregunta-respuesta con lenguaje real del cliente); (4) Consistencia de entidad (mismo nombre/descripción/categoría en web, G2, LinkedIn, SUNAT); (5) Autoridad de dominio y backlinks de calidad.
+
+AUDIT EN 6 PASOS: (1) Benchmark de visibilidad — 15-20 preguntas de INTENCIÓN DE COMPRA (no de marca) en ChatGPT/Perplexity/Claude, documentadas con screenshots vs 3 competidores; (2) Audit de schema y SEO técnico (schema.org/validator, Screaming Frog, Search Console); (3) Audit de presencia en plataformas de review; (4) Audit de contenido Q&A; (5) Análisis y redacción del reporte con ayuda de Claude; (6) Entrega async: Loom de 20-30 min sin rostro + reporte en Notion, por email.
+
+PITCH (clave): NO citar estadísticas globales (todas tienen sesgo). DEMOSTRAR: "le pregunté a ChatGPT y Perplexity exactamente lo que preguntan tus clientes; acá están los 20 screenshots; no apareces en ninguno, tu competidor sí". Es irrefutable y reproducible por el propio cliente.
+
+PRICING PROGRESIVO: 3 audits gratis (para portafolio + testimonios) → $300-500/audit puntual → $800-1,200/audit o retainer mensual $600-1,000 → meta: ~3 retainers de $1,000 ≈ S/10,500/mes (supera la meta de S/5,000). Herramientas: medición manual gratis o Profound (~$50/mes), schema.org/validator, Screaming Frog (gratis hasta 500 URLs), Loom (gratis 25 vids), Notion, Claude Pro, Carrd/Framer para landing, LinkedIn (el rol en Credicorp da autoridad instantánea).
+
+EMPRESAS TARGET SEGURAS (sin riesgo compliance): Crehana, Chazki, Joinnus, Buk, Alegra, Defontana, Factorial, Databot, PIBOT.pe, PlanOK, Zubale, Happ, Nuvocargo. CASO DE ESTUDIO útil: Instaleap (gran empresa, clientes Walmart/Carrefour, e igual invisible en IA para queries de intención).`;
+
+// ============================================================
+// PHASES
+// ============================================================
+const PHASES = [
+  { id:'compliance',  label:'Blindaje',    short:'S0'    },
+  { id:'fundamentos', label:'Fundamentos', short:'S1-4'  },
+  { id:'portfolio',   label:'Portafolio',  short:'S5-6'  },
+  { id:'clientes',    label:'Pagadores',   short:'S7-10' },
+  { id:'escala',      label:'Retainers',   short:'M3+'   },
+];
+const PHASE_LABELS = { compliance:'Blindaje', fundamentos:'Fundamentos', portfolio:'Portafolio', clientes:'Primeros pagadores', escala:'Retainers y escala' };
+
+// ============================================================
+// TASKS — el plan real, partido en misiones jugables
+// ============================================================
+const TASKS = [
+
+  // ===== FASE 0 — BLINDAJE (Semana 0, en paralelo a todo) =====
+  {
+    id:'b1', phase:'compliance',
+    title:'Declarar la actividad externa a Cumplimiento Credicorp',
+    desc:'Este es el gate que bloquea todo lo demás. El Código de Ética de Credicorp te aplica 24/7. Declarar ANTES de cobrar al primer cliente no es opcional — es lo que te protege el sueldo principal.',
+    minutes:40, tag:'Compliance',
+    why:'Cobrarle a un cliente sin haber declarado la actividad externa es un riesgo de conflicto de interés que puede costarte el trabajo en Credicorp, que es tu ingreso #1 y la base de autoridad de todo el negocio. El trámite tarda 2-4 semanas: arráncalo ya, en paralelo con el aprendizaje.',
+    tutorial:[
+      { title:'Identifica a quién escribirle: busca en la intranet / Workplace de Credicorp a la <b>Unidad de Cumplimiento</b> (Compliance) y el canal para declarar actividades externas o conflictos de interés.', detail:'La mayoría de bancos tienen un formulario o correo formal para esto. Si no lo encuentras, pregúntale a tu jefe directo o a RR.HH. por el procedimiento de "declaración de actividad externa" — preguntar es señal de cumplimiento, no de problema.' },
+      { title:'Redacta la declaración describiendo la actividad de forma neutra y precisa: <i>"consultoría externa de visibilidad digital con IA (AEO/GEO) para empresas de tecnología fuera del sector financiero regulado"</i>. Deja claro que será 100% fuera del horario laboral y sin clientes del sector financiero.', detail:'El encuadre importa: "posicionamiento digital para empresas de software" suena muy distinto a "consultoría". Sé explícito en que evitarás bancos, fintechs de crédito, AFP, seguros y cualquier entidad regulada por SBS/SMV.' },
+      { title:'Envía la declaración por el canal formal (correo o formulario), guardando copia de todo. Anota la fecha de envío.', detail:'Tener registro escrito con fecha es tu protección. Si más adelante surge cualquier duda, demuestras que declaraste de buena fe y antes de monetizar.' },
+      { title:'Cuando recibas respuesta, actualiza el estado de Compliance en la barra superior de esta herramienta (Pendiente → Enviada → Aprobada). No le cobres a ningún cliente hasta que esté Aprobada.', detail:'La barra de compliance arriba existe justo para esto. Mientras esté en Pendiente o Enviada, puedes avanzar en TODO el aprendizaje y hasta hacer audits gratuitos, pero no cobrar.' },
+    ],
+    tip:'Mientras esperas la aprobación (2-4 semanas) NO te quedes parado: avanza toda la Fase 1 (aprender + herramientas + audit de práctica + landing). Para cuando aprueben, ya estarás listo para conseguir clientes.',
+  },
+  {
+    id:'b2', phase:'compliance',
+    title:'Definir tu filtro de clientes prohibidos vs permitidos',
+    desc:'Una regla escrita que aplicas a cada prospecto, sin excepción. Esto evita que una venta tentadora te meta en un conflicto de interés con Credicorp.',
+    minutes:20, tag:'Compliance',
+    tutorial:[
+      { title:'Escribe en una nota tu lista NEGRA (nunca aceptar): bancos, financieras, cajas, cooperativas de crédito, fintechs de lending/crédito/factoring, casas de cambio, AFP, aseguradoras, SAB, y cualquier entidad regulada por SBS o SMV.', detail:'Estas categorías tienen overlap directo con el negocio de Credicorp Capital o con regulación financiera peruana. Son riesgo de compliance casi seguro, así que ni se evalúan.' },
+      { title:'Escribe tu lista VERDE (target ideal): SaaS B2B no financiero, edtech, logística, salud digital, e-commerce/herramientas, RR.HH./payroll, productividad. Ejemplos: Crehana, Chazki, Joinnus, Buk, Alegra, Defontana, Factorial.', detail:'Son empresas digital-first con presupuesto de marketing y un decisor que sigue tendencias tech — el perfil que mejor entiende y paga AEO/GEO, y sin riesgo regulatorio.' },
+      { title:'Crea una zona AMARILLA (verificar antes de contactar): pasarelas de pago, proptech, fintechs de pago no-crediticio. Para estas, consultar con Cumplimiento caso por caso.', detail:'Culqi (pagos), Kambista (cambio), Prestamype (préstamos) son ejemplos de "verificar" o directamente prohibidos. Ante la duda, trátalo como lista negra hasta confirmar.' },
+      { title:'Convierte esto en un checklist de una línea que revises ANTES de escribirle a cualquier prospecto: "¿Está regulada por SBS/SMV o es de crédito/inversión? Si sí → no.".', detail:'Tener la regla escrita y a la mano elimina la tentación de aceptar un cliente atractivo del sector prohibido en un momento de presión por cerrar ventas.' },
+    ],
+  },
+
+  // ===== FASE 1 — FUNDAMENTOS (Semanas 1-4) =====
+  {
+    id:'f1', phase:'fundamentos',
+    title:'Aprender el concepto y el mercado AEO/GEO',
+    desc:'Antes de auditar a nadie, tienes que entender cómo los LLMs eligen a quién citar. Una semana de lectura enfocada te da el lenguaje y la seguridad para tu primer pitch.',
+    minutes:90, tag:'Aprender',
+    why:'No puedes vender con confianza algo que no dominas. Entender por qué un LLM cita a una empresa y no a otra es lo que te permite diagnosticar y, sobre todo, explicarle el problema a un cliente sin tecnicismos.',
+    tutorial:[
+      { title:'Lee los blogs de las agencias líderes para entender la metodología: <b>First Page Sage</b>, <b>NoGood</b> y el blog de <b>Perplexity</b> sobre cómo cita sus fuentes. Toma notas de los conceptos que se repiten.', detail:'Estas son las referencias del mercado anglosajón. Tu ventaja es traer esa metodología al mercado en español, que está casi vacío de competidores serios.' },
+      { title:'Internaliza los <b>5 factores técnicos</b> (los tienes en el Glosario abajo): citaciones en fuentes autoritativas, schema markup, contenido Q&A, consistencia de entidad, y autoridad de dominio. Asegúrate de poder explicar cada uno en una frase simple.', detail:'Si puedes explicarle cada factor a un gerente de marketing de 45 años sin background técnico, lo dominas. Si necesitas jerga, todavía no.' },
+      { title:'Entiende la diferencia entre <b>preguntas de marca</b> ("¿qué es Buk?") y <b>preguntas de intención de compra</b> ("¿qué software de planilla recomiendan para una empresa mediana en Perú?"). Las segundas son donde está el verdadero gap.', detail:'Casi cualquier empresa con presencia online aparece bien en preguntas de marca. El oro está en las preguntas de intención — ahí es donde tus clientes desaparecen y su competencia aparece.' },
+      { title:'Haz tu primer test informal: abre ChatGPT y Perplexity y pregunta por recomendaciones en una categoría que conozcas. Observa qué marcas aparecen, en qué orden, y con qué descripción.', detail:'Este ejercicio te muestra en vivo el fenómeno que vas a vender. Ver el patrón con tus propios ojos vale más que cualquier lectura teórica.' },
+    ],
+    tip:'No intentes aprenderlo todo. El objetivo de esta semana es poder hacer un audit con confianza, no convertirte en académico del tema. Usa el chat de Claude (abajo) para resolver dudas puntuales al instante.',
+  },
+  {
+    id:'f2', phase:'fundamentos',
+    title:'Dominar el stack de herramientas',
+    desc:'Tu negocio entero corre con herramientas gratuitas o de bajo costo. Familiarízate con cada una ahora, sin presión de un cliente esperando.',
+    minutes:75, tag:'Herramientas',
+    tutorial:[
+      { title:'Para medir visibilidad en IA: empieza con el <b>método manual gratuito</b> (abrir ChatGPT, Perplexity y Claude, hacer preguntas, capturar screenshots). Crea también una cuenta de prueba en <b>Profound.io</b> para ver cómo se ve la medición profesional.', detail:'El método manual es suficiente para tus primeros 3-5 audits mientras validas el negocio. Profound (~$50/mes) lo agregas solo cuando ya tengas clientes pagando que lo justifiquen.' },
+      { title:'Para la auditoría técnica del sitio: instala <b>Screaming Frog</b> (gratis hasta 500 URLs), familiarízate con <b>schema.org/validator</b> y crea una cuenta en <b>Google Search Console</b>.', detail:'Screaming Frog rastrea el sitio del cliente y te muestra su estructura, schemas y problemas técnicos. El validador de schema te dice si los datos estructurados están bien hechos. Ambos son gratis.' },
+      { title:'Para la entrega: crea cuentas en <b>Loom</b> (gratis hasta 25 videos) y <b>Notion</b> (gratis individual). Graba un Loom de prueba de 2 minutos compartiendo tu pantalla, <b>sin cámara</b>, para practicar tu voz y ritmo.', detail:'Loom + Notion es tu formato de entrega: un video de 20-30 min recorriendo el reporte, más el reporte escrito. Practicar la voz ahora te quita el nervio para cuando sea un entregable real.' },
+      { title:'Confirma que tienes <b>Claude Pro</b> activo (ya lo usas) — será tu acelerador para redactar e interpretar reportes, generando ~70% del borrador en minutos.', detail:'Claude Pro es distinto de la API key que usa el chat de esta herramienta. Pro es tu copiloto para producir los reportes; la API key (opcional) es la que conecta el chat de cada paso.' },
+    ],
+  },
+  {
+    id:'f3', phase:'fundamentos',
+    title:'Hacer un audit de práctica completo (sin entregar)',
+    desc:'Ejecuta el flujo de 6 pasos de punta a punta sobre una empresa conocida, solo para ti. El objetivo es dominar el proceso, no entregarle nada a nadie.',
+    minutes:180, tag:'Práctica',
+    why:'La primera vez que haces algo es lenta y torpe. Que esa primera vez sea sobre una empresa de práctica — no sobre tu primer cliente real — es lo que te da la seguridad para no improvisar cuando importe.',
+    tutorial:[
+      { title:'Elige una empresa conocida para practicar. <b>Instaleap</b> es ideal como caso de estudio: empresa grande (clientes como Walmart y Carrefour) y aun así invisible en IA para queries de intención de compra. O usa <b>PIBOT.pe</b> / <b>Databot</b>.', detail:'Practicar con una empresa que claramente tiene un gap te da resultados vistosos para entender el proceso. Instaleap además te sirve después como caso de estudio en pitches a otros clientes.' },
+      { title:'<b>Paso 1 — Benchmark:</b> haz 15-20 preguntas de intención de compra en ChatGPT, Perplexity y Claude. Documenta con screenshots si la empresa aparece, en qué posición, y qué competidores salen en su lugar.', detail:'Usa preguntas como las haría un comprador real ("¿qué herramienta de X recomiendan para [contexto]?"), no preguntas de marca. Este paso es el corazón del audit y de la venta.' },
+      { title:'<b>Pasos 2-4 — Auditoría técnica:</b> revisa el sitio en Screaming Frog y schema.org/validator (¿tiene schemas?), revisa su presencia en G2/Capterra/Crunchbase/LinkedIn, y revisa si su contenido tiene formato Q&A real.', detail:'Aquí descubres POR QUÉ no aparecen: sin schema, sin contenido Q&A, perfiles de review incompletos. Entender la causa es lo que hace creíble la solución.' },
+      { title:'<b>Paso 5 — Análisis con Claude:</b> dale a Claude Pro todos los datos recopilados y pídele un resumen ejecutivo, hallazgos críticos y 10 recomendaciones priorizadas. Edita y agrega tu contexto local.', detail:'Claude genera ~70% del reporte en minutos. Tu valor agregado es la edición, el contexto peruano y la priorización realista — no escribir desde cero.' },
+      { title:'<b>Paso 6 — Entrega de práctica:</b> graba un Loom de 15-20 min recorriendo tu reporte como si se lo presentaras al cliente. Mírate el video después para detectar dónde dudas o te enredas.', detail:'Verte presentar es incómodo pero es el atajo más rápido para mejorar. La meta del trimestre es bajar el tiempo de audit de 6-8h a 3-4h; eso solo llega con repetición.' },
+    ],
+  },
+  {
+    id:'f4', phase:'fundamentos',
+    title:'Definir tu oferta en una línea y crear la landing',
+    desc:'Una página simple en Carrd o Framer: qué haces, para quién, cómo es el proceso, y un CTA. No necesitas más para empezar a recibir prospectos.',
+    minutes:90, tag:'Web',
+    tutorial:[
+      { title:'Escribe tu oferta en una sola frase, sin jerga: <i>"Ayudo a empresas de software y fintech de LATAM a aparecer cuando sus clientes le preguntan a ChatGPT, Perplexity o Gemini qué solución usar."</i>', detail:'Si la frase necesita explicación, todavía no está lista. Tiene que entenderse en 5 segundos por alguien que nunca oyó hablar de AEO/GEO.' },
+      { title:'Crea la landing en <b>Carrd</b> ($19/año) o <b>Framer</b>. Secciones mínimas: el problema (tu competencia aparece en la IA y tú no), qué haces, el proceso en 4 pasos (Diagnóstico → Implementación → Test de citación → Mantenimiento), y un CTA de "pide tu diagnóstico".', detail:'No sobrediseñes. Una landing de una sola página, clara y rápida, convierte mejor que una web elaborada que tardas semanas en lanzar.' },
+      { title:'Aplica tu propio método a tu landing: agrega un bloque de FAQ en formato pregunta-respuesta y datos estructurados básicos. Tu sitio debe ser tu primera demostración de que el método funciona.', detail:'El consultor de AEO/GEO cuya propia web no está optimizada pierde credibilidad al instante. Tu landing es tu carta de presentación y tu prueba de concepto.' },
+      { title:'El CTA lleva a un formulario simple o a tu correo — nada que requiera agendar una reunión en horario laboral. Recuerda: el modelo es 100% asíncrono.', detail:'Todo tu negocio debe poder ejecutarse fuera del horario de Credicorp. Un CTA que fuerce llamadas de día rompe esa restricción desde el inicio.' },
+    ],
+  },
+  {
+    id:'f5', phase:'fundamentos',
+    title:'Actualizar LinkedIn con Credicorp como autoridad',
+    desc:'Tu rol en banca privada es un moat real. Un headline bien armado convierte tu perfil en prueba de credibilidad instantánea para cualquier prospecto.',
+    minutes:30, tag:'Posicionamiento',
+    tutorial:[
+      { title:'Cambia tu headline a algo como: <i>"Product Owner @ Credicorp Capital · Consultor de visibilidad con IA (AEO/GEO) para fintech y SaaS B2B de LATAM"</i>.', detail:'La mención a Credicorp Capital da autoridad instantánea: comunica que entiendes de negocio, datos y tecnología a nivel corporativo. Es tu diferenciador frente a un freelancer genérico.' },
+      { title:'En el "Acerca de", explica en lenguaje simple qué problema resuelves (las empresas no aparecen en las respuestas de IA) y para quién. Mantén la consistencia con el texto de tu landing.', detail:'La consistencia de entidad aplica también a ti: que tu LinkedIn, tu landing y tu mensaje digan lo mismo refuerza tu credibilidad ante prospectos que te investigan.' },
+      { title:'Asegúrate de que tu actividad sea coherente con la declaración a Compliance: hablas de visibilidad digital para empresas de tecnología, nunca de asesoría financiera ni de inversiones.', detail:'Tu perfil público debe respetar el mismo límite que declaraste. Nada de contenido que pueda leerse como promoción de productos financieros o asesoría de inversión.' },
+      { title:'Empieza a publicar 2-3 veces por semana sobre AEO/GEO aplicado a LATAM, basado en datos y análisis propio, sin mostrar rostro. Esto alimenta tu pipeline orgánico.', detail:'El contenido en LinkedIn es un canal de adquisición de bajo costo. Posts basados en tus propios hallazgos (no opiniones genéricas) construyen autoridad y atraen prospectos.' },
+    ],
+  },
+
+  // ===== FASE 2 — PORTAFOLIO (Semanas 5-6) =====
+  {
+    id:'p1', phase:'portfolio',
+    title:'Armar lista de 10 empresas target y detectar gaps',
+    desc:'Empieza por las "verdes" sin riesgo de compliance. El criterio no es el tamaño — es que exista un gap real entre lo bueno que es su producto y lo invisible que son en IA.',
+    minutes:60, tag:'Prospección',
+    why:'Los primeros clientes (gratis o pagados) salen de un trabajo deliberado de prospección. Elegir empresas con un gap demostrable es lo que hace que tu pitch sea irrefutable desde el primer mensaje.',
+    tutorial:[
+      { title:'Abre una hoja de cálculo y lista 10 empresas de tu lista verde: <b>Crehana, Chazki, Joinnus, Buk, Alegra, Defontana, Factorial, Databot, PIBOT.pe, Zubale, Happ, Nuvocargo</b>. Todas sin riesgo de compliance.', detail:'Empezar por las verdes te quita la fricción de tener que verificar compliance en cada una. PIBOT.pe y Databot son candidatas fuertes para el primer audit: chicas, con gap claro, probablemente más receptivas.' },
+      { title:'Para cada empresa, haz 5 preguntas de intención de compra en ChatGPT y Perplexity. Anota si aparece o no, y quién aparece en su lugar.', detail:'Este es tu gancho de venta concreto: si la empresa no aparece pero su competidor sí, tienes un problema demostrable. Si ya aparece bien, pásala — no hay gap que vender.' },
+      { title:'Filtra y prioriza las que tienen el mayor gap (no aparecen en nada) y un decisor accesible (founder/gerente de marketing que sigue tendencias tech).', detail:'El perfil ideal es una empresa digital-first de 10-100 empleados que ya invierte en marketing. No microemprendimientos sin presupuesto (el concepto les es muy abstracto) ni corporaciones gigantes inalcanzables.' },
+      { title:'Agrega una columna de "estado" para trackear cada una: no contactado / contactado / audit en proceso / audit entregado / cliente / descartado.', detail:'Llevar el estado de cada prospecto en una hoja simple evita que se te pierda el hilo — clave dado tu patrón de no terminar cosas y tu tiempo fragmentado.' },
+    ],
+  },
+  {
+    id:'p2', phase:'portfolio',
+    title:'Escribir el mensaje de outreach basado en un hallazgo real',
+    desc:'Nada de mensajes genéricos. Cada outreach arranca con un hallazgo específico que ya encontraste para esa empresa. Eso es lo que lo hace imposible de ignorar.',
+    minutes:30, tag:'Ventas',
+    tutorial:[
+      { title:'Escribe una plantilla corta (5 líneas máx) que se personaliza por empresa: saludo + el hallazgo concreto + la implicancia + oferta de audit gratuito a cambio de testimonial.', detail:'Ejemplo de gancho: "Al buscar [tipo de software] en Perú en ChatGPT y Perplexity, [empresa] no aparece pero [competidor] sí. Te armé un análisis rápido — ¿te lo comparto?"' },
+      { title:'Identifica al decisor real (founder, gerente de marketing, líder de digital), no la cuenta genérica de info@. Encuéntralo por LinkedIn.', detail:'El error más común es escribir al canal genérico: el mensaje muere con alguien sin poder de decisión. Llegar al decisor desde el inicio es lo que separa un pitch que avanza de uno que se pierde.' },
+      { title:'En esta fase ofreces el audit <b>gratis</b> a cambio de un caso de estudio con nombre, datos concretos y testimonial escrito. Déjalo explícito.', detail:'Los 3 audits gratuitos no son caridad: son tu inversión en prueba social. Sin casos reales con nombre, ninguna estrategia posterior de venta tiene con qué convencer a un prospecto frío.' },
+      { title:'Define tu meta de outreach: ~10 mensajes diarios por LinkedIn durante 2 semanas (~140 mensajes). Con 5-15% de respuesta, eso da 3-5 conversaciones que aceptan el audit gratis.', detail:'El outreach es un juego de números con mensajes personalizados. La constancia diaria (no ráfagas) es lo que llena el pipeline. Llevar el conteo te ayuda a iterar el mensaje según qué responde mejor.' },
+    ],
+  },
+  {
+    id:'p3', phase:'portfolio',
+    title:'Ejecutar audit gratuito #1 (primer caso de estudio)',
+    desc:'Tu primer audit real. Sigue el flujo de 6 pasos que ya practicaste. La diferencia: este se entrega, y se convierte en tu primer caso documentado.',
+    minutes:240, tag:'Ejecución',
+    why:'El primer caso de estudio real, con nombre de empresa y resultado documentado, es el cimiento de todo lo que viene. Sin él, no tienes prueba social, y sin prueba social no hay clientes pagados.',
+    tutorial:[
+      { title:'Ejecuta el benchmark completo: 15-20 queries de intención en los 3 LLMs, documentando todo con screenshots fechados (antes). Compara contra 3 competidores.', detail:'Los screenshots fechados son prueba irrefutable. Este "antes" es la mitad del valor: te servirá para mostrar el contraste cuando midas el "después".' },
+      { title:'Completa la auditoría técnica (schema, plataformas de review, contenido Q&A) con Screaming Frog y schema.org/validator. Documenta qué falta.', detail:'Cada elemento faltante (sin schema, sin Q&A, perfil de G2 incompleto) se convierte en un ítem concreto y accionable del reporte que el cliente entiende perfectamente.' },
+      { title:'Redacta el reporte con Claude Pro: resumen ejecutivo, hallazgos críticos, 10 recomendaciones priorizadas por impacto y facilidad, y un roadmap de 90 días. Edítalo con tu contexto.', detail:'Termina el reporte con una línea que abre la puerta al retainer: "Estas recomendaciones tardan 3-6 meses en generar impacto medible; ofrezco seguimiento mensual para monitorearlo".' },
+      { title:'Entrega async: graba el Loom de 20-30 min (pantalla + voz, sin rostro) recorriendo el reporte, y envíalo junto con el documento de Notion por email. Sin reunión obligatoria.', detail:'Esta entrega asíncrona es el corazón de tu modelo: 100% compatible con tu trabajo en Credicorp, sin reuniones en horario laboral.' },
+      { title:'No reveles TODAS las soluciones en el reporte gratuito: muestra el diagnóstico completo, pero la implementación detallada es parte del servicio de pago.', detail:'Dar todo gratis quita el incentivo de contratarte y devalúa tu trabajo técnico. El reporte gratis muestra el problema y el qué; el cómo detallado se cobra.' },
+    ],
+  },
+  {
+    id:'p4', phase:'portfolio',
+    title:'Ejecutar audit gratuito #2',
+    desc:'Segundo caso. Cada repetición sistematiza tu proceso y baja tu tiempo de ejecución. La meta del trimestre es llegar a 3-4h por audit.',
+    minutes:240, tag:'Ejecución',
+    tutorial:[
+      { title:'Repite el flujo completo de 6 pasos, pero esta vez cronométrate por etapa para ver dónde se te va el tiempo.', detail:'Saber qué paso te consume más tiempo te dice qué sistematizar o plantillar primero. El ingreso por hora real es lo que define tu rentabilidad, no el precio nominal.' },
+      { title:'Reutiliza todo lo reutilizable del audit #1: la estructura del reporte, las preguntas de benchmark base, tu guion de Loom. Solo adapta lo específico de la empresa.', detail:'Estás construyendo tu propio sistema replicable sin escribirlo aparte: cada audit reutiliza más del anterior. Eso es lo que baja el tiempo de 6-8h a 3-4h.' },
+      { title:'Si una pregunta de benchmark o una sección del reporte funcionó especialmente bien, conviértela en parte fija de tu plantilla.', detail:'Lo que comprobaste que funciona se vuelve estándar. Así tu calidad sube y tu tiempo baja a la vez, audit tras audit.' },
+    ],
+  },
+  {
+    id:'p5', phase:'portfolio',
+    title:'Ejecutar audit gratuito #3 y pedir los testimonios',
+    desc:'Con el tercer caso cierras tu portafolio de validación. Ahora pide a los 3 el testimonio escrito y el permiso para usar su nombre y los screenshots.',
+    minutes:240, tag:'Ejecución',
+    tutorial:[
+      { title:'Ejecuta el tercer audit con el flujo ya afinado. Para esta altura el proceso debería sentirse natural.', detail:'Tres audits es la masa crítica de prueba social. Con eso ya puedes subir a precios de pago con argumentos concretos, no promesas.' },
+      { title:'Después de entregar, pide a cada uno de los 3 clientes un testimonio escrito específico: <i>"¿Me darías 2-3 líneas sobre qué problema tenías y qué cambió con el análisis?"</i>', detail:'Pedir algo corto y concreto reduce muchísimo la probabilidad de que lo posterguen. El momento ideal es justo después de entregar, cuando vieron el valor.' },
+      { title:'Pide permiso explícito para usar el nombre de la empresa, el testimonio y los screenshots de resultado en tu portafolio, landing y pitches.', detail:'El permiso explícito te protege y da confianza al cliente. Estos 3 casos documentados son el activo de ventas más poderoso que tendrás para conseguir a los pagadores.' },
+      { title:'Crea una sección "Casos" en tu landing con los 3 casos: problema inicial, qué implementaste, resultado medible (antes/después en screenshots) y el testimonio.', detail:'La estructura problema-solución-resultado es la narrativa más efectiva en B2B: el prospecto se identifica con el problema y proyecta el resultado en su propio negocio.' },
+    ],
+  },
+
+  // ===== FASE 3 — PRIMEROS PAGADORES (Semanas 7-10) =====
+  {
+    id:'c1', phase:'clientes',
+    title:'Sistematizar el flujo de audit en un checklist repetible',
+    desc:'Convierte tu proceso en una plantilla de Notion con checklist por cada uno de los 6 pasos. Esto te permite ejecutar varios audits en paralelo sin perder calidad.',
+    minutes:60, tag:'Sistema',
+    why:'Sin checklist, la calidad depende de que te acuerdes de todo en el momento. Con checklist, el resultado es consistente aunque estés en tu tercer audit simultáneo después de las 6pm y cansado del día en Credicorp.',
+    tutorial:[
+      { title:'Crea una plantilla maestra en Notion con los 6 pasos del audit, cada uno con sus sub-tareas en checkbox y un espacio de notas.', detail:'Una plantilla duplicable por cliente te da arranque instantáneo en cada nuevo audit y garantiza que nunca te saltes un paso clave.' },
+      { title:'En "Benchmark", lista tus 15-20 preguntas de intención base como checklist, dejando espacio para adaptarlas por industria.', detail:'Tener las preguntas base pre-escritas te ahorra el trabajo mental de inventarlas cada vez. Solo las adaptas al sector del cliente.' },
+      { title:'En la sección técnica, lista los elementos a verificar: schema (Organization, SoftwareApplication, FAQPage, Review), velocidad en PageSpeed, sitemap, presencia en G2/Capterra/Crunchbase/LinkedIn, contenido Q&A.', detail:'Esta checklist técnica es tu control de calidad. Cada ítem olvidado es una corrección que te cuesta tiempo no facturado después.' },
+      { title:'Itera el checklist tras cada audit: si encontraste un problema no cubierto, agrégalo. La plantilla debe crecer con tu experiencia.', detail:'Un checklist que no cambia es uno que no aprende. La versión más valiosa es la que acumula 5-6 audits de aprendizaje.' },
+    ],
+  },
+  {
+    id:'c2', phase:'clientes',
+    title:'Lanzar la campaña de outreach a escala',
+    desc:'Ahora con 3 casos reales y testimonios, tu mensaje pega mucho más fuerte. Sostén el ritmo de ~10 mensajes diarios durante 2 semanas.',
+    minutes:45, tag:'Ventas',
+    tutorial:[
+      { title:'Actualiza tu plantilla de outreach incluyendo una referencia a un caso real: <i>"hace poco hice esto para [empresa similar] y en X semanas aparecía en los 3 LLMs principales"</i>.', detail:'Una mención casual a un caso de éxito específico activa la credibilidad sin sonar a venta. Ya no es promesa, es algo que pasó y que el prospecto puede ver.' },
+      { title:'Mantén ~10 mensajes diarios por LinkedIn a prospectos nuevos de tu lista, cada uno personalizado con un hallazgo propio. Lleva el conteo y la tasa de respuesta.', detail:'140 mensajes en 2 semanas con 5-15% de respuesta = varias conversaciones reales. La constancia diaria es lo que llena el pipeline; las ráfagas no funcionan.' },
+      { title:'En paralelo, participa en comunidades de founders/startups LATAM (Slack de SaaS LATAM, Startup Perú, EmprendeUP) aportando perspectiva, sin vender directamente.', detail:'Aportar valor en comunidades construye reputación y genera inbound. Es un canal de adquisición complementario al outreach directo, también 100% asíncrono.' },
+      { title:'Itera el mensaje según los datos: si un asunto/gancho responde mejor, conviértelo en tu plantilla principal. Anota qué funciona.', detail:'Trackear qué versión del mensaje convierte mejor te permite mejorar la tasa de respuesta con el tiempo, en vez de adivinar.' },
+    ],
+  },
+  {
+    id:'c3', phase:'clientes',
+    title:'Cerrar el primer cliente de pago ($300-500)',
+    desc:'El precio de entrada es deliberadamente bajo: la prioridad es validar que el mercado paga, no maximizar el primer ticket. Recuerda: compliance debe estar APROBADA antes de cobrar.',
+    minutes:30, tag:'Ventas',
+    gate:'compliance',
+    why:'Cerrar el primer cliente de pago, aunque sea pequeño, es el hito que convierte la idea en negocio real. Todo lo demás se construye sobre esa primera validación de que alguien abre la billetera.',
+    tutorial:[
+      { title:'Verifica que tu declaración a Compliance esté APROBADA (barra superior). No cobres antes de eso. Confirma además que el prospecto no cae en tu lista negra.', detail:'Este es el gate innegociable. Cobrar sin aprobación pone en riesgo tu ingreso principal. La herramienta te avisará si intentas completar esta misión sin marcar compliance como aprobada.' },
+      { title:'En la conversación (async o una llamada fuera de horario laboral), demuestra el problema en vivo: comparte screenshots de su búsqueda en ChatGPT donde no aparecen y su competidor sí.', detail:'La demostración directa es tu arma más fuerte. Ver su propio nombre ausente y el del competidor presente convierte el problema de abstracto a urgente en 10 segundos.' },
+      { title:'Presenta el <b>audit puntual a $300-500</b> como puerta de entrada de bajo riesgo: "te entrego el diagnóstico completo y el roadmap en X días; si luego quieres implementación o seguimiento, lo vemos".', detail:'El precio bajo de entrada reduce la fricción y prioriza validar que el mercado paga. Maximizar ingreso viene después, cuando tengas más casos y pipeline.' },
+      { title:'Cierra con una acción concreta y un compromiso de tu parte: "¿arrancamos esta semana? Te entrego el reporte en 5 días hábiles". Empieza solo cuando el pago (o anticipo) esté confirmado.', detail:'Empezar sin pago confirmado es el error #1 del freelancer. El cobro por adelantado filtra clientes no comprometidos y te protege de trabajar gratis.' },
+    ],
+  },
+  {
+    id:'c4', phase:'clientes',
+    title:'Entregar el audit pagado #1 y proponer el retainer',
+    desc:'Misma calidad de entrega que en los gratuitos, pero ahora cobrado. Al cerrar, planta la semilla del seguimiento mensual recurrente.',
+    minutes:240, tag:'Ejecución',
+    gate:'compliance',
+    tutorial:[
+      { title:'Ejecuta el audit con tu checklist sistematizado y entrégalo async (Loom + Notion por email). La calidad debe ser idéntica o mejor que la de los gratuitos.', detail:'El cliente pagado merece tu mejor trabajo: es tu testimonio más valioso y tu fuente de retainer. La sistematización te permite mantener calidad alta en menos tiempo.' },
+      { title:'Cierra el reporte con la sección de conversión a retainer: explica que las recomendaciones tardan 3-6 meses en mostrar impacto medible en citaciones, y que ofreces seguimiento mensual para monitorearlo.', detail:'La tasa esperada de conversión de audit a retainer en servicios bien ejecutados es 30-50%. Esa sección del reporte es lo que la dispara.' },
+      { title:'Propón el retainer de forma directa: <b>$600-1,000/mes</b> que incluye test de citación mensual en los 3 LLMs, monitoreo, ajuste de estrategia y un reporte mensual.', detail:'El retainer es el ingreso recurrente que hace sostenible el negocio. ~3 retainers de $1,000 ≈ S/10,500/mes, lo que supera tu meta. Proponerlo apenas entregas, mientras la satisfacción está alta, es clave.' },
+      { title:'Pide el testimonio y permiso de uso apenas el cliente reaccione positivamente a la entrega.', detail:'El momento de mayor satisfacción es justo al recibir el reporte con resultados. Pedir el testimonio ahí maximiza la probabilidad de obtenerlo y de que sea entusiasta.' },
+    ],
+  },
+  {
+    id:'c5', phase:'clientes',
+    title:'Cerrar y entregar clientes pagados #2 y #3',
+    desc:'Repite el proceso completo de venta y entrega con dos clientes más. Con 3 pagadores ya tienes ingresos reales y un sistema probado.',
+    minutes:300, tag:'Ejecución',
+    gate:'compliance',
+    tutorial:[
+      { title:'Sigue el mismo proceso afinado: demostración del problema → audit a precio de entrada → entrega async → propuesta de retainer.', detail:'Repetir exactamente el mismo flujo te permite identificar qué parte ya está aceitada y cuál necesita ajuste. El proceso probado es tu activo más valioso.' },
+      { title:'Considera subir el precio del audit con cada nuevo cliente si los anteriores cerraron sin mucha resistencia de precio.', detail:'Si nadie dice que es caro, probablemente cobras de menos. Una resistencia moderada de precio es señal de que está bien calibrado. Sube progresivamente.' },
+      { title:'Con 3 pagadores entregados, calcula tu primer ingreso real del trimestre y revisa cuántos convirtieron (o están por convertir) a retainer.', detail:'Tres clientes pagados validan definitivamente el modelo. A partir de aquí el juego cambia de "¿funciona?" a "¿cómo escalo lo que ya funciona?".' },
+    ],
+  },
+
+  // ===== FASE 4 — RETAINERS Y ESCALA (Meses 3-6) =====
+  {
+    id:'e1', phase:'escala',
+    title:'Montar el sistema de reporte mensual del retainer',
+    desc:'El reporte mensual es tu touchpoint recurrente con cada cliente de retainer. Tiene que ser profesional pero rápido de generar — no más de 30 min por cliente.',
+    minutes:60, tag:'Sistema',
+    why:'El retainer solo es rentable si el reporte mensual no te come horas. Una plantilla fija te permite atender varios clientes recurrentes dentro de tus 3h diarias después de las 6pm.',
+    tutorial:[
+      { title:'Crea una plantilla fija (Google Slides o Notion) con: resumen ejecutivo en 3 líneas, test de citación del mes (tabla queries × 3 LLMs), capturas de las citas encontradas, cambios realizados, y próximos pasos del mes siguiente.', detail:'Una estructura fija crea expectativas claras en el cliente y hace que cada reporte se arme rápido. La predictibilidad genera confianza a largo plazo.' },
+      { title:'Usa exactamente las mismas queries cada mes para cada cliente, en una hoja con pestaña por cliente, para poder mostrar tendencia (de 0 a N apariciones en 3 meses).', detail:'La consistencia de queries es lo que da valor al seguimiento: muestra progreso real con datos, no solo "este mes apareces". Eso justifica el retainer mes a mes.' },
+      { title:'Incluye al menos una captura con el nombre del cliente citado en un LLM — esa es la imagen que el cliente comparte internamente con su equipo o directivos.', detail:'"ChatGPT recomienda nuestra empresa" en una captura fechada es algo que el cliente quiere mostrar. Eso refuerza el valor percibido y la renovación del retainer.' },
+      { title:'Bloquea en tu calendario el primer miércoles de cada mes como "test mensual AEO/GEO" para procesar todos los clientes activos de una vez.', detail:'Un bloque fijo convierte el test en ritual, no en tarea que procrastinas. El primer miércoles asegura que el reporte llegue antes del día 10.' },
+    ],
+  },
+  {
+    id:'e2', phase:'escala',
+    title:'Convertir audits puntuales en retainers y subir precios',
+    desc:'Con casos y resultados acumulados, mueve a tus clientes de audit puntual a retainer mensual y sube precios en cada nuevo cierre.',
+    minutes:45, tag:'Ventas',
+    gate:'compliance',
+    tutorial:[
+      { title:'A los clientes de audit puntual que ya entregaste, ofréceles formalmente el retainer mensual de seguimiento, mostrándoles el test de citación más reciente como evidencia de movimiento.', detail:'La conversión a retainer es donde el negocio se vuelve sostenible. La meta: ~3 retainers de $1,000/mes ≈ S/10,500/mes, superando tu objetivo de S/5,000.' },
+      { title:'Sube el precio de los audits nuevos al rango de $800-1,200 una vez que tengas 3+ testimonios con resultados, pipeline con más interesados que capacidad, y 60+ días de entregas consistentes.', detail:'Estas tres condiciones son la señal de que el mercado soporta más precio. Subir con prueba social en la mano es mucho más fácil que subir a ciegas.' },
+      { title:'Actualiza tu deck de ventas y landing con cada nuevo caso y testimonio. El deck debe vender solo antes de que hables.', detail:'Un deck con resultados reales convierte mucho más que uno con promesas. Cada caso nuevo lo hace más potente para el siguiente prospecto.' },
+      { title:'Revisa cada cliente nuevo contra tu filtro de compliance antes de cerrar. La regla no cambia aunque el negocio crezca.', detail:'A medida que llegan más prospectos, la disciplina de filtrar por compliance debe mantenerse intacta. Un cliente del sector prohibido sigue siendo un riesgo aunque sea atractivo.' },
+    ],
+  },
+  {
+    id:'e3', phase:'escala',
+    title:'Calcular tu MRR y trazar el camino a la meta',
+    desc:'Sin medir no puedes mejorar. El MRR (ingreso mensual recurrente) es la métrica clave. Calcula dónde estás y qué te falta para S/5,000 y luego S/10,000/mes.',
+    minutes:45, tag:'Revisión',
+    why:'El balance no es un ejercicio administrativo: es lo que convierte la experiencia del trimestre en estrategia para el siguiente. Sin él, arrancas el próximo ciclo a ciegas repitiendo lo mismo.',
+    tutorial:[
+      { title:'Calcula tu MRR actual: número de clientes con retainer activo × tarifa mensual. Anota aparte el ingreso por audits puntuales del trimestre.', detail:'Separar MRR de ingresos puntuales importa: el MRR es predecible y compuesto, los puntuales son variables. Un negocio de consultoría maduro tiene la mayoría de ingresos en MRR.' },
+      { title:'Calcula tus horas invertidas por tipo de trabajo (audit, retainer, ventas) y divide ingresos entre horas para obtener tu ingreso por hora real.', detail:'El ingreso por hora es el indicador real de rentabilidad. Puedes tener muchos clientes y poca rentabilidad si los audits te toman el doble de lo estimado. Esto te dice dónde está el cuello de botella.' },
+      { title:'Identifica tu cliente ideal: el tipo que cierra más rápido, paga mejor y da menos problemas. Ese es tu foco para el siguiente trimestre.', detail:'Optimizar el cliente ideal es el cambio de mayor impacto en rentabilidad. Un cliente que paga 30% más y requiere 50% menos gestión cambia por completo las métricas del negocio.' },
+      { title:'Compara con la matemática de la meta: ~3 retainers de $1,000 ≈ S/10,500/mes (supera S/10,000); para el hito intermedio de fin de 2026 (~S/5,000/mes) necesitas aproximadamente la mitad.', detail:'Tener la meta traducida a "cuántos retainers necesito" la hace accionable. Carga estimada: 15-20 h/mes por cliente, manejable en tus 3h diarias + fines de semana.' },
+    ],
+  },
+  {
+    id:'e4', phase:'escala',
+    title:'Definir el segundo stream de ingresos',
+    desc:'Con el negocio base validado y sistematizado, evalúa un upsell a los mismos clientes o un producto que escale sin tu tiempo directo.',
+    minutes:50, tag:'Estrategia',
+    tutorial:[
+      { title:'Evalúa el upsell más natural: <b>agentes de IA conversacionales</b> para los mismos clientes de AEO (un chatbot que responde FAQs en su sitio, mejorando visibilidad y conversión a la vez). Ticket de $2,000-4,000 por proyecto.', detail:'Venderle más a un cliente que ya confía en ti es mucho más fácil y rentable que conseguir uno nuevo. El agente IA complementa perfecto al trabajo de AEO/GEO.' },
+      { title:'Considera un <b>micro-SaaS de citation tracking en español</b> (con Bubble o Lovable): una herramienta simple que muestra semanalmente cuántas veces aparece una empresa en ChatGPT/Perplexity/Claude. Véndelo primero a tus clientes actuales ($99-199/mes).', detail:'Un micro-SaaS escala sin consumir tu tiempo por cada cliente nuevo — clave dada tu restricción de horas. Validarlo primero con clientes propios baja el riesgo.' },
+      { title:'Evalúa un <b>newsletter sectorial "AI Visibility LATAM"</b> como volante de adquisición orgánica: contenido de valor que atrae prospectos sin outreach activo.', detail:'El newsletter es un activo de marketing que trabaja por ti 24/7, también 100% asíncrono y sin rostro. Construye autoridad y llena el pipeline con el tiempo.' },
+      { title:'Elige UNO solo para el próximo trimestre. Tu patrón es no terminar proyectos por dispersión — un segundo stream enfocado vale más que tres empezados.', detail:'La disciplina de elegir uno solo respeta tu constraint real de tiempo y tu patrón conocido. Mejor un stream nuevo terminado que tres a medias compitiendo con el negocio base que ya funciona.' },
+    ],
+    tip:'Si llegaste aquí con 2-3 retainers activos, el modelo está validado y la meta de fin de 2026 está al alcance. El siguiente trimestre es escalar lo que funciona, no inventar de cero.',
+  },
+
+];
+
+// ============================================================
+// GLOSSARY (referencia rápida)
+// ============================================================
+const GLOSSARY = {
+  factores: [
+    { n:'1', t:'Citaciones en fuentes autoritativas', d:'Los LLMs confían más en algunas fuentes: <b>G2, Capterra, GetApp, Trustpilot, Crunchbase, LinkedIn</b> y medios sectoriales. Sin perfil completo ahí, la empresa es casi invisible cuando alguien pregunta por su categoría.' },
+    { n:'2', t:'Schema markup (JSON-LD)', d:'Código que le dice al motor qué es la empresa, qué hace y dónde opera. Tipos clave: <code>Organization</code>, <code>SoftwareApplication</code>, <code>Product</code>, <code>FAQPage</code>, <code>Review</code>. Se valida gratis en <code>schema.org/validator</code>.' },
+    { n:'3', t:'Contenido tipo Q&A', d:'Los LLMs prefieren citar contenido ya en formato pregunta-respuesta directa. Un FAQ con las preguntas reales del cliente gana sobre texto de marketing genérico.' },
+    { n:'4', t:'Consistencia de entidad', d:'El modelo construye una "entidad" de cada empresa. Si el nombre/descripción/categoría varía entre web, SUNAT, G2 y LinkedIn, le cuesta consolidar. Consistencia total = entidad más fuerte = más citaciones.' },
+    { n:'5', t:'Autoridad de dominio y backlinks', d:'Como en SEO clásico: sitios con enlaces entrantes de fuentes respetadas pesan más cuando los LLMs los encuentran durante el retrieval en tiempo real.' },
+  ],
+  audit: [
+    { n:'1', t:'Benchmark de visibilidad (1-2h)', d:'15-20 preguntas de <b>intención de compra</b> (no de marca) en ChatGPT, Perplexity y Claude. Documentar con screenshots si el cliente aparece y quién sale en su lugar vs 3 competidores.' },
+    { n:'2', t:'Audit de schema y SEO técnico (1h)', d:'Revisar datos estructurados y estructura del sitio con <code>schema.org/validator</code>, Screaming Frog (gratis hasta 500 URLs) y Search Console.' },
+    { n:'3', t:'Audit de plataformas de review (30 min)', d:'Completitud y calidad de perfiles en G2, Capterra, GetApp, Trustpilot, Crunchbase y LinkedIn.' },
+    { n:'4', t:'Audit de contenido Q&A (30 min)', d:'¿El blog/FAQ usa lenguaje real del cliente o marketing genérico? ¿Existe formato pregunta-respuesta?' },
+    { n:'5', t:'Análisis con Claude (1-2h)', d:'Pasar todos los datos a Claude y pedir resumen ejecutivo, hallazgos críticos, 10 recomendaciones priorizadas y roadmap de 90 días. Editar y personalizar.' },
+    { n:'6', t:'Entrega async (30-45 min)', d:'Video Loom de 20-30 min (pantalla + voz, <b>sin rostro</b>) recorriendo el reporte, más el documento en Notion. Por email. Sin reunión obligatoria.' },
+  ],
+};
+
+const TOTAL = TASKS.length;
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  completed: {},
+  stepProgress: {},
+  chats: {},
+  compliance: 'pendiente',
+  streak: 0,
+  lastActiveDay: null,
+};
+
+function loadState(){
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state = Object.assign(state, JSON.parse(raw));
+    if (!state.stepProgress) state.stepProgress = {};
+    if (!state.chats) state.chats = {};
+    if (!state.compliance) state.compliance = 'pendiente';
+  } catch(e){}
+}
+function saveState(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
+}
+function getKey(){ try { return localStorage.getItem(KEY_STORAGE) || ''; } catch(e){ return ''; } }
+function setKey(k){ try { if(k){ localStorage.setItem(KEY_STORAGE, k); } else { localStorage.removeItem(KEY_STORAGE); } } catch(e){} }
+
+function dayKey(d){ return d.toISOString().slice(0,10); }
+function bumpStreak(){
+  const today = dayKey(new Date());
+  if (state.lastActiveDay === today) return;
+  const y = new Date(); y.setDate(y.getDate()-1);
+  state.streak = state.lastActiveDay === dayKey(y) ? state.streak + 1 : 1;
+  state.lastActiveDay = today;
+}
+
+// ============================================================
+// TIMER
+// ============================================================
+let timer = { seconds:0, total:0, running:false, interval:null };
+function pad2(n){ n = String(n); return n.length < 2 ? '0'+n : n; }
+function fmt(s){ return pad2(Math.floor(s/60))+':'+pad2(s%60); }
+function startTimer(totalSecs){
+  clearInterval(timer.interval);
+  timer.seconds = totalSecs; timer.total = totalSecs; timer.running = true;
+  renderTimer();
+  timer.interval = setInterval(()=>{
+    timer.seconds -= 1;
+    if (timer.seconds <= 0){ clearInterval(timer.interval); timer.running=false; timer.seconds=0; renderTimer(); showToast('Tiempo cumplido — marca la misión cuando estés listo'); return; }
+    renderTimer();
+  }, 1000);
+}
+function pauseTimer(){ clearInterval(timer.interval); timer.running=false; renderTimer(); }
+function resumeTimer(){
+  if (timer.seconds <= 0) return;
+  timer.running = true; renderTimer();
+  timer.interval = setInterval(()=>{
+    timer.seconds -= 1;
+    if (timer.seconds <= 0){ clearInterval(timer.interval); timer.running=false; timer.seconds=0; renderTimer(); showToast('Tiempo cumplido — marca la misión cuando estés listo'); return; }
+    renderTimer();
+  }, 1000);
+}
+function renderTimer(){
+  const d = document.getElementById('timerDisplay');
+  if (!d) return;
+  d.textContent = fmt(timer.seconds);
+  d.classList.toggle('running', timer.running);
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
+function allDone(){ return Object.keys(state.completed).length >= TOTAL; }
+function getNextTask(){ for (const t of TASKS){ if (!state.completed[t.id]) return t; } return null; }
+function escapeHtml(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function stripTags(s){ return String(s).replace(/<[^>]+>/g,''); }
+
+// ============================================================
+// COMPLIANCE BAR
+// ============================================================
+const COMPLIANCE_STATES = ['pendiente','enviada','aprobada'];
+const COMPLIANCE_TEXT = {
+  pendiente: 'Compliance Credicorp: PENDIENTE — declárala antes de cobrar',
+  enviada:   'Compliance: declaración ENVIADA — esperando aprobación',
+  aprobada:  'Compliance: APROBADA ✓ — ya puedes monetizar',
+};
+function renderCompliance(){
+  const bar = document.getElementById('complianceBar');
+  const txt = document.getElementById('compText');
+  bar.className = 'compliance-bar ' + state.compliance;
+  txt.textContent = COMPLIANCE_TEXT[state.compliance];
+}
+document.getElementById('complianceBar').onclick = ()=>{
+  const i = COMPLIANCE_STATES.indexOf(state.compliance);
+  state.compliance = COMPLIANCE_STATES[(i+1) % COMPLIANCE_STATES.length];
+  saveState(); renderCompliance();
+  if (state.compliance === 'aprobada') showToast('Compliance aprobada — vía libre para cobrar');
+};
+
+// ============================================================
+// RAIL
+// ============================================================
+function renderRail(){
+  const doneCount = Object.keys(state.completed).length;
+  const pct = Math.round((doneCount/TOTAL)*100);
+  document.getElementById('railFill').style.width = pct+'%';
+  document.getElementById('railPct').textContent = pct+'%';
+  document.getElementById('doneNum').textContent = doneCount;
+  document.getElementById('streakNum').textContent = state.streak;
+  const currentTask = getNextTask();
+  const currentPhase = currentTask ? currentTask.phase : PHASES[PHASES.length-1].id;
+  const railPhases = document.getElementById('railPhases');
+  railPhases.innerHTML = '';
+  PHASES.forEach(p => {
+    const span = document.createElement('span');
+    span.textContent = p.label + ' · ' + p.short;
+    if (p.id === currentPhase) span.classList.add('active');
+    railPhases.appendChild(span);
+  });
+}
+
+// ============================================================
+// TUTORIAL (per-step checklist)
+// ============================================================
+function getStepProgress(taskId){
+  if (!state.stepProgress) state.stepProgress = {};
+  if (!state.stepProgress[taskId]) state.stepProgress[taskId] = {};
+  return state.stepProgress[taskId];
+}
+function renderTutorialInner(task){
+  const steps = task.tutorial || [];
+  const progress = getStepProgress(task.id);
+  const doneCount = steps.filter((s,i) => progress[i]).length;
+  const pct = steps.length ? Math.round((doneCount/steps.length)*100) : 0;
+  let html = '';
+  if (task.why){
+    html += `<div class="why-box">&#x1F3AF; <span><b>Por qué importa:</b> ${task.why}</span></div>`;
+  }
+  html += `
+    <div class="level-bar-row">
+      <span class="level-bar-label">Avance</span>
+      <div class="level-bar-track"><div class="level-bar-fill" style="width:${pct}%"></div></div>
+      <span class="level-bar-label">${doneCount}/${steps.length}</span>
+    </div>`;
+  steps.forEach((step, i) => {
+    const isDone = !!progress[i];
+    html += `
+      <div class="tutorial-step${isDone?' step-done':''}">
+        <div class="tutorial-step-row" data-toggle-step="${i}">
+          <div class="step-check">${isDone?'&#x2713;':''}</div>
+          <div class="step-main">
+            <div class="step-title"><span class="step-num-tag">${i+1}.</span>${step.title}</div>
+            <div class="step-detail">${step.detail}</div>
+          </div>
+        </div>
+      </div>`;
+  });
+  if (task.tip){
+    html += `<div class="tutorial-tip">&#x1F4A1; <span><b>Tip:</b> ${task.tip}</span></div>`;
+  }
+  if (steps.length && doneCount === steps.length){
+    html += `<div class="tutorial-complete-banner">&#x1F3C6; Pasos completos — recorriste todo el tutorial de esta misión.</div>`;
+  }
+  return html;
+}
+function wireTutorialSteps(task){
+  const panel = document.getElementById('tutorialPanel');
+  if (!panel) return;
+  panel.querySelectorAll('[data-toggle-step]').forEach(row => {
+    row.onclick = () => {
+      const i = row.getAttribute('data-toggle-step');
+      const progress = getStepProgress(task.id);
+      progress[i] = !progress[i];
+      saveState();
+      panel.innerHTML = renderTutorialInner(task);
+      wireTutorialSteps(task);
+      updateTutorialBadge(task);
+    };
+  });
+}
+function updateTutorialBadge(task){
+  const badge = document.getElementById('tutBadge');
+  if (!badge) return;
+  const steps = task.tutorial || [];
+  const progress = getStepProgress(task.id);
+  const doneCount = steps.filter((s,i) => progress[i]).length;
+  const complete = doneCount === steps.length && steps.length > 0;
+  badge.textContent = complete ? '✓ completo' : `${doneCount}/${steps.length} pasos`;
+  badge.classList.toggle('complete', !!complete);
+}
+
+// ============================================================
+// CHAT WITH CLAUDE (embebido por misión)
+// ============================================================
+function getChat(taskId){
+  if (!state.chats) state.chats = {};
+  if (!state.chats[taskId]) state.chats[taskId] = [];
+  return state.chats[taskId];
+}
+function buildSystemPrompt(task){
+  const steps = (task.tutorial||[]).map((s,i)=> (i+1)+'. '+stripTags(s.title)).join('\n');
+  return `Eres el copiloto de Abraham dentro de su herramienta de ejecución del negocio de consultoría AEO/GEO. Respondes en español de Perú: directo, concreto, accionable, sin rodeos ni relleno. Da una recomendación clara en vez de una lista exhaustiva de opciones. Responde solo con la respuesta final, sin pensar en voz alta. Mantén las respuestas breves salvo que se te pida más detalle.
+
+CONTEXTO DEL NEGOCIO Y DE ABRAHAM:
+${BUSINESS_CONTEXT}
+
+MISIÓN ACTUAL en la que Abraham está trabajando ahora mismo:
+Título: ${task.title}
+Descripción: ${task.desc}
+Pasos de la misión:
+${steps}
+${task.why ? '\nPor qué importa: '+task.why : ''}
+
+Tu trabajo: resolver dudas sobre ESTA misión/paso, dar ejemplos concretos adaptados a SU caso (fintech no-crediticia / SaaS B2B de LATAM), ayudarlo a ejecutar y desbloquearlo cuando se trabe. Si la pregunta toca clientes del sector financiero regulado (bancos, fintechs de crédito/inversión, casas de cambio, seguros, AFP, SAB), recuérdale el riesgo de compliance con Credicorp. No inventes cifras ni datos; si no estás seguro, dilo claramente.`;
+}
+function fmtChatText(s){
+  let h = escapeHtml(s);
+  h = h.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  h = h.replace(/`([^`]+)`/g, '<code>$1</code>');
+  h = h.replace(/\n/g, '<br>');
+  return h;
+}
+function renderChatInner(task){
+  const key = getKey();
+  if (!key){
+    return `
+      <div class="chat-panel">
+        <div class="chat-connect">
+          <div class="chat-connect-title">&#x1F4AC; Conecta a Claude para preguntar sobre este paso</div>
+          <div class="chat-connect-sub">Necesitas una API key de Anthropic (es distinta de tu Claude Pro). Consíguela gratis en <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> y pega aquí la que empieza con <code>sk-ant-</code>.</div>
+          <div class="chat-key-row">
+            <input class="chat-key-input" id="keyInput" type="password" placeholder="sk-ant-..." autocomplete="off">
+            <button class="chat-send" id="keySave">Guardar</button>
+          </div>
+          <div class="chat-key-note">Tu key se guarda solo en este navegador (localStorage), nunca se envía a ningún lado salvo directamente a la API de Anthropic. El uso se cobra por consumo a tu cuenta de Anthropic (centavos por pregunta).</div>
+        </div>
+      </div>`;
+  }
+  const chat = getChat(task.id);
+  let msgs = '';
+  if (chat.length === 0){
+    msgs = `<div class="chat-msg assistant">Pregúntame lo que necesites sobre <b>"${escapeHtml(task.title)}"</b>. Conozco tu negocio, tus restricciones y las reglas de compliance.</div>`;
+  } else {
+    chat.forEach(m => {
+      if (m.role === 'user') msgs += `<div class="chat-msg user">${escapeHtml(m.content)}</div>`;
+      else msgs += `<div class="chat-msg assistant">${fmtChatText(m.content)}</div>`;
+    });
+  }
+  return `
+    <div class="chat-panel">
+      <div class="chat-log" id="chatLog">${msgs}</div>
+      <div class="chat-chips" id="chatChips">
+        <span class="chat-chip" data-q="¿Por qué este paso importa para mi caso específico?">¿Por qué importa?</span>
+        <span class="chat-chip" data-q="Dame un ejemplo concreto de cómo hacer esto para una empresa SaaS B2B de Perú.">Dame un ejemplo</span>
+        <span class="chat-chip" data-q="¿Hay algún riesgo de compliance con Credicorp en este paso?">¿Riesgo de compliance?</span>
+        <span class="chat-chip" data-q="¿Cómo hago este paso más rápido sin perder calidad?">Hazlo más rápido</span>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="chatInput" placeholder="Escribe tu duda sobre este paso..." rows="1"></textarea>
+        <button class="chat-send" id="chatSend">Enviar</button>
+      </div>
+      <div class="chat-foot">
+        <span class="chat-model">modelo: ${CLAUDE_MODEL}</span>
+        <button class="chat-key-manage" id="keyManage">quitar API key</button>
+      </div>
+    </div>`;
+}
+function scrollChat(){ const log = document.getElementById('chatLog'); if (log) log.scrollTop = log.scrollHeight; }
+
+async function callClaude(task){
+  const key = getKey();
+  const sys = buildSystemPrompt(task);
+  const history = getChat(task.id).map(m => ({ role:m.role, content:m.content }));
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{
+      'content-type':'application/json',
+      'x-api-key': key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body: JSON.stringify({
+      model: CLAUDE_MODEL,
+      max_tokens: 1024,
+      system: sys,
+      messages: history
+    })
+  });
+  if (!res.ok){
+    let detail = '';
+    try { const j = await res.json(); detail = (j.error && j.error.message) ? j.error.message : ''; } catch(e){}
+    if (res.status === 401) throw new Error('API key inválida o vencida. Revisa que copiaste bien la key de console.anthropic.com.');
+    if (res.status === 429) throw new Error('Límite de uso alcanzado (rate limit). Espera unos segundos y reintenta.');
+    if (res.status === 400 && /credit|balance|billing/i.test(detail)) throw new Error('Tu cuenta de Anthropic no tiene saldo. Agrega crédito en console.anthropic.com → Billing.');
+    throw new Error('Error de la API ('+res.status+'). '+detail);
+  }
+  const data = await res.json();
+  if (data.stop_reason === 'refusal') return 'No puedo responder eso. Reformula la pregunta enfocándola en la ejecución del paso.';
+  const text = (data.content||[]).filter(b => b.type==='text').map(b => b.text).join('').trim();
+  return text || '(respuesta vacía — reintenta)';
+}
+
+async function sendChat(task, text){
+  text = (text||'').trim();
+  if (!text) return;
+  const chat = getChat(task.id);
+  chat.push({ role:'user', content:text });
+  saveState();
+  // re-render with the new user message + thinking indicator
+  const panelHost = document.getElementById('chatPanelHost');
+  panelHost.innerHTML = renderChatInner(task);
+  wireChat(task);
+  const log = document.getElementById('chatLog');
+  const thinking = document.createElement('div');
+  thinking.className = 'chat-msg thinking';
+  thinking.textContent = 'Claude está pensando…';
+  log.appendChild(thinking);
+  scrollChat();
+  const sendBtn = document.getElementById('chatSend');
+  if (sendBtn) sendBtn.disabled = true;
+  try {
+    const answer = await callClaude(task);
+    chat.push({ role:'assistant', content:answer });
+    saveState();
+  } catch(err){
+    // remove thinking, show error
+    panelHost.innerHTML = renderChatInner(task);
+    wireChat(task);
+    const log2 = document.getElementById('chatLog');
+    const errDiv = document.createElement('div');
+    errDiv.className = 'chat-msg error';
+    errDiv.textContent = '⚠ ' + (err.message || 'No se pudo conectar. Si abriste el archivo con file:// y falla, sírvelo por localhost.');
+    log2.appendChild(errDiv);
+    scrollChat();
+    return;
+  }
+  panelHost.innerHTML = renderChatInner(task);
+  wireChat(task);
+  scrollChat();
+}
+
+function wireChat(task){
+  const host = document.getElementById('chatPanelHost');
+  if (!host) return;
+  const keySave = document.getElementById('keySave');
+  if (keySave){
+    keySave.onclick = ()=>{
+      const v = document.getElementById('keyInput').value.trim();
+      if (!v){ showToast('Pega tu API key primero'); return; }
+      setKey(v);
+      host.innerHTML = renderChatInner(task);
+      wireChat(task);
+      showToast('Claude conectado');
+    };
+    const ki = document.getElementById('keyInput');
+    if (ki) ki.onkeydown = (e)=>{ if (e.key==='Enter'){ e.preventDefault(); keySave.click(); } };
+    return;
+  }
+  const sendBtn = document.getElementById('chatSend');
+  const input = document.getElementById('chatInput');
+  if (sendBtn && input){
+    sendBtn.onclick = ()=>{ const v = input.value; input.value=''; sendChat(task, v); };
+    input.onkeydown = (e)=>{ if (e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendBtn.click(); } };
+  }
+  host.querySelectorAll('.chat-chip').forEach(chip=>{
+    chip.onclick = ()=> sendChat(task, chip.getAttribute('data-q'));
+  });
+  const km = document.getElementById('keyManage');
+  if (km){
+    km.onclick = ()=>{
+      if (confirm('¿Quitar la API key de este navegador? El chat dejará de funcionar hasta que pegues otra.')){
+        setKey('');
+        host.innerHTML = renderChatInner(task);
+        wireChat(task);
+      }
+    };
+  }
+}
+
+// ============================================================
+// TIMER CONTROLS
+// ============================================================
+function renderTimerControls(task){
+  const c = document.getElementById('timerControls');
+  c.innerHTML = `<button class="tbtn primary" id="btnStart">Iniciar</button>`;
+  function wirePause(){ const b = document.getElementById('btnPause'); if (b) b.onclick = onPause; }
+  function onPause(){ pauseTimer(); c.innerHTML = `<button class="tbtn primary" id="btnResume">Continuar</button>`; document.getElementById('btnResume').onclick = onResume; }
+  function onResume(){ resumeTimer(); c.innerHTML = `<button class="tbtn" id="btnPause">Pausar</button>`; wirePause(); }
+  document.getElementById('btnStart').onclick = ()=>{ startTimer(task.minutes*60); c.innerHTML = `<button class="tbtn" id="btnPause">Pausar</button>`; wirePause(); };
+}
+
+// ============================================================
+// RENDER MISSION
+// ============================================================
+function renderMission(){
+  const slot = document.getElementById('missionSlot');
+  const task = getNextTask();
+  clearInterval(timer.interval);
+  timer = { seconds:0, total:0, running:false, interval:null };
+
+  if (!task){
+    slot.innerHTML = `
+      <div class="mission-card">
+        <div class="mission-tape"></div>
+        <div class="empty-state">
+          <div class="done-icon">&#x1F680;</div>
+          <div class="done-title">Plan de 90 días completado.</div>
+          <div class="done-sub">Las ${TOTAL} misiones están listas. Si llegaste con 2-3 retainers activos, el modelo está validado y la meta de fin de 2026 está al alcance.</div>
+        </div>
+      </div>`;
+    renderRail();
+    return;
+  }
+
+  const idx = TASKS.findIndex(t => t.id === task.id);
+  const num = pad2(idx+1);
+  slot.innerHTML = `
+    <div class="mission-card">
+      <div class="mission-tape"></div>
+      <div class="mission-head">
+        <span class="mission-tag">MISIÓN ${num} / ${TOTAL}</span>
+        <span class="phase-tag">${PHASE_LABELS[task.phase]}</span>
+      </div>
+      <div class="mission-body">
+        <h2 class="mission-title">${task.title}</h2>
+        <p class="mission-desc">${task.desc}</p>
+        <div class="mission-meta">
+          <div class="meta-pill">&#x23F1; <b>${task.minutes} min</b></div>
+          <div class="meta-pill">&#x1F3F7; <b>${task.tag}</b></div>
+          ${task.gate==='compliance' ? '<div class="meta-pill">&#x1F6E1;&#xFE0F; <b>requiere compliance</b></div>' : ''}
+        </div>
+
+        <div class="sec-toggle tut" id="tutToggle">
+          <div class="sec-toggle-left"><span>&#x1F4CB; Pasos de la misión</span></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="mini-badge" id="tutBadge"></span>
+            <span class="sec-chevron" id="tutChevron">&#x25BE;</span>
+          </div>
+        </div>
+        <div class="panel" id="tutPanel"><div class="tutorial-panel" id="tutorialPanel">${renderTutorialInner(task)}</div></div>
+
+        <div class="sec-toggle chat" id="chatToggle">
+          <div class="sec-toggle-left"><span>&#x1F4AC; Pregúntale a Claude sobre este paso</span></div>
+          <span class="sec-chevron" id="chatChevron">&#x25BE;</span>
+        </div>
+        <div class="panel" id="chatPanelWrap"><div id="chatPanelHost">${renderChatInner(task)}</div></div>
+
+        <div class="timer-zone">
+          <div class="timer-display" id="timerDisplay">${fmt(task.minutes*60)}</div>
+          <div class="timer-controls" id="timerControls"></div>
+        </div>
+        <textarea class="log-input" id="noteInput" placeholder="Anota algo: qué hiciste, qué resultado salió, qué falta..."></textarea>
+        <div class="action-row">
+          <button class="btn-complete" id="completeBtn">Misión completada &#x2713;</button>
+          <button class="btn-skip" id="skipBtn">dejar para después</button>
+        </div>
+      </div>
+    </div>`;
+
+  renderTimerControls(task);
+  renderTimer();
+  updateTutorialBadge(task);
+
+  document.getElementById('completeBtn').onclick = () => completeTask(task);
+  document.getElementById('skipBtn').onclick = () => skipTask(task);
+  document.getElementById('tutToggle').onclick = () => {
+    document.getElementById('tutPanel').classList.toggle('open');
+    document.getElementById('tutChevron').classList.toggle('open');
+  };
+  document.getElementById('chatToggle').onclick = () => {
+    document.getElementById('chatPanelWrap').classList.toggle('open');
+    document.getElementById('chatChevron').classList.toggle('open');
+  };
+  wireTutorialSteps(task);
+  wireChat(task);
+  renderRail();
+}
+
+function completeTask(task){
+  if (task.gate === 'compliance' && state.compliance !== 'aprobada'){
+    const go = confirm('Ojo: esta misión implica cobrar, pero la barra de Compliance no está en APROBADA.\n\nNo deberías cobrarle a un cliente antes de que Cumplimiento de Credicorp apruebe tu declaración.\n\n¿Ya está aprobada y quieres continuar igual?');
+    if (!go) return;
+  }
+  const note = document.getElementById('noteInput').value.trim();
+  state.completed[task.id] = { note, ts: new Date().toISOString() };
+  bumpStreak();
+  saveState();
+  showToast(pickCelebration());
+  flashAndAdvance();
+}
+function skipTask(task){
+  const idx = TASKS.findIndex(t => t.id === task.id);
+  if (idx > -1 && idx < TASKS.length-1){
+    const [t] = TASKS.splice(idx,1);
+    TASKS.splice(Math.min(idx+3, TASKS.length), 0, t);
+  }
+  renderMission();
+}
+function flashAndAdvance(){
+  const slot = document.getElementById('missionSlot');
+  slot.innerHTML = `
+    <div class="mission-card">
+      <div class="mission-tape"></div>
+      <div class="done-flash">
+        <div class="done-icon">&#x2705;</div>
+        <div class="done-title">Misión completada.</div>
+        <div class="done-sub">El plan avanza. Siguiente cuando estés listo.</div>
+        <button class="tbtn primary" id="nextBtn" style="padding:12px 22px;font-size:13.5px;">Ver la próxima misión →</button>
+      </div>
+    </div>`;
+  document.getElementById('nextBtn').onclick = renderMission;
+  renderRail();
+  renderHistory();
+}
+
+const CELEBRATIONS = [
+  'Misión completada. El negocio avanza.',
+  'Listo. Así se construye el MRR.',
+  'Una menos. Sigue el ritmo.',
+  'Bien ejecutado — disciplina de consultor.',
+  'Completado. La meta se acerca.',
+  'Eso quedó. El plan sigue su curso.',
+];
+function pickCelebration(){ return CELEBRATIONS[Math.floor(Math.random()*CELEBRATIONS.length)]; }
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._hideTimeout);
+  t._hideTimeout = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ============================================================
+// HISTORY
+// ============================================================
+function renderHistory(){
+  const panel = document.getElementById('historyPanel');
+  panel.innerHTML = '';
+  PHASES.forEach(p => {
+    const tasksInPhase = TASKS.filter(t => t.phase === p.id);
+    const doneInPhase = tasksInPhase.filter(t => state.completed[t.id]).length;
+    const block = document.createElement('div');
+    block.className = 'phase-block';
+    const head = document.createElement('div');
+    head.className = 'phase-block-head';
+    head.innerHTML = `<span>${p.label} · ${p.short}</span><span>${doneInPhase}/${tasksInPhase.length}</span>`;
+    block.appendChild(head);
+    tasksInPhase.forEach(t => {
+      const done = state.completed[t.id];
+      const row = document.createElement('div');
+      row.className = 'task-row'+(done?' done':'');
+      const when = done ? new Date(done.ts).toLocaleDateString('es-PE',{day:'2-digit',month:'short'}) : '';
+      row.innerHTML = `
+        <div class="task-check">${done?'&#x2713;':''}</div>
+        <div class="task-text">
+          <div class="task-text-title">${t.title}</div>
+          ${done && done.note ? `<div class="task-note">"${escapeHtml(done.note)}"</div>` : ''}
+        </div>
+        <div class="task-when">${when}</div>`;
+      block.appendChild(row);
+    });
+    panel.appendChild(block);
+  });
+}
+
+// ============================================================
+// GLOSSARY
+// ============================================================
+function renderGlossary(){
+  const panel = document.getElementById('glossPanel');
+  let html = '<div class="gloss-panel">';
+  html += '<div class="gloss-section-label">Los 5 factores técnicos de AEO/GEO</div>';
+  GLOSSARY.factores.forEach(f => {
+    html += `<div class="gloss-item"><h4><span class="gloss-num">${f.n}</span>${f.t}</h4><p>${f.d}</p></div>`;
+  });
+  html += '<div class="gloss-section-label" style="margin-top:16px;">El flujo del audit en 6 pasos</div>';
+  GLOSSARY.audit.forEach(a => {
+    html += `<div class="gloss-item"><h4><span class="gloss-num">${a.n}</span>${a.t}</h4><p>${a.d}</p></div>`;
+  });
+  html += '</div>';
+  panel.innerHTML = html;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+loadState();
+renderCompliance();
+renderMission();
+renderHistory();
+renderGlossary();
+
+document.getElementById('historyToggle').onclick = () => {
+  document.getElementById('historyPanel').classList.toggle('open');
+  document.getElementById('historyChevron').classList.toggle('open');
+};
+document.getElementById('glossToggle').onclick = () => {
+  document.getElementById('glossPanel').classList.toggle('open');
+  document.getElementById('glossChevron').classList.toggle('open');
+};
+document.getElementById('resetBtn').onclick = () => {
+  if (confirm('¿Reiniciar todo el progreso del plan? Esto borra misiones completadas, racha, notas y conversaciones. (Tu API key NO se borra.)')){
+    state = { completed:{}, stepProgress:{}, chats:{}, compliance:'pendiente', streak:0, lastActiveDay:null };
+    saveState(); renderCompliance(); renderMission(); renderHistory();
+    showToast('Progreso reiniciado. Plan listo para empezar de nuevo.');
+  }
+};
+
+})();
+</script>
+</body>
+</html>
