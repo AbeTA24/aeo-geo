@@ -24,6 +24,10 @@ self.addEventListener('fetch', (e) => {
   // Nunca interceptar la API de Anthropic.
   if (url.hostname === 'api.anthropic.com') return;
 
+  // La copia de prueba (/preview/) va siempre a la red y nunca se guarda
+  // en la caché de la app real.
+  if (url.origin === self.location.origin && url.pathname.includes('/preview/')) return;
+
   // Navegación: red primero (así llegan las actualizaciones), caché si no hay red.
   if (req.mode === 'navigate'){
     e.respondWith(
