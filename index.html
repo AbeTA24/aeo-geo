@@ -416,6 +416,14 @@ button{font-family:var(--sans);}
 .app-foot .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;}
 .app-note{font-size:11px;color:var(--muted);line-height:1.55;max-width:60ch;}
 
+.backup-box{border:1px solid var(--sand);background:var(--paper-raise);padding:16px 18px;margin-bottom:28px;}
+.backup-box .bk-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
+.backup-box .bk-last{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--muted);}
+.backup-box .bk-note{font-size:11.5px;color:var(--muted);line-height:1.55;margin:0 0 14px;}
+.backup-box .bk-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.backup-box .bk-actions .btn-ghost{min-height:44px;flex:1 1 140px;}
+.backup-box .bk-undo{margin-top:14px;}
+
 /* ============================================================
    SHEET DE CELEBRACIÓN (recompensa variable)
    ============================================================ */
@@ -863,30 +871,37 @@ const TOTAL = TASKS.length;
 // ============================================================
 // STATE
 // ============================================================
-let state = {
-  completed: {},
-  stepProgress: {},
-  chats: {},
-  compliance: 'pendiente',
-  streak: 0,
-  lastActiveDay: null,
-  bestStreak: 0,
-  freezes: 0,
-  activityLog: {},
-  seenInsights: [],
-  migratedV2: false,
-};
+function defaultState(){
+  return {
+    completed: {},
+    stepProgress: {},
+    chats: {},
+    compliance: 'pendiente',
+    streak: 0,
+    lastActiveDay: null,
+    bestStreak: 0,
+    freezes: 0,
+    activityLog: {},
+    seenInsights: [],
+    migratedV2: false,
+  };
+}
+let state = defaultState();
+
+function normalizeState(){
+  ['completed','stepProgress','chats','activityLog'].forEach(k => { if (!state[k] || typeof state[k] !== 'object') state[k] = {}; });
+  if (!Array.isArray(state.seenInsights)) state.seenInsights = [];
+  if (!state.compliance) state.compliance = 'pendiente';
+  if (!state.bestStreak) state.bestStreak = state.streak || 0;
+  if (!state.freezes) state.freezes = 0;
+}
 
 function loadState(){
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) state = Object.assign(state, JSON.parse(raw));
   } catch(e){}
-  ['stepProgress','chats','activityLog'].forEach(k => { if (!state[k]) state[k] = {}; });
-  if (!state.seenInsights) state.seenInsights = [];
-  if (!state.compliance) state.compliance = 'pendiente';
-  if (!state.bestStreak) state.bestStreak = state.streak || 0;
-  if (!state.freezes) state.freezes = 0;
+  normalizeState();
   // Migración desde la v2 (la versión anterior en este mismo dominio):
   // conserva racha y estado de compliance. Las misiones no migran porque
   // el plan cambió por completo con el análisis de mercado.
@@ -910,6 +925,119 @@ function loadState(){
 function saveState(){ try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){} }
 function getKey(){ try { return localStorage.getItem(KEY_STORAGE) || ''; } catch(e){ return ''; } }
 function setKey(k){ try { if(k){ localStorage.setItem(KEY_STORAGE, k); } else { localStorage.removeItem(KEY_STORAGE); } } catch(e){} }
+
+// ============================================================
+// RESPALDO: exportar / importar progreso
+// El archivo nunca incluye la API key (vive en otra clave).
+// ============================================================
+const BACKUP_APP = 'aeo-geo-lab';
+const BACKUP_FORMAT = 1;
+const SAFETY_KEY = 'aeogeo_plan_v3_safety';
+
+function fmtDateTime(iso){
+  return new Date(iso).toLocaleString('es-PE', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+}
+function countMarkedSteps(s){
+  let n = 0;
+  Object.values(s.stepProgress || {}).forEach(p => { Object.values(p || {}).forEach(v => { if (v) n++; }); });
+  return n;
+}
+function progressSummary(s){
+  const m = Object.keys(s.completed || {}).length;
+  const p = countMarkedSteps(s);
+  return m + (m === 1 ? ' misión completada' : ' misiones completadas') + ' · ' + p + (p === 1 ? ' paso marcado' : ' pasos marcados') + ' · racha ' + (s.streak || 0);
+}
+function backupFileName(){ return 'aeo-geo-respaldo-' + todayKey() + '.json'; }
+function buildBackupText(){
+  state.lastBackupAt = new Date().toISOString();
+  saveState();
+  return JSON.stringify({
+    app: BACKUP_APP,
+    format: BACKUP_FORMAT,
+    exportedAt: state.lastBackupAt,
+    storageKey: STORAGE_KEY,
+    state: state,
+  }, null, 2);
+}
+function exportBackup(){
+  const blob = new Blob([buildBackupText()], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = backupFileName();
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  showToast('Respaldo descargado');
+  render();
+}
+function canShareFiles(){
+  try {
+    if (!navigator.canShare) return false;
+    return navigator.canShare({ files:[new File(['{}'], 'x.json', { type:'application/json' })] });
+  } catch(e){ return false; }
+}
+async function shareBackup(){
+  const file = new File([buildBackupText()], backupFileName(), { type:'application/json' });
+  try {
+    await navigator.share({ files:[file], title:'Respaldo AEO–GEO' });
+    showToast('Respaldo enviado');
+  } catch(e){
+    if (e && e.name !== 'AbortError') showToast('No se pudo compartir — usa "Descargar"');
+  }
+  render();
+}
+function parseBackup(text){
+  let obj;
+  try { obj = JSON.parse(text); } catch(e){ throw new Error('El archivo no es un JSON válido.'); }
+  if (!obj || typeof obj !== 'object') throw new Error('El archivo está vacío o dañado.');
+  if (obj.app && obj.app !== BACKUP_APP) throw new Error('Este archivo es de otra app, no de AEO–GEO.');
+  const s = obj.state || obj;
+  const isObj = v => v && typeof v === 'object' && !Array.isArray(v);
+  if (!isObj(s) || !isObj(s.completed)) throw new Error('Este archivo no parece un respaldo de AEO–GEO.');
+  if (s.stepProgress !== undefined && !isObj(s.stepProgress)) throw new Error('El respaldo tiene los pasos dañados.');
+  return { state: s, exportedAt: obj.exportedAt || null };
+}
+function saveSafetyCopy(reason){
+  try {
+    localStorage.setItem(SAFETY_KEY, JSON.stringify({ savedAt: new Date().toISOString(), reason, state }));
+    return true;
+  } catch(e){ return false; }
+}
+function getSafetyCopy(){
+  try { const raw = localStorage.getItem(SAFETY_KEY); return raw ? JSON.parse(raw) : null; } catch(e){ return null; }
+}
+function replaceState(next){
+  state = Object.assign(defaultState(), next);
+  normalizeState();
+  state.migratedV2 = true;
+  saveState();
+}
+function importBackupText(text){
+  let parsed;
+  try { parsed = parseBackup(text); }
+  catch(e){ alert('No pude restaurar el respaldo.\n\n' + e.message + '\n\nTu progreso actual no cambió.'); return; }
+  const when = parsed.exportedAt ? ('del ' + fmtDateTime(parsed.exportedAt)) : '(sin fecha)';
+  const ok = confirm(
+    'Restaurar respaldo ' + when + ':\n' + progressSummary(parsed.state) +
+    '\n\nReemplazará tu progreso actual:\n' + progressSummary(state) +
+    '\n\nAntes guardo una copia de tu progreso actual en este dispositivo, para que puedas deshacer.'
+  );
+  if (!ok) return;
+  if (!saveSafetyCopy('import')){ alert('No pude guardar la copia de seguridad previa, así que no restauré nada. Tu progreso actual no cambió.'); return; }
+  replaceState(parsed.state);
+  render();
+  showToast('Respaldo restaurado');
+}
+function undoLastReplace(){
+  const copy = getSafetyCopy();
+  if (!copy || !copy.state) return;
+  if (!confirm('¿Volver al progreso que tenías el ' + fmtDateTime(copy.savedAt) + '?\n' + progressSummary(copy.state))) return;
+  replaceState(copy.state);
+  try { localStorage.removeItem(SAFETY_KEY); } catch(e){}
+  render();
+  showToast('Progreso anterior recuperado');
+}
 
 // ============================================================
 // RACHA + ACTIVIDAD (mecánica de racha con protectores, no tóxica)
@@ -1511,6 +1639,22 @@ function renderDatos(){
       <div class="stat-cell"><span class="sn tnum">${state.freezes}</span><span class="lbl">Protectores</span></div>
     </div>`;
 
+  const safety = getSafetyCopy();
+  html += `<div class="backup-box">
+    <div class="bk-head">
+      <span class="lbl forest">Respaldo de tu progreso</span>
+      <span class="bk-last">${state.lastBackupAt ? 'Último: ' + fmtDateTime(state.lastBackupAt) : 'Aún sin respaldo'}</span>
+    </div>
+    <p class="bk-note">Tu progreso vive solo en este dispositivo. Descarga un archivo y guárdalo fuera del celular (Drive o correo). No incluye tu API key. En iPhone, hazlo desde la app instalada: guarda sus datos aparte de Safari.</p>
+    <div class="bk-actions">
+      <button class="btn-ghost" id="bkExport">Descargar respaldo</button>
+      ${canShareFiles() ? '<button class="btn-ghost" id="bkShare">Enviar a…</button>' : ''}
+      <button class="btn-ghost" id="bkImport">Restaurar</button>
+    </div>
+    <input type="file" id="bkFile" accept=".json,application/json" hidden>
+    ${safety && safety.state ? `<div class="bk-undo"><button class="link-btn" id="bkUndo">deshacer ${safety.reason === 'reset' ? 'el reinicio' : 'la restauración'} (volver a lo del ${fmtDateTime(safety.savedAt)})</button></div>` : ''}
+  </div>`;
+
   html += `<div class="sec-h" data-sec="registro"><span>Registro de misiones</span><span class="plus${openSecs.registro?' open':''}">+</span></div>
     <div class="sec-body${openSecs.registro?' open':''}">`;
   const completedList = TASKS.filter(t => state.completed[t.id]);
@@ -1615,11 +1759,32 @@ function wireView(){
   document.querySelectorAll('.sec-h').forEach(h => {
     h.onclick = () => { const s = h.getAttribute('data-sec'); openSecs[s] = !openSecs[s]; render(); };
   });
+  const bkExport = document.getElementById('bkExport');
+  if (bkExport) bkExport.onclick = exportBackup;
+  const bkShare = document.getElementById('bkShare');
+  if (bkShare) bkShare.onclick = shareBackup;
+  const bkImport = document.getElementById('bkImport');
+  const bkFile = document.getElementById('bkFile');
+  if (bkImport && bkFile){
+    bkImport.onclick = () => { bkFile.value = ''; bkFile.click(); };
+    bkFile.onchange = () => {
+      const f = bkFile.files && bkFile.files[0];
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = () => importBackupText(String(reader.result || ''));
+      reader.onerror = () => alert('No pude leer el archivo. Tu progreso actual no cambió.');
+      reader.readAsText(f);
+    };
+  }
+  const bkUndo = document.getElementById('bkUndo');
+  if (bkUndo) bkUndo.onclick = undoLastReplace;
+
   const resetBtn = document.getElementById('resetBtn');
   if (resetBtn) resetBtn.onclick = () => {
-    if (confirm('¿Reiniciar todo el progreso del plan? Esto borra misiones, pasos, racha, notas y conversaciones. (Tu API key NO se borra.)')){
-      state = { completed:{}, stepProgress:{}, chats:{}, compliance:'pendiente', streak:0, lastActiveDay:null, bestStreak:0, freezes:0, activityLog:{}, seenInsights:[], migratedV2:true };
-      saveState(); render();
+    if (confirm('¿Reiniciar todo el progreso del plan? Esto borra misiones, pasos, racha, notas y conversaciones. (Tu API key NO se borra.)\n\nGuardo una copia en este dispositivo por si quieres deshacerlo.')){
+      saveSafetyCopy('reset');
+      replaceState({});
+      render();
       showToast('Progreso reiniciado.');
     }
   };
