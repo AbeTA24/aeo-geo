@@ -651,6 +651,11 @@ button{font-family:var(--sans);}
 .lin-lock .req-link{min-height:32px;}
 .comp-mini .crit-tag,.comp-full .crit-tag{font-size:8.5px;margin-left:8px;}
 
+.stats-grid.audit{grid-template-columns:repeat(3,1fr);margin-bottom:12px;}
+.stats-grid.audit .stat-cell{border-top:0 !important;}
+.stats-grid.audit .stat-cell + .stat-cell{border-left:1px solid var(--sand) !important;}
+.src-row .src-meta{text-transform:none;letter-spacing:0.02em;font-size:11px;line-height:1.5;}
+
 /* EMPIEZA AQUÍ */
 .start-box{border:1px solid var(--forest);border-left-width:3px;background:var(--paper-raise);padding:13px 15px 14px;margin:6px 0 18px;}
 .start-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;}
@@ -1210,7 +1215,8 @@ const WEB_STEPS = {
       done:'GitHub te pide el código al iniciar sesión.',
     } },
   'S1.4': { title:'Cuenta de Cloudflare con doble factor', requires:['S1.2'], cost:C0, sources:['Q-CF2FA'] },
-  'S1.5': { title:'Búsqueda fonética de "TuFuente" en INDECOPI', requires:[], cost:{ type:'free', status:'nuance', mandatory:true, sourceIds:['F36'] }, sources:['F36'],
+  'S1.5': { title:'Búsqueda fonética de "TuFuente" en INDECOPI', requires:[], cost:{ type:'free', status:'ok', mandatory:true, sourceIds:['F36'] }, sources:['F36'],
+    start:{ kind:'link', label:'Abrir «Busca tu marca» de INDECOPI', url:'https://enlinea.indecopi.gob.pe/buscatumarca', then:'Elige <b>Búsqueda Fonética</b>, escribe solo el término principal y marca hasta 3 clases.' },
     body:{
       steps:[
         'Entra a la plataforma de marcas de INDECOPI y busca la opción de <b>búsqueda fonética</b> [[F36]].',
@@ -1226,7 +1232,7 @@ const WEB_STEPS = {
   'S2.2': { title:'Instalar Node.js', requires:[], cost:C0, sources:['F08','F09'] },
   'S2.3': { title:'Crear la carpeta del proyecto', requires:[], cost:C0, sources:[] },
   'S2.4': { title:'Abrir Claude Code en esa carpeta', requires:['S2.1','S2.3'], cost:{ type:'included', status:'ok', mandatory:true, label:'Incluido en tu plan de Claude' }, sources:['F07'] },
-  'S3.1': { title:'Elegir ruta de investigación de keywords', requires:['S2.4'], cost:{ type:'usage', status:'none', mandatory:false, label:'S/ 0 o pago por uso', sourceIds:['Q-DFS'] }, sources:['F10'] },
+  'S3.1': { title:'Elegir ruta de investigación de keywords', requires:['S2.4'], cost:{ type:'usage', status:'ok', mandatory:false, label:'S/ 0 o pago por uso', sourceIds:['Q-DFS'] }, sources:['F10'] },
   'S3.2': { title:'Pedir el CSV de arquitectura', requires:['S3.1'], cost:{ type:'free', status:'ok', mandatory:true, label:'S/ 0 (o créditos de DataForSEO)' }, sources:['F20','F07'],
     start:{ kind:'copy', label:'Copiar el prompt para Claude Code', then:'Abre Claude Code en la carpeta <code>tufuente-web</code>, modo <b>Plan</b>, y pega el prompt (Ctrl+V).',
       text:"Soy TuFuente.ai, consultoría de visibilidad en buscadores de IA para pymes de LatAm, con base en Lima. Servicios: Auditoría, Implementación, Monitoreo. Arma un CSV con columnas: página, keyword objetivo, volumen mensual, URL. Incluye home, una página por servicio, metodología, sobre mí, contacto y blog. Si no tienes datos de volumen, pon 'sin dato'. No inventes." },
@@ -1273,20 +1279,20 @@ const WEB_STEPS = {
     } },
   'S6.3': { title:'Decidir si compartes el link', requires:['S6.2','S1.1'], cost:C0, criterio:true, sources:[] },
   'S6.4': { title:'Velocidad', requires:['S6.2','S5.4'], cost:{ type:'free', status:'nuance', mandatory:true, sourceIds:['F45'] }, sources:['F45','F20'] },
-  'S6.5': { title:'Publicación automática con cada cambio', requires:['S5.6','S6.1'], optional:true, cost:{ type:'free', status:'none', mandatory:false }, sources:['F24'] },
-  'S7.1': { title:'Comprar tufuente.ai', requires:['GATE','S1.4'], cost:{ type:'fixed', amount:160, currency:'USD', status:'nuance', mandatory:true, label:'US$80/año · mín. 2 años (~US$160)', note:'Precio de fuente secundaria [[F42]]; el mínimo de 2 años sí está verificado [[F03]]. Confirma el total en el checkout.', sourceIds:['F42','F03'] }, sources:['F02','F03','F42','Q-LOCK'],
+  'S6.5': { title:'Publicación automática con cada cambio', requires:['S5.6','S6.1'], optional:true, cost:{ type:'free', status:'ok', mandatory:false, sourceIds:['Q-BUILDS'] }, sources:['F24'] },
+  'S7.1': { title:'Comprar tufuente.ai', requires:['GATE','S1.4'], cost:{ type:'fixed', amount:160, currency:'USD', status:'nuance', mandatory:true, label:'US$80/año (hasta ~US$160 si exige 2 años)', note:'Precio según fuentes secundarias [[F42]]. El mínimo de 2 años lo dice otro registrador y puede ya no aplicar [[F03]]: revisa el plazo y el total en el checkout.', sourceIds:['F42','F03'] }, sources:['F02','F03','F42','Q-LOCK'],
     body:{
       steps:[
         'domains.cloudflare.com → busca <code>tufuente.ai</code>. Cloudflare cobra los .ai al costo, sin recargo [[F02]].',
-        'Revisa el <b>total</b> antes de pagar (debería cubrir 2 años) [[F03]].',
+        'Revisa el <b>plazo</b> y el <b>total</b> antes de pagar [[F03]].',
         'Paga tú.',
         'Activa el bloqueo de transferencia si el panel lo ofrece [[Q-LOCK]].',
       ],
       done:'tufuente.ai aparece en tu cuenta.',
     } },
   'S7.2': { title:'Conectar tufuente.ai a tu web', requires:['S7.1','S6.2'], cost:{ type:'free', status:'none', mandatory:true }, sources:[] },
-  'S7.3': { title:'Recibir correo en hola@tufuente.ai', requires:['S7.1'], cost:{ type:'unknown', status:'none', mandatory:false, sourceIds:['Q-EMAIL'] }, sources:['F04'] },
-  'S7.4': { title:'DMARC', requires:['S7.3'], cost:{ type:'free', status:'ok', mandatory:true, sourceIds:['F05'] }, sources:['F05','F06'] },
+  'S7.3': { title:'Recibir correo en hola@tufuente.ai', requires:['S7.1'], cost:{ type:'free', status:'ok', mandatory:false, sourceIds:['Q-EMAIL'] }, sources:['F04'] },
+  'S7.4': { title:'DMARC', requires:['S7.3'], cost:{ type:'free', status:'nuance', mandatory:true, sourceIds:['F05'] }, sources:['F05','F06'] },
   'S7.5': { title:'Google Search Console', requires:['S7.1','S7.2'], cost:{ type:'free', status:'nuance', mandatory:true }, sources:['F25'] },
   'S7.6': { title:'Bing Webmaster Tools', requires:['S7.5'], cost:{ type:'free', status:'nuance', mandatory:true }, sources:['F26','F27','F28'] },
   'S7.7': { title:'IndexNow con Crawler Hints', requires:['S7.1'], cost:{ type:'free', status:'ok', mandatory:true, sourceIds:['F29'] }, sources:['F29','F30'] },
@@ -1303,55 +1309,55 @@ const WEB_STEPS = {
   'S10.1': { title:'Formulario de contacto con anti-spam', requires:['S7.2','S8.2','S8.4'], optional:true, cost:{ type:'usage', status:'ok', mandatory:false, label:'S/ 0 hasta 100 mil peticiones/día; luego desde US$5/mes', sourceIds:['F40'] }, sources:['F40','F43','F04','F12','F13','F14'] },
   'S10.2': { title:'Enviar correos desde hola@tufuente.ai', requires:['S7.3'], optional:true, cost:{ type:'unknown', status:'none', mandatory:false, sourceIds:['Q-SEND'] }, sources:[] },
   'S10.3': { title:'Otterly pagado', requires:[], optional:true, cost:{ type:'fixed', amount:29, currency:'USD', period:'month', status:'ok', mandatory:false, label:'US$29/mes (Lite)', sourceIds:['F11'] }, sources:['F11'] },
-  'S10.4': { title:'Registro de marca en INDECOPI', requires:['S1.5'], optional:true, cost:{ type:'unknown', status:'none', mandatory:false, sourceIds:['F37'] }, sources:['F37'] },
+  'S10.4': { title:'Registro de marca en INDECOPI', requires:['S1.5'], optional:true, cost:{ type:'fixed', amount:534.9, currency:'PEN', status:'nuance', mandatory:false, label:'S/ 534.90 por clase (S/ 401.20 si eres mype)', sourceIds:['F37'] }, sources:['F37'] },
 };
 // Fuentes del plan v2. "planStatus" es el estado que trae el plan; se reverifican en la Fase 4.
 const SOURCES = {
-  F01:{ claim:'Activar 2FA en GitHub', site:'GitHub Docs', status:'ok', url:'https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication' },
-  F02:{ claim:'Cloudflare Registrar registra .ai al costo', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/changelog/post/2025-03-27-ai-domains-available/' },
-  F03:{ claim:'.ai: mínimo 2 años de registro', site:'Spaceship', status:'ok', note:'Registrador distinto a Cloudflare.', url:'https://www.spaceship.com/en-GB/domains/cctld/ai/' },
-  F04:{ claim:'Email Routing: pasos, MX/SPF/DKIM, solo reenvía; envío en Beta', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/email-service/get-started/route-emails/' },
-  F05:{ claim:'SPF, DKIM, DMARC; DMARC Management incluido', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/dmarc-management/' },
-  F06:{ claim:'DMARC: p=none → quarantine → reject', site:'DuoCircle', status:'nuance', note:'Fuente secundaria.', url:'https://www.duocircle.com/blog/dmarc/cloudflares-new-spf-dkim-and-dmarc-requirements/' },
-  F07:{ claim:'Pestaña Code en Windows, modos, Git', site:'Claude Code Docs', status:'ok', url:'https://code.claude.com/docs/en/desktop' },
-  F08:{ claim:'Node.js tiene LTS vigente', site:'Node.js', status:'ok', url:'https://nodejs.org/en/blog/release/v26.13.0' },
-  F09:{ claim:'Astro: Node 22.23.4+ par; npm create astro@latest', site:'Astro Docs', status:'ok', url:'https://docs.astro.build/en/install-and-setup/' },
-  F10:{ claim:'DataForSEO MCP en Claude Code', site:'DataForSEO', status:'ok', url:'https://dataforseo.com/help-center/3-ways-to-install-dataforseo-mcp-with-claude-code' },
-  F11:{ claim:'Otterly: planes y precios', site:'Otterly', status:'ok', url:'https://otterly.ai/pricing' },
-  F12:{ claim:'Turnstile: crear widget, sitekey y secret', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/turnstile/get-started/widget-management/dashboard/' },
-  F13:{ claim:'Turnstile en planes gratuitos', site:'Cloudflare', status:'nuance', note:'Gratuidad implícita, no explícita.', url:'https://developers.cloudflare.com/use-cases/solutions/protect-sensitive-forms-fraud-abuse/' },
-  F14:{ claim:'Reglamento Ley 29733: consentimiento y cookies', site:'kom.pe', status:'nuance', note:'Fuente secundaria que cita el reglamento.', url:'https://kom.pe/reglamento-ley-29733-web-formularios-cookies/' },
-  F15:{ claim:'Inscripción de banco de datos gratis y online', site:'gob.pe', status:'ok', url:'https://www.gob.pe/8060-inscribir-banco-de-datos-en-el-registro-nacional-de-proteccion-de-datos-personales' },
-  F16:{ claim:'Un Excel ya es banco de datos', site:'kom.pe', status:'nuance', note:'Fuente secundaria.', url:'https://kom.pe/registro-banco-datos-personales-anpd/' },
-  F17:{ claim:'Multa de 6.5 UIT por no inscribir', site:'gob.pe', status:'ok', url:'https://cdn.www.gob.pe/uploads/document/file/1375385/RD-045-2016.pdf.pdf' },
-  F18:{ claim:'Libro de Reclamaciones: B2B vs consumidor final', site:'kom.pe', status:'nuance', note:'Fuente secundaria.', url:'https://kom.pe/quienes-obligados-libro-reclamaciones-peru/' },
-  F19:{ claim:'Criterio INDECOPI sobre webs informativas', site:'PRCP', status:'ok', url:'https://blog.prcp.com.pe/wp-content/uploads/2024/03/Client-Memo-Dia-Mundial-de-los-Derechos-de-los-Consumidores-en-que-casos-el-INDECOPI-ha-cambiado-su-criterio-v4.pdf' },
-  F20:{ claim:'Método de Nico (AI Ranking), video completo', site:'YouTube', status:'ok', url:'https://www.youtube.com/watch?v=2Rj69MhAyds' },
-  F21:{ claim:'Herramienta gratuita de Libro de Reclamaciones', site:'gob.pe', status:'ok', url:'https://www.gob.pe/institucion/indecopi/noticias/1296574-los-emprendedores-ya-pueden-generar-su-libro-de-reclamaciones-de-manera-rapida-y-sencilla-sin-costo-alguno' },
-  F22:{ claim:'Archivo _headers en public/', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/workers/static-assets/headers/' },
-  F23:{ claim:'Activar Dependabot security updates', site:'GitHub Docs', status:'ok', url:'https://docs.github.com/github/managing-security-vulnerabilities/configuring-dependabot-security-updates' },
-  F24:{ claim:'Desplegar Astro en Cloudflare Workers', site:'Astro Docs', status:'ok', url:'https://docs.astro.build/en/guides/deploy/cloudflare/' },
-  F25:{ claim:'Search Console: propiedad de dominio por DNS', site:'Google', status:'ok', url:'https://support.google.com/webmasters/answer/9008080?hl=en' },
-  F26:{ claim:'Bing: importar sitios desde Search Console', site:'Bing', status:'ok', url:'https://blogs.bing.com/webmaster/2019/9/Import-sites-from-Search-Console-to-Bing-Webmaster-Tools/' },
-  F27:{ claim:'ChatGPT Search: Bing + índice propio', site:'GEO Toolbox', status:'nuance', note:'Matizado: combina Bing con rastreo propio de OpenAI.', url:'https://geotoolbox.ai/blog/how-chatgpt-search-works' },
-  F28:{ claim:'ChatGPT Search sobre índice de Bing (2024)', site:'SE Roundtable', status:'ok', note:'Dato de 2024.', url:'https://www.seroundtable.com/bing-powers-chatgpt-search-38345.html' },
-  F29:{ claim:'Crawler Hints / IndexNow gratis, un clic', site:'Bing', status:'ok', url:'https://blogs.bing.com/webmaster/november-2021/Cloudflare-Supports-IndexNow-via-one-click-Integration' },
-  F30:{ claim:'Dónde activar Crawler Hints hoy', site:'Cloudflare', status:'ok', note:'Vista previa de la documentación.', url:'https://9d2efef1.previews.developers.cloudflare.com/cache/advanced-configuration/crawler-hints/index.md' },
-  F31:{ claim:'Bots de entrenamiento vs búsqueda', site:'inweb.ua', status:'nuance', note:'Fuente secundaria.', url:'https://vydai.inweb.ua/en/blog/practice-and-methodology/control-ai-crawlers-with-robots-txt-gptbot-claudebot-perplexitybot-google-extended' },
-  F32:{ claim:'Lista de bots de IA', site:'Otterly', status:'nuance', note:'Fuente secundaria.', url:'https://help.otterly.ai/ai-crawlers' },
-  F33:{ claim:'Google Business Profile exige contacto presencial', site:'Google', status:'ok', url:'https://support.google.com/business/answer/13763036' },
-  F34:{ claim:'Negocio solo online no elegible', site:'Google', status:'ok', url:'https://support.google.com/business/answer/7039811' },
-  F35:{ claim:'RUC persona natural online', site:'SUNAT', status:'ok', url:'https://orientacion.sunat.gob.pe/1097-0-inscribete-en-el-ruc' },
-  F36:{ claim:'Búsqueda fonética gratis en INDECOPI', site:'INDECOPI', status:'nuance', note:'Solo se leyó el título de la nota; la página no se dejó abrir.', url:'https://www.indecopi.gob.pe/-/realiza-la-busqueda-fonetica-para-registrar-tu-marca-gratis-y-en-4-simples-pasos' },
-  F37:{ claim:'Costo de registrar una marca', site:'gob.pe', status:'none', note:'La página no fue accesible.', url:'https://www.gob.pe/institucion/indecopi/noticias/665850-emprendedor-conoce-cuanto-cuesta-registrar-tu-marca-en-indecopi' },
+  F01:{ claim:'Activar 2FA en GitHub (Settings → Password and authentication)', site:'GitHub Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication' },
+  F02:{ claim:'Cloudflare Registrar registra y renueva .ai al costo, sin recargo', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/changelog/post/2025-03-27-ai-domains-available/' },
+  F03:{ claim:'.ai: mínimo de 2 años de registro', site:'Spaceship', status:'nuance', verifiedAt:'2026-11-08', note:'Lo dice otro registrador, no Cloudflare. Una guía de 2026 indica que, tras cambios del registro, la mayoría ya vende plazos de 1 año: revisa el selector de plazo en el checkout.', url:'https://www.spaceship.com/en-GB/domains/cctld/ai/' },
+  F04:{ claim:'Email Routing: reglas, direcciones de destino y registros MX/SPF/DKIM', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', note:'Enviar a cualquier destinatario desde Cloudflare requiere el plan Workers Paid.', url:'https://developers.cloudflare.com/email-service/configuration/email-routing-addresses/' },
+  F05:{ claim:'DMARC Management: configurar SPF, DKIM y DMARC; disponible en todos los planes', site:'Cloudflare', status:'nuance', verifiedAt:'2026-11-08', note:'La documentación dice que está disponible en todos los planes con DNS de Cloudflare, pero no dice explícitamente que sea gratis.', url:'https://developers.cloudflare.com/dmarc-management/security-records/' },
+  F06:{ claim:'DMARC: empezar con p=none, revisar reportes y pasar gradualmente a quarantine y reject', site:'Google Workspace', status:'ok', verifiedAt:'2026-11-08', note:'Google sugiere monitorear al menos una semana y subir el porcentaje de a poco.', url:'https://support.google.com/a/answer/10032473?hl=en' },
+  F07:{ claim:'Claude Code (escritorio): modos Plan y Accept edits; Git necesario en Windows para aislar sesiones', site:'Claude Code Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://code.claude.com/docs/en/desktop' },
+  F08:{ claim:'Node.js 26.13.0 es LTS (28 oct 2026)', site:'Node.js', status:'ok', verifiedAt:'2026-11-08', url:'https://nodejs.org/en/blog/release/v26.13.0' },
+  F09:{ claim:'Astro pide Node 22.23.4 o mayor y no soporta versiones impares; npm create astro@latest', site:'Astro Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.astro.build/en/install-and-setup/' },
+  F10:{ claim:'MCP de DataForSEO para Claude y otros agentes', site:'DataForSEO', status:'ok', verifiedAt:'2026-11-08', url:'https://dataforseo.com/seo-mcp-server' },
+  F11:{ claim:'Otterly: Lite US$29/mes con 15 prompts; prueba de 14 días sin tarjeta', site:'Otterly', status:'ok', verifiedAt:'2026-11-08', url:'https://help.otterly.ai/pricing-of-otterlyai' },
+  F12:{ claim:'Turnstile: crear el widget y obtener sitekey y secret', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/turnstile/get-started/' },
+  F13:{ claim:'Turnstile tiene un plan gratis con desafíos ilimitados (hasta 20 widgets)', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/turnstile/plans/' },
+  F14:{ claim:'Reglamento de la Ley 29733: consentimiento y cookies', site:'kom.pe', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria. No encontré el texto oficial que hable de cookies; el nuevo reglamento (DS 016-2024-JUS) rige desde marzo de 2025.', url:'https://kom.pe/reglamento-ley-29733-web-formularios-cookies/' },
+  F15:{ claim:'Inscribir un banco de datos personales es gratis y en línea (desde el 31 de marzo de 2025)', site:'gob.pe', status:'ok', verifiedAt:'2026-11-08', url:'https://www.gob.pe/8060-inscribir-banco-de-datos-en-el-registro-nacional-de-proteccion-de-datos-personales' },
+  F16:{ claim:'Una lista organizada en Excel puede ser un banco de datos que debe inscribirse', site:'kom.pe', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria. Una resolución de la autoridad (RD 809-2017) trató un Excel como banco de datos, pero no pude abrirla.', url:'https://kom.pe/registro-banco-datos-personales-anpd/' },
+  F17:{ claim:'Multa de 6.5 UIT por no inscribir un banco de datos', site:'gob.pe', status:'nuance', verifiedAt:'2026-11-08', note:'Es una resolución en PDF que no pude abrir; la cifra viene del plan v2.', url:'https://cdn.www.gob.pe/uploads/document/file/1375385/RD-045-2016.pdf.pdf' },
+  F18:{ claim:'El Libro de Reclamaciones protege al consumidor final, no a relaciones entre empresas', site:'kom.pe', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria; no encontré la norma que excluya expresamente las relaciones entre empresas.', url:'https://kom.pe/quienes-obligados-libro-reclamaciones-peru/' },
+  F19:{ claim:'Criterio de INDECOPI sobre webs informativas', site:'PRCP (estudio de abogados)', status:'nuance', verifiedAt:'2026-11-08', note:'Memo de un estudio de abogados; el documento existe, pero no pude abrir el PDF.', url:'https://blog.prcp.com.pe/wp-content/uploads/2024/03/Client-Memo-Dia-Mundial-de-los-Derechos-de-los-Consumidores-en-que-casos-el-INDECOPI-ha-cambiado-su-criterio-v4.pdf' },
+  F20:{ claim:'Método de Nico (AI Ranking), video completo', site:'YouTube', status:'nuance', verifiedAt:'2026-11-08', note:'No pude confirmar el video por búsqueda; el plan v2 trae su transcripción completa.', url:'https://www.youtube.com/watch?v=2Rj69MhAyds' },
+  F21:{ claim:'Herramienta gratuita «Tu Libro de Reclamaciones» de INDECOPI', site:'gob.pe', status:'ok', verifiedAt:'2026-11-08', url:'https://www.gob.pe/institucion/indecopi/noticias/1296574-los-emprendedores-ya-pueden-generar-su-libro-de-reclamaciones-de-manera-rapida-y-sencilla-sin-costo-alguno' },
+  F22:{ claim:'Archivo _headers en public/ para cabeceras de los archivos estáticos', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/workers/static-assets/headers/' },
+  F23:{ claim:'Activar Dependabot security updates', site:'GitHub Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.github.com/github/managing-security-vulnerabilities/configuring-dependabot-security-updates' },
+  F24:{ claim:'Desplegar Astro en Cloudflare Workers (npx astro build y npx wrangler deploy)', site:'Astro Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.astro.build/en/guides/deploy/cloudflare/' },
+  F25:{ claim:'Search Console: propiedad de dominio verificada con un registro TXT (no lo borres)', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://support.google.com/webmasters/answer/9008080?hl=en' },
+  F26:{ claim:'Bing: importar sitios desde Search Console, verificados automáticamente', site:'Bing', status:'ok', verifiedAt:'2026-11-08', url:'https://blogs.bing.com/webmaster/september-2019/Import-sites-from-Search-Console-to-Bing-Webmaster-Tools' },
+  F27:{ claim:'ChatGPT Search combina el índice de Bing con rastreo propio de OpenAI', site:'GEO Toolbox', status:'nuance', verifiedAt:'2026-11-08', note:'Fuentes de terceros; OpenAI no publica la mezcla exacta.', url:'https://geotoolbox.ai/blog/how-chatgpt-search-works' },
+  F28:{ claim:'ChatGPT Search sobre el índice de Bing (2024)', site:'SE Roundtable', status:'nuance', verifiedAt:'2026-11-08', note:'Dato de 2024; no lo pude re-verificar en la Fase 4.', url:'https://www.seroundtable.com/bing-powers-chatgpt-search-38345.html' },
+  F29:{ claim:'Crawler Hints de Cloudflare avisa a IndexNow, gratis y con un clic', site:'Bing', status:'ok', verifiedAt:'2026-11-08', url:'https://blogs.bing.com/webmaster/november-2021/Cloudflare-Supports-IndexNow-via-one-click-Integration' },
+  F30:{ claim:'Activar Crawler Hints desde la página Configuration (caché)', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/cache/advanced-configuration/crawler-hints/' },
+  F31:{ claim:'OpenAI: OAI-SearchBot es para búsqueda y GPTBot para entrenamiento; se controlan por separado', site:'OpenAI', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.openai.com/api/docs/bots' },
+  F32:{ claim:'Anthropic: ClaudeBot es de entrenamiento y Claude-SearchBot de búsqueda', site:'Anthropic', status:'ok', verifiedAt:'2026-11-08', url:'https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler' },
+  F33:{ claim:'Google Business Profile exige contacto presencial; los negocios solo online no son elegibles', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://support.google.com/business/answer/13762416?hl=en' },
+  F34:{ claim:'Solo los negocios con área de servicio ocultan su dirección', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://support.google.com/business/answer/2853879?hl=en' },
+  F35:{ claim:'RUC de persona natural en línea: APP Personas, huella con RENIEC y Clave SOL', site:'SUNAT', status:'ok', verifiedAt:'2026-11-08', url:'https://orientacion.sunat.gob.pe/1097-0-inscribete-en-el-ruc' },
+  F36:{ claim:'Búsqueda fonética de marcas gratis en INDECOPI («Busca tu marca»)', site:'gob.pe', status:'ok', verifiedAt:'2026-11-08', url:'https://www.gob.pe/institucion/indecopi/noticias/302737-realiza-la-busqueda-fonetica-para-registrar-tu-marca-gratis-y-en-4-simples-pasos' },
+  F37:{ claim:'Registrar una marca: S/ 534.90 por una clase (S/ 401.20 para mypes con Remype)', site:'gob.pe', status:'nuance', verifiedAt:'2026-11-08', note:'Cifra de la guía más reciente de INDECOPI; comunicados anteriores decían S/ 534.99. Confirma el monto en Pagalo.pe antes de pagar.', url:'https://www.gob.pe/333-registrar-la-marca-de-producto-o-servicio-de-tu-negocio-en-indecopi' },
   F38:{ claim:'Mueller compara llms.txt con la etiqueta meta keywords: "lo que el dueño del sitio dice"', site:'Search Engine Journal', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria: reporta la frase de Mueller. La frase "tu tiempo se aprovecha mejor en otra parte" que tenía la app no aparece en ninguna fuente y se quitó.', url:'https://www.searchenginejournal.com/google-says-llms-txt-comparable-to-keywords-meta-tag/544804/' },
-  F39:{ claim:'Peticiones a archivos estáticos en Workers: gratis e ilimitadas', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/' },
-  F40:{ claim:'Workers gratis: 100 mil peticiones/día; pagado desde US$5/mes', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/workers/platform/pricing/' },
-  F41:{ claim:'GitHub gratis: repos privados ilimitados y Dependabot alerts', site:'GitHub Docs', status:'ok', url:'https://docs.github.com/en/get-started/learning-about-github/githubs-plans' },
-  F42:{ claim:'Precio de .ai en Cloudflare: US$80/año', site:'DomainOffer', status:'nuance', note:'Fuente secundaria, actualizada el 7/11/2026.', url:'https://domainoffer.net/tld/ai/cloudflare' },
-  F43:{ claim:'Turnstile exige validación en servidor', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/turnstile/get-started/server-side-validation/' },
-  F44:{ claim:'Libro de Reclamaciones aplica a proveedores con RUC', site:'BDO', status:'nuance', note:'Fuente secundaria (BDO).', url:'https://pe-www.bdo.global/getattachment/Publicaciones/Business-Services-Outsourcing/Alerta-Legal/Alerta-Legal-INDECOPI-supervisa-implementacion-del/BDO-Peru_Alerta-Legal-13-12-2021.pdf.aspx?lang=es-PE' },
-  F45:{ claim:'PageSpeed Insights (herramienta de Google)', site:'Google', status:'nuance', note:'Existe; su gratuidad no se verificó explícitamente.', url:'https://developers.google.com/speed/docs/insights/v5/about' },
+  F39:{ claim:'Peticiones a archivos estáticos en Workers: gratis e ilimitadas', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/' },
+  F40:{ claim:'Workers gratis: 100 mil peticiones al día; pagado desde US$5/mes', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/workers/platform/pricing/' },
+  F41:{ claim:'GitHub gratis: repos privados ilimitados y Dependabot alerts', site:'GitHub Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.github.com/en/get-started/learning-about-github/githubs-plans' },
+  F42:{ claim:'Precio de .ai en Cloudflare: US$80/año', site:'DomainOffer', status:'nuance', verifiedAt:'2026-11-08', note:'Varias fuentes secundarias coinciden en US$80; no encontré la página oficial de precios.', url:'https://domainoffer.net/tld/ai/cloudflare' },
+  F43:{ claim:'Turnstile exige validar cada token en el servidor (Siteverify)', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/turnstile/get-started/server-side-validation/' },
+  F44:{ claim:'El Libro de Reclamaciones aplica a proveedores identificados con RUC', site:'BDO', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria (BDO); no encontré los requisitos exactos de la herramienta.', url:'https://pe-www.bdo.global/getattachment/Publicaciones/Business-Services-Outsourcing/Alerta-Legal/Alerta-Legal-INDECOPI-supervisa-implementacion-del/BDO-Peru_Alerta-Legal-13-12-2021.pdf.aspx?lang=es-PE' },
+  F45:{ claim:'PageSpeed Insights: herramienta gratuita de Google', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.google.com/speed/docs/insights/v5/about' },
   L01:{ claim:'97% de los archivos llms.txt no recibió ninguna solicitud en mayo de 2026 (137.210 sitios)', site:'Ahrefs', status:'ok', verifiedAt:'2026-11-08', note:'Mide solo el archivo índice y sitios que usan Ahrefs Web Analytics (más técnicos que el promedio).', url:'https://ahrefs.com/blog/llmstxt-study/' },
   L02:{ claim:'Gary Illyes (Google): Google no usa llms.txt para sus funciones de IA', site:'Search Engine Land', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria que reporta lo dicho en un evento de Google (2025).', url:'https://searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422' },
   L03:{ claim:'La guía de Google sobre llms.txt varía según el producto', site:'Search Engine Journal', status:'nuance', verifiedAt:'2026-11-08', note:'Por ejemplo, Lighthouse lo revisa como opcional en una categoría experimental.', url:'https://www.searchenginejournal.com/googles-llms-txt-guidance-depends-on-which-product-you-ask/575431/' },
@@ -1359,39 +1365,39 @@ const SOURCES = {
   R02:{ claim:'Actualización con 642 pruebas: el efecto sigue, pero es más moderado al corregir sesgos', site:'Sheeran, Listrom y Gollwitzer, 2024', status:'nuance', verifiedAt:'2026-11-08', note:'Tomado de una fuente secundaria; el estudio original se revisa en la Fase 4.', url:'https://goalsandprogress.com/implementation-intentions-research/' },
   R03:{ claim:'Una conducta ocurre cuando coinciden motivación, capacidad y un aviso (B=MAP)', site:'BJ Fogg', status:'ok', verifiedAt:'2026-11-08', url:'https://behaviormodel.org/' },
   R04:{ claim:'Las personas interrumpidas trabajaron más rápido, pero con más estrés, frustración y presión de tiempo', site:'Mark, Gudith y Klocke, CHI 2008', status:'ok', verifiedAt:'2026-11-08', url:'https://www.ics.uci.edu/~gmark/chi08-mark.pdf' },
-  'Q-CF2FA':{ claim:'Ruta del menú de 2FA en Cloudflare', site:'Sin fuente', status:'none', url:null },
-  'Q-LOCK': { claim:'Bloqueo de transferencia del dominio en Cloudflare', site:'Sin fuente', status:'none', url:null },
-  'Q-EMAIL':{ claim:'Precio de Email Routing', site:'Sin fuente', status:'none', note:'La página no dice precio.', url:null },
-  'Q-DFS':  { claim:'Créditos gratis de prueba de DataForSEO', site:'Sin fuente', status:'none', url:null },
-  'Q-IMG':  { claim:'Costo de tu generador de imágenes', site:'Sin fuente', status:'none', url:null },
-  'Q-LEGAL':{ claim:'Costo de una revisión legal de textos', site:'Sin fuente', status:'none', url:null },
-  'Q-SEND': { claim:'Proveedores y precio para enviar correo desde tu dominio', site:'Sin fuente', status:'none', url:null },
+  'Q-CF2FA':{ claim:'2FA en Cloudflare: Perfil → Authentication → Mobile App Authentication', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/fundamentals/user-profiles/2fa/' },
+  'Q-LOCK':{ claim:'Bloqueo de transferencia del dominio en Cloudflare', site:'Sin fuente', status:'none', verifiedAt:'2026-11-08', note:'Buscado sin resultado.', url:null },
+  'Q-EMAIL':{ claim:'Email Routing es gratis: recibir correos es ilimitado en el plan gratis', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/email-service/platform/pricing/' },
+  'Q-DFS':{ claim:'DataForSEO da US$1 de crédito de prueba; luego la recarga mínima es de US$50', site:'DataForSEO', status:'ok', verifiedAt:'2026-11-08', url:'https://dataforseo.com/pricing' },
+  'Q-IMG':{ claim:'Costo de tu generador de imágenes', site:'Sin fuente', status:'none', verifiedAt:'2026-11-08', note:'Depende de lo que ya pagues.', url:null },
+  'Q-LEGAL':{ claim:'Costo de una revisión legal de textos', site:'Sin fuente', status:'none', verifiedAt:'2026-11-08', note:'Varía por abogado.', url:null },
+  'Q-SEND':{ claim:'Enviar correo desde tu dominio: en Cloudflare, a cualquier destinatario, requiere Workers Paid (desde US$5/mes)', site:'Cloudflare', status:'nuance', verifiedAt:'2026-11-08', note:'Precios de otros proveedores (Google Workspace, Zoho): no verificados.', url:'https://developers.cloudflare.com/email-service/platform/pricing/' },
   'Q-VOL':      { claim:'Volatilidad de las respuestas de IA (investigación de tu Misión 05)', site:'Sin fuente', status:'none', note:'No re-verificada aquí.', url:null },
-  'Q-WEBP':     { claim:'Cuánto pesa WebP frente a PNG', site:'Sin fuente', status:'none', url:null },
-  'Q-ASTROCOLL':{ claim:'Colecciones de contenido de Astro', site:'Sin fuente', status:'none', url:null },
-  'Q-HEADERS':  { claim:'Valores recomendados de cada cabecera de seguridad', site:'Sin fuente', status:'none', url:null },
-  'Q-DEPBOT':   { claim:'Dependabot security updates en repos privados del plan gratis', site:'Sin fuente', status:'none', url:null },
-  'Q-BUILDS':   { claim:'Límites de Workers Builds en el plan gratis', site:'Sin fuente', status:'none', url:null },
-  'Q-CUSTOMDOM':{ claim:'Dominio personalizado en Workers', site:'Sin fuente', status:'none', url:null },
-  'Q-SITEMAP':  { claim:'Sitemap automático en Astro', site:'Sin fuente', status:'none', url:null },
-  'Q-SCHEMA':   { claim:'Organization y Person en schema.org', site:'Sin fuente', status:'none', url:null },
-  'Q-GA4':      { claim:'Documentación de Google Analytics 4', site:'Sin fuente', status:'none', url:null },
-  'Q-BOTS':     { claim:'Documentación oficial de los bots de OpenAI y Anthropic', site:'Sin fuente', status:'none', url:null },
-  'Q-OTTRL':{ claim:'Duración de la prueba gratis de Otterly', site:'Sin fuente', status:'none', url:null },
+  'Q-WEBP':{ claim:'WebP sin pérdida pesa alrededor de 26% menos que PNG', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.google.com/speed/webp' },
+  'Q-ASTROCOLL':{ claim:'Colecciones de contenido de Astro para el blog', site:'Astro Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.astro.build/en/guides/content-collections/' },
+  'Q-HEADERS':{ claim:'Valores recomendados de las cabeceras de seguridad', site:'OWASP', status:'ok', verifiedAt:'2026-11-08', url:'https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html' },
+  'Q-DEPBOT':{ claim:'Alertas y actualizaciones de seguridad de Dependabot: disponibles en cualquier plan de GitHub', site:'GitHub Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.github.com/en/code-security/getting-started/github-security-features' },
+  'Q-BUILDS':{ claim:'Workers Builds gratis: 3.000 minutos de build al mes, 1 a la vez', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/workers/ci-cd/builds/limits-and-pricing/' },
+  'Q-CUSTOMDOM':{ claim:'Dominio personalizado en Workers (Settings → Domains & Routes)', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', note:'El dominio es exacto: www necesita su propia regla.', url:'https://developers.cloudflare.com/workers/configuration/routing/custom-domains/' },
+  'Q-SITEMAP':{ claim:'Sitemap automático en Astro (@astrojs/sitemap)', site:'Astro Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.astro.build/en/guides/integrations-guide/sitemap/' },
+  'Q-SCHEMA':{ claim:'Datos estructurados Organization (logo, sameAs) según Google', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.google.com/search/docs/appearance/structured-data/organization' },
+  'Q-GA4':{ claim:'Configurar Google Analytics 4: propiedad, flujo web y etiqueta', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://support.google.com/analytics/answer/9304153?hl=en' },
+  'Q-BOTS':{ claim:'Documentación oficial de los bots de OpenAI', site:'OpenAI', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.openai.com/api/docs/bots' },
+  'Q-OTTRL':{ claim:'La prueba gratis de Otterly dura 14 días y no pide tarjeta', site:'Otterly', status:'ok', verifiedAt:'2026-11-08', url:'https://help.otterly.ai/pricing-of-otterlyai' },
 };
-const SOURCES_CHECKED = { by:'plan v2', at:'2026-11-07', pending:true };
+const SOURCES_CHECKED = { by:'plan v2', at:'2026-11-07', pending:false };
 // Resumen de costos del plan (pestaña Datos).
 const COST_TABLE = [
-  { concept:'Dominio tufuente.ai', amount:'US$80/año, mín. 2 años → ~US$160', mandatory:'Sí, para publicar con tu marca', when:'S7', step:'S7.1', sources:['F42','F03'], status:'nuance' },
+  { concept:'Dominio tufuente.ai', amount:'US$80/año; ~US$160 si exige 2 años', mandatory:'Sí, para publicar con tu marca', when:'S7', step:'S7.1', sources:['F42','F03'], status:'nuance' },
   { concept:'Hosting en Cloudflare Workers', amount:'US$0 (estáticos gratis e ilimitados)', mandatory:'Sí', when:'S6', step:'S6.2', sources:['F39'], status:'ok' },
   { concept:'GitHub (repo privado)', amount:'US$0', mandatory:'Sí', when:'S5', step:'S5.6', sources:['F41'], status:'ok' },
-  { concept:'Email Routing (hola@tufuente.ai)', amount:'Sin dato', mandatory:'Recomendado', when:'S7', step:'S7.3', sources:['Q-EMAIL'], status:'none' },
-  { concept:'DataForSEO', amount:'Pago por uso; créditos de prueba: sin dato', mandatory:'No (hay ruta gratis)', when:'S3', step:'S3.1', sources:['Q-DFS'], status:'none' },
-  { concept:'Otterly Lite', amount:'US$29/mes; duración de prueba: sin dato', mandatory:'No (hay ruta gratis)', when:'S3 / S10', step:'S10.3', sources:['F11','Q-OTTRL'], status:'ok' },
+  { concept:'Email Routing (hola@tufuente.ai)', amount:'US$0: recibir correos es gratis', mandatory:'Recomendado', when:'S7', step:'S7.3', sources:['Q-EMAIL'], status:'ok' },
+  { concept:'DataForSEO', amount:'Pago por uso; US$1 de prueba, luego recarga mínima de US$50', mandatory:'No (hay ruta gratis)', when:'S3', step:'S3.1', sources:['Q-DFS'], status:'ok' },
+ { concept:'Otterly Lite', amount:'US$29/mes; prueba gratis de 14 días', mandatory:'No (hay ruta gratis)', when:'S3 / S10', step:'S10.3', sources:['F11','Q-OTTRL'], status:'ok' },
   { concept:'Generador de imágenes', amount:'Depende de lo que ya pagues', mandatory:'No (puedes usar fotos propias)', when:'S4', step:'S4.3', sources:['Q-IMG'], status:'none' },
   { concept:'Workers pagado', amount:'US$5/mes mínimo', mandatory:'Solo si el formulario supera 100 mil peticiones/día', when:'S10', step:'S10.1', sources:['F40'], status:'ok' },
-  { concept:'Correo para enviar desde tu dominio', amount:'Sin dato', mandatory:'No', when:'S10', step:'S10.2', sources:['Q-SEND'], status:'none' },
-  { concept:'Registro de marca INDECOPI', amount:'Sin dato', mandatory:'No para lanzar', when:'S10', step:'S10.4', sources:['F37'], status:'none' },
+  { concept:'Correo para enviar desde tu dominio', amount:'En Cloudflare, Workers Paid desde US$5/mes; otros proveedores: sin dato', mandatory:'No', when:'S10', step:'S10.2', sources:['Q-SEND'], status:'nuance' },
+  { concept:'Registro de marca INDECOPI', amount:'S/ 534.90 por clase (S/ 401.20 si eres mype)', mandatory:'No para lanzar', when:'S10', step:'S10.4', sources:['F37'], status:'nuance' },
   { concept:'Revisión legal de textos', amount:'Sin dato', mandatory:'Recomendado (criterio)', when:'S8', step:'S8.2', sources:['Q-LEGAL'], status:'none' },
   { concept:'RUC', amount:'Sin costo mencionado', mandatory:'Para facturar', when:'S8', step:'S8.1', sources:['F35'], status:'nuance' },
   { concept:'Inscripción de banco de datos', amount:'US$0', mandatory:'Sí, cuando guardes contactos organizados', when:'S8', step:'S8.4', sources:['F15'], status:'ok' },
@@ -1449,7 +1455,7 @@ const WEB_CONTENT = {
   'S3.1': { start:{ kind:`copy`, label:`Copiar el prompt de DataForSEO (solo ruta con datos)`, text:`Conecta el MCP remoto de DataForSEO; ayúdame a generar el token Base64 sin guardar las credenciales en el proyecto.`, then:`Solo si eliges la ruta con datos. Si eliges la ruta gratis, marca este paso como hecho y sigue.` },
     body:{ steps:[
       `<b>Ruta gratis</b> (recomendada para empezar): sin volúmenes de búsqueda. Tu web tiene pocas páginas (home, 3 servicios, metodología, sobre mí, contacto, blog), así que el volumen importa menos que en una web local con 20 distritos. {{criterio}}`,
-      `<b>Ruta con datos (pago por uso):</b> crea cuenta en app.dataforseo.com/register. Hay botón de prueba gratis; cuántos créditos da: [[Q-DFS]]`,
+      `<b>Ruta con datos (pago por uso):</b> crea cuenta en app.dataforseo.com/register. La prueba gratis da US$1 de crédito; después, la recarga mínima es de US$50 [[Q-DFS]].`,
       `Copia tu <b>API login</b> y <b>API password</b> desde app.dataforseo.com/api-access.`,
       `En Claude Code: "Conecta el MCP remoto de DataForSEO; ayúdame a generar el token Base64 sin guardar las credenciales en el proyecto." [[F10]]`,
       `Revisa y aprueba el comando <code>claude mcp add ... https://mcp.dataforseo.com/http</code>.`,
@@ -1559,7 +1565,7 @@ const WEB_CONTENT = {
     body:{ steps:[
       `Cloudflare → DNS → confirma que existen SPF y DKIM [[F05]].`,
       `Pide a Claude Code (o hazlo en el panel) un TXT en <code>_dmarc.tufuente.ai</code> con <code>p=none</code> y un correo para reportes.`,
-      `En 2-4 semanas, si todo pasa bien, sube a <code>p=quarantine</code> y luego a <code>p=reject</code> [[F06]]. El plazo de 2-4 semanas: {{criterio}}`,
+      `Revisa los reportes al menos una semana (Google lo sugiere así) y, si tu correo legítimo pasa bien, sube a <code>p=quarantine</code>, empezando con un porcentaje pequeño, y luego a <code>p=reject</code> [[F06]].`,
       `Opcional: activa <b>DMARC Management</b> [[F05]].`,
     ], done:`El registro <code>_dmarc</code> existe.` } },
   'S7.5': { start:{ kind:`link`, label:`Abrir Search Console`, url:`https://search.google.com/search-console`, then:`<b>Agregar propiedad</b> → <b>Dominio</b> → <code>tufuente.ai</code>.` },
@@ -1600,7 +1606,7 @@ const WEB_CONTENT = {
       `"Escribe un borrador de política de privacidad: quién soy, qué datos recibo (por WhatsApp o correo), para qué, cuánto tiempo los guardo y cómo pedir que los borren. Publícala en <code>/privacidad</code> y enlázala en el pie de página." [[F14]]`,
       `Hazla revisar por un abogado o servicio legal antes de publicarla. {{criterio}}`,
     ], done:`<code>/privacidad</code> está publicada.` } },
-  'S8.3': { start:{ kind:`link`, label:`Abrir la herramienta de INDECOPI`, url:`https://www.gob.pe/institucion/indecopi/noticias/1296574-los-emprendedores-ya-pueden-generar-su-libro-de-reclamaciones-de-manera-rapida-y-sencilla-sin-costo-alguno`, then:`Ten a mano tu RUC (S8.1).` },
+  'S8.3': { start:{ kind:`link`, label:`Abrir «Tu Libro de Reclamaciones»`, url:`https://consumidor.indecopi.gob.pe/tulibro/`, then:`Herramienta gratuita de INDECOPI. Ten a mano tu RUC (S8.1).` },
     body:{ steps:[
       `Usa la herramienta gratuita "Tu Libro de Reclamaciones" de INDECOPI [[F21]].`,
       `Créalo con tus datos y RUC [[F44]].`,
@@ -1633,8 +1639,8 @@ const WEB_CONTENT = {
        done:`Sin aceptar, Analytics no carga; aceptando, Tag Assistant lo detecta.` } },
   'S9.4': { body:{ steps:[
       `Decide: ¿vas a reunirte en persona con clientes en Lima en horarios definidos?`,
-      `<b>Sí:</b> créalo como negocio con área de servicio, ocultando tu dirección [[F33]].`,
-      `<b>No:</b> no lo crees. Los negocios 100% online no son elegibles [[F34]].`,
+      `<b>Sí:</b> créalo como negocio con área de servicio, ocultando tu dirección [[F34]].`,
+      `<b>No:</b> no lo crees. Google exige contacto presencial; los negocios 100% online no son elegibles [[F33]].`,
     ], done:`Tomaste la decisión por escrito.` } },
   'S9.5': { start:{ kind:`doc`, label:`Abrir la plantilla del caso de estudio`, template:`casestudy`, file:`S9.5 · Caso de estudio TuFuente.ai`, folder:`Web · S9 Medición` },
     body:{ steps:[
@@ -1652,9 +1658,9 @@ const WEB_CONTENT = {
   'S10.2': { body:{ steps:[ `Elige un proveedor para enviar correo desde tu dominio (Google Workspace, Zoho u otro). Precio: [[Q-SEND]]` ],
        extra:`<b>Cuándo hacerlo:</b> cuando empieces a escribirle a prospectos y quieras que vean tu dominio. {{criterio}}` } },
   'S10.3': { start:{ kind:`link`, label:`Ver planes de Otterly`, url:`https://otterly.ai/pricing`, then:`Lite: 15 prompts, 4 motores; Claude y Gemini son extras.` },
-    body:{ steps:[ `Contrata Otterly Lite: US$29/mes, 15 prompts, 4 motores; Claude y Gemini son extras [[F11]]. Duración de la prueba gratis: [[Q-OTTRL]]` ],
+    body:{ steps:[ `Contrata Otterly Lite: US$29/mes, 15 prompts, 4 motores; Claude y Gemini son extras [[F11]]. La prueba gratis dura 14 días y no pide tarjeta [[Q-OTTRL]].` ],
        extra:`<b>Cuándo hacerlo:</b> cuando el método manual de S3.4 te quite mucho tiempo, o cuando vayas a revenderlo a clientes. {{criterio}}` } },
-  'S10.4': { body:{ steps:[ `Registra la marca en INDECOPI. Costo del registro: [[F37]]` ],
+  'S10.4': { body:{ steps:[ `Registra la marca en INDECOPI: S/ 534.90 por una clase, o S/ 401.20 si eres mype inscrita en el Remype [[F37]]. Confirma el monto en Pagalo.pe antes de pagar.` ],
        extra:`<b>Cuándo hacerlo:</b> antes de invertir fuerte en publicidad o cuando tengas tus primeros ingresos. {{criterio}}` } },
 };
 // "Empieza aquí" para pasos que ya tenían contenido
@@ -2542,9 +2548,9 @@ function closeBSheet(restoreFocus){
 function openSourceSheet(id, opener){
   const s = SOURCES[id];
   if (!s) return;
-  const checked = SOURCES_CHECKED.pending
-    ? `Según el ${SOURCES_CHECKED.by} (${fmtDay(SOURCES_CHECKED.at)}) · se reverifica en la Fase 4`
-    : `Verificado el ${fmtDay(s.verifiedAt || SOURCES_CHECKED.at)}`;
+  const checked = !s.verifiedAt
+    ? 'Pendiente de verificar'
+    : (s.status === 'none' ? 'Buscado el ' + fmtDay(s.verifiedAt) + ': sin fuente encontrada' : 'Verificado el ' + fmtDay(s.verifiedAt));
   let host = '';
   try { host = s.url ? new URL(s.url).hostname.replace(/^www\./, '') : ''; } catch(e){}
   openBSheet(`
@@ -3419,7 +3425,35 @@ async function sendChat(task, text){
 // ============================================================
 // VISTA: DATOS
 // ============================================================
-let openSecs = { registro:false, gloss:false, costos:true };
+let openSecs = { registro:false, gloss:false, costos:true, fuentes:false };
+function sourcesAuditHtml(){
+  const ids = Object.keys(SOURCES);
+  const by = st => ids.filter(id => SOURCES[id].status === st);
+  const groups = [
+    { st:'nuance', title:'⚠️ Matizadas o secundarias: revísalas a mano', ids:by('nuance') },
+    { st:'none',   title:'❓ Sin fuente encontrada', ids:by('none') },
+    { st:'ok',     title:'✅ Verificadas', ids:by('ok') },
+  ];
+  let html = `<div class="sec-h" data-sec="fuentes"><span>Verificación de fuentes</span><span class="plus${openSecs.fuentes ? ' open' : ''}">+</span></div>
+    <div class="sec-body${openSecs.fuentes ? ' open' : ''}">
+    <div class="stats-grid audit">
+      <div class="stat-cell"><span class="sn tnum">${by('ok').length}</span><span class="lbl">✅ Verificadas</span></div>
+      <div class="stat-cell"><span class="sn tnum">${by('nuance').length}</span><span class="lbl">⚠️ Matizadas</span></div>
+      <div class="stat-cell"><span class="sn tnum">${by('none').length}</span><span class="lbl">❓ Sin fuente</span></div>
+    </div>
+    <p class="cost-intro">Cada dato verificable de la app tiene su fuente. Toca una para ver el detalle y abrirla.</p>`;
+  groups.forEach(g => {
+    html += `<div class="gloss-slabel">${g.title} (${g.ids.length})</div>`;
+    g.ids.forEach(id => {
+      const x = SOURCES[id];
+      html += `<button type="button" class="src-row" data-src="${id}">
+        <span class="src-ic" aria-hidden="true">${SRC_ICON[x.status]}</span>
+        <span class="src-main"><span class="src-claim">${escapeHtml(x.claim)}</span><span class="src-meta">${escapeHtml(srcLabel(x))} · ${x.verifiedAt ? (x.status === 'none' ? 'buscado ' : 'verificado ') + fmtDay(x.verifiedAt) : 'pendiente'}${x.note ? ' · ' + escapeHtml(x.note) : ''}</span></span>
+      </button>`;
+    });
+  });
+  return html + '</div>';
+}
 function costsSectionHtml(){
   const up = upcomingMandatory();
   const upUsd = up.map(id => WEB_STEPS[id].cost).filter(c => c.currency !== 'PEN').reduce((a, c) => a + c.amount, 0);
@@ -3475,6 +3509,7 @@ function renderDatos(){
 
   html += driveSectionHtml();
   html += costsSectionHtml();
+  html += sourcesAuditHtml();
 
   html += `<div class="sec-h" data-sec="registro"><span>Registro de misiones</span><span class="plus${openSecs.registro?' open':''}">+</span></div>
     <div class="sec-body${openSecs.registro?' open':''}">`;
