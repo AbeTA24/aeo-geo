@@ -1,7 +1,7 @@
 // Service worker — AEO–GEO Lab
 // Navegación: network-first (para recibir actualizaciones), fallback a caché (offline).
 // Estáticos y fuentes: cache-first con relleno en segundo plano.
-const CACHE = 'aeogeo-app-v2';
+const CACHE = 'aeogeo-app-v3';
 const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
@@ -29,9 +29,11 @@ self.addEventListener('fetch', (e) => {
   if (url.origin === self.location.origin && url.pathname.includes('/preview/')) return;
 
   // Navegación: red primero (así llegan las actualizaciones), caché si no hay red.
+  // 'no-cache' obliga a preguntarle al servidor: sin esto el navegador puede
+  // mostrar hasta 10 minutos una copia vieja guardada por GitHub Pages.
   if (req.mode === 'navigate'){
     e.respondWith(
-      fetch(req)
+      fetch(req.url, { cache: 'no-cache', credentials: 'same-origin' })
         .then((res) => {
           const copy = res.clone();
           caches.open(CACHE).then((c) => c.put('./index.html', copy));
