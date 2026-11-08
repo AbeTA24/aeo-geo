@@ -656,6 +656,10 @@ button{font-family:var(--sans);}
 .stats-grid.audit .stat-cell + .stat-cell{border-left:1px solid var(--sand) !important;}
 .src-row .src-meta{text-transform:none;letter-spacing:0.02em;font-size:11px;line-height:1.5;}
 
+.unv-tag{display:inline-block;margin-left:8px;font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:var(--ochre);border:1px dashed var(--ochre);padding:0 5px;line-height:1.7;vertical-align:middle;}
+.unver-box{font-size:12.5px;line-height:1.55;color:var(--body);border-left:2px solid var(--ochre);background:var(--paper-raise);padding:10px 14px;margin:0 0 18px;}
+.unver-box b{color:var(--ochre);}
+
 /* EMPIEZA AQUÍ */
 .start-box{border:1px solid var(--forest);border-left-width:3px;background:var(--paper-raise);padding:13px 15px 14px;margin:6px 0 18px;}
 .start-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;}
@@ -778,11 +782,11 @@ const BUSINESS_CONTEXT = `Abraham, 28, ingeniero industrial, Product Owner de Le
 
 NEGOCIO: agencia BOUTIQUE "productizada" de consultoría AEO/GEO (Answer/Generative Engine Optimization) en español para LATAM. AEO/GEO = lograr que una marca aparezca/sea citada cuando alguien le pregunta a ChatGPT, Perplexity, Gemini o Claude qué solución/proveedor usar. NO es construir software ni webs de clientes: es servicio/ejecución. Entrega 100% asíncrona: video Loom SIN ROSTRO + reporte en Notion, por email. Sin reuniones en horario laboral.
 
-POSICIONAMIENTO (clave del análisis de mercado): el mercado AEO/GEO está bifurcado en (1) plataformas SaaS de medición muy financiadas — Profound levantó US$155M, valuación US$1B; AthenaHQ (Y Combinator); Goodie; Otterly; Rankscale; Scrunch; Peec — y (2) agencias de servicios — First Page Sage (~US$20.8M ingresos, bootstrapped, sin capital de riesgo). Abraham se para en la capa de SERVICIOS, NO de software (construir SaaS exige capital VC que no tiene ni quiere). Modelo a EMULAR: First Page Sage — bootstrapped, rentable, construido sobre autoridad de contenido (su propio blog rankea tan alto que los LLMs lo citan), sin tecnología propia. En vez de construir herramienta, REVENDE una barata: Otterly.AI (~US$29/mes, tiene programa de partners para agencias) o Rankscale (~US$20/mes).
+POSICIONAMIENTO (clave del análisis de mercado): el mercado AEO/GEO está bifurcado en (1) plataformas SaaS de medición muy financiadas — Profound superó los US$155M levantados y llegó a US$1.000M de valuación en feb 2026, con otra ronda reportada de US$180M a US$1.800M en sept 2026; AthenaHQ (Y Combinator); Goodie; Otterly; Rankscale; Scrunch; Peec — y (2) agencias de servicios — First Page Sage (fundada en 2009, sin rondas de inversión conocidas; ingresos estimados por terceros entre US$8M y más de US$50M). Abraham se para en la capa de SERVICIOS, NO de software (construir SaaS exige capital VC que no tiene ni quiere). Modelo a EMULAR: First Page Sage — bootstrapped, rentable, construido sobre autoridad de contenido (su propio blog rankea tan alto que los LLMs lo citan), sin tecnología propia. En vez de construir herramienta, REVENDE una barata: Otterly.AI (US$29/mes en Lite, prueba de 14 días, programa para agencias) o Rankscale (desde US$20/mes).
 
 QUÉ FUNCIONA DE VERDAD (lo más validado, en orden): (a) contenido answer-first y estructurado — respuesta directa arriba, párrafos cortos, jerarquía de headings, listas, tablas, definiciones explícitas, datos con fuente citada; (b) autoridad de marca y citas de terceros / Digital PR — aparecer en listas/rankings que posicionan bien, reviews en G2/Clutch/Capterra/Trustpilot, menciones en publicaciones autoritativas; (c) presencia auténtica en Reddit/Quora/foros del sector (los LLMs entrenan con contenido de comunidad). SOBREVALORADO — no perder tiempo aquí: llms.txt (DESCARTADO: no se implementa ni se recomienda a clientes; John Mueller de Google lo comparó con la etiqueta meta keywords y un estudio de Ahrefs de junio de 2026 encontró que el 97% de los archivos llms.txt no recibe solicitudes) y schema markup como "driver directo de citas" (schema sigue sirviendo para SEO clásico/rich results, que alimentan AI Overviews indirectamente, así que se incluye como higiene SEO, pero NO es la palanca principal de citas de IA). Gran parte de lo que las agencias venden como "GEO técnico" tiene impacto cuestionable; vender humo técnico quema credibilidad.
 
-MEDICIÓN / ROI (obstáculo #1 de la industria, aún más agudo en LatAm): las plataformas de IA NO muestran tráfico referido de forma confiable. Hasta 90% de las fuentes citadas pueden cambiar con el tiempo y cada modelo usa fuentes distintas (investigación de Profound). NO prometer tráfico de "último clic"; prometer y reportar MÉTRICAS DE PRESENCIA: citation rate (tasa de citación), share of answer (cuánto apareces vs competidores), prompt visibility. El argumento de venta más fuerte NO son las estadísticas de mercado (varían 4x entre fuentes de market research de segundo nivel, sesgadas) sino la DEMOSTRACIÓN: "le pregunté a ChatGPT/Perplexity exactamente lo que preguntan tus clientes; acá están los screenshots; no apareces, tu competidor sí".
+MEDICIÓN / ROI (obstáculo #1 de la industria, aún más agudo en LatAm): las plataformas de IA NO muestran tráfico referido de forma confiable. Las fuentes citadas cambian mucho con el tiempo (Profound reporta, según resúmenes de su estudio, 40-60% de dominios al mes y 70-90% en seis meses) y cada modelo usa fuentes distintas. NO prometer tráfico de "último clic"; prometer y reportar MÉTRICAS DE PRESENCIA: citation rate (tasa de citación), share of answer (cuánto apareces vs competidores), prompt visibility. El argumento de venta más fuerte NO son las estadísticas de mercado (varían 4x entre fuentes de market research de segundo nivel, sesgadas) sino la DEMOSTRACIÓN: "le pregunté a ChatGPT/Perplexity exactamente lo que preguntan tus clientes; acá están los screenshots; no apareces, tu competidor sí".
 
 PRICING (referencia LatAm): auditoría/diagnóstico US$300-800 (gancho, puede ser gratis al inicio); retainer básico US$800-1,500/mes (PYMEs, servicios profesionales); retainer crecimiento US$1,500-3,000/mes (SaaS, exportadores, B2B). El mercado USA cobra US$2,000-12,000/mes — no competir ahí; los precios LatAm son una ventaja, no una debilidad. Meta de Abraham: ~3 retainers ≈ S/10,500/mes (supera S/10,000); hito intermedio fin 2026 ≈ S/5,000/mes. Capital de arranque US$400-700.
 
@@ -794,7 +798,7 @@ WEB PROPIA (decisión): TuFuente.ai se construye con Claude Code + Astro y se pu
 
 COMPETENCIA LATAM: ya hay ~una decena de agencias hispanas en GEO/AEO (AMD —se dice "pionera y líder LatAm", Colombia/Ecuador/Perú/Panamá—, Agencia Eleven, ESBUENISIMO LABS —Chile, linkbuilding+PR—, Ranker Studio, SEO Secreto —México—, SemanticPunch —Chile, prefiere "GSO"—, Postedin —"primera agencia AEO en español"—, Conversion —Brasil—). El mercado se está abriendo pero NO está saturado; el "first mover" puro ya no existe. CUIDADO METODOLÓGICO: casi toda la info competitiva viene de listicles "Top 10 agencias GEO" auto-promocionales (cada artículo pone #1 al que lo patrocina/publica) — investiga con escepticismo, verifica con búsquedas reales. "GEO genérico" tiene vida útil de ~12-18 meses antes de volverse commodity (como SEO 2015-2020) → la defensa es VERTICALIZAR (dominar un sector). TRIGGER competitivo: si 2+ competidores (AMD, Ranker Studio, ESBUENISIMO…) lanzan paquetes GEO dirigidos a Perú, adelantar la verticalización aunque no se hayan cumplido los benchmarks de calendario.
 
-DIFERENCIADORES de Abraham: (1) español regional + contexto cultural peruano que las agencias gringas no captan; (2) precios ajustados a LatAm; (3) zona horaria/cercanía; (4) CASOS DE ESTUDIO VERIFICABLES con métricas reales antes/después — el gran diferenciador frente a operadores opacos tipo "AEO Engine" (que inflan resultados con PR pagado auto-distribuido y afirmaciones sin metodología tipo "920% en 100 días" sin baseline); (5) su rol en Credicorp Capital da autoridad instantánea.
+DIFERENCIADORES de Abraham: (1) español regional + contexto cultural peruano que las agencias gringas no captan; (2) precios ajustados a LatAm; (3) zona horaria/cercanía; (4) CASOS DE ESTUDIO VERIFICABLES con métricas reales antes/después — el gran diferenciador frente a operadores opacos (por ejemplo, AEO Engine publica un "920%" cuya definición, plazo y muestra cambian entre sus propias páginas, sin auditoría externa); (5) su rol en Credicorp Capital da autoridad instantánea.
 
 CONSTRAINTS DUROS: 3h/día L-V después de las 6pm + hasta 8h sáb/dom. Capital US$400-700 (~S/1,500-2,600). No mostrar rostro. Todo 100% asíncrono, sin reuniones 9am-6pm.`;
 
@@ -820,9 +824,9 @@ const TASKS = [
   {
     id:'b1', phase:'compliance',
     title:'Declarar la actividad externa a Cumplimiento Credicorp',
-    desc:'Es el gate que bloquea cobrar. El Código de Ética de Credicorp te aplica 24/7. Declarar ANTES de tu primer cobro no es opcional: es lo que protege tu ingreso #1 y la autoridad sobre la que se sostiene todo el negocio.',
+    desc:'Es el gate que bloquea compartir la web y cobrar. El Código de Ética de Credicorp te aplica 24/7 (política interna, sin texto público [[M13]]). Declarar ANTES de tu primer cobro no es opcional: es lo que protege tu ingreso #1 y la autoridad sobre la que se sostiene todo el negocio.',
     minutes:40, tag:'Compliance',
-    why:'Cobrarle a un cliente sin declarar la actividad externa es un riesgo de conflicto de interés que puede costarte el trabajo en Credicorp. El trámite tarda 2-4 semanas: arráncalo HOY, en paralelo con el aprendizaje, para no perder semanas de calendario.',
+    why:'Cobrarle a un cliente sin declarar la actividad externa es un riesgo de conflicto de interés que puede costarte el trabajo en Credicorp. El trámite puede tardar semanas (tu estimado: 2-4 {{criterio}}): arráncalo HOY, en paralelo con el aprendizaje, para no perder semanas de calendario.',
     tutorial:[
       { title:'Ubica en la intranet/Workplace de Credicorp a la <b>Unidad de Cumplimiento</b> y el canal para declarar actividades externas o conflictos de interés.', detail:'Casi todo banco tiene un formulario o correo formal. Si no lo encuentras, pregúntale a tu jefe directo o a RR.HH. por el procedimiento de "declaración de actividad externa" — preguntar es señal de cumplimiento, no de problema.' },
       { title:'Redacta la declaración en términos neutros y precisos: <i>"consultoría externa de visibilidad digital con IA (AEO/GEO) para empresas de tecnología y exportación, fuera del sector financiero regulado"</i>, 100% fuera del horario laboral y sin clientes del sector financiero.', detail:'El encuadre importa: "posicionamiento digital para empresas de software/exportación" suena muy distinto a "consultoría" a secas. Sé explícito en que evitarás bancos, fintech de crédito, AFP, seguros y cualquier entidad regulada por SBS/SMV.' },
@@ -834,7 +838,7 @@ const TASKS = [
   {
     id:'b2', phase:'compliance',
     title:'Definir tu filtro de clientes prohibidos vs permitidos',
-    desc:'Una regla escrita que aplicas a cada prospecto, sin excepción. Evita que una venta tentadora te meta en un conflicto de interés con Credicorp — y define desde ya qué vertical es el más seguro para ti.',
+    desc:'Una regla escrita que aplicas a cada prospecto, sin excepción. Evita que una venta tentadora te meta en un conflicto de interés con Credicorp — y define desde ya qué vertical es el más seguro para ti. {{criterio}}',
     minutes:20, tag:'Compliance',
     tutorial:[
       { title:'Escribe tu lista NEGRA (nunca aceptar): bancos, financieras, cajas, cooperativas de crédito, fintech de lending/crédito/factoring, casas de cambio, AFP, aseguradoras, SAB, y cualquier entidad regulada por SBS o SMV.', detail:'Estas categorías tienen overlap directo con el negocio de Credicorp Capital o con regulación financiera peruana. Son riesgo casi seguro: ni se evalúan.' },
@@ -848,14 +852,14 @@ const TASKS = [
     title:'Entender el mercado real y dónde te paras',
     desc:'El mercado AEO/GEO está bifurcado: software muy financiado vs agencias de servicios bootstrapped. Tu lugar es la capa de servicios, emulando a First Page Sage — no construir tecnología.',
     minutes:90, tag:'Estrategia',
-    why:'El capital de riesgo (US$155M solo en Profound) validó la categoría pero solo en la capa de SOFTWARE. Las agencias rentables son bootstrapped. Con tu capital (US$400-700) y tu tiempo limitado, pararte en servicios/ejecución es lo único viable — y lo más rentable para un solo.',
+    why:'El capital de riesgo (más de US$155M solo en Profound hasta febrero de 2026 [[M01]], y otra ronda reportada de US$180M en septiembre [[M02]]) validó la categoría pero solo en la capa de SOFTWARE. Las agencias rentables son bootstrapped. Con tu capital (US$400-700) y tu tiempo limitado, pararte en servicios/ejecución es lo único viable — y lo más rentable para un solo.',
     tutorial:[
-      { title:'Estudia las dos capas del mercado: <b>plataformas SaaS de medición</b> (Profound, AthenaHQ, Goodie, Otterly, Rankscale, Scrunch, Peec) vs <b>agencias de ejecución</b> (First Page Sage y SEOs tradicionales que añaden GEO).', detail:'Las plataformas compiten por la capa de medición y necesitan capital VC. Las agencias compiten por la ejecución. Tú compites en ejecución/servicio: no construyes tecnología que te obligaría a competir con empresas de US$1B.' },
-      { title:'Adopta el modelo de <b>First Page Sage</b> como tu plantilla: bootstrapped, rentable (~US$20.8M ingresos estimados), construido sobre autoridad de contenido — su propio blog rankea tan alto que ChatGPT y Bing lo citan como fuente — sin tecnología propia.', detail:'Es el modelo de agencia GEO más exitoso y replicable, y el más relevante para emular en LatAm. Lo vas a copiar: contenido como motor de captación, no software.' },
+      { title:'Estudia las dos capas del mercado: <b>plataformas SaaS de medición</b> (Profound, AthenaHQ [[M03]], Goodie, Otterly, Rankscale, Scrunch, Peec) vs <b>agencias de ejecución</b> (First Page Sage y SEOs tradicionales que añaden GEO).', detail:'Las plataformas compiten por la capa de medición y necesitan capital VC. Las agencias compiten por la ejecución. Tú compites en ejecución/servicio: no construyes tecnología que te obligaría a competir con empresas valuadas en US$1.000M [[M01]].' },
+      { title:'Adopta el modelo de <b>First Page Sage</b> como tu plantilla: fundada en 2009, sin rondas de inversión conocidas, con ingresos que terceros estiman entre US$8M y más de US$50M [[M04]], construida sobre autoridad de contenido y sin tecnología propia. Que su blog sea su motor de captación es tu lectura del modelo {{criterio}}.', detail:'Es el modelo de agencia GEO más exitoso y replicable, y el más relevante para emular en LatAm. Lo vas a copiar: contenido como motor de captación, no software.' },
       { title:'Decide de forma explícita: <b>NO vas a construir software</b>. Vas a REVENDER una herramienta barata de medición (Otterly/Rankscale) y vender tu criterio + ejecución encima.', detail:'Construir un SaaS te metería a competir por capital y producto contra gigantes. Revender + ejecutar te deja en la capa donde un solo con bajo capital sí gana margen.' },
-      { title:'Internaliza la advertencia sobre operadores OPACOS (arquetipo "AEO Engine"): inflan resultados con PR pagado auto-distribuido y afirmaciones sin metodología (ej. "920% en 100 días" sin baseline ni muestra), y se auto-rankean #1 en listicles que ellos mismos publican.', detail:'Tu diferenciador será exactamente lo contrario: casos de estudio verificables. NO copies sus tácticas de humo — su falta de validación independiente es una advertencia, no un modelo.' },
+      { title:'Internaliza la advertencia sobre operadores OPACOS. Ejemplo: AEO Engine publica un "920%" cuya definición, plazo y muestra cambian entre sus propias páginas, sin auditoría externa [[M14]]. Desconfía de toda cifra sin línea base ni metodología.', detail:'Tu diferenciador será exactamente lo contrario: casos de estudio verificables, con método y fechas. Una cifra sin validación independiente es una advertencia, no un modelo.' },
     ],
-    tip:'El mercado LatAm en español se está abriendo pero NO está saturado: hay ~una decena de agencias, así que el "first mover" puro ya no existe, pero hay ventana real si te diferencias por verticalización y casos verificables (los dos pilares de las fases finales).',
+    tip:'El mercado LatAm en español se está abriendo pero NO está saturado: hay ~una decena de agencias (conteo sin verificar), así que el "first mover" puro ya no existe, pero hay ventana real si te diferencias por verticalización y casos verificables (los dos pilares de las fases finales).',
   },
   {
     id:'f2', phase:'fundamentos',
@@ -864,10 +868,10 @@ const TASKS = [
     minutes:75, tag:'Método',
     why:'Si vendes lo mismo sobrevalorado que el resto (llms.txt, schema como protagonista), eres un commodity más. Si vendes lo que de verdad mueve la aguja —contenido + autoridad— te diferencias y entregas resultados reales que sostienen casos verificables.',
     tutorial:[
-      { title:'Prioriza lo MÁS validado: <b>contenido answer-first y estructurado</b> — respuesta directa arriba, párrafos cortos, jerarquía clara de headings, listas, tablas, definiciones explícitas y datos con fuente citada.', detail:'Es lo que los LLMs extraen y citan con mayor consistencia. Si solo dominaras una cosa, que sea esta: es el pilar #1 y el más replicable.' },
-      { title:'Segundo pilar: <b>autoridad de marca y citas de terceros (Digital PR)</b> — aparecer en listas/rankings que posicionan bien, reviews en G2/Clutch/Capterra/Trustpilot, menciones en publicaciones autoritativas.', detail:'Los LLMs confían en lo que MUCHAS fuentes externas dicen de una marca, no solo en lo que la marca dice de sí misma. Construir esa autoridad externa es trabajo de relaciones y contenido, no de código.' },
-      { title:'Tercer pilar: <b>presencia auténtica en Reddit, Quora y foros</b> del sector del cliente.', detail:'Los modelos entrenan con contenido de comunidad; una participación genuina (aportar valor, no spamear) puede traducirse en citas. Es de bajo costo y alto valor.' },
-      { title:'<span class="drop-tag">descartado</span> <code>llms.txt</code>: no lo implementes ni lo recomiendes. John Mueller (Google) lo comparó con la etiqueta <i>meta keywords</i>: es lo que el dueño del sitio dice de sí mismo [[F38]]. Un análisis de Ahrefs sobre 137 mil sitios encontró que el 97% de esos archivos no recibió ninguna solicitud en un mes [[L01]]. Sobrevalorado también: el <b>schema markup como "driver directo de citas"</b>.', detail:'Schema sí sirve para SEO clásico y rich results (que alimentan AI Overviews indirectamente), así que lo incluyes como higiene técnica — pero NO lo vendas como la palanca principal de citas de IA. Vender humo técnico te quema la credibilidad que tanto cuesta construir.' },
+      { title:'Prioriza lo MÁS validado: <b>contenido answer-first y estructurado</b> — respuesta directa arriba, párrafos cortos, jerarquía clara de headings, listas, tablas, definiciones explícitas y datos con fuente citada.', detail:'Un estudio académico encontró que optimizar el contenido (citar fuentes, sumar estadísticas y citas) puede subir la visibilidad en respuestas generativas hasta 40% [[M06]]. Si solo dominaras una cosa, que sea esta: es el pilar #1 y el más replicable.' },
+      { title:'Segundo pilar: <b>autoridad de marca y citas de terceros (Digital PR)</b> — aparecer en listas/rankings que posicionan bien, reviews en G2/Clutch/Capterra/Trustpilot, menciones en publicaciones autoritativas.', detail:'Ahrefs, con 75 mil marcas, encontró que las menciones de marca en la web son el factor más correlacionado con aparecer en AI Overviews, más que los backlinks [[M16]]. Importa lo que MUCHAS fuentes externas dicen de una marca, no solo lo que la marca dice de sí misma. Construir esa autoridad externa es trabajo de relaciones y contenido, no de código.' },
+      { title:'Tercer pilar: <b>presencia auténtica en Reddit, Quora y foros</b> del sector del cliente.', detail:'Reddit licenció su contenido para entrenar IA a Google y a OpenAI en 2024 [[M15]]; una participación genuina (aportar valor, no spamear) puede traducirse en citas. Es de bajo costo y alto valor.' },
+      { title:'<span class="drop-tag">descartado</span> <code>llms.txt</code>: no lo implementes ni lo recomiendes. John Mueller (Google) lo comparó con la etiqueta <i>meta keywords</i>: es lo que el dueño del sitio dice de sí mismo [[F38]]. Un análisis de Ahrefs sobre 137 mil sitios encontró que el 97% de esos archivos no recibió ninguna solicitud en un mes [[L01]]. Sobrevalorado también: el <b>schema markup como "driver directo de citas"</b>.', detail:'Google dice que no hace falta ningún schema especial ni archivo de IA para aparecer en AI Overviews y AI Mode, y que ignora llms.txt [[M07]]. Schema sí sirve para SEO clásico y rich results, así que lo incluyes como higiene técnica — pero NO lo vendas como la palanca principal de citas de IA. Vender humo técnico te quema la credibilidad que tanto cuesta construir.' },
     ],
     tip:'La mayoría de tu competencia vende "GEO técnico" que no mueve la aguja. Que tu oferta se ancle en contenido citable + autoridad + presencia comunitaria es, por sí solo, un diferenciador frente a casi todos.',
   },
@@ -877,9 +881,9 @@ const TASKS = [
     desc:'Tu "tecnología" es una herramienta barata que revendes, no que construyes. Y defines desde ya las métricas honestas que vas a prometer: presencia, nunca tráfico de último clic.',
     minutes:75, tag:'Herramientas',
     tutorial:[
-      { title:'Suscríbete a UNA herramienta de medición barata y revendible: <b>Otterly.AI</b> (~US$29/mes, cubre ChatGPT/AI Overviews/Perplexity/Copilot, tiene programa de partners para agencias) o <b>Rankscale</b> (~US$20/mes, 17+ plataformas, trial gratis).', detail:'Esta es tu "tecnología": la revendes dentro de tu servicio. Para los primeros 1-2 audits puedes usar el método manual gratis (screenshots) y sumar la herramienta cuando un cliente la justifique. Tu capital total de arranque queda en US$400-700.' },
-      { title:'Define las <b>MÉTRICAS DE PRESENCIA</b> que vas a medir y reportar: <code>citation rate</code> (cuántas veces te citan), <code>share of answer</code> (cuánto apareces vs competidores) y <code>prompt visibility</code>.', detail:'Estas son las métricas honestas y medibles. NO prometas tráfico de "último clic": la atribución de IA es el problema #1 de la industria (las plataformas no muestran tráfico referido confiable y hasta 90% de las fuentes citadas cambian con el tiempo).' },
-      { title:'Arma el resto del stack gratuito: <b>Screaming Frog</b> (gratis ≤500 URLs) y <code>schema.org/validator</code> para la higiene técnica, <b>Google Search Console</b> (ya incluye tráfico de AI Overviews), <b>Loom</b> (gratis 25 vids) y <b>Notion</b> para la entrega async.', detail:'Con esto cubres medición, auditoría técnica y entrega sin gastar casi nada. Recuerda: la parte técnica es higiene, no el protagonista.' },
+      { title:'Suscríbete a UNA herramienta de medición barata y revendible: <b>Otterly.AI</b> (US$29/mes en Lite [[F11]]; cubre ChatGPT, AI Overviews, Perplexity y Copilot, y tiene programa para agencias [[M10]]) o <b>Rankscale</b> (desde US$20/mes, con prueba de 7 días en su plan Pro [[M09]]).', detail:'Esta es tu "tecnología": la revendes dentro de tu servicio. Para los primeros 1-2 audits puedes usar el método manual gratis (screenshots) y sumar la herramienta cuando un cliente la justifique. Tu capital total de arranque queda en US$400-700.' },
+      { title:'Define las <b>MÉTRICAS DE PRESENCIA</b> que vas a medir y reportar: <code>citation rate</code> (cuántas veces te citan), <code>share of answer</code> (cuánto apareces vs competidores) y <code>prompt visibility</code>.', detail:'Estas son las métricas honestas y medibles. NO prometas tráfico de "último clic": la atribución de IA es el problema #1 de la industria (las plataformas no muestran tráfico referido confiable y las fuentes citadas cambian mucho con el tiempo [[M05]]).' },
+      { title:'Arma el resto del stack gratuito: <b>Screaming Frog</b> (gratis hasta 500 URLs [[M11]]) y <code>schema.org/validator</code> para la higiene técnica, <b>Google Search Console</b> (ya incluye AI Overviews y AI Mode [[M08]]), <b>Loom</b> (gratis: 25 videos de hasta 5 minutos [[M12]]) y <b>Notion</b> para la entrega async.', detail:'Con esto cubres medición, auditoría técnica y entrega sin gastar casi nada. Ojo: el plan gratis de Loom corta a los 5 minutos; para entregables de 15-20 minutos necesitarás un plan pago o dividir el video. Recuerda: la parte técnica es higiene, no el protagonista.' },
       { title:'Graba un Loom de práctica de 2-3 min, <b>sin rostro</b>, recorriendo un dashboard de Otterly/Rankscale, para practicar voz y ritmo.', detail:'El Loom es la cara del negocio (sin mostrar tu cara real). Practicar ahora te quita el nervio para el primer entregable real y te ayuda a bajar el tiempo de entrega.' },
     ],
   },
@@ -889,10 +893,10 @@ const TASKS = [
     desc:'Tu blog no es decoración: es el motor de captación auto-reforzante que, con el tiempo, te trae clientes sin perseguirlos. Más tu rol en Credicorp como autoridad instantánea.',
     minutes:90, tag:'Posicionamiento',
     tutorial:[
-      { title:'Escribe tu oferta en UNA frase sin jerga: <i>"Ayudo a [exportadores / SaaS / servicios profesionales] de LatAm a aparecer cuando sus clientes le preguntan a ChatGPT, Perplexity o Gemini qué proveedor elegir."</i>', detail:'Si necesita explicación, no está lista: tiene que entenderse en 5 segundos por alguien que nunca oyó hablar de AEO/GEO.' },
+      { title:'Escribe tu oferta en UNA frase sin jerga: <i>"Ayudo a [exportadores / SaaS / servicios profesionales] de LatAm a aparecer cuando sus clientes le preguntan a ChatGPT, Perplexity o Gemini qué proveedor elegir."</i>', detail:'Si necesita explicación, no está lista: tiene que entenderse en 5 segundos por alguien que nunca oyó hablar de AEO/GEO. {{criterio}}' },
       { title:'Construye tu web con <b>Claude Code + Astro</b>, publicada en <b>Cloudflare</b>, con un <b>blog</b> desde el inicio: trátate como tu propio cliente. El blog sigue siendo tu motor auto-reforzante, al estilo de First Page Sage.', detail:'Decisión tomada: Framer quedó descartado porque lo sentiste genérico. Construir tu web tú mismo es tu mejor demostración: un consultor de visibilidad en IA que es invisible en IA no tiene credibilidad. El paso a paso completo está en <b>Plan → Proyecto web</b> (S1 a S7). Este paso se marca solo cuando conectes tu dominio (S7.2).' },
       { title:'Aplica answer-first a tu propio sitio: FAQ en formato pregunta-respuesta, definiciones claras, datos con fuente. (Higiene de schema sí, pero sin obsesionarte — no es el driver principal.)', detail:'Practicas en tu propio sitio exactamente lo que vendes. Esto refuerza tu "entidad" y te vuelve tu propio primer caso de éxito.' },
-      { title:'Actualiza <b>LinkedIn</b> con Credicorp como autoridad: <i>"Product Owner @ Credicorp Capital · Consultor de visibilidad con IA (AEO/GEO) para SaaS y exportadores de LatAm"</i>. Publica 2-3 veces/semana, sin rostro, basado en datos propios.', detail:'El rol en banca privada da autoridad instantánea y te diferencia de un freelancer genérico. La coherencia LinkedIn↔landing↔blog refuerza tu entidad ante prospectos que te investigan.' },
+      { title:'Actualiza <b>LinkedIn</b> con Credicorp como autoridad: <i>"Product Owner @ Credicorp Capital · Consultor de visibilidad con IA (AEO/GEO) para SaaS y exportadores de LatAm"</i>. Publica 2-3 veces/semana, sin rostro, basado en datos propios.', detail:'El rol en banca privada da autoridad instantánea y te diferencia de un freelancer genérico {{criterio}}. La coherencia LinkedIn↔landing↔blog refuerza tu entidad ante prospectos que te investigan.' },
     ],
     tip:'El blog rinde con el tiempo, no de inmediato: empiézalo ya aunque los primeros clientes lleguen por outreach. Es el activo que en 12-18 meses te trae clientes sin perseguirlos, igual que el blog de First Page Sage.',
   },
@@ -943,7 +947,7 @@ const TASKS = [
     minutes:240, tag:'Ejecución',
     why:'Los casos de estudio verificables con métricas reales antes/después son lo que te separa de los operadores de humo. Construirlos en la ventana de espera convierte un cuello de botella (compliance) en una ventaja de tiempo.',
     tutorial:[
-      { title:'Ejecuta 1-2 audits gratuitos completos (flujo de 6 pasos) sobre pilotos que aceptaron, a cambio de <b>testimonio + permiso</b> de usar su nombre y resultados.', detail:'Gratis aquí no es caridad: es tu inversión en prueba social verificable, lo que te distingue de operadores como AEO Engine que dependen de PR pagado auto-distribuido.' },
+      { title:'Ejecuta 1-2 audits gratuitos completos (flujo de 6 pasos) sobre pilotos que aceptaron, a cambio de <b>testimonio + permiso</b> de usar su nombre y resultados.', detail:'Gratis aquí no es caridad: es tu inversión en prueba social verificable, lo que te distingue de operadores que publican cifras sin metodología verificable [[M14]].' },
       { title:'Mide el "antes" con <code>citation rate</code> y <code>share of answer</code> y documéntalo con screenshots fechados.', detail:'El antes/después medible es la mitad del valor del caso: te da el contraste irrefutable que ningún cliente puede dudar.' },
       { title:'Entrega async (Loom sin rostro + Notion). Aplica/observa las recomendaciones y captura el "después" unas semanas más tarde.', detail:'El delta real (de 0 a N citas, o de bajo a alto share of answer) es lo que hace el caso convincente. Recuerda que las recomendaciones tardan semanas en reflejarse — gestiona esa expectativa.' },
       { title:'Documenta cada caso con la estructura <b>problema → qué implementaste → resultado medible → testimonio</b>.', detail:'Esta narrativa es la que el prospecto pagado proyecta a su propio negocio. Es el formato más efectivo en B2B y la base de tu landing y tu blog.' },
@@ -971,7 +975,7 @@ const TASKS = [
     minutes:60, tag:'Activo',
     tutorial:[
       { title:'Selecciona tus 2-3 mejores casos (gratuitos o pagados) con métricas reales antes/después de <code>citation rate</code> y <code>share of answer</code>.', detail:'Tres casos verificables son la masa crítica de prueba social que sostiene precios de pago con argumentos concretos, no promesas.' },
-      { title:'Publícalos en tu sitio: screenshots fechados + testimonio, estructura problema-solución-resultado. NUNCA uses PR pagado auto-distribuido ni afirmaciones sin metodología.', detail:'El contraste con operadores tipo AEO Engine ("920% sin baseline") es justamente tu venta: tú muestras datos verificables que el cliente puede reproducir.' },
+      { title:'Publícalos en tu sitio: screenshots fechados + testimonio, estructura problema-solución-resultado. NUNCA uses PR pagado auto-distribuido ni afirmaciones sin metodología.', detail:'El contraste con cifras como el "920%" de AEO Engine, cuya definición cambia entre sus propias páginas [[M14]], es justamente tu venta: tú muestras datos verificables que el cliente puede reproducir.' },
       { title:'Convierte cada caso en contenido para el blog y LinkedIn (sin revelar lo confidencial del cliente).', detail:'Alimenta el motor de captación auto-reforzante: un buen caso trabaja por ti en cada pitch futuro y ayuda a que tu propio sitio sea citado por los LLMs.' },
     ],
   },
@@ -1361,6 +1365,22 @@ const SOURCES = {
   L01:{ claim:'97% de los archivos llms.txt no recibió ninguna solicitud en mayo de 2026 (137.210 sitios)', site:'Ahrefs', status:'ok', verifiedAt:'2026-11-08', note:'Mide solo el archivo índice y sitios que usan Ahrefs Web Analytics (más técnicos que el promedio).', url:'https://ahrefs.com/blog/llmstxt-study/' },
   L02:{ claim:'Gary Illyes (Google): Google no usa llms.txt para sus funciones de IA', site:'Search Engine Land', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria que reporta lo dicho en un evento de Google (2025).', url:'https://searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422' },
   L03:{ claim:'La guía de Google sobre llms.txt varía según el producto', site:'Search Engine Journal', status:'nuance', verifiedAt:'2026-11-08', note:'Por ejemplo, Lighthouse lo revisa como opcional en una categoría experimental.', url:'https://www.searchenginejournal.com/googles-llms-txt-guidance-depends-on-which-product-you-ask/575431/' },
+  M01:{ claim:'Profound: US$96M a US$1.000M de valuación (feb 2026); más de US$155M levantados en total', site:'Fortune', status:'ok', verifiedAt:'2026-11-08', url:'https://www.fortune.com/2026/02/24/exclusive-as-ai-threatens-search-profound-raises-96-million-to-help-brands-stay-visible' },
+  M02:{ claim:'Profound: ronda de US$180M a US$1.800M de valuación (sept 2026)', site:'The Next Web', status:'nuance', verifiedAt:'2026-11-08', note:'Pocas fuentes cubrieron esta ronda.', url:'https://thenextweb.com/news/profound-180m-series-d-ai-answer-engine-optimisation' },
+  M03:{ claim:'AthenaHQ es una startup de Y Combinator', site:'Y Combinator', status:'ok', verifiedAt:'2026-11-08', url:'https://ycombinator.com/companies/athenahq' },
+  M04:{ claim:'Ingresos de First Page Sage: ~US$20.8M según ZoomInfo; otras bases dan de US$8M a más de US$50M', site:'ZoomInfo', status:'nuance', verifiedAt:'2026-11-08', note:'Estimaciones de terceros; la empresa no publica cifras. Fundada en 2009; no se encontraron rondas de inversión.', url:'https://zoominfo.com/c/first-page-sage/356030818' },
+  M05:{ claim:'Las fuentes que citan las IA cambian mucho con el tiempo, incluso para la misma pregunta', site:'Profound', status:'nuance', verifiedAt:'2026-11-08', note:'Según resúmenes de su estudio: 40-60% de los dominios citados cambian al mes y 70-90% en seis meses. BrightEdge mide mucho menos cambio semana a semana.', url:'https://tryprofound.com/blog/ai-search-volatility' },
+  M06:{ claim:'Optimizar el contenido (citar fuentes, sumar estadísticas y citas) puede subir la visibilidad en respuestas generativas hasta 40%', site:'Aggarwal et al., KDD 2024', status:'ok', verifiedAt:'2026-11-08', note:'El efecto varía según el sector.', url:'https://arxiv.org/abs/2311.09735' },
+  M07:{ claim:'Google: no hacen falta archivos de IA ni schema especial para aparecer en AI Overviews y AI Mode; Google Search ignora llms.txt', site:'Google Search Central', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.google.com/search/docs/fundamentals/ai-optimization-guide' },
+  M08:{ claim:'Search Console incluye AI Overviews y AI Mode en el informe de rendimiento', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://support.google.com/webmasters/answer/16984139?hl=en' },
+  M09:{ claim:'Rankscale: planes desde US$20/mes; prueba de 7 días en el plan Pro', site:'Rankscale', status:'nuance', verifiedAt:'2026-11-08', note:'Cuántas plataformas cubre: sin confirmar (la app decía 17+).', url:'https://www.rankscale.ai/pricing' },
+  M10:{ claim:'Otterly tiene programa para agencias; sus planes cubren ChatGPT, AI Overviews, Perplexity y Copilot', site:'Otterly', status:'ok', verifiedAt:'2026-11-08', note:'Gemini, AI Mode y Claude aparecen como extras pagados.', url:'https://otterly.ai/agencies' },
+  M11:{ claim:'Screaming Frog es gratis hasta 500 URLs por rastreo', site:'Screaming Frog', status:'ok', verifiedAt:'2026-11-08', url:'https://www.screamingfrog.co.uk/seo-spider/' },
+  M12:{ claim:'Loom gratis: hasta 25 videos y 5 minutos por video', site:'Loom (Atlassian)', status:'ok', verifiedAt:'2026-11-08', url:'https://support.atlassian.com/loom/docs/how-long-can-i-record/' },
+  M13:{ claim:'En Credicorp, el Código de Ética es la guía principal y hay canales para consultarlo', site:'Credicorp', status:'nuance', verifiedAt:'2026-11-08', note:'No encontré un texto público sobre actividades externas: cuándo y cómo declarar es política interna. Confírmalo con Cumplimiento.', url:'https://grupocredicorp.com/wp-content/uploads/2025/03/Rol-de-Cumplimiento-y-Etica-en-Credicorp-ESP.pdf' },
+  M14:{ claim:'AEO Engine publica un "920%" cuya definición, plazo y muestra cambian entre sus propias páginas, sin auditoría externa', site:'Blog de AEO Engine', status:'ok', verifiedAt:'2026-11-08', note:'Se verificó lo que la empresa publica sobre sí misma, no el resultado.', url:'https://blog.aeoengine.ai/?p=816' },
+  M15:{ claim:'Reddit licenció su contenido para IA a Google (feb 2024) y a OpenAI (may 2024)', site:'TechCrunch', status:'ok', verifiedAt:'2026-11-08', url:'https://techcrunch.com/2024/05/16/openai-inks-deal-to-train-ai-on-reddit-data' },
+  M16:{ claim:'Ahrefs (75 mil marcas): las menciones de marca en la web son el factor más correlacionado con aparecer en AI Overviews (0,664 frente a 0,218 de los backlinks)', site:'Ahrefs', status:'ok', verifiedAt:'2026-11-08', note:'Es correlación, no causalidad.', url:'https://ahrefs.com/blog/ai-overview-brand-correlation/' },
   R01:{ claim:'Planes "si pasa X, hago Y": efecto medio-grande en el logro de metas (d = 0,65; 94 pruebas)', site:'Gollwitzer y Sheeran, 2006', status:'nuance', verifiedAt:'2026-11-08', note:'Meta-análisis en Advances in Experimental Social Psychology, vol. 38. Enlace a una ficha bibliográfica; los datos coinciden en varias fuentes, pero no pude abrir la página de la revista.', url:'https://stafforini.com/works/gollwitzer-2006-implementation-intentions-and/' },
   R02:{ claim:'Actualización con 642 pruebas: el efecto sigue, pero es más moderado al corregir sesgos', site:'Sheeran, Listrom y Gollwitzer, 2024', status:'nuance', verifiedAt:'2026-11-08', note:'Tomado de una fuente secundaria; el estudio original se revisa en la Fase 4.', url:'https://goalsandprogress.com/implementation-intentions-research/' },
   R03:{ claim:'Una conducta ocurre cuando coinciden motivación, capacidad y un aviso (B=MAP)', site:'BJ Fogg', status:'ok', verifiedAt:'2026-11-08', url:'https://behaviormodel.org/' },
@@ -1372,7 +1392,6 @@ const SOURCES = {
   'Q-IMG':{ claim:'Costo de tu generador de imágenes', site:'Sin fuente', status:'none', verifiedAt:'2026-11-08', note:'Depende de lo que ya pagues.', url:null },
   'Q-LEGAL':{ claim:'Costo de una revisión legal de textos', site:'Sin fuente', status:'none', verifiedAt:'2026-11-08', note:'Varía por abogado.', url:null },
   'Q-SEND':{ claim:'Enviar correo desde tu dominio: en Cloudflare, a cualquier destinatario, requiere Workers Paid (desde US$5/mes)', site:'Cloudflare', status:'nuance', verifiedAt:'2026-11-08', note:'Precios de otros proveedores (Google Workspace, Zoho): no verificados.', url:'https://developers.cloudflare.com/email-service/platform/pricing/' },
-  'Q-VOL':      { claim:'Volatilidad de las respuestas de IA (investigación de tu Misión 05)', site:'Sin fuente', status:'none', note:'No re-verificada aquí.', url:null },
   'Q-WEBP':{ claim:'WebP sin pérdida pesa alrededor de 26% menos que PNG', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.google.com/speed/webp' },
   'Q-ASTROCOLL':{ claim:'Colecciones de contenido de Astro para el blog', site:'Astro Docs', status:'ok', verifiedAt:'2026-11-08', url:'https://docs.astro.build/en/guides/content-collections/' },
   'Q-HEADERS':{ claim:'Valores recomendados de las cabeceras de seguridad', site:'OWASP', status:'ok', verifiedAt:'2026-11-08', url:'https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html' },
@@ -1504,7 +1523,7 @@ const WEB_CONTENT = {
   'S5.3': { start:{ kind:`copy`, label:`Copiar el prompt del resto de páginas`, text:`Usa la home como plantilla de estilo y construye servicios (uno por página), metodología, sobre mí y contacto, según arquitectura.csv. En metodología, explica con honestidad que las métricas de IA son volátiles y cómo mido; cita las fuentes que uses.`, then:`Pégalo en Claude Code y revisa cada página en computadora y celular.` },
     body:{ steps:[
       `"Usa la home como plantilla de estilo y construye servicios (uno por página), metodología, sobre mí y contacto, según <code>arquitectura.csv</code>."`,
-      `En <b>metodología</b>, pide que explique con honestidad que las métricas de IA son volátiles y cómo mides [[Q-VOL]].`,
+      `En <b>metodología</b>, pide que explique con honestidad que las métricas de IA son volátiles y cómo mides [[M05]].`,
       `Revisa cada página en computadora y celular.`,
     ], done:`Todas las páginas del CSV existen.` } },
   'S5.4': { start:{ kind:`copy`, label:`Copiar el prompt de imágenes`, text:`Conviértelas a WebP, ubícalas y escribe un alt natural para cada una.`, then:`Arrastra tus imágenes a Claude Code y pega el prompt.` },
@@ -1953,6 +1972,9 @@ function stripTags(s){ return String(s).replace(/<[^>]+>/g,'').replace(/\[\[[A-Z
 function vibrate(ms){ try { if (navigator.vibrate) navigator.vibrate(ms); } catch(e){} }
 // Pasos del plan de 21 misiones que dependen del proyecto web. Se marcan solos al cumplirse.
 const LINEAR_REQUIRES = { 'f4:1': ['S7.2'] };
+// Misiones 07 a 21: sus datos no se re-verificaron (decisión de la Fase 5). Se muestran como "sin verificar".
+const UNVERIFIED_TASKS = new Set(['f5','v1','v2','v3','v4','v5','p1','p2','p3','p4','p5','e1','e2','e3','e4']);
+function unverTag(id){ return UNVERIFIED_TASKS.has(id) ? '<span class="unv-tag">sin verificar</span>' : ''; }
 function linearBlockers(taskId, i){ const r = LINEAR_REQUIRES[taskId + ':' + i]; return r ? r.filter(x => !isWebDone(x)) : []; }
 function syncLinearFromWeb(){
   Object.keys(LINEAR_REQUIRES).forEach(k => {
@@ -2140,7 +2162,7 @@ function renderHoy(){
     <div class="now-inner">
       <div class="now-context">
         <span class="lbl forest">${PHASE_LABELS[t.phase]}</span>
-        <span class="lbl">Misión ${pad2(idx+1)}/${TOTAL}</span>
+        <span class="lbl">Misión ${pad2(idx+1)}/${TOTAL}${unverTag(t.id)}</span>
       </div>
       <div class="now-mission"><b>${t.title}</b> · ~${t.minutes} min en total, avanza por pasos</div>
       <div class="mini-progress">
@@ -2184,7 +2206,7 @@ function linearAltHtml(action){
     ? ('Paso ' + pad2(action.stepIndex + 1) + ' de ' + pad2(steps.length) + ': ' + stripTags(steps[action.stepIndex].title))
     : 'Todos los pasos listos: ciérrala';
   return `<div class="alt-card" data-open-mission="${t.id}" role="button" tabindex="0">
-    <span class="lbl">También en tu plan · Misión ${pad2(idx + 1)}/${TOTAL}</span>
+    <span class="lbl">También en tu plan · Misión ${pad2(idx + 1)}/${TOTAL}${unverTag(t.id)}</span>
     <div class="alt-title">${escapeHtml(t.title)}</div>
     <div class="alt-sub">${escapeHtml(what)}</div>
     ${action.kind === 'step' ? startMiniHtml(t.id + ':' + action.stepIndex) : ''}
@@ -2230,7 +2252,7 @@ function renderPlan(){
         <span class="m-check"></span>
         <div class="m-main">
           <div class="m-title">${t.title}</div>
-          <div class="m-meta">${isCurrent ? '<span class="cur">Actual</span> — ' : ''}${t.minutes} min · ${t.tag}${t.gate==='compliance' ? ' · <span class="gate">compliance</span>' : ''}</div>
+          <div class="m-meta">${isCurrent ? '<span class="cur">Actual</span> — ' : ''}${t.minutes} min · ${t.tag}${t.gate==='compliance' ? ' · <span class="gate">compliance</span>' : ''}${UNVERIFIED_TASKS.has(t.id) ? ' · ' + unverTag(t.id) : ''}</div>
         </div>
       </div>`;
     });
@@ -2281,16 +2303,17 @@ function openMissionDetail(taskId){
     </div>
     <span class="lbl forest">${PHASE_LABELS[t.phase]}</span>
     <h1 class="d-title">${t.title}</h1>
-    <p class="d-desc">${t.desc}</p>
+    <p class="d-desc">${rich(t.desc)}</p>
     <div class="d-meta">
       <span>${t.minutes} min</span><span class="sep">&mdash;</span><span>${t.tag}</span>
       ${t.gate==='compliance' ? '<span class="sep">&mdash;</span><span class="gate">Requiere compliance aprobada</span>' : ''}
       ${isDone ? '<span class="sep">&mdash;</span><span style="color:var(--forest);">Completada</span>' : (isCurrent ? '<span class="sep">&mdash;</span><span style="color:var(--forest);">Actual</span>' : '<span class="sep">&mdash;</span><span>Se desbloquea en orden</span>')}
     </div>
-    ${t.why ? `<div class="why-box"><div class="why-label">Por qué importa</div><div class="why-text">${t.why}</div></div>` : ''}
+    ${UNVERIFIED_TASKS.has(t.id) ? '<div class="unver-box">⚠️ <b>Datos sin verificar.</b> Las cifras, precios y nombres de esta misión vienen del análisis original y todavía no tienen fuente. Tómalos como referencia, no como hecho.</div>' : ''}
+    ${t.why ? `<div class="why-box"><div class="why-label">Por qué importa</div><div class="why-text">${rich(t.why)}</div></div>` : ''}
     <div class="mini-progress"><span class="lbl tnum">${doneSteps}/${steps.length}</span><div class="mini-track"><div class="mini-fill" style="width:${steps.length?Math.round((doneSteps/steps.length)*100):0}%"></div></div></div>
     <div class="step-block">${stepsHtml}</div>
-    ${t.tip ? `<div class="tip-box"><div class="tip-label">Nota</div><div class="tip-text">${t.tip}</div></div>` : ''}
+    ${t.tip ? `<div class="tip-box"><div class="tip-label">Nota</div><div class="tip-text">${rich(t.tip)}</div></div>` : ''}
     ${isDone && state.completed[t.id].note ? `<div class="d-note">"${escapeHtml(state.completed[t.id].note)}"</div>` : ''}
     <div class="d-actions">
       ${isCurrent && doneSteps === steps.length ? `<textarea class="note-input" id="ovNote" placeholder="Anota algo: qué hiciste, qué salió, qué falta..."></textarea><button class="btn-main" id="ovComplete">Marcar misión completada</button>` : ''}
@@ -2380,7 +2403,7 @@ function showCelebration({title, line, insight, extra}){
     <div class="sheet-title">${title}</div>
     <div class="sheet-line">${line}</div>
     ${extra ? `<div class="sheet-extra">${extra}</div>` : ''}
-    ${insight ? `<div class="insight-card"><div class="insight-l">Dato del mercado — ${insight.sec}</div><div class="insight-t">${insight.t}</div><div class="insight-d">${rich(insight.d)}</div></div>` : ''}
+    ${insight ? `<div class="insight-card"><div class="insight-l">Dato del mercado — ${insight.sec}${/\[\[/.test(insight.d) ? '' : ' · sin verificar'}</div><div class="insight-t">${insight.t}</div><div class="insight-d">${rich(insight.d)}</div></div>` : ''}
     <button class="btn-main" id="sheetGo">Seguir</button>
   </div>`;
   document.body.appendChild(bd);
@@ -3534,6 +3557,7 @@ function renderDatos(){
 
   html += `<div class="sec-h" data-sec="gloss"><span>Inteligencia de mercado</span><span class="plus${openSecs.gloss?' open':''}">+</span></div>
     <div class="sec-body${openSecs.gloss?' open':''}">`;
+  html += `<div class="unver-box">⚠️ <b>Sin verificar.</b> Estos datos vienen del análisis de mercado original. Solo lo que lleva un chip de fuente está verificado.</div>`;
   GLOSSARY.forEach(sec => {
     html += `<div class="gloss-slabel">${sec.label}</div>`;
     sec.items.forEach(it => {
