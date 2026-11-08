@@ -1205,7 +1205,7 @@ const WEB_GATE = {
 const C0 = { type:'free', status:'ok', mandatory:true };
 const WEB_STEPS = {
   'S1.1': { title:'Consulta de compliance en Credicorp', requires:[], cost:C0, linked:'compliance', criterio:true, sources:[] },
-  'S1.2': { title:'App de doble factor y gestor de contraseñas', requires:[], cost:C0, criterio:true, sources:[] },
+  'S1.2': { title:'App de doble factor y gestor de contraseñas', requires:[], cost:C0, criterio:true, sources:['F46','F47'] },
   'S1.3': { title:'Cuenta de GitHub con doble factor', requires:['S1.2'], cost:{ type:'free', status:'ok', mandatory:true, note:'Repositorios privados ilimitados en el plan gratis [[F41]]', sourceIds:['F41'] }, sources:['F01','F41'],
     start:{ kind:'link', label:'Abrir la configuración de GitHub', url:'https://github.com/settings', then:'Ya dentro: barra lateral → <b>Password and authentication</b> → <b>Enable two-factor authentication</b>. Ten a mano tu app autenticadora.' },
     body:{
@@ -1365,6 +1365,8 @@ const SOURCES = {
   F43:{ claim:'Turnstile exige validar cada token en el servidor (Siteverify)', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/turnstile/get-started/server-side-validation/' },
   F44:{ claim:'El Libro de Reclamaciones aplica a proveedores identificados con RUC', site:'BDO', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria (BDO); no encontré los requisitos exactos de la herramienta.', url:'https://pe-www.bdo.global/getattachment/Publicaciones/Business-Services-Outsourcing/Alerta-Legal/Alerta-Legal-INDECOPI-supervisa-implementacion-del/BDO-Peru_Alerta-Legal-13-12-2021.pdf.aspx?lang=es-PE' },
   F45:{ claim:'PageSpeed Insights: herramienta gratuita de Google', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.google.com/speed/docs/insights/v5/about' },
+  F46:{ claim:'El Gestor de contraseñas de Google permite agregar una nota a cada contraseña guardada, con la misma protección que la contraseña', site:'Ayuda de Google Chrome', status:'ok', verifiedAt:'2026-11-08', url:'https://support.google.com/chrome/answer/7378684?hl=en' },
+  F47:{ claim:'Microsoft Authenticator dejó de guardar y autocompletar contraseñas en 2025 (las pasó a Edge); sigue dando códigos de doble factor', site:'TechRadar', status:'ok', verifiedAt:'2026-11-08', url:'https://www.techradar.com/pro/security/microsoft-authenticator-begins-password-autofill-phase-out-this-week-so-export-now-or-you-could-lose-them-forever' },
   L01:{ claim:'97% de los archivos llms.txt no recibió ninguna solicitud en mayo de 2026 (137.210 sitios)', site:'Ahrefs', status:'ok', verifiedAt:'2026-11-08', note:'Mide solo el archivo índice y sitios que usan Ahrefs Web Analytics (más técnicos que el promedio).', url:'https://ahrefs.com/blog/llmstxt-study/' },
   L02:{ claim:'Gary Illyes (Google): Google no usa llms.txt para sus funciones de IA', site:'Search Engine Land', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria que reporta lo dicho en un evento de Google (2025).', url:'https://searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422' },
   L03:{ claim:'La guía de Google sobre llms.txt varía según el producto', site:'Search Engine Journal', status:'nuance', verifiedAt:'2026-11-08', note:'Por ejemplo, Lighthouse lo revisa como opcional en una categoría experimental.', url:'https://www.searchenginejournal.com/googles-llms-txt-guidance-depends-on-which-product-you-ask/575431/' },
@@ -1456,12 +1458,12 @@ const WEB_CONTENT = {
     ], why:`Una web pública ofreciendo servicios ya es una actividad externa visible. {{criterio}}`,
        extra:`<b>Mientras esperas:</b> sigue con S2 a S5, que son locales y nadie las ve.`,
        done:`Tienes la respuesta escrita.` } },
-  'S1.2': { start:{ kind:`link`, label:`Buscar una app autenticadora en Play Store`, url:`https://play.google.com/store/search?q=authenticator&c=apps`, then:`Instala Google Authenticator o Microsoft Authenticator en tu celular.` },
+  'S1.2': { start:{ kind:`link`, label:`Abrir Google Authenticator en Play Store`, url:`https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2`, then:`Instálala. Debajo del nombre debe decir "Google LLC": hay copias con anuncios que se hacen pasar por autenticadoras.` },
     body:{ steps:[
-      `Instala en el celular una app autenticadora (Google Authenticator o Microsoft Authenticator) desde la Play Store.`,
-      `Usa un gestor de contraseñas (el de Chrome sirve para empezar) para todas las cuentas del proyecto.`,
-      `Crea una nota segura "Códigos de recuperación TuFuente".`,
-    ], done:`La app está instalada y la nota creada.` } },
+      `Instala Google Authenticator (de Google LLC) con el botón de arriba. Microsoft Authenticator (de Microsoft Corporation) también sirve. Evita otras apps parecidas, sobre todo si muestran anuncios.`,
+      `Para contraseñas usa el Gestor de contraseñas de Google, el que ya trae Chrome. No uses Microsoft Authenticator para esto: desde 2025 ya no guarda contraseñas [[F47]].`,
+      `Ábrelo desde Chrome (menú ⋮ → Gestor de contraseñas de Google) o en passwords.google.com. Si quieres, deja creada una entrada "TuFuente · códigos de recuperación". Cuando GitHub y Cloudflare te den códigos de recuperación (pasos S1.3 y S1.4), pégalos en el campo <b>Nota</b> de esa cuenta: queda protegida igual que la contraseña [[F46]].`,
+    ], done:`Tienes Google Authenticator instalado y sabes dónde guardarás los códigos de recuperación.` } },
   'S1.4': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`Crea la cuenta (o entra) y busca en tu perfil la autenticación de dos factores.` },
     body:{ steps:[
       `Entra a dash.cloudflare.com y crea una cuenta.`,
