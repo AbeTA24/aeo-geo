@@ -645,6 +645,36 @@ button{font-family:var(--sans);}
 .ci-a{font-size:13px;color:var(--body);margin:3px 0;line-height:1.7;}
 .ci-m{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);line-height:1.8;}
 .ci-m .req-link{min-height:26px;padding:0 6px;font-size:9.5px;margin-left:2px;}
+
+/* EMPIEZA AQUÍ */
+.start-box{border:1px solid var(--forest);border-left-width:3px;background:var(--paper-raise);padding:13px 15px 14px;margin:6px 0 18px;}
+.start-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;}
+.start-h > span{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:var(--forest);}
+.start-h .link-btn{font-size:9.5px;min-height:32px;}
+.btn-start{
+  display:flex;align-items:center;gap:10px;width:100%;min-height:48px;padding:11px 14px;cursor:pointer;text-align:left;
+  background:var(--paper);border:1px solid var(--forest);color:var(--forest);font-family:var(--sans);
+  font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;transition:background .18s ease,color .18s ease;
+}
+.btn-start:hover{background:var(--forest);color:var(--paper);}
+.btn-start .bs-ic{font-size:15px;letter-spacing:0;line-height:1;}
+.btn-start.small{min-height:44px;margin-top:10px;font-size:10.5px;padding:9px 12px;}
+.start-sub{font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:8px;}
+.start-sub b{color:var(--body);}
+.start-sub code{background:var(--sand);padding:1px 5px;font-size:0.9em;color:var(--forest);}
+.start-prompt{margin-top:8px;font-size:12.5px;color:var(--body);}
+.start-prompt summary{cursor:pointer;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:underline;text-underline-offset:4px;min-height:32px;display:flex;align-items:center;}
+.start-prompt p{margin:6px 0 0;line-height:1.6;border-left:2px solid var(--sand);padding-left:10px;}
+.cap{margin-bottom:12px;}
+.cap-l{display:block;font-size:12.5px;color:var(--ink);font-weight:500;margin-bottom:6px;}
+.cap-ta{min-height:110px;margin-bottom:8px;font-size:16px;}
+.cap-row{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.cap-row .btn-ghost{min-height:44px;}
+.cap-count{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;}
+.cap-done{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--muted);margin-bottom:10px;}
+.why-list{margin:6px 0 4px;padding-left:18px;}
+.why-list li{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:10px;}
+.drv-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;min-height:44px;flex:1 1 140px;}
 </style>
 </head>
 <body>
@@ -1102,6 +1132,7 @@ const WEB_STEPS = {
   'S1.1': { title:'Consulta de compliance en Credicorp', requires:[], cost:C0, linked:'compliance', criterio:true, sources:[] },
   'S1.2': { title:'App de doble factor y gestor de contraseñas', requires:[], cost:C0, criterio:true, sources:[] },
   'S1.3': { title:'Cuenta de GitHub con doble factor', requires:['S1.2'], cost:{ type:'free', status:'ok', mandatory:true, note:'Repositorios privados ilimitados en el plan gratis [[F41]]', sourceIds:['F41'] }, sources:['F01','F41'],
+    start:{ kind:'link', label:'Abrir la configuración de GitHub', url:'https://github.com/settings', then:'Ya dentro: barra lateral → <b>Password and authentication</b> → <b>Enable two-factor authentication</b>. Ten a mano tu app autenticadora.' },
     body:{
       steps:[
         'Entra a github.com y crea una cuenta (o usa la tuya).',
@@ -1133,9 +1164,31 @@ const WEB_STEPS = {
   'S2.3': { title:'Crear la carpeta del proyecto', requires:[], cost:C0, sources:[] },
   'S2.4': { title:'Abrir Claude Code en esa carpeta', requires:['S2.1','S2.3'], cost:{ type:'included', status:'ok', mandatory:true, label:'Incluido en tu plan de Claude' }, sources:['F07'] },
   'S3.1': { title:'Elegir ruta de investigación de keywords', requires:['S2.4'], cost:{ type:'usage', status:'none', mandatory:false, label:'S/ 0 o pago por uso', sourceIds:['Q-DFS'] }, sources:['F10'] },
-  'S3.2': { title:'Pedir el CSV de arquitectura', requires:['S3.1'], cost:{ type:'free', status:'ok', mandatory:true, label:'S/ 0 (o créditos de DataForSEO)' }, sources:['F20','F07'] },
+  'S3.2': { title:'Pedir el CSV de arquitectura', requires:['S3.1'], cost:{ type:'free', status:'ok', mandatory:true, label:'S/ 0 (o créditos de DataForSEO)' }, sources:['F20','F07'],
+    start:{ kind:'copy', label:'Copiar el prompt para Claude Code', then:'Abre Claude Code en la carpeta <code>tufuente-web</code>, modo <b>Plan</b>, y pega el prompt (Ctrl+V).',
+      text:"Soy TuFuente.ai, consultoría de visibilidad en buscadores de IA para pymes de LatAm, con base en Lima. Servicios: Auditoría, Implementación, Monitoreo. Arma un CSV con columnas: página, keyword objetivo, volumen mensual, URL. Incluye home, una página por servicio, metodología, sobre mí, contacto y blog. Si no tienes datos de volumen, pon 'sin dato'. No inventes." },
+    body:{
+      steps:[
+        'Claude Code en modo <b>Plan</b> [[F07]].',
+        'Pega el prompt (está listo arriba, en "Empieza aquí").',
+        'Aprueba → modo <b>Accept edits</b>.',
+      ],
+      done:'Existe <code>arquitectura.csv</code>.',
+    } },
   'S3.3': { title:'Revisar el CSV tú mismo', requires:['S3.2'], cost:C0, sources:['F20'] },
-  'S3.4': { title:'Línea base de visibilidad en IA (ruta gratis)', requires:[], cost:C0, criterio:true, sources:['F11'] },
+  'S3.4': { title:'Línea base de visibilidad en IA (ruta gratis)', requires:[], cost:C0, criterio:true, sources:['F11'],
+    start:{ kind:'sheet', label:'Abrir mi hoja de línea base', template:'baseline', capture:'questions15',
+      file:'S3.4 · Línea base de visibilidad en IA', folder:'Web · S3 Investigación' },
+    body:{
+      steps:[
+        'Escribe <b>15 preguntas fijas</b> que haría tu cliente ideal. Guárdalas y <b>no las cambies después</b>.',
+        'Una vez al mes, en una ventana de incógnito, hazle cada pregunta a ChatGPT, Perplexity y Gemini, cada una en una conversación nueva.',
+        'Anota en la hoja: fecha, motor, pregunta, si apareces (sí/no) y quién aparece.',
+        'Haz la primera ronda <b>antes</b> de publicar la web.',
+      ],
+      why:'Sin línea base no puedes demostrar mejora. Es manual y menos rigurosa que una herramienta que corre varias veces vía API, pero sirve para empezar. {{criterio}}',
+      done:'Tienes la primera ronda anotada con fecha.',
+    } },
   'S4.1': { title:'Juntar inspiración', requires:['S3.3'], cost:C0, sources:['F20'] },
   'S4.2': { title:'Guía de marca', requires:['S4.1'], cost:C0, sources:['F20'] },
   'S4.3': { title:'Guía de estilo de imágenes', requires:['S4.2'], condition:'Acceso a un generador de imágenes (o usa fotos propias)', cost:{ type:'unknown', status:'none', mandatory:false, label:'Según tu suscripción', sourceIds:['Q-IMG'] }, sources:['F20'] },
@@ -1236,6 +1289,10 @@ const SOURCES = {
   F43:{ claim:'Turnstile exige validación en servidor', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/turnstile/get-started/server-side-validation/' },
   F44:{ claim:'Libro de Reclamaciones aplica a proveedores con RUC', site:'BDO', status:'nuance', note:'Fuente secundaria (BDO).', url:'https://pe-www.bdo.global/getattachment/Publicaciones/Business-Services-Outsourcing/Alerta-Legal/Alerta-Legal-INDECOPI-supervisa-implementacion-del/BDO-Peru_Alerta-Legal-13-12-2021.pdf.aspx?lang=es-PE' },
   F45:{ claim:'PageSpeed Insights (herramienta de Google)', site:'Google', status:'nuance', note:'Existe; su gratuidad no se verificó explícitamente.', url:'https://developers.google.com/speed/docs/insights/v5/about' },
+  R01:{ claim:'Planes "si pasa X, hago Y": efecto medio-grande en el logro de metas (d = 0,65; 94 pruebas)', site:'Gollwitzer y Sheeran, 2006', status:'nuance', verifiedAt:'2026-11-08', note:'Meta-análisis en Advances in Experimental Social Psychology, vol. 38. Enlace a una ficha bibliográfica; los datos coinciden en varias fuentes, pero no pude abrir la página de la revista.', url:'https://stafforini.com/works/gollwitzer-2006-implementation-intentions-and/' },
+  R02:{ claim:'Actualización con 642 pruebas: el efecto sigue, pero es más moderado al corregir sesgos', site:'Sheeran, Listrom y Gollwitzer, 2024', status:'nuance', verifiedAt:'2026-11-08', note:'Tomado de una fuente secundaria; el estudio original se revisa en la Fase 4.', url:'https://goalsandprogress.com/implementation-intentions-research/' },
+  R03:{ claim:'Una conducta ocurre cuando coinciden motivación, capacidad y un aviso (B=MAP)', site:'BJ Fogg', status:'ok', verifiedAt:'2026-11-08', url:'https://behaviormodel.org/' },
+  R04:{ claim:'Las personas interrumpidas trabajaron más rápido, pero con más estrés, frustración y presión de tiempo', site:'Mark, Gudith y Klocke, CHI 2008', status:'ok', verifiedAt:'2026-11-08', url:'https://www.ics.uci.edu/~gmark/chi08-mark.pdf' },
   'Q-CF2FA':{ claim:'Ruta del menú de 2FA en Cloudflare', site:'Sin fuente', status:'none', url:null },
   'Q-LOCK': { claim:'Bloqueo de transferencia del dominio en Cloudflare', site:'Sin fuente', status:'none', url:null },
   'Q-EMAIL':{ claim:'Precio de Email Routing', site:'Sin fuente', status:'none', note:'La página no dice precio.', url:null },
@@ -1305,8 +1362,9 @@ function validateWebPlan(p){
     const s = p.steps[id];
     (s.sources || []).forEach(sid => checkSrc(id, sid));
     ((s.cost && s.cost.sourceIds) || []).forEach(sid => checkSrc(id + ' (costo)', sid));
-    const texts = [s.cost && s.cost.note].concat(s.body ? [].concat(s.body.steps || [], s.body.why || [], s.body.extra || [], s.body.done || []) : []);
+    const texts = [s.cost && s.cost.note, s.start && s.start.then].concat(s.body ? [].concat(s.body.steps || [], s.body.why || [], s.body.extra || [], s.body.done || []) : []);
     texts.filter(Boolean).forEach(t => { let mm; refRe.lastIndex = 0; while ((mm = refRe.exec(t))) checkSrc(id, mm[1]); });
+    if (s.start && ['link','copy','doc','sheet'].indexOf(s.start.kind) < 0) errors.push(id + ': "Empieza aquí" con tipo desconocido ' + s.start.kind);
   });
   (p.costTable || []).forEach(r => {
     if (r.step && !p.steps[r.step]) errors.push('Costos "' + r.concept + '": paso inexistente ' + r.step);
@@ -1337,12 +1395,17 @@ function defaultState(){
     migratedV2: false,
     webSteps: {},
     webMissions: {},
+    drive: { connected:false, appFolderId:null, appFolderUrl:null, folders:{}, files:{} },
+    captures: {},
+    starts: {},
   };
 }
 let state = defaultState();
 
 function normalizeState(){
-  ['completed','stepProgress','chats','activityLog','webSteps','webMissions'].forEach(k => { if (!state[k] || typeof state[k] !== 'object') state[k] = {}; });
+  state.drive = Object.assign({ connected:false, appFolderId:null, appFolderUrl:null, folders:{}, files:{} }, state.drive || {});
+  ['folders','files'].forEach(k => { if (!state.drive[k] || typeof state.drive[k] !== 'object') state.drive[k] = {}; });
+  ['completed','stepProgress','chats','activityLog','webSteps','webMissions','captures','starts'].forEach(k => { if (!state[k] || typeof state[k] !== 'object') state[k] = {}; });
   if (!Array.isArray(state.seenInsights)) state.seenInsights = [];
   if (!state.compliance) state.compliance = 'pendiente';
   if (!state.bestStreak) state.bestStreak = state.streak || 0;
@@ -1719,6 +1782,7 @@ function renderHoy(){
       <h1 class="now-title">${st.title}</h1>
       <button class="now-detail-toggle" data-act="toggle-detail">Ver por qué / cómo</button>
       <div class="now-detail" id="nowDetail">${st.detail}${t.why && action.stepIndex === 0 ? `<br><br><span class="serif-i" style="color:var(--ink);">${t.why}</span>` : ''}</div>
+      ${startBoxHtml(t.id + ':' + action.stepIndex)}
       <button class="btn-main" data-act="step-done">Paso hecho</button>
       <div class="now-foot">
         <button class="link-btn" data-act="go-coach">Preguntar a Claude</button>
@@ -1750,6 +1814,7 @@ function linearAltHtml(action){
     <span class="lbl">También en tu plan · Misión ${pad2(idx + 1)}/${TOTAL}</span>
     <div class="alt-title">${escapeHtml(t.title)}</div>
     <div class="alt-sub">${escapeHtml(what)}</div>
+    ${action.kind === 'step' ? startMiniHtml(t.id + ':' + action.stepIndex) : ''}
   </div>`;
 }
 
@@ -1826,6 +1891,7 @@ function openMissionDetail(taskId){
       <div class="s-main">
         <div class="s-title">${st.title}</div>
         <div class="s-detail">${st.detail}</div>
+        ${!sd ? startMiniHtml(t.id + ':' + i) : ''}
       </div>
     </div>`;
   });
@@ -2266,6 +2332,7 @@ function openWebStep(id, back){
   }
   html += `<div class="cost-line"><span class="cl-l">Costo</span><span>${escapeHtml(s.cost.label || costBadgeText(s.cost))}${s.cost.note ? ' — ' + rich(s.cost.note) : ''}${!s.cost.note && s.cost.sourceIds ? ' ' + s.cost.sourceIds.map(chipHtml).join(' ') : ''}</span></div>`;
   if (s.condition) html += `<div class="cost-line"><span class="cl-l">Condición</span><span>${escapeHtml(s.condition)}</span></div>`;
+  if (s.start && st !== 'done') html += startBoxHtml(id);
   if (s.body){
     html += `<div class="w-sec-h">Qué hacer</div><ol class="w-steps">${s.body.steps.map(x => `<li>${rich(x)}</li>`).join('')}</ol>`;
     if (s.body.why) html += `<div class="why-box"><div class="why-label">Por qué</div><div class="why-text">${rich(s.body.why)}</div></div>`;
@@ -2405,6 +2472,318 @@ function openWebMap(){
   });
 }
 
+// ============================================================
+// EMPIEZA AQUÍ: la primera acción concreta de cada paso
+// link = ir al lugar exacto · copy = copiar el prompt · doc/sheet = tu archivo en Drive, ya armado
+// ============================================================
+const LINEAR_STARTS = {
+  'f4:2': { kind:'doc', label:'Abrir mi documento de FAQ', template:'faq',
+    file:'06.3 · FAQ answer-first — TuFuente.ai', folder:'06 · Posicionamiento' },
+};
+function getStart(key){ return (WEB_STEPS[key] && WEB_STEPS[key].start) || LINEAR_STARTS[key] || null; }
+
+const FAQ_EXAMPLES = [
+  '¿Qué es la visibilidad en buscadores de IA (AEO/GEO)?',
+  '¿Cómo sé si mi empresa aparece cuando alguien le pregunta a ChatGPT?',
+  '¿En qué se diferencia del SEO tradicional?',
+  '¿Qué incluye una auditoría y cuánto demora?',
+  '¿Cómo miden los resultados si la IA cambia sus respuestas?',
+];
+const ENGINES = ['ChatGPT', 'Perplexity', 'Gemini'];
+const BASELINE_HEAD = ['Ronda', 'Fecha', 'Motor', 'Pregunta', '¿Aparezco? (sí/no)', 'Quién aparece', 'Notas'];
+function baselineRows(){
+  const qs = (state.captures.questions15 || []).filter(Boolean);
+  const list = qs.length ? qs : Array.from({ length: 15 }, (_, i) => 'Pregunta ' + (i + 1));
+  const rows = [];
+  list.forEach(q => ENGINES.forEach(m => rows.push(['1', '', m, q, '', '', ''])));
+  return rows;
+}
+const TEMPLATES = {
+  faq: {
+    html: () => `<h1>06.3 · FAQ answer-first — TuFuente.ai</h1>
+<p><i>Cómo usar este documento:</i> escribe cada pregunta como la haría tu cliente. Responde primero en 1 o 2 frases (la respuesta directa) y después el detalle. Si das un dato, pon su fuente.</p>
+<h2>Preguntas frecuentes</h2>
+${FAQ_EXAMPLES.map((q, i) => `<h3>Pregunta ${i + 1}: ${q}</h3><p><b>Respuesta corta (1-2 frases):</b> </p><p><b>Detalle:</b> </p><p><b>Fuente (si das un dato):</b> </p>`).join('\n')}
+<h2>Definiciones claras</h2>
+<p><b>AEO/GEO:</b> </p><p><b>Citation rate (tasa de citación):</b> </p><p><b>Share of answer:</b> </p>
+<p><i>Después, esta FAQ irá en tu web. Datos estructurados (schema) sí, como higiene, sin obsesionarte: no es la palanca principal.</i></p>`,
+    text: () => ['06.3 · FAQ answer-first — TuFuente.ai', '', 'Cómo usar este documento: escribe cada pregunta como la haría tu cliente. Responde primero en 1 o 2 frases y después el detalle. Si das un dato, pon su fuente.', '', 'PREGUNTAS FRECUENTES', '']
+      .concat(...FAQ_EXAMPLES.map((q, i) => ['Pregunta ' + (i + 1) + ': ' + q, 'Respuesta corta (1-2 frases):', 'Detalle:', 'Fuente (si das un dato):', '']))
+      .concat(['DEFINICIONES CLARAS', 'AEO/GEO:', 'Citation rate (tasa de citación):', 'Share of answer:']).join('\n'),
+  },
+  baseline: {
+    csv: () => [BASELINE_HEAD].concat(baselineRows()).map(r => r.map(c => /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c).join(',')).join('\n'),
+    text: () => [BASELINE_HEAD].concat(baselineRows()).map(r => r.join('\t')).join('\n'),
+  },
+};
+
+// --- Google Drive (permiso drive.file: la app solo ve los archivos que ella crea) ---
+const GOOGLE_CLIENT_ID = window.__AEOGEO_TEST_CLIENT_ID__ || '';
+const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
+const DRIVE_APP_FOLDER = 'Plan AEO-GEO (app)';
+const MIME_FOLDER = 'application/vnd.google-apps.folder';
+const MIME_DOC = 'application/vnd.google-apps.document';
+const MIME_SHEET = 'application/vnd.google-apps.spreadsheet';
+const TOKEN_KEY = 'aeogeo_gtoken';
+function driveConfigured(){ return !!GOOGLE_CLIENT_ID; }
+let gisPromise = null;
+function loadGis(){
+  if (window.google && google.accounts && google.accounts.oauth2) return Promise.resolve();
+  if (gisPromise) return gisPromise;
+  gisPromise = new Promise((res, rej) => {
+    const sc = document.createElement('script');
+    sc.src = 'https://accounts.google.com/gsi/client';
+    sc.async = true;
+    sc.onload = () => res();
+    sc.onerror = () => { gisPromise = null; rej(new Error('no se pudo cargar Google')); };
+    document.head.appendChild(sc);
+  });
+  return gisPromise;
+}
+function driveToken(){
+  try { const t = JSON.parse(sessionStorage.getItem(TOKEN_KEY) || 'null'); if (t && t.exp > Date.now() + 60000) return t.token; } catch(e){}
+  return null;
+}
+let tokenClient = null;
+// Debe llamarse dentro de un clic: Google exige un gesto del usuario para cada pedido de permiso.
+function requestDriveToken(){
+  return new Promise((res, rej) => {
+    if (!(window.google && google.accounts && google.accounts.oauth2)){ loadGis().catch(() => {}); rej(new Error('Google aún está cargando; toca otra vez')); return; }
+    if (!tokenClient) tokenClient = google.accounts.oauth2.initTokenClient({ client_id: GOOGLE_CLIENT_ID, scope: DRIVE_SCOPE, callback: () => {} });
+    tokenClient.callback = r => {
+      if (!r || r.error){ rej(new Error((r && r.error) || 'sin permiso')); return; }
+      try { sessionStorage.setItem(TOKEN_KEY, JSON.stringify({ token: r.access_token, exp: Date.now() + (r.expires_in || 3600) * 1000 })); } catch(e){}
+      state.drive.connected = true;
+      saveState();
+      res(r.access_token);
+    };
+    tokenClient.error_callback = e => rej(new Error(e && e.type === 'popup_failed_to_open' ? 'el navegador bloqueó la ventana de Google' : 'cerraste la ventana de Google'));
+    tokenClient.requestAccessToken({ prompt: state.drive.connected ? '' : 'consent' });
+  });
+}
+async function gapiFetch(url, opts){
+  const r = await fetch(url, Object.assign({}, opts, { headers: Object.assign({ Authorization: 'Bearer ' + driveToken() }, (opts && opts.headers) || {}) }));
+  if (!r.ok){
+    if (r.status === 401){ try { sessionStorage.removeItem(TOKEN_KEY); } catch(e){} }
+    const err = new Error('Drive respondió ' + r.status);
+    err.status = r.status;
+    throw err;
+  }
+  return r.json();
+}
+function driveCreateFolder(name, parent){
+  return gapiFetch('https://www.googleapis.com/drive/v3/files?fields=id,name,webViewLink', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(Object.assign({ name, mimeType: MIME_FOLDER }, parent ? { parents: [parent] } : {})),
+  });
+}
+function driveUpload(name, parent, targetMime, mediaType, content){
+  const b = 'aeogeo' + Date.now();
+  const body = '--' + b + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + JSON.stringify({ name, mimeType: targetMime, parents: [parent] }) +
+    '\r\n--' + b + '\r\nContent-Type: ' + mediaType + '; charset=UTF-8\r\n\r\n' + content + '\r\n--' + b + '--';
+  return gapiFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,webViewLink', {
+    method: 'POST', headers: { 'Content-Type': 'multipart/related; boundary=' + b }, body,
+  });
+}
+async function ensureFolder(name, retried){
+  try {
+    if (!state.drive.appFolderId){
+      const r = await driveCreateFolder(DRIVE_APP_FOLDER, null);
+      state.drive.appFolderId = r.id;
+      state.drive.appFolderUrl = r.webViewLink || ('https://drive.google.com/drive/folders/' + r.id);
+      saveState();
+    }
+    if (!state.drive.folders[name]){
+      const r = await driveCreateFolder(name, state.drive.appFolderId);
+      state.drive.folders[name] = r.id;
+      saveState();
+    }
+    return state.drive.folders[name];
+  } catch(e){
+    // Si borraste la carpeta de la app en Drive, se vuelve a crear una vez.
+    if (e.status === 404 && !retried){ state.drive.appFolderId = null; state.drive.appFolderUrl = null; state.drive.folders = {}; return ensureFolder(name, true); }
+    throw e;
+  }
+}
+async function createStartFile(key, st, retried){
+  const isSheet = st.kind === 'sheet';
+  const parent = await ensureFolder(st.folder);
+  let f;
+  try {
+    f = await driveUpload(st.file, parent, isSheet ? MIME_SHEET : MIME_DOC, isSheet ? 'text/csv' : 'text/html', isSheet ? TEMPLATES[st.template].csv() : TEMPLATES[st.template].html());
+  } catch(e){
+    if (e.status === 404 && !retried){ state.drive.folders = {}; state.drive.appFolderId = null; return createStartFile(key, st, true); }
+    throw e;
+  }
+  state.drive.files[key] = {
+    id: f.id, name: st.file, folder: st.folder, kind: st.kind, ts: new Date().toISOString(),
+    url: f.webViewLink || ('https://docs.google.com/' + (isSheet ? 'spreadsheets' : 'document') + '/d/' + f.id + '/edit'),
+  };
+  saveState();
+  return state.drive.files[key];
+}
+// En la laptop, el documento se abre en una ventana a la derecha de la app; en el celular, en una pestaña o en la app de Google.
+function sideFeatures(){
+  if (window.innerWidth < 900 || !window.screen) return null;
+  const W = screen.availWidth, H = screen.availHeight, w = Math.round(W * 0.5);
+  return 'popup,width=' + w + ',height=' + H + ',left=' + (W - w) + ',top=0';
+}
+function openSide(url){
+  const f = sideFeatures();
+  const w = f ? window.open(url, 'aeogeo-tool', f) : window.open(url, '_blank');
+  if (!w) showToast('El navegador bloqueó la ventana: permite ventanas emergentes para esta página');
+  return w;
+}
+function openSideBlank(){
+  const w = openSide('about:blank');
+  try { if (w){ w.document.title = 'Preparando…'; w.document.body.innerHTML = '<p style="font:16px sans-serif;padding:24px;color:#494949">Preparando tu documento en Drive…</p>'; } } catch(e){}
+  return w;
+}
+async function copyText(t){
+  try { await navigator.clipboard.writeText(t); return true; } catch(e){}
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  } catch(e){ return false; }
+}
+function driveErrorText(e){ return 'No pude crear el documento en Drive (' + (e && (e.status || e.message)) + '). Intenta de nuevo.'; }
+
+async function runStart(key){
+  const st = getStart(key);
+  if (!st) return;
+  if (!state.starts[key]){ state.starts[key] = new Date().toISOString(); saveState(); }
+  if (st.kind === 'link'){ window.open(st.url, '_blank', 'noopener'); return; }
+  if (st.kind === 'copy'){
+    const ok = await copyText(st.text);
+    showToast(ok ? 'Prompt copiado: pégalo en Claude Code' : 'No pude copiar: ábrelo en "ver el prompt" y cópialo a mano');
+    return;
+  }
+  const existing = state.drive.files[key];
+  if (existing && existing.url){ openSide(existing.url); return; }
+  if (!driveConfigured()){
+    const ok = await copyText(TEMPLATES[st.template].text());
+    openSide(st.kind === 'sheet' ? 'https://sheets.new' : 'https://docs.new');
+    showToast(ok ? 'Estructura copiada: pégala en el documento nuevo (Ctrl+V)' : 'Se abrió un documento nuevo');
+    return;
+  }
+  if (!driveToken()){
+    try { await requestDriveToken(); }
+    catch(e){ showToast('Google no dio permiso: ' + e.message); return; }
+    try { await createStartFile(key, st); refreshStart(key); showToast('Listo: tu documento ya está en Drive. Toca "Abrir" otra vez.'); }
+    catch(e){ showToast(driveErrorText(e)); }
+    return;
+  }
+  const w = openSideBlank();
+  try {
+    const nf = await createStartFile(key, st);
+    if (w && !w.closed) w.location.href = nf.url; else openSide(nf.url);
+    refreshStart(key);
+  } catch(e){
+    if (w && !w.closed) w.close();
+    showToast(e.status === 401 ? 'La sesión con Google venció: toca otra vez' : driveErrorText(e));
+  }
+}
+function startIcon(st){ return { link:'↗', copy:'⧉', doc:'📄', sheet:'📊' }[st.kind] || '→'; }
+function startLabel(key, st){ return state.drive.files[key] ? (st.kind === 'sheet' ? 'Abrir mi hoja' : 'Abrir mi documento') : st.label; }
+function startSub(key, st){
+  if (st.kind === 'link' || st.kind === 'copy') return st.then || '';
+  const f = state.drive.files[key];
+  if (f) return 'En tu Drive: ' + DRIVE_APP_FOLDER + ' / ' + escapeHtml(f.folder) + ' / ' + escapeHtml(f.name);
+  if (driveConfigured()) return 'Se crea en tu Drive (' + DRIVE_APP_FOLDER + ' / ' + escapeHtml(st.folder) + ') ya con la estructura. La primera vez Google te pide permiso.';
+  return 'Mientras conectamos tu Drive: se abre un documento nuevo y la estructura queda copiada para que la pegues (Ctrl+V).';
+}
+function captureHtml(key, st){
+  if (st.capture !== 'questions15') return '';
+  const qs = state.captures.questions15 || [];
+  if (state.drive.files[key]) return `<div class="cap-done">Tus ${qs.length || 15} preguntas ya están en la hoja; si quieres cambiarlas, hazlo allí.</div>`;
+  return `<div class="cap">
+    <label class="cap-l" for="cap-${key}">Tus 15 preguntas fijas, una por línea</label>
+    <textarea id="cap-${key}" class="note-input cap-ta" data-cap="questions15" rows="5" placeholder="¿Qué agencia me ayuda a aparecer en ChatGPT en Perú?&#10;¿Quién hace auditorías de visibilidad en IA en Lima?">${escapeHtml(qs.join('\n'))}</textarea>
+    <div class="cap-row"><span class="cap-count" data-cap-count="questions15">${qs.length}/15</span><button type="button" class="btn-ghost" data-cap-save="questions15">Guardar preguntas</button></div>
+  </div>`;
+}
+function startBoxHtml(key){
+  const st = getStart(key);
+  if (!st) return '';
+  return `<div class="start-box" data-start-box="${key}">
+    <div class="start-h"><span>Empieza aquí</span><button type="button" class="link-btn" data-why-start>por qué</button></div>
+    ${captureHtml(key, st)}
+    <button type="button" class="btn-start" data-start="${key}"><span class="bs-ic" aria-hidden="true">${startIcon(st)}</span><span>${escapeHtml(startLabel(key, st))}</span></button>
+    <div class="start-sub">${startSub(key, st)}</div>
+    ${st.kind === 'copy' ? `<details class="start-prompt"><summary>ver el prompt</summary><p>${escapeHtml(st.text)}</p></details>` : ''}
+  </div>`;
+}
+function startMiniHtml(key){
+  const st = getStart(key);
+  if (!st) return '';
+  return `<button type="button" class="btn-start small" data-start="${key}"><span class="bs-ic" aria-hidden="true">${startIcon(st)}</span><span>Empieza aquí: ${escapeHtml(startLabel(key, st))}</span></button>`;
+}
+function refreshStart(key){
+  document.querySelectorAll('[data-start-box="' + key + '"]').forEach(el => { el.outerHTML = startBoxHtml(key); });
+  document.querySelectorAll('.btn-start.small[data-start="' + key + '"]').forEach(el => { el.outerHTML = startMiniHtml(key); });
+}
+function saveCapture(name){
+  const ta = document.querySelector('[data-cap="' + name + '"]');
+  if (!ta) return;
+  const list = ta.value.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 15);
+  state.captures[name] = list;
+  saveState();
+  showToast(list.length === 15 ? '15 preguntas guardadas' : ('Guardadas ' + list.length + ' de 15. Puedes completar después.'));
+}
+function openWhyStart(opener){
+  openBSheet(`
+    <div class="sh-status">Por qué existe "Empieza aquí"</div>
+    <h2 class="sh-title" id="whyTitle">El paso más difícil suele ser el primero</h2>
+    <ul class="why-list">
+      <li>Decidir de antemano <b>cuándo y cómo</b> harás algo ayuda a cumplirlo ${chipHtml('R01')}, aunque estudios más recientes muestran un efecto más moderado de lo que se creía ${chipHtml('R02')}.</li>
+      <li>Una acción ocurre cuando coinciden motivación, capacidad y un aviso; si falta algo, no ocurre. Por eso el siguiente paso tiene que costar poco: un toque y el documento ya armado ${chipHtml('R03')}.</li>
+      <li>Interrumpirse cuesta: en un experimento, quienes fueron interrumpidos terminaron más rápido, pero con más estrés y frustración ${chipHtml('R04')}. Abrir todo listo evita cortar tu concentración buscando archivos.</li>
+    </ul>
+  `, opener, 'whyTitle');
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-start]');
+  const w = e.target.closest('[data-why-start]');
+  const cs = e.target.closest('[data-cap-save]');
+  if (!b && !w && !cs) return;
+  e.preventDefault();
+  e.stopPropagation();
+  if (b) runStart(b.getAttribute('data-start'));
+  else if (w) openWhyStart(w);
+  else saveCapture(cs.getAttribute('data-cap-save'));
+}, true);
+document.addEventListener('input', e => {
+  const ta = e.target.closest && e.target.closest('[data-cap]');
+  if (!ta) return;
+  const n = ta.value.split('\n').map(x => x.trim()).filter(Boolean).length;
+  const c = document.querySelector('[data-cap-count="' + ta.getAttribute('data-cap') + '"]');
+  if (c) c.textContent = n + '/15';
+});
+// La tarjeta del paso no debe marcarse al tocar dentro del recuadro "Empieza aquí".
+document.addEventListener('click', e => { if (e.target.closest('.start-box')) e.stopPropagation(); }, true);
+
+function driveSectionHtml(){
+  const conf = driveConfigured();
+  const tok = !!driveToken();
+  const nFiles = Object.keys(state.drive.files).length;
+  const status = !conf ? 'Sin configurar' : (tok ? 'Conectado' : (state.drive.connected ? 'Conectado antes · reconecta al usarlo' : 'No conectado'));
+  return `<div class="backup-box drive-box">
+    <div class="bk-head"><span class="lbl forest">Google Drive</span><span class="bk-last">${status}</span></div>
+    ${conf
+      ? `<p class="bk-note">La app solo ve los archivos que ella misma crea (permiso drive.file de Google). Guarda todo en la carpeta "${DRIVE_APP_FOLDER}": muévela una vez a 02 - Proyectos / AEO Consultancy y la seguirá encontrando.</p>`
+      : `<p class="bk-note">Falta un paso único: crear tu llave de Google (unos 15 minutos, te guío). Mientras tanto, "Empieza aquí" abre un documento nuevo y copia la estructura para que la pegues.</p>`}
+    <div class="bk-actions">
+      ${conf && !tok ? '<button type="button" class="btn-ghost" id="drvConnect">Conectar Google Drive</button>' : ''}
+      ${state.drive.appFolderUrl ? `<a class="btn-ghost drv-link" href="${escapeHtml(state.drive.appFolderUrl)}" target="_blank" rel="noopener">Abrir carpeta de la app</a>` : ''}
+    </div>
+    ${nFiles ? `<p class="bk-note" style="margin:12px 0 0;">${nFiles === 1 ? '1 documento creado' : nFiles + ' documentos creados'} desde "Empieza aquí".</p>` : ''}
+  </div>`;
+}
+
 // Siguiente paso del proyecto web para "Hoy": desbloqueado, no opcional, S/ 0 primero.
 function nextWebStep(){
   const tier = s => (s.cost.type === 'free' || s.cost.type === 'included') ? 0 : 1;
@@ -2462,6 +2841,7 @@ function webNowCardHtml(id){
       <div class="now-mission"><b>${m.id} · ${escapeHtml(m.title)}</b></div>
       <div class="now-step-label"><span class="now-step-num">SIGUIENTE PASO · ${id}</span> ${costBadge(s.cost)}</div>
       <h1 class="now-title">${escapeHtml(s.title)}</h1>
+      ${startBoxHtml(id)}
       ${s.body
         ? `<div class="now-what">Qué hacer</div><ol class="now-steps">${s.body.steps.map(x => `<li>${rich(x)}</li>`).join('')}</ol>${s.body.done ? `<div class="now-done"><span class="cl-l">Listo cuando</span><span>${rich(s.body.done)}</span></div>` : ''}`
         : `<div class="now-pending">Las instrucciones de este paso todavía no están cargadas en la vista de prueba (llegan en la Fase 4). Por ahora solo puedes ver su costo, dependencias y fuentes en "ver detalle".</div>`}
@@ -2696,6 +3076,7 @@ function renderDatos(){
     ${safety && safety.state ? `<div class="bk-undo"><button class="link-btn" id="bkUndo">deshacer ${safety.reason === 'reset' ? 'el reinicio' : 'la restauración'} (volver a lo del ${fmtDateTime(safety.savedAt)})</button></div>` : ''}
   </div>`;
 
+  html += driveSectionHtml();
   html += costsSectionHtml();
 
   html += `<div class="sec-h" data-sec="registro"><span>Registro de misiones</span><span class="plus${openSecs.registro?' open':''}">+</span></div>
@@ -2788,6 +3169,10 @@ function wireView(){
     c.onclick = go;
     c.onkeydown = e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } };
   });
+  const drvConnect = document.getElementById('drvConnect');
+  if (drvConnect) drvConnect.onclick = () => {
+    requestDriveToken().then(() => { render(); showToast('Google Drive conectado'); }).catch(e => showToast('No se conectó: ' + e.message));
+  };
   const pvCopy = document.getElementById('pvCopy');
   if (pvCopy) pvCopy.onclick = copyRealProgress;
 
@@ -2857,6 +3242,7 @@ function wireView(){
 // ============================================================
 loadState();
 setTab('hoy');
+if (driveConfigured()) loadGis().catch(() => {});
 
 if ('serviceWorker' in navigator && !IS_PREVIEW){
   window.addEventListener('load', () => {
