@@ -657,6 +657,7 @@ button{font-family:var(--sans);}
 
 .sync-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:var(--col-w,680px);margin:0 auto 14px;padding:9px 14px;border:1px solid var(--forest);background:var(--paper,transparent);font-size:13px;line-height:1.4;}
 .sync-bar .link-btn{white-space:nowrap;font-weight:600;}
+.lbl .ord{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;margin-right:6px;border:1px solid currentColor;border-radius:50%;font-size:9px;letter-spacing:0;vertical-align:1px;}
 .unv-tag{display:inline-block;margin-left:8px;font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:var(--ochre);border:1px dashed var(--ochre);padding:0 5px;line-height:1.7;vertical-align:middle;}
 .unver-box{font-size:12.5px;line-height:1.55;color:var(--body);border-left:2px solid var(--ochre);background:var(--paper-raise);padding:10px 14px;margin:0 0 18px;}
 .unver-box b{color:var(--ochre);}
@@ -2231,7 +2232,7 @@ function linearAltHtml(action){
     ? ('Paso ' + pad2(action.stepIndex + 1) + ' de ' + pad2(steps.length) + ': ' + stripTags(steps[action.stepIndex].title))
     : 'Todos los pasos listos: ciérrala';
   return `<div class="alt-card" data-open-mission="${t.id}" role="button" tabindex="0">
-    <span class="lbl">También en tu plan · Misión ${pad2(idx + 1)}/${TOTAL}${unverTag(t.id)}</span>
+    <span class="lbl"><b class="ord">2</b> Si te queda tiempo · Plan del negocio · Misión ${pad2(idx + 1)}/${TOTAL}${unverTag(t.id)}</span>
     <div class="alt-title">${escapeHtml(t.title)}</div>
     <div class="alt-sub">${escapeHtml(what)}</div>
     ${action.kind === 'step' ? startMiniHtml(t.id + ':' + action.stepIndex) : ''}
@@ -3512,7 +3513,7 @@ function webNowCardHtml(id){
   return `<div class="now-card web-now">
     <div class="now-ghost">${sp.id}</div>
     <div class="now-inner">
-      <div class="now-context"><span class="lbl forest">Proyecto web · ${escapeHtml(sp.title)}</span><span class="lbl">${pr.done}/${pr.total} pasos</span></div>
+      <div class="now-context"><span class="lbl forest"><b class="ord">1</b> Primero · Proyecto web · ${escapeHtml(sp.title)}</span><span class="lbl">${pr.done}/${pr.total} pasos</span></div>
       <div class="now-mission"><b>${m.id} · ${escapeHtml(m.title)}</b></div>
       <div class="now-step-label"><span class="now-step-num">SIGUIENTE PASO · ${id}</span> ${costBadge(s.cost)}</div>
       <h1 class="now-title">${escapeHtml(s.title)}</h1>
