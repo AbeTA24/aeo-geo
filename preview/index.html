@@ -2575,7 +2575,8 @@ ${FAQ_EXAMPLES.map((q, i) => `<h3>Pregunta ${i + 1}: ${q}</h3><p><b>Respuesta co
 };
 
 // --- Google Drive (permiso drive.file: la app solo ve los archivos que ella crea) ---
-const GOOGLE_CLIENT_ID = window.__AEOGEO_TEST_CLIENT_ID__ || '';
+// ID de cliente OAuth (público por diseño; Google solo lo acepta desde https://abeta24.github.io).
+const GOOGLE_CLIENT_ID = ('__AEOGEO_TEST_CLIENT_ID__' in window) ? window.__AEOGEO_TEST_CLIENT_ID__ : '705676941892-rtc3jcopekk5trrd1vi5sk9t10as65d6.apps.googleusercontent.com';
 const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
 const DRIVE_APP_FOLDER = 'Plan AEO-GEO (app)';
 const MIME_FOLDER = 'application/vnd.google-apps.folder';
