@@ -3011,16 +3011,25 @@ function driveUpload(name, parent, targetMime, mediaType, content){
     method: 'POST', headers: { 'Content-Type': 'multipart/related; boundary=' + b }, body,
   });
 }
+// Busca algo que la app ya creó (drive.file solo deja ver esos archivos), para no duplicar
+// entre la vista de prueba, la app real, el celular y la laptop.
+async function driveFind(name, mime, parent){
+  const esc = v => String(v).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  let q = "name = '" + esc(name) + "' and mimeType = '" + mime + "' and trashed = false";
+  if (parent) q += " and '" + esc(parent) + "' in parents";
+  const r = await gapiFetch('https://www.googleapis.com/drive/v3/files?spaces=drive&pageSize=10&fields=files(id,name,webViewLink)&q=' + encodeURIComponent(q), { method: 'GET' });
+  return (r.files && r.files[0]) || null;
+}
 async function ensureFolder(name, retried){
   try {
     if (!state.drive.appFolderId){
-      const r = await driveCreateFolder(DRIVE_APP_FOLDER, null);
+      const r = (await driveFind(DRIVE_APP_FOLDER, MIME_FOLDER, null)) || (await driveCreateFolder(DRIVE_APP_FOLDER, null));
       state.drive.appFolderId = r.id;
       state.drive.appFolderUrl = r.webViewLink || ('https://drive.google.com/drive/folders/' + r.id);
       saveState();
     }
     if (!state.drive.folders[name]){
-      const r = await driveCreateFolder(name, state.drive.appFolderId);
+      const r = (await driveFind(name, MIME_FOLDER, state.drive.appFolderId)) || (await driveCreateFolder(name, state.drive.appFolderId));
       state.drive.folders[name] = r.id;
       saveState();
     }
@@ -3036,7 +3045,8 @@ async function createStartFile(key, st, retried){
   const parent = await ensureFolder(st.folder);
   let f;
   try {
-    f = await driveUpload(st.file, parent, isSheet ? MIME_SHEET : MIME_DOC, isSheet ? 'text/csv' : 'text/html', isSheet ? TEMPLATES[st.template].csv() : TEMPLATES[st.template].html());
+    f = (await driveFind(st.file, isSheet ? MIME_SHEET : MIME_DOC, parent))
+      || (await driveUpload(st.file, parent, isSheet ? MIME_SHEET : MIME_DOC, isSheet ? 'text/csv' : 'text/html', isSheet ? TEMPLATES[st.template].csv() : TEMPLATES[st.template].html()));
   } catch(e){
     if (e.status === 404 && !retried){ state.drive.folders = {}; state.drive.appFolderId = null; return createStartFile(key, st, true); }
     throw e;

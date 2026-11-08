@@ -1,7 +1,7 @@
 // Service worker — AEO–GEO Lab
 // Navegación: network-first (para recibir actualizaciones), fallback a caché (offline).
 // Estáticos y fuentes: cache-first con relleno en segundo plano.
-const CACHE = 'aeogeo-app-v1';
+const CACHE = 'aeogeo-app-v2';
 const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
