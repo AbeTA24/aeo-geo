@@ -656,6 +656,8 @@ button{font-family:var(--sans);}
 .stats-grid.audit .stat-cell + .stat-cell{border-left:1px solid var(--sand) !important;}
 .src-row .src-meta{text-transform:none;letter-spacing:0.02em;font-size:11px;line-height:1.5;}
 
+.sync-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:var(--col-w,680px);margin:0 auto 14px;padding:9px 14px;border:1px solid var(--forest);background:var(--paper,transparent);font-size:13px;line-height:1.4;}
+.sync-bar .link-btn{white-space:nowrap;font-weight:600;}
 .unv-tag{display:inline-block;margin-left:8px;font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:var(--ochre);border:1px dashed var(--ochre);padding:0 5px;line-height:1.7;vertical-align:middle;}
 .unver-box{font-size:12.5px;line-height:1.55;color:var(--body);border-left:2px solid var(--ochre);background:var(--paper-raise);padding:10px 14px;margin:0 0 18px;}
 .unver-box b{color:var(--ochre);}
@@ -1824,7 +1826,11 @@ function loadState(){
     saveState();
   }
 }
-function saveState(){ try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){} }
+function saveState(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
+  if (!syncQuiet && typeof onLocalChange === 'function') onLocalChange();
+}
+let syncQuiet = false;
 function getKey(){ try { return localStorage.getItem(KEY_STORAGE) || ''; } catch(e){ return ''; } }
 function setKey(k){ try { if(k){ localStorage.setItem(KEY_STORAGE, k); } else { localStorage.removeItem(KEY_STORAGE); } } catch(e){} }
 
@@ -2059,6 +2065,7 @@ const COMPLIANCE_TEXT = {
 function cycleCompliance(){
   const i = COMPLIANCE_STATES.indexOf(state.compliance);
   state.compliance = COMPLIANCE_STATES[(i+1) % COMPLIANCE_STATES.length];
+  state.complianceAt = new Date().toISOString();
   saveState();
   if (state.compliance === 'aprobada') showToast('Compliance aprobada — vía libre para publicar y cobrar');
   render();
@@ -2086,7 +2093,7 @@ function render(){
   else if (currentTab === 'plan') body = renderPlan();
   else if (currentTab === 'coach') body = renderCoach();
   else body = renderDatos();
-  v.innerHTML = previewBarHtml() + body;
+  v.innerHTML = previewBarHtml() + syncBarHtml() + body;
   wireView();
 }
 
@@ -3077,6 +3084,220 @@ async function createStartFile(key, st, retried){
   saveState();
   return state.drive.files[key];
 }
+
+// ============================================================
+// SINCRONIZACIÓN entre dispositivos vía tu Google Drive
+// Un archivo JSON en la carpeta de la app guarda tu progreso (nunca la API key).
+// Cada dispositivo lo lee al abrir y lo actualiza al guardar. Si dos dispositivos
+// cambiaron a la vez, se combinan: nada marcado como hecho se pierde.
+// ============================================================
+const SYNC_FILE = IS_PREVIEW ? 'progreso-aeo-geo (prueba).json' : 'progreso-aeo-geo.json';
+const SYNC_META_KEY = IS_PREVIEW ? 'aeogeo_preview_sync' : 'aeogeo_sync';
+const SYNC_SAFETY_KEY = SAFETY_KEY + '_sync';
+const SYNC_FORMAT = 1;
+let syncBusy = false, syncTimer = null, syncErr = null, syncLastTry = 0;
+function syncMeta(){
+  try { return Object.assign({ fileId:null, rev:null, dirty:false, at:null, device:null }, JSON.parse(localStorage.getItem(SYNC_META_KEY) || '{}')); }
+  catch(e){ return { fileId:null, rev:null, dirty:false, at:null, device:null }; }
+}
+function setSyncMeta(patch){ try { localStorage.setItem(SYNC_META_KEY, JSON.stringify(Object.assign(syncMeta(), patch))); } catch(e){} }
+function syncEnabled(){ return driveConfigured() && !!state.drive.connected; }
+function deviceName(){
+  const m = syncMeta();
+  if (m.device) return m.device;
+  const d = (/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent) ? 'celular' : 'compu') + '-' + Math.random().toString(36).slice(2, 6);
+  setSyncMeta({ device: d });
+  return d;
+}
+function onLocalChange(){
+  if (!syncEnabled()) return;
+  setSyncMeta({ dirty: true });
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => { if (driveToken()) syncNow(); else render(); }, 4000);
+}
+// Combina dos progresos sin perder nada marcado como hecho.
+function mergeStates(a, b, aNewer){
+  const isObj = v => v && typeof v === 'object' && !Array.isArray(v);
+  const A = a || {}, B = b || {}, N = aNewer ? A : B, O = aNewer ? B : A;
+  const out = Object.assign({}, O, N);
+  const byTs = (x, y) => { if (!x) return y; if (!y) return x; return String((y && y.ts) || '') > String((x && x.ts) || '') ? y : x; };
+  const unionBy = (k, pick) => { const r = Object.assign({}, (O[k] || {})); Object.entries(N[k] || {}).forEach(([id, v]) => { r[id] = (id in r) ? pick(r[id], v) : v; }); out[k] = r; };
+  unionBy('completed', byTs);
+  out.stepProgress = {};
+  new Set([...Object.keys(A.stepProgress || {}), ...Object.keys(B.stepProgress || {})]).forEach(t => {
+    const r = {}; [A, B].forEach(s => Object.entries((s.stepProgress || {})[t] || {}).forEach(([i, v]) => { if (v) r[i] = true; }));
+    out.stepProgress[t] = r;
+  });
+  unionBy('webSteps', (x, y) => (isObj(x) && isObj(y)) ? byTs(x, y) : (x || y));
+  unionBy('webMissions', (x, y) => (isObj(x) && isObj(y)) ? byTs(x, y) : (x || y));
+  unionBy('captures', (x, y) => (isObj(x) && isObj(y)) ? byTs(x, y) : y);
+  unionBy('starts', (x, y) => (isObj(x) && isObj(y)) ? byTs(x, y) : y);
+  unionBy('chats', (x, y) => (Array.isArray(y) && (!Array.isArray(x) || y.length >= x.length)) ? y : x);
+  unionBy('activityLog', (x, y) => Math.max(x || 0, y || 0));
+  out.seenInsights = [...new Set([...(A.seenInsights || []), ...(B.seenInsights || [])])];
+  out.bestStreak = Math.max(A.bestStreak || 0, B.bestStreak || 0);
+  // Racha y protectores: del dispositivo con actividad más reciente; si el otro
+  // estuvo activo el día anterior (o el mismo día), la racha continúa.
+  const nA = String(A.lastActiveDay || ''), nB = String(B.lastActiveDay || '');
+  const act = nA >= nB ? A : B, oth = act === A ? B : A;
+  out.lastActiveDay = act.lastActiveDay || null;
+  out.freezes = act.freezes || 0;
+  out.streak = act.streak || 0;
+  if (act.lastActiveDay && oth.lastActiveDay){
+    const gap = daysBetween(oth.lastActiveDay, act.lastActiveDay);
+    if (gap === 0) out.streak = Math.max(act.streak || 0, oth.streak || 0);
+    else if (gap === 1) out.streak = Math.max(act.streak || 0, (oth.streak || 0) + 1);
+  }
+  out.bestStreak = Math.max(out.bestStreak, out.streak);
+  // Compliance: el cambio más reciente; si no hay fecha, el estado más avanzado.
+  const ca = A.complianceAt || '', cb = B.complianceAt || '';
+  if (ca || cb) { const w = ca >= cb ? A : B; out.compliance = w.compliance; out.complianceAt = w.complianceAt; }
+  else out.compliance = COMPLIANCE_STATES.indexOf(A.compliance) >= COMPLIANCE_STATES.indexOf(B.compliance) ? A.compliance : B.compliance;
+  out.lastBackupAt = [A.lastBackupAt, B.lastBackupAt].filter(Boolean).sort().pop() || null;
+  out.migratedV2 = true;
+  // Drive: une carpetas y documentos creados desde cualquier dispositivo.
+  const da = A.drive || {}, db = B.drive || {};
+  out.drive = Object.assign({}, db, da, {
+    connected: !!(da.connected || db.connected),
+    appFolderId: da.appFolderId || db.appFolderId || null,
+    appFolderUrl: da.appFolderUrl || db.appFolderUrl || null,
+    folders: Object.assign({}, db.folders || {}, da.folders || {}),
+    files: Object.assign({}, db.files || {}, da.files || {}),
+  });
+  return out;
+}
+function sameProgress(x, y){
+  const k = s => JSON.stringify([s.completed, s.stepProgress, s.webSteps, s.webMissions, s.compliance, s.streak, s.captures, s.chats]);
+  return k(x) === k(y);
+}
+async function ensureAppFolder(){
+  if (state.drive.appFolderId){
+    try { await gapiFetch('https://www.googleapis.com/drive/v3/files/' + state.drive.appFolderId + '?fields=id,trashed', { method:'GET' }); return state.drive.appFolderId; }
+    catch(e){ if (e.status !== 404) throw e; state.drive.appFolderId = null; state.drive.appFolderUrl = null; state.drive.folders = {}; }
+  }
+  const r = (await driveFind(DRIVE_APP_FOLDER, MIME_FOLDER, null)) || (await driveCreateFolder(DRIVE_APP_FOLDER, null));
+  state.drive.appFolderId = r.id;
+  state.drive.appFolderUrl = r.webViewLink || ('https://drive.google.com/drive/folders/' + r.id);
+  return r.id;
+}
+async function driveReadJson(id){
+  const r = await fetch('https://www.googleapis.com/drive/v3/files/' + id + '?alt=media', { headers: { Authorization: 'Bearer ' + driveToken() } });
+  if (!r.ok){ if (r.status === 401){ try { sessionStorage.removeItem(TOKEN_KEY); } catch(e){} } const e = new Error('Drive respondió ' + r.status); e.status = r.status; throw e; }
+  return r.json();
+}
+function syncPayload(rev){
+  return JSON.stringify({ app: BACKUP_APP, format: SYNC_FORMAT, rev, savedAt: new Date().toISOString(), device: deviceName(), state });
+}
+async function driveWriteJson(id, parent, content){
+  if (id){
+    return gapiFetch('https://www.googleapis.com/upload/drive/v3/files/' + id + '?uploadType=media&fields=id', {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json; charset=UTF-8' }, body: content,
+    });
+  }
+  return driveUpload(SYNC_FILE, parent, 'application/json', 'application/json', content);
+}
+async function syncNow(manual){
+  if (!syncEnabled() || syncBusy) return;
+  if (!driveToken()){ render(); return; }
+  syncBusy = true; syncErr = null; syncLastTry = Date.now();
+  try {
+    const parent = await ensureAppFolder();
+    const meta = syncMeta();
+    let fileId = meta.fileId, remote = null;
+    if (fileId){
+      try { remote = await driveReadJson(fileId); } catch(e){ if (e.status === 404) fileId = null; else throw e; }
+    }
+    if (!fileId){
+      const f = await driveFind(SYNC_FILE, 'application/json', parent);
+      if (f){ fileId = f.id; remote = await driveReadJson(fileId); }
+    }
+    let rev, changed = false, merged = false;
+    const remoteOk = remote && remote.app === BACKUP_APP && remote.state && typeof remote.state.completed === 'object';
+    if (!remoteOk){
+      rev = 1;
+    } else if (remote.rev === meta.rev){
+      rev = meta.dirty ? remote.rev + 1 : null;          // nadie más cambió: subo lo mío si hay cambios
+    } else if (!meta.dirty && meta.rev !== null){
+      // Otro dispositivo avanzó y aquí no hubo cambios: tomo su versión.
+      if (!sameProgress(state, remote.state)){ saveSyncSafety(); changed = true; }
+      const keepDrive = state.drive;
+      syncQuiet = true; replaceState(remote.state); state.drive = mergeStates({ drive: keepDrive }, { drive: state.drive }, false).drive; saveState(); syncQuiet = false;
+      rev = null; setSyncMeta({ rev: remote.rev });
+    } else {
+      // Cambios en los dos lados (o primera vez en este dispositivo): combino.
+      const next = mergeStates(state, remote.state, !!meta.dirty);
+      if (!sameProgress(state, next)){ saveSyncSafety(); changed = true; }
+      merged = !sameProgress(remote.state, next);
+      syncQuiet = true; replaceState(next); syncQuiet = false;
+      rev = remote.rev + 1;
+    }
+    if (rev !== null){
+      const f = await driveWriteJson(fileId, parent, syncPayload(rev));
+      fileId = fileId || f.id;
+    }
+    setSyncMeta({ fileId, rev: rev !== null ? rev : (remoteOk ? remote.rev : meta.rev), dirty: false, at: new Date().toISOString() });
+    syncQuiet = true; saveState(); syncQuiet = false;
+    if (changed) showToast(merged ? 'Progreso combinado con tu otro dispositivo' : 'Progreso actualizado desde tu otro dispositivo');
+    else if (manual) showToast('Sincronizado');
+  } catch(e){
+    syncErr = e.status === 401 ? null : (e.message || 'error');
+    if (manual && syncErr) showToast('No se sincronizó: ' + syncErr);
+  } finally {
+    syncBusy = false;
+    render();
+  }
+}
+function saveSyncSafety(){
+  try { localStorage.setItem(SYNC_SAFETY_KEY, JSON.stringify({ savedAt: new Date().toISOString(), state })); } catch(e){}
+}
+function getSyncSafety(){ try { return JSON.parse(localStorage.getItem(SYNC_SAFETY_KEY) || 'null'); } catch(e){ return null; } }
+function undoLastSync(){
+  const c = getSyncSafety(); if (!c || !c.state) return;
+  if (!confirm('¿Volver a como estaba este dispositivo el ' + fmtDateTime(c.savedAt) + ', antes de sincronizar?\n' + progressSummary(c.state) + '\n\nSe subirá esa versión a Drive para tus otros dispositivos.')) return;
+  replaceState(c.state);
+  try { localStorage.removeItem(SYNC_SAFETY_KEY); } catch(e){}
+  setSyncMeta({ dirty: true });
+  render();
+  if (driveToken()) syncNow(true);
+}
+// Tocar "Sincronizar": pide permiso a Google solo si hace falta (Google exige un toque).
+function syncTap(){
+  if (driveToken()){ syncNow(true); return; }
+  requestDriveToken().then(() => syncNow(true)).catch(e => showToast('No se conectó: ' + e.message));
+}
+function syncStatusText(){
+  const m = syncMeta();
+  if (syncBusy) return 'Sincronizando…';
+  if (!driveToken()) return m.dirty ? 'Cambios sin sincronizar' : 'Toca para sincronizar';
+  if (syncErr) return 'No se pudo sincronizar';
+  if (m.dirty) return 'Cambios por subir…';
+  return m.at ? 'Sincronizado · ' + new Date(m.at).toLocaleTimeString('es-PE', { hour:'2-digit', minute:'2-digit' }) : 'Listo para sincronizar';
+}
+// Barra arriba: solo aparece cuando hace falta un toque.
+function syncBarHtml(){
+  if (!syncEnabled() || syncBusy) return '';
+  const need = !driveToken() || syncErr;
+  if (!need) return '';
+  const m = syncMeta();
+  const msg = syncErr ? 'No se pudo sincronizar con Drive' : (m.dirty ? 'Tienes cambios sin sincronizar' : 'Sincroniza para ver lo que hiciste en tu otro dispositivo');
+  return `<div class="sync-bar"><span>☁ ${msg}</span><button type="button" class="link-btn" data-sync-tap>${syncErr ? 'Reintentar' : 'Sincronizar'}</button></div>`;
+}
+function syncSectionHtml(){
+  if (!driveConfigured()) return '';
+  const m = syncMeta(), safety = getSyncSafety();
+  return `<div class="backup-box sync-box">
+    <div class="bk-head"><span class="lbl forest">Sincronizar dispositivos</span><span class="bk-last">${syncEnabled() ? syncStatusText() : 'Apagada'}</span></div>
+    <p class="bk-note">${syncEnabled()
+      ? 'Tu progreso se guarda en el archivo "' + SYNC_FILE + '" de tu carpeta "' + DRIVE_APP_FOLDER + '". Cada dispositivo lo lee al abrir la app y lo actualiza cuando avanzas. Google pide un toque para dar permiso cada vez que abres la app (dura una hora). La API key no se sube.'
+      : 'Conecta Google Drive (abajo) para que el celular y la compu compartan tu progreso.'}</p>
+    ${syncEnabled() ? '<div class="bk-actions"><button type="button" class="btn-ghost" data-sync-tap>Sincronizar ahora</button></div>' : ''}
+    ${safety && safety.state ? `<div class="bk-undo"><button class="link-btn" id="syncUndo">deshacer la última sincronización (volver a lo del ${fmtDateTime(safety.savedAt)})</button></div>` : ''}
+  </div>`;
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && syncEnabled() && driveToken() && Date.now() - syncLastTry > 30000) syncNow();
+});
+
 // En la laptop, el documento se abre en una ventana a la derecha de la app; en el celular, en una pestaña o en la app de Google.
 function sideFeatures(){
   if (window.innerWidth < 900 || !window.screen) return null;
@@ -3549,7 +3770,7 @@ function renderDatos(){
       <span class="lbl forest">Respaldo de tu progreso</span>
       <span class="bk-last">${state.lastBackupAt ? 'Último: ' + fmtDateTime(state.lastBackupAt) : 'Aún sin respaldo'}</span>
     </div>
-    <p class="bk-note">Tu progreso vive solo en este dispositivo. Descarga un archivo y guárdalo fuera del celular (Drive o correo). No incluye tu API key. En iPhone, hazlo desde la app instalada: guarda sus datos aparte de Safari.</p>
+    <p class="bk-note">${syncEnabled() ? 'Además de sincronizar, guarda un respaldo de vez en cuando.' : 'Tu progreso vive solo en este dispositivo.'} Descarga un archivo y guárdalo fuera del celular (Drive o correo). No incluye tu API key. En iPhone, hazlo desde la app instalada: guarda sus datos aparte de Safari.</p>
     <div class="bk-actions">
       <button class="btn-ghost" id="bkExport">Descargar respaldo</button>
       ${canShareFiles() ? '<button class="btn-ghost" id="bkShare">Enviar a…</button>' : ''}
@@ -3559,6 +3780,7 @@ function renderDatos(){
     ${safety && safety.state ? `<div class="bk-undo"><button class="link-btn" id="bkUndo">deshacer ${safety.reason === 'reset' ? 'el reinicio' : 'la restauración'} (volver a lo del ${fmtDateTime(safety.savedAt)})</button></div>` : ''}
   </div>`;
 
+  html += syncSectionHtml();
   html += driveSectionHtml();
   html += costsSectionHtml();
   html += sourcesAuditHtml();
@@ -3656,8 +3878,11 @@ function wireView(){
   });
   const drvConnect = document.getElementById('drvConnect');
   if (drvConnect) drvConnect.onclick = () => {
-    requestDriveToken().then(() => { render(); showToast('Google Drive conectado'); }).catch(e => showToast('No se conectó: ' + e.message));
+    requestDriveToken().then(() => { render(); showToast('Google Drive conectado'); syncNow(); }).catch(e => showToast('No se conectó: ' + e.message));
   };
+  document.querySelectorAll('[data-sync-tap]').forEach(b => { b.onclick = syncTap; });
+  const syncUndo = document.getElementById('syncUndo');
+  if (syncUndo) syncUndo.onclick = undoLastSync;
   const pvCopy = document.getElementById('pvCopy');
   if (pvCopy) pvCopy.onclick = copyRealProgress;
 
@@ -3728,6 +3953,7 @@ function wireView(){
 loadState();
 setTab('hoy');
 if (driveConfigured()) loadGis().catch(() => {});
+if (syncEnabled() && driveToken()) setTimeout(() => syncNow(), 400);
 
 if ('serviceWorker' in navigator && !IS_PREVIEW){
   window.addEventListener('load', () => {
