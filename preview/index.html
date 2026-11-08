@@ -603,6 +603,14 @@ button{font-family:var(--sans);}
 .alt-title{font-size:14px;font-weight:500;color:var(--ink);margin:5px 0 2px;line-height:1.4;}
 .alt-sub{font-size:12.5px;color:var(--muted);line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
 .web-now .now-step-label{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.now-what{font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:var(--forest);margin:4px 0 8px;}
+.now-steps{margin:0 0 14px;padding-left:20px;}
+.now-steps li{font-size:14px;color:var(--ink);line-height:1.6;margin-bottom:7px;}
+.now-steps li b{color:var(--forest);font-weight:600;}
+.now-steps code{background:var(--sand);padding:1px 5px;font-size:0.88em;color:var(--forest);}
+.now-done{display:grid;grid-template-columns:96px 1fr;gap:10px;font-size:13px;line-height:1.55;color:var(--body);padding:10px 0;border-top:1px solid var(--line);margin-bottom:16px;}
+.now-pending{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.5;color:var(--muted);border:1px dashed var(--sand);padding:12px 14px;margin:2px 0 18px;}
+@media(min-width:900px){ .preview-bar{max-width:640px;} }
 
 .map-legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 14px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
 .map-legend .lg{display:inline-flex;align-items:center;gap:6px;}
@@ -2454,6 +2462,9 @@ function webNowCardHtml(id){
       <div class="now-mission"><b>${m.id} · ${escapeHtml(m.title)}</b></div>
       <div class="now-step-label"><span class="now-step-num">SIGUIENTE PASO · ${id}</span> ${costBadge(s.cost)}</div>
       <h1 class="now-title">${escapeHtml(s.title)}</h1>
+      ${s.body
+        ? `<div class="now-what">Qué hacer</div><ol class="now-steps">${s.body.steps.map(x => `<li>${rich(x)}</li>`).join('')}</ol>${s.body.done ? `<div class="now-done"><span class="cl-l">Listo cuando</span><span>${rich(s.body.done)}</span></div>` : ''}`
+        : `<div class="now-pending">Las instrucciones de este paso todavía no están cargadas en la vista de prueba (llegan en la Fase 4). Por ahora solo puedes ver su costo, dependencias y fuentes en "ver detalle".</div>`}
       <button class="btn-main" data-act="web-done" data-id="${id}">${isPaidStep(s) ? 'Paso hecho (registrar pago)' : 'Paso hecho'}</button>
       <div class="now-foot"><button class="link-btn" data-act="web-open" data-id="${id}">ver detalle y fuentes</button><button class="link-btn" data-act="web-map">mapa</button></div>
     </div>
