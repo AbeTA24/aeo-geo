@@ -646,6 +646,11 @@ button{font-family:var(--sans);}
 .ci-m{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);line-height:1.8;}
 .ci-m .req-link{min-height:26px;padding:0 6px;font-size:9.5px;margin-left:2px;}
 
+.drop-tag{display:inline-block;font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;font-style:normal;color:var(--rust);border:1px solid var(--rust);padding:0 6px;margin-right:4px;vertical-align:middle;line-height:1.7;}
+.lin-lock{font-size:12px;color:var(--rust);margin-top:8px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
+.lin-lock .req-link{min-height:32px;}
+.comp-mini .crit-tag,.comp-full .crit-tag{font-size:8.5px;margin-left:8px;}
+
 /* EMPIEZA AQUÍ */
 .start-box{border:1px solid var(--forest);border-left-width:3px;background:var(--paper-raise);padding:13px 15px 14px;margin:6px 0 18px;}
 .start-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;}
@@ -770,7 +775,7 @@ NEGOCIO: agencia BOUTIQUE "productizada" de consultoría AEO/GEO (Answer/Generat
 
 POSICIONAMIENTO (clave del análisis de mercado): el mercado AEO/GEO está bifurcado en (1) plataformas SaaS de medición muy financiadas — Profound levantó US$155M, valuación US$1B; AthenaHQ (Y Combinator); Goodie; Otterly; Rankscale; Scrunch; Peec — y (2) agencias de servicios — First Page Sage (~US$20.8M ingresos, bootstrapped, sin capital de riesgo). Abraham se para en la capa de SERVICIOS, NO de software (construir SaaS exige capital VC que no tiene ni quiere). Modelo a EMULAR: First Page Sage — bootstrapped, rentable, construido sobre autoridad de contenido (su propio blog rankea tan alto que los LLMs lo citan), sin tecnología propia. En vez de construir herramienta, REVENDE una barata: Otterly.AI (~US$29/mes, tiene programa de partners para agencias) o Rankscale (~US$20/mes).
 
-QUÉ FUNCIONA DE VERDAD (lo más validado, en orden): (a) contenido answer-first y estructurado — respuesta directa arriba, párrafos cortos, jerarquía de headings, listas, tablas, definiciones explícitas, datos con fuente citada; (b) autoridad de marca y citas de terceros / Digital PR — aparecer en listas/rankings que posicionan bien, reviews en G2/Clutch/Capterra/Trustpilot, menciones en publicaciones autoritativas; (c) presencia auténtica en Reddit/Quora/foros del sector (los LLMs entrenan con contenido de comunidad). SOBREVALORADO — no perder tiempo aquí: llms.txt (ningún LLM mayor confirma usarlo; John Mueller de Google dijo explícitamente que Google NO lo usa) y schema markup como "driver directo de citas" (schema sigue sirviendo para SEO clásico/rich results, que alimentan AI Overviews indirectamente, así que se incluye como higiene SEO, pero NO es la palanca principal de citas de IA). Gran parte de lo que las agencias venden como "GEO técnico" tiene impacto cuestionable; vender humo técnico quema credibilidad.
+QUÉ FUNCIONA DE VERDAD (lo más validado, en orden): (a) contenido answer-first y estructurado — respuesta directa arriba, párrafos cortos, jerarquía de headings, listas, tablas, definiciones explícitas, datos con fuente citada; (b) autoridad de marca y citas de terceros / Digital PR — aparecer en listas/rankings que posicionan bien, reviews en G2/Clutch/Capterra/Trustpilot, menciones en publicaciones autoritativas; (c) presencia auténtica en Reddit/Quora/foros del sector (los LLMs entrenan con contenido de comunidad). SOBREVALORADO — no perder tiempo aquí: llms.txt (DESCARTADO: no se implementa ni se recomienda a clientes; John Mueller de Google lo comparó con la etiqueta meta keywords y un estudio de Ahrefs de junio de 2026 encontró que el 97% de los archivos llms.txt no recibe solicitudes) y schema markup como "driver directo de citas" (schema sigue sirviendo para SEO clásico/rich results, que alimentan AI Overviews indirectamente, así que se incluye como higiene SEO, pero NO es la palanca principal de citas de IA). Gran parte de lo que las agencias venden como "GEO técnico" tiene impacto cuestionable; vender humo técnico quema credibilidad.
 
 MEDICIÓN / ROI (obstáculo #1 de la industria, aún más agudo en LatAm): las plataformas de IA NO muestran tráfico referido de forma confiable. Hasta 90% de las fuentes citadas pueden cambiar con el tiempo y cada modelo usa fuentes distintas (investigación de Profound). NO prometer tráfico de "último clic"; prometer y reportar MÉTRICAS DE PRESENCIA: citation rate (tasa de citación), share of answer (cuánto apareces vs competidores), prompt visibility. El argumento de venta más fuerte NO son las estadísticas de mercado (varían 4x entre fuentes de market research de segundo nivel, sesgadas) sino la DEMOSTRACIÓN: "le pregunté a ChatGPT/Perplexity exactamente lo que preguntan tus clientes; acá están los screenshots; no apareces, tu competidor sí".
 
@@ -778,7 +783,9 @@ PRICING (referencia LatAm): auditoría/diagnóstico US$300-800 (gancho, puede se
 
 CLIENTES IDEALES (por claridad de ROI): (1) EXPORTADORES / empresas B2B que venden a clientes GLOBALES — los compradores internacionales usan ChatGPT para investigar proveedores = caso de ROI más claro y el mejor primer cliente; (2) SaaS y fintech (digital-first, presupuesto de marketing); (3) servicios profesionales de alto ticket (estudios legales, clínicas, consultoras); (4) ecommerce con catálogo. Perfil: digital-first, 10-100 empleados, ya invierte en marketing, decisor que sigue tendencias tech. NO microemprendimientos sin presupuesto (el concepto les es muy abstracto), NO corporaciones gigantes inalcanzables.
 
-COMPLIANCE (CRÍTICO): el Código de Ética de Credicorp aplica 24/7. Debe DECLARAR la actividad externa a la Unidad de Cumplimiento ANTES de cobrarle al primer cliente. EVITAR clientes regulados por SBS/SMV: bancos, financieras, cajas, cooperativas, fintech de crédito/factoring/lending, casas de cambio, AFP, seguros, SAB. Fintech solo si es NO crediticia y validada caso por caso. Por esto, para verticalizar, la EXPORTACIÓN AGRO es el terreno más limpio para Abraham (terreno abierto Y sin riesgo de compliance), mientras que fintech, aunque atractiva, exige cuidado.
+COMPLIANCE (CRÍTICO): el Código de Ética de Credicorp aplica 24/7. Debe DECLARAR la actividad externa a la Unidad de Cumplimiento ANTES de compartir o publicar su web (una web pública ofreciendo servicios ya es una actividad visible; criterio, no política pública) y en todo caso antes de cobrarle al primer cliente.
+
+WEB PROPIA (decisión): TuFuente.ai se construye con Claude Code + Astro y se publica en Cloudflare (Workers), tratándose como su propio cliente; Framer quedó descartado. El paso a paso vive en la app como "Proyecto web" (subproyectos S1 a S10), con todo lo gratis antes de cualquier gasto y una compuerta antes de comprar el dominio. EVITAR clientes regulados por SBS/SMV: bancos, financieras, cajas, cooperativas, fintech de crédito/factoring/lending, casas de cambio, AFP, seguros, SAB. Fintech solo si es NO crediticia y validada caso por caso. Por esto, para verticalizar, la EXPORTACIÓN AGRO es el terreno más limpio para Abraham (terreno abierto Y sin riesgo de compliance), mientras que fintech, aunque atractiva, exige cuidado.
 
 COMPETENCIA LATAM: ya hay ~una decena de agencias hispanas en GEO/AEO (AMD —se dice "pionera y líder LatAm", Colombia/Ecuador/Perú/Panamá—, Agencia Eleven, ESBUENISIMO LABS —Chile, linkbuilding+PR—, Ranker Studio, SEO Secreto —México—, SemanticPunch —Chile, prefiere "GSO"—, Postedin —"primera agencia AEO en español"—, Conversion —Brasil—). El mercado se está abriendo pero NO está saturado; el "first mover" puro ya no existe. CUIDADO METODOLÓGICO: casi toda la info competitiva viene de listicles "Top 10 agencias GEO" auto-promocionales (cada artículo pone #1 al que lo patrocina/publica) — investiga con escepticismo, verifica con búsquedas reales. "GEO genérico" tiene vida útil de ~12-18 meses antes de volverse commodity (como SEO 2015-2020) → la defensa es VERTICALIZAR (dominar un sector). TRIGGER competitivo: si 2+ competidores (AMD, Ranker Studio, ESBUENISIMO…) lanzan paquetes GEO dirigidos a Perú, adelantar la verticalización aunque no se hayan cumplido los benchmarks de calendario.
 
@@ -855,7 +862,7 @@ const TASKS = [
       { title:'Prioriza lo MÁS validado: <b>contenido answer-first y estructurado</b> — respuesta directa arriba, párrafos cortos, jerarquía clara de headings, listas, tablas, definiciones explícitas y datos con fuente citada.', detail:'Es lo que los LLMs extraen y citan con mayor consistencia. Si solo dominaras una cosa, que sea esta: es el pilar #1 y el más replicable.' },
       { title:'Segundo pilar: <b>autoridad de marca y citas de terceros (Digital PR)</b> — aparecer en listas/rankings que posicionan bien, reviews en G2/Clutch/Capterra/Trustpilot, menciones en publicaciones autoritativas.', detail:'Los LLMs confían en lo que MUCHAS fuentes externas dicen de una marca, no solo en lo que la marca dice de sí misma. Construir esa autoridad externa es trabajo de relaciones y contenido, no de código.' },
       { title:'Tercer pilar: <b>presencia auténtica en Reddit, Quora y foros</b> del sector del cliente.', detail:'Los modelos entrenan con contenido de comunidad; una participación genuina (aportar valor, no spamear) puede traducirse en citas. Es de bajo costo y alto valor.' },
-      { title:'SOBREVALORADO — no pierdas tiempo aquí: <code>llms.txt</code> (ningún LLM mayor confirma usarlo; John Mueller de Google dijo explícitamente que Google NO lo usa: "tu tiempo se aprovecha mejor en otra parte") y el <b>schema markup como "driver directo de citas"</b>.', detail:'Schema sí sirve para SEO clásico y rich results (que alimentan AI Overviews indirectamente), así que lo incluyes como higiene técnica — pero NO lo vendas como la palanca principal de citas de IA. Vender humo técnico te quema la credibilidad que tanto cuesta construir.' },
+      { title:'<span class="drop-tag">descartado</span> <code>llms.txt</code>: no lo implementes ni lo recomiendes. John Mueller (Google) lo comparó con la etiqueta <i>meta keywords</i>: es lo que el dueño del sitio dice de sí mismo [[F38]]. Un análisis de Ahrefs sobre 137 mil sitios encontró que el 97% de esos archivos no recibió ninguna solicitud en un mes [[L01]]. Sobrevalorado también: el <b>schema markup como "driver directo de citas"</b>.', detail:'Schema sí sirve para SEO clásico y rich results (que alimentan AI Overviews indirectamente), así que lo incluyes como higiene técnica — pero NO lo vendas como la palanca principal de citas de IA. Vender humo técnico te quema la credibilidad que tanto cuesta construir.' },
     ],
     tip:'La mayoría de tu competencia vende "GEO técnico" que no mueve la aguja. Que tu oferta se ancle en contenido citable + autoridad + presencia comunitaria es, por sí solo, un diferenciador frente a casi todos.',
   },
@@ -878,7 +885,7 @@ const TASKS = [
     minutes:90, tag:'Posicionamiento',
     tutorial:[
       { title:'Escribe tu oferta en UNA frase sin jerga: <i>"Ayudo a [exportadores / SaaS / servicios profesionales] de LatAm a aparecer cuando sus clientes le preguntan a ChatGPT, Perplexity o Gemini qué proveedor elegir."</i>', detail:'Si necesita explicación, no está lista: tiene que entenderse en 5 segundos por alguien que nunca oyó hablar de AEO/GEO.' },
-      { title:'Construye tu web con <b>Claude Code + Astro</b>, publicada en <b>Cloudflare</b>, con un <b>blog</b> desde el inicio: trátate como tu propio cliente. El blog sigue siendo tu motor auto-reforzante, al estilo de First Page Sage.', detail:'Decisión tomada: Framer quedó descartado porque lo sentiste genérico. Construir tu web tú mismo es tu mejor demostración: un consultor de visibilidad en IA que es invisible en IA no tiene credibilidad. El paso a paso (cuentas seguras, diseño, construcción, prueba gratis y dominio) está en tu plan detallado y llega a la app como "Proyecto web" en la próxima actualización. No marques este paso todavía: márcalo cuando tu web esté publicada con tu dominio.' },
+      { title:'Construye tu web con <b>Claude Code + Astro</b>, publicada en <b>Cloudflare</b>, con un <b>blog</b> desde el inicio: trátate como tu propio cliente. El blog sigue siendo tu motor auto-reforzante, al estilo de First Page Sage.', detail:'Decisión tomada: Framer quedó descartado porque lo sentiste genérico. Construir tu web tú mismo es tu mejor demostración: un consultor de visibilidad en IA que es invisible en IA no tiene credibilidad. El paso a paso completo está en <b>Plan → Proyecto web</b> (S1 a S7). Este paso se marca solo cuando conectes tu dominio (S7.2).' },
       { title:'Aplica answer-first a tu propio sitio: FAQ en formato pregunta-respuesta, definiciones claras, datos con fuente. (Higiene de schema sí, pero sin obsesionarte — no es el driver principal.)', detail:'Practicas en tu propio sitio exactamente lo que vendes. Esto refuerza tu "entidad" y te vuelve tu propio primer caso de éxito.' },
       { title:'Actualiza <b>LinkedIn</b> con Credicorp como autoridad: <i>"Product Owner @ Credicorp Capital · Consultor de visibilidad con IA (AEO/GEO) para SaaS y exportadores de LatAm"</i>. Publica 2-3 veces/semana, sin rostro, basado en datos propios.', detail:'El rol en banca privada da autoridad instantánea y te diferencia de un freelancer genérico. La coherencia LinkedIn↔landing↔blog refuerza tu entidad ante prospectos que te investigan.' },
     ],
@@ -1092,7 +1099,7 @@ const GLOSSARY = [
     { n:'03', t:'Presencia en Reddit/Quora/foros', d:'Los LLMs entrenan con contenido de comunidad. Participación auténtica (no spam) = citas. Bajo costo, alto valor.' },
   ]},
   { label:'Lo que está SOBREVALORADO (no pierdas tiempo)', items:[
-    { n:'✕', neg:true, t:'llms.txt', d:'Ningún LLM mayor confirma usarlo; John Mueller de Google dijo explícitamente que Google <b>NO</b> lo usa. "Tu tiempo se aprovecha mejor en otra parte."' },
+    { n:'✕', neg:true, t:'llms.txt (descartado)', d:'No se implementa ni se recomienda a clientes. John Mueller (Google) lo comparó con la etiqueta meta keywords [[F38]]. Ahrefs: el 97% de los archivos llms.txt no recibió ninguna solicitud en un mes, sobre 137 mil sitios [[L01]]. Gary Illyes (Google) dijo que Google no lo usa [[L02]], aunque la guía de Google varía según el producto [[L03]].' },
     { n:'✕', neg:true, t:'Schema como "driver de citas"', d:'Sirve para SEO clásico/rich results (que alimentan AI Overviews indirectamente), así que se incluye como higiene — pero NO es la palanca directa de citas de IA. No lo vendas como protagonista.' },
   ]},
   { label:'Métricas que puedes medir y prometer', items:[
@@ -1337,7 +1344,7 @@ const SOURCES = {
   F35:{ claim:'RUC persona natural online', site:'SUNAT', status:'ok', url:'https://orientacion.sunat.gob.pe/1097-0-inscribete-en-el-ruc' },
   F36:{ claim:'Búsqueda fonética gratis en INDECOPI', site:'INDECOPI', status:'nuance', note:'Solo se leyó el título de la nota; la página no se dejó abrir.', url:'https://www.indecopi.gob.pe/-/realiza-la-busqueda-fonetica-para-registrar-tu-marca-gratis-y-en-4-simples-pasos' },
   F37:{ claim:'Costo de registrar una marca', site:'gob.pe', status:'none', note:'La página no fue accesible.', url:'https://www.gob.pe/institucion/indecopi/noticias/665850-emprendedor-conoce-cuanto-cuesta-registrar-tu-marca-en-indecopi' },
-  F38:{ claim:'Mueller compara llms.txt con la meta keywords', site:'Search Engine Journal', status:'nuance', note:'Fuente secundaria.', url:'https://www.searchenginejournal.com/google-says-llms-txt-comparable-to-keywords-meta-tag/544804/' },
+  F38:{ claim:'Mueller compara llms.txt con la etiqueta meta keywords: "lo que el dueño del sitio dice"', site:'Search Engine Journal', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria: reporta la frase de Mueller. La frase "tu tiempo se aprovecha mejor en otra parte" que tenía la app no aparece en ninguna fuente y se quitó.', url:'https://www.searchenginejournal.com/google-says-llms-txt-comparable-to-keywords-meta-tag/544804/' },
   F39:{ claim:'Peticiones a archivos estáticos en Workers: gratis e ilimitadas', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/' },
   F40:{ claim:'Workers gratis: 100 mil peticiones/día; pagado desde US$5/mes', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/workers/platform/pricing/' },
   F41:{ claim:'GitHub gratis: repos privados ilimitados y Dependabot alerts', site:'GitHub Docs', status:'ok', url:'https://docs.github.com/en/get-started/learning-about-github/githubs-plans' },
@@ -1345,6 +1352,9 @@ const SOURCES = {
   F43:{ claim:'Turnstile exige validación en servidor', site:'Cloudflare', status:'ok', url:'https://developers.cloudflare.com/turnstile/get-started/server-side-validation/' },
   F44:{ claim:'Libro de Reclamaciones aplica a proveedores con RUC', site:'BDO', status:'nuance', note:'Fuente secundaria (BDO).', url:'https://pe-www.bdo.global/getattachment/Publicaciones/Business-Services-Outsourcing/Alerta-Legal/Alerta-Legal-INDECOPI-supervisa-implementacion-del/BDO-Peru_Alerta-Legal-13-12-2021.pdf.aspx?lang=es-PE' },
   F45:{ claim:'PageSpeed Insights (herramienta de Google)', site:'Google', status:'nuance', note:'Existe; su gratuidad no se verificó explícitamente.', url:'https://developers.google.com/speed/docs/insights/v5/about' },
+  L01:{ claim:'97% de los archivos llms.txt no recibió ninguna solicitud en mayo de 2026 (137.210 sitios)', site:'Ahrefs', status:'ok', verifiedAt:'2026-11-08', note:'Mide solo el archivo índice y sitios que usan Ahrefs Web Analytics (más técnicos que el promedio).', url:'https://ahrefs.com/blog/llmstxt-study/' },
+  L02:{ claim:'Gary Illyes (Google): Google no usa llms.txt para sus funciones de IA', site:'Search Engine Land', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria que reporta lo dicho en un evento de Google (2025).', url:'https://searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422' },
+  L03:{ claim:'La guía de Google sobre llms.txt varía según el producto', site:'Search Engine Journal', status:'nuance', verifiedAt:'2026-11-08', note:'Por ejemplo, Lighthouse lo revisa como opcional en una categoría experimental.', url:'https://www.searchenginejournal.com/googles-llms-txt-guidance-depends-on-which-product-you-ask/575431/' },
   R01:{ claim:'Planes "si pasa X, hago Y": efecto medio-grande en el logro de metas (d = 0,65; 94 pruebas)', site:'Gollwitzer y Sheeran, 2006', status:'nuance', verifiedAt:'2026-11-08', note:'Meta-análisis en Advances in Experimental Social Psychology, vol. 38. Enlace a una ficha bibliográfica; los datos coinciden en varias fuentes, pero no pude abrir la página de la revista.', url:'https://stafforini.com/works/gollwitzer-2006-implementation-intentions-and/' },
   R02:{ claim:'Actualización con 642 pruebas: el efecto sigue, pero es más moderado al corregir sesgos', site:'Sheeran, Listrom y Gollwitzer, 2024', status:'nuance', verifiedAt:'2026-11-08', note:'Tomado de una fuente secundaria; el estudio original se revisa en la Fase 4.', url:'https://goalsandprogress.com/implementation-intentions-research/' },
   R03:{ claim:'Una conducta ocurre cuando coinciden motivación, capacidad y un aviso (B=MAP)', site:'BJ Fogg', status:'ok', verifiedAt:'2026-11-08', url:'https://behaviormodel.org/' },
@@ -1356,6 +1366,17 @@ const SOURCES = {
   'Q-IMG':  { claim:'Costo de tu generador de imágenes', site:'Sin fuente', status:'none', url:null },
   'Q-LEGAL':{ claim:'Costo de una revisión legal de textos', site:'Sin fuente', status:'none', url:null },
   'Q-SEND': { claim:'Proveedores y precio para enviar correo desde tu dominio', site:'Sin fuente', status:'none', url:null },
+  'Q-VOL':      { claim:'Volatilidad de las respuestas de IA (investigación de tu Misión 05)', site:'Sin fuente', status:'none', note:'No re-verificada aquí.', url:null },
+  'Q-WEBP':     { claim:'Cuánto pesa WebP frente a PNG', site:'Sin fuente', status:'none', url:null },
+  'Q-ASTROCOLL':{ claim:'Colecciones de contenido de Astro', site:'Sin fuente', status:'none', url:null },
+  'Q-HEADERS':  { claim:'Valores recomendados de cada cabecera de seguridad', site:'Sin fuente', status:'none', url:null },
+  'Q-DEPBOT':   { claim:'Dependabot security updates en repos privados del plan gratis', site:'Sin fuente', status:'none', url:null },
+  'Q-BUILDS':   { claim:'Límites de Workers Builds en el plan gratis', site:'Sin fuente', status:'none', url:null },
+  'Q-CUSTOMDOM':{ claim:'Dominio personalizado en Workers', site:'Sin fuente', status:'none', url:null },
+  'Q-SITEMAP':  { claim:'Sitemap automático en Astro', site:'Sin fuente', status:'none', url:null },
+  'Q-SCHEMA':   { claim:'Organization y Person en schema.org', site:'Sin fuente', status:'none', url:null },
+  'Q-GA4':      { claim:'Documentación de Google Analytics 4', site:'Sin fuente', status:'none', url:null },
+  'Q-BOTS':     { claim:'Documentación oficial de los bots de OpenAI y Anthropic', site:'Sin fuente', status:'none', url:null },
   'Q-OTTRL':{ claim:'Duración de la prueba gratis de Otterly', site:'Sin fuente', status:'none', url:null },
 };
 const SOURCES_CHECKED = { by:'plan v2', at:'2026-11-07', pending:true };
@@ -1375,6 +1396,271 @@ const COST_TABLE = [
   { concept:'RUC', amount:'Sin costo mencionado', mandatory:'Para facturar', when:'S8', step:'S8.1', sources:['F35'], status:'nuance' },
   { concept:'Inscripción de banco de datos', amount:'US$0', mandatory:'Sí, cuando guardes contactos organizados', when:'S8', step:'S8.4', sources:['F15'], status:'ok' },
 ];
+
+// Contenido completo de cada paso (plan v2), "Empieza aquí" incluido.
+// Se fusiona sobre WEB_STEPS. Las etiquetas {{criterio}} marcan recomendaciones, no datos.
+const WEB_CONTENT = {
+  'S1.1': { start:{ kind:`doc`, label:`Abrir el borrador del correo a Compliance`, template:`compliance`, file:`S1.1 · Correo a Compliance`, folder:`Web · S1 Base segura` },
+    body:{ steps:[
+      `Busca en la intranet o el código de conducta la sección de "actividades externas" o "conflictos de interés".`,
+      `Identifica a quién se declara (Compliance o tu jefe directo, según el documento).`,
+      `Escribe un correo de 4-5 líneas: qué es TuFuente.ai, que es fuera del horario laboral, que no atenderás entidades financieras reguladas y que publicarás una web.`,
+      `Pide respuesta por escrito y guárdala en una carpeta "Compliance".`,
+    ], why:`Una web pública ofreciendo servicios ya es una actividad externa visible. {{criterio}}`,
+       extra:`<b>Mientras esperas:</b> sigue con S2 a S5, que son locales y nadie las ve.`,
+       done:`Tienes la respuesta escrita.` } },
+  'S1.2': { start:{ kind:`link`, label:`Buscar una app autenticadora en Play Store`, url:`https://play.google.com/store/search?q=authenticator&c=apps`, then:`Instala Google Authenticator o Microsoft Authenticator en tu celular.` },
+    body:{ steps:[
+      `Instala en el celular una app autenticadora (Google Authenticator o Microsoft Authenticator) desde la Play Store.`,
+      `Usa un gestor de contraseñas (el de Chrome sirve para empezar) para todas las cuentas del proyecto.`,
+      `Crea una nota segura "Códigos de recuperación TuFuente".`,
+    ], done:`La app está instalada y la nota creada.` } },
+  'S1.4': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`Crea la cuenta (o entra) y busca en tu perfil la autenticación de dos factores.` },
+    body:{ steps:[
+      `Entra a dash.cloudflare.com y crea una cuenta.`,
+      `Busca en tu perfil la autenticación de dos factores y actívala con tu app [[Q-CF2FA]].`,
+      `Guarda los códigos de respaldo.`,
+    ], why:`Cloudflare va a manejar tu hosting, y luego tu dominio, DNS y correo. Es la cuenta más crítica. {{criterio}}`,
+       done:`Cloudflare te pide el código al iniciar sesión.` } },
+  'S2.1': { start:{ kind:`copy`, label:`Copiar el comando`, text:`git --version`, then:`Tecla Windows → escribe <code>PowerShell</code> → Enter, pega el comando y presiona Enter.` },
+    body:{ steps:[
+      `Tecla Windows → escribe <code>PowerShell</code> → Enter.`,
+      `Escribe <code>git --version</code> → Enter [[F07]].`,
+      `Si sale una versión, listo. Si no reconoce el comando, instala Git for Windows desde git-scm.com y repite. {{criterio}}`,
+    ], done:`Ves <code>git version 2.xx</code>.` } },
+  'S2.2': { start:{ kind:`link`, label:`Abrir nodejs.org (descarga LTS)`, url:`https://nodejs.org/`, then:`Descarga la versión <b>LTS</b> para Windows (<code>.msi</code>).` },
+    body:{ steps:[
+      `Entra a nodejs.org → descarga la versión <b>LTS</b> para Windows (<code>.msi</code>) [[F08]].`,
+      `Siguiente → Siguiente → Instalar, con opciones por defecto.`,
+      `<b>Cierra y vuelve a abrir</b> PowerShell.`,
+      `Escribe <code>node -v</code> → Enter.`,
+      `Confirma que sea <b>22.23.4 o mayor, y par</b> (22, 24, 26...). Astro no soporta versiones impares [[F09]].`,
+    ], done:`<code>node -v</code> muestra una versión par ≥ 22.23.4.` } },
+  'S2.3': { start:{ kind:`copy`, label:`Copiar el nombre de la carpeta`, text:`tufuente-web`, then:`Explorador de archivos → Documentos → crea <code>Proyectos</code> y dentro una carpeta con este nombre.` },
+    body:{ steps:[ `Explorador de archivos → Documentos → crea <code>Proyectos\\tufuente-web</code>.` ], done:`La carpeta existe.` } },
+  'S2.4': { start:{ kind:`copy`, label:`Copiar el primer mensaje para Claude Code`, text:`Confírmame que ves esta carpeta y que Node y Git están instalados.`, then:`App de Claude → pestaña <b>Code</b> → carpeta <code>tufuente-web</code> → modo <b>Plan</b> → pega.` },
+    body:{ steps:[
+      `App de Claude → pestaña <b>Code</b> [[F07]].`,
+      `Debajo de la caja de texto, selector de <b>carpeta del proyecto</b> → <code>tufuente-web</code>.`,
+      `Selector de modo → <b>Plan</b>.`,
+      `Escribe: "Confírmame que ves esta carpeta y que Node y Git están instalados."`,
+    ], extra:`<b>Ojo:</b> el modo Plan y las tareas grandes consumen más uso de tu plan. Si te topas con el límite, divide las tareas en partes más chicas. {{criterio}}`,
+       done:`Claude responde con las versiones.` } },
+  'S3.1': { start:{ kind:`copy`, label:`Copiar el prompt de DataForSEO (solo ruta con datos)`, text:`Conecta el MCP remoto de DataForSEO; ayúdame a generar el token Base64 sin guardar las credenciales en el proyecto.`, then:`Solo si eliges la ruta con datos. Si eliges la ruta gratis, marca este paso como hecho y sigue.` },
+    body:{ steps:[
+      `<b>Ruta gratis</b> (recomendada para empezar): sin volúmenes de búsqueda. Tu web tiene pocas páginas (home, 3 servicios, metodología, sobre mí, contacto, blog), así que el volumen importa menos que en una web local con 20 distritos. {{criterio}}`,
+      `<b>Ruta con datos (pago por uso):</b> crea cuenta en app.dataforseo.com/register. Hay botón de prueba gratis; cuántos créditos da: [[Q-DFS]]`,
+      `Copia tu <b>API login</b> y <b>API password</b> desde app.dataforseo.com/api-access.`,
+      `En Claude Code: "Conecta el MCP remoto de DataForSEO; ayúdame a generar el token Base64 sin guardar las credenciales en el proyecto." [[F10]]`,
+      `Revisa y aprueba el comando <code>claude mcp add ... https://mcp.dataforseo.com/http</code>.`,
+    ], done:`Elegiste ruta (y, si es la de datos, Claude te devuelve un volumen real de prueba).` } },
+  'S3.3': { body:{ steps:[
+      `Ábrelo en Excel. Revisa que cada página tenga una keyword con sentido.`,
+      `Los volúmenes de cualquier herramienta son estimaciones [[F20]].`,
+      `Ajusta y guarda.`,
+    ], done:`Estás de acuerdo con la lista.` } },
+  'S4.1': { start:{ kind:`link`, label:`Abrir Dribbble`, url:`https://dribbble.com/`, then:`Busca "consulting website" o "agency landing" y guarda 3-5 capturas.` },
+    body:{ steps:[
+      `dribbble.com → busca "consulting website" o "agency landing" → guarda 3-5 capturas [[F20]].`,
+      `21st.dev → guarda 2-3 componentes que te gusten.`,
+      `Ponlos en una carpeta <code>inspiracion</code> dentro del proyecto.`,
+    ], done:`Tienes 5-8 referencias.` } },
+  'S4.2': { start:{ kind:`copy`, label:`Copiar el prompt de la guía de marca`, text:`Con las referencias de inspiracion, propón 2 direcciones visuales (colores, tipografías, tono). Pregúntame lo que necesites.`, then:`Pégalo en Claude Code y, al elegir, pídele que la guarde en <code>marca.md</code>.` },
+    body:{ steps:[
+      `En Claude Code: "Con las referencias de <code>inspiracion</code>, propón 2 direcciones visuales (colores, tipografías, tono). Pregúntame lo que necesites." [[F20]]`,
+      `Elige una → pídele que la guarde en <code>marca.md</code>.`,
+    ], extra:`Los prompts de Nico están en su comunidad; no los revisé. {{criterio}}`,
+       done:`Existe <code>marca.md</code>.` } },
+  'S4.3': { start:{ kind:`copy`, label:`Copiar el prompt de estilo de imágenes`, text:`Escríbeme un envoltorio de prompt para imágenes: cámara, lente, luz, colores fijos, y un espacio [ESCENA]. Guárdalo en estilo-imagenes.md.`, then:`Pégalo en Claude Code; luego prueba 2 escenas en tu generador.` },
+    body:{ steps:[
+      `En Claude Code: "Escríbeme un envoltorio de prompt para imágenes: cámara, lente, luz, colores fijos, y un espacio [ESCENA]. Guárdalo en <code>estilo-imagenes.md</code>." [[F20]]`,
+      `Prueba con 2 escenas en tu generador.`,
+      `Ajusta hasta que te guste.`,
+    ], extra:`<b>Alternativa gratis:</b> usa fotos propias tomadas con tu celular o tu DJI, con el mismo criterio de luz y encuadre. {{criterio}}`,
+       done:`Tienes 2 imágenes coherentes.` } },
+  'S5.1': { start:{ kind:`copy`, label:`Copiar el prompt para crear el proyecto`, text:`Crea un proyecto Astro en esta carpeta con npm create astro@latest, plantilla mínima, TypeScript. Explícame cada pregunta del instalador.`, then:`Claude Code en modo <b>Plan</b> → pega → aprueba → <b>Accept edits</b>.` },
+    body:{ steps:[
+      `Modo <b>Plan</b>: "Crea un proyecto Astro en esta carpeta con <code>npm create astro@latest</code>, plantilla mínima, TypeScript. Explícame cada pregunta del instalador." [[F09]]`,
+      `Aprueba → <b>Accept edits</b> (te pedirá permiso para comandos; acepta los que entiendas o pregunta).`,
+      `"Levanta el servidor local y dame el link."`,
+      `Ábrelo en Chrome (en el video era <code>localhost:4321</code>) [[F20]].`,
+    ], done:`Ves la página de bienvenida de Astro.` } },
+  'S5.2': { start:{ kind:`copy`, label:`Copiar el prompt de la home`, then:`Claude Code en modo <b>Plan</b> → pega. Cambia el número de WhatsApp antes de aprobar.`,
+      text:`Construye la home siguiendo arquitectura.csv, marca.md y la regla de los 2 segundos. Frase principal: 'Cuando tu cliente ideal le pregunta a ChatGPT o Perplexity dónde comprar o a quién contratar, hoy aparece tu competencia — te ayudo a que aparezcas tú.' Botones de contacto: WhatsApp (https://wa.me/51XXXXXXXXX) y correo (mailto:). Contenido answer-first. No inventes testimonios, logos de clientes ni cifras.` },
+    body:{ steps:[
+      `Modo <b>Plan</b>: pega el prompt de "Empieza aquí" [[F20]].`,
+      `Aprueba → <b>Accept edits</b>.`,
+      `Pide cambios hasta que te guste.`,
+      `Revisa el celular: Chrome → F12 → ícono de teléfono.`,
+    ], why:`Un formulario con anti-spam exige un servidor que valide cada envío [[F43]] y una forma de mandarte los mensajes. Eso pasó a S10 como opcional. Los botones de WhatsApp y correo no necesitan nada de eso.`,
+       extra:`<b>Ojo:</b> el botón de correo funcionará recién cuando hola@tufuente.ai exista (S7.3). Mientras tanto, usa tu Gmail o solo WhatsApp.`,
+       done:`La home te gusta en computadora y celular.` } },
+  'S5.3': { start:{ kind:`copy`, label:`Copiar el prompt del resto de páginas`, text:`Usa la home como plantilla de estilo y construye servicios (uno por página), metodología, sobre mí y contacto, según arquitectura.csv. En metodología, explica con honestidad que las métricas de IA son volátiles y cómo mido; cita las fuentes que uses.`, then:`Pégalo en Claude Code y revisa cada página en computadora y celular.` },
+    body:{ steps:[
+      `"Usa la home como plantilla de estilo y construye servicios (uno por página), metodología, sobre mí y contacto, según <code>arquitectura.csv</code>."`,
+      `En <b>metodología</b>, pide que explique con honestidad que las métricas de IA son volátiles y cómo mides [[Q-VOL]].`,
+      `Revisa cada página en computadora y celular.`,
+    ], done:`Todas las páginas del CSV existen.` } },
+  'S5.4': { start:{ kind:`copy`, label:`Copiar el prompt de imágenes`, text:`Conviértelas a WebP, ubícalas y escribe un alt natural para cada una.`, then:`Arrastra tus imágenes a Claude Code y pega el prompt.` },
+    body:{ steps:[
+      `Genera o toma las imágenes.`,
+      `Arrástralas a Claude Code: "Conviértelas a WebP, ubícalas y escribe un alt natural para cada una." [[F20]]`,
+    ], extra:`Cuánto pesa WebP frente a PNG: [[Q-WEBP]]`,
+       done:`No hay PNG pesados y todas tienen alt.` } },
+  'S5.5': { start:{ kind:`copy`, label:`Copiar el prompt del blog`, text:`Crea el blog con una colección de contenido de Astro, plantilla de post con título, fecha, autor e imagen. Luego crea un post de ejemplo.`, then:`Pégalo en Claude Code.` },
+    body:{ steps:[
+      `"Crea el blog con una colección de contenido de Astro, plantilla de post con título, fecha, autor e imagen." [[Q-ASTROCOLL]]`,
+      `Pide un post de ejemplo.`,
+    ], done:`<code>/blog</code> y un post de ejemplo se ven bien.` } },
+  'S5.6': { start:{ kind:`copy`, label:`Copiar el prompt de seguridad y repositorio`, then:`Pégalo en Claude Code. Al final, activa Dependabot en GitHub (paso 3).`,
+      text:`Crea public/_headers con cabeceras de seguridad para todo el sitio (/*): X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security y una Content-Security-Policy. Explícame cada una en una línea. Después inicializa Git, crea un .gitignore que excluya node_modules, .env y secretos, revisa que no haya claves en los archivos, y ayúdame a crear un repositorio privado tufuente-web en GitHub y subir el código.` },
+    body:{ steps:[
+      `"Crea <code>public/_headers</code> con cabeceras de seguridad para todo el sitio (<code>/*</code>): X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security y una Content-Security-Policy. Explícame cada una en una línea." [[F22]] Valores exactos de cada cabecera: [[Q-HEADERS]]`,
+      `"Inicializa Git, crea un <code>.gitignore</code> que excluya <code>node_modules</code>, <code>.env</code> y secretos, revisa que no haya claves en los archivos, y ayúdame a crear un repositorio <b>privado</b> <code>tufuente-web</code> en GitHub y subir el código." [[F41]]`,
+      `En GitHub: repositorio → <b>Settings → Advanced Security → Dependabot security updates → Enable</b> [[F23]].`,
+    ], extra:`El plan gratis incluye "Dependabot alerts" [[F41]]; que incluya también las "security updates" en repos privados no lo dice explícito [[Q-DEPBOT]].`,
+       done:`El código está en GitHub, privado, con Dependabot activo.` } },
+  'S6.1': { start:{ kind:`copy`, label:`Copiar el prompt de despliegue`, text:`Instala Wrangler como dependencia de desarrollo y crea wrangler.jsonc para un sitio Astro estático que sirva dist, con 404 propia (not_found_handling: 404-page). Fecha de compatibilidad: hoy. Luego corre npx astro build && npx wrangler dev y dame el link de vista previa local.`, then:`Pégalo en Claude Code.` },
+    body:{ steps:[
+      `"Instala Wrangler como dependencia de desarrollo y crea <code>wrangler.jsonc</code> para un sitio Astro estático que sirva <code>dist</code>, con 404 propia (<code>not_found_handling: 404-page</code>). Fecha de compatibilidad: hoy." [[F24]]`,
+      `"Corre <code>npx astro build && npx wrangler dev</code> y dame el link de vista previa local."`,
+    ], why:`Cloudflare recomienda Workers para proyectos nuevos, y las peticiones a archivos estáticos son gratis e ilimitadas en todos los planes [[F39]].`,
+       done:`La vista previa local funciona.` } },
+  'S6.3': { body:{ steps:[
+      `Si compliance aún no responde, <b>no compartas el link</b> con nadie. {{criterio}}`,
+      `Si respondió que sí, puedes mostrárselo a 2-3 personas de confianza para que te den feedback.`,
+    ], done:`Decidiste según la respuesta de compliance.` } },
+  'S6.4': { start:{ kind:`link`, label:`Abrir PageSpeed Insights`, url:`https://pagespeed.web.dev/`, then:`Pega tu link <code>workers.dev</code> y analiza. Después repite en gtmetrix.com.` },
+    body:{ steps:[
+      `Analiza el link <code>workers.dev</code> en <b>PageSpeed Insights</b> (de Google) [[F45]] y en gtmetrix.com.`,
+      `Meta del video: carga completa en menos de 2,5 segundos [[F20]]. Es la meta del video, no de una fuente técnica.`,
+      `Si sale lento, pásale los reportes a Claude Code.`,
+    ], done:`Carga rápido en ambas.` } },
+  'S6.5': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`<b>Compute → Workers & Pages → Create application → Import a repository</b>.` },
+    body:{ steps:[
+      `Cloudflare → <b>Compute → Workers & Pages → Create application → Import a repository</b> → <code>tufuente-web</code> [[F24]].`,
+      `Build: <code>npx astro build</code> · Deploy: <code>npx wrangler deploy</code> → <b>Save and Deploy</b>.`,
+    ], extra:`Si Workers Builds tiene límites en el plan gratis: [[Q-BUILDS]]`,
+       done:`Un cambio subido a GitHub aparece en la web.` } },
+  'S7.2': { start:{ kind:`copy`, label:`Copiar el prompt del dominio`, text:`Conecta el Worker a tufuente.ai como dominio personalizado. Cita la documentación de Cloudflare que uses.`, then:`Pégalo en Claude Code; después abre https://tufuente.ai.` },
+    body:{ steps:[
+      `"Conecta el Worker a tufuente.ai como dominio personalizado. Cita la documentación de Cloudflare que uses." [[Q-CUSTOMDOM]]`,
+      `Espera unos minutos y abre https://tufuente.ai.`,
+    ], done:`https://tufuente.ai muestra tu web con candado.` } },
+  'S7.3': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`<b>Compute → Email Service → Email Routing</b>.` },
+    body:{ steps:[
+      `Cloudflare → <b>Compute → Email Service → Email Routing</b> → activa tu dominio (agrega solo MX, SPF y DKIM) [[F04]].`,
+      `<b>Destination Addresses</b> → agrega tu Gmail → verifícalo.`,
+      `Tu dominio → <b>Routing Rules</b> → <b>Create routing rule</b> → <code>hola</code> → <b>Send to an email</b> → tu Gmail → <b>Save</b>.`,
+      `Prueba desde otra cuenta (revisa Spam).`,
+    ], extra:`<b>Ojo:</b> solo <b>recibe y reenvía</b>. Para <b>enviar</b> desde hola@tufuente.ai necesitas un proveedor (S10.2).`,
+       done:`El correo de prueba llegó.` } },
+  'S7.4': { start:{ kind:`copy`, label:`Copiar el prompt de DMARC`, text:`Ayúdame a crear en el DNS de Cloudflare un registro TXT en _dmarc.tufuente.ai con p=none y un correo para reportes. Explícame cada parte.`, then:`Pégalo en Claude Code, o crea el registro tú en el panel de DNS.` },
+    body:{ steps:[
+      `Cloudflare → DNS → confirma que existen SPF y DKIM [[F05]].`,
+      `Pide a Claude Code (o hazlo en el panel) un TXT en <code>_dmarc.tufuente.ai</code> con <code>p=none</code> y un correo para reportes.`,
+      `En 2-4 semanas, si todo pasa bien, sube a <code>p=quarantine</code> y luego a <code>p=reject</code> [[F06]]. El plazo de 2-4 semanas: {{criterio}}`,
+      `Opcional: activa <b>DMARC Management</b> [[F05]].`,
+    ], done:`El registro <code>_dmarc</code> existe.` } },
+  'S7.5': { start:{ kind:`link`, label:`Abrir Search Console`, url:`https://search.google.com/search-console`, then:`<b>Agregar propiedad</b> → <b>Dominio</b> → <code>tufuente.ai</code>.` },
+    body:{ steps:[
+      `search.google.com/search-console → <b>Agregar propiedad</b> → <b>Dominio</b> → <code>tufuente.ai</code> [[F25]].`,
+      `Si ofrece verificación automática con tu proveedor, úsala. Si no: <b>TXT</b> → copia el texto.`,
+      `Cloudflare → DNS → TXT con nombre <code>@</code> y ese valor.`,
+      `<b>Verificar</b> (puede tardar hasta 3 días).`,
+      `<b>Nunca borres ese TXT.</b>`,
+    ], done:`La propiedad aparece verificada.` } },
+  'S7.6': { start:{ kind:`link`, label:`Abrir Bing Webmaster Tools`, url:`https://www.bing.com/webmasters`, then:`<b>My Sites → Import</b> → inicia sesión con Google.` },
+    body:{ steps:[
+      `bing.com/webmasters → <b>My Sites → Import</b> → inicia sesión con Google y autoriza [[F26]].`,
+      `Selecciona tufuente.ai → <b>Import</b> (se verifica solo).`,
+    ], why:`ChatGPT Search se apoya en el índice de Bing como pilar importante [[F28]], aunque hoy combina también el rastreo propio de OpenAI [[F27]].`,
+       done:`tufuente.ai aparece en Bing Webmaster Tools.` } },
+  'S7.7': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`Tu dominio → página <b>Configuration</b> (caché) → <b>Crawler Hints</b>.` },
+    body:{ steps:[ `Cloudflare → tu dominio → página <b>Configuration</b> (caché) → activa <b>Crawler Hints</b> [[F30]].` ],
+       why:`Crawler Hints avisa a los buscadores cuando cambias algo, gratis y con un clic [[F29]].`,
+       done:`Está activado.` } },
+  'S7.8': { start:{ kind:`copy`, label:`Copiar el prompt de robots y sitemap`, then:`Pégalo en Claude Code. Después envía el sitemap en Search Console y en Bing.`,
+      text:`Crea public/robots.txt que permita a todos los buscadores, permita explícitamente OAI-SearchBot, Claude-SearchBot y PerplexityBot, deje permitidos GPTBot y ClaudeBot (explícame la diferencia) e incluya el sitemap. Agrega también un sitemap automático al proyecto Astro. Cita la documentación oficial de cada bot.` },
+    body:{ steps:[
+      `"Crea <code>public/robots.txt</code> que permita a todos los buscadores, permita explícitamente <code>OAI-SearchBot</code>, <code>Claude-SearchBot</code> y <code>PerplexityBot</code>, deje permitidos <code>GPTBot</code> y <code>ClaudeBot</code> (explícame la diferencia) e incluya el sitemap." [[F31]] [[F32]] [[Q-BOTS]]`,
+      `"Agrega un sitemap automático al proyecto Astro." [[Q-SITEMAP]]`,
+      `Envía la URL del sitemap en Search Console y en Bing Webmaster Tools.`,
+    ], extra:`<b>Ojo:</b> <b>ClaudeBot es de entrenamiento</b>; el de búsqueda es <b>Claude-SearchBot</b>.`,
+       done:`Ambos muestran el sitemap como leído.` } },
+  'S8.1': { start:{ kind:`link`, label:`Abrir la guía de SUNAT para el RUC`, url:`https://orientacion.sunat.gob.pe/1097-0-inscribete-en-el-ruc`, then:`Sigue el trámite con la <b>APP Personas</b> de SUNAT.` },
+    body:{ steps:[
+      `Instala la <b>APP Personas</b> de SUNAT [[F35]].`,
+      `DNI → inscripción en el RUC → motivo → verificación de huella (RENIEC).`,
+      `Genera tu <b>Clave SOL</b> en el mismo trámite.`,
+      `Elige régimen tributario <b>con un contador</b>. {{criterio}}`,
+    ], done:`Tienes RUC y Clave SOL.` } },
+  'S8.2': { start:{ kind:`copy`, label:`Copiar el prompt de la política de privacidad`, text:`Escribe un borrador de política de privacidad: quién soy, qué datos recibo (por WhatsApp o correo), para qué, cuánto tiempo los guardo y cómo pedir que los borren. Publícala en /privacidad y enlázala en el pie de página.`, then:`Pégalo en Claude Code. Antes de publicarla, que la revise un abogado.` },
+    body:{ steps:[
+      `"Escribe un borrador de política de privacidad: quién soy, qué datos recibo (por WhatsApp o correo), para qué, cuánto tiempo los guardo y cómo pedir que los borren. Publícala en <code>/privacidad</code> y enlázala en el pie de página." [[F14]]`,
+      `Hazla revisar por un abogado o servicio legal antes de publicarla. {{criterio}}`,
+    ], done:`<code>/privacidad</code> está publicada.` } },
+  'S8.3': { start:{ kind:`link`, label:`Abrir la herramienta de INDECOPI`, url:`https://www.gob.pe/institucion/indecopi/noticias/1296574-los-emprendedores-ya-pueden-generar-su-libro-de-reclamaciones-de-manera-rapida-y-sencilla-sin-costo-alguno`, then:`Ten a mano tu RUC (S8.1).` },
+    body:{ steps:[
+      `Usa la herramienta gratuita "Tu Libro de Reclamaciones" de INDECOPI [[F21]].`,
+      `Créalo con tus datos y RUC [[F44]].`,
+      `Pon el aviso y el link en el pie de página de todas las páginas.`,
+    ], why:`Si solo atiendes empresas, no aplica [[F18]]; pero basta un cliente persona natural consumidor final, y una web informativa también puede obligar [[F19]]. Como apuntas a pymes, conviene tenerlo. {{criterio}}`,
+       done:`El link aparece en tu web.` } },
+  'S8.4': { start:{ kind:`link`, label:`Abrir el trámite en gob.pe`, url:`https://www.gob.pe/8060-inscribir-banco-de-datos-en-el-registro-nacional-de-proteccion-de-datos-personales`, then:`Descarga el formulario: nombre "Contactos TuFuente".` },
+    body:{ steps:[
+      `gob.pe → "Inscribir banco de datos en el Registro Nacional de Protección de Datos Personales" [[F15]].`,
+      `Descarga el formulario. Nombre: "Contactos TuFuente". Finalidad: responder consultas comerciales. Datos: nombre, correo, teléfono, mensaje.`,
+      `Fírmalo y súbelo online.`,
+      `Guarda la constancia y el código.`,
+    ], why:`Datos de personas guardados de forma organizada (aunque sea en un Excel) son un banco de datos que debe inscribirse [[F16]]. Es gratis [[F15]]. Hubo una multa de 6.5 UIT por no hacerlo [[F17]].`,
+       done:`Tienes la constancia.` } },
+  'S9.1': { start:{ kind:`link`, label:`Abrir LinkedIn`, url:`https://www.linkedin.com/`, then:`Menú <b>Para negocios</b> → crea una página de empresa "TuFuente.ai".` },
+    body:{ steps:[ `Crea la página "TuFuente.ai" con el mismo nombre, descripción y logo de la web.` ], done:`La página existe.` } },
+  'S9.2': { start:{ kind:`copy`, label:`Copiar el prompt de datos estructurados`, text:`Agrega JSON-LD Organization (nombre, URL, logo, descripción, sameAs con LinkedIn) en todas las páginas, y Person para mí como autor del blog.`, then:`Pégalo en Claude Code; después prueba en search.google.com/test/rich-results.` },
+    body:{ steps:[
+      `"Agrega JSON-LD <code>Organization</code> (nombre, URL, logo, descripción, <code>sameAs</code> con LinkedIn) en todas las páginas, y <code>Person</code> para mí como autor del blog." [[Q-SCHEMA]]`,
+      `Prueba en search.google.com/test/rich-results.`,
+    ], why:`Es soporte técnico correcto, no la palanca principal para que te citen (Misión 04).`,
+       done:`La prueba no muestra errores.` } },
+  'S9.3': { start:{ kind:`copy`, label:`Copiar el prompt del aviso de cookies`, text:`Agrega un aviso de cookies con Aceptar y Rechazar igual de visibles, y que Google Analytics no cargue hasta que la persona acepte.`, then:`Pégalo en Claude Code. Después crea la propiedad en analytics.google.com.` },
+    body:{ steps:[
+      `"Agrega un aviso de cookies con <b>Aceptar</b> y <b>Rechazar</b> igual de visibles, y que Google Analytics no cargue hasta que la persona acepte." [[F14]]`,
+      `Crea cuenta y propiedad en analytics.google.com → flujo web con tufuente.ai → copia la etiqueta [[F20]] [[Q-GA4]].`,
+      `"Instala esta etiqueta respetando el aviso de cookies, y mide clics en WhatsApp y correo." Ajusta la Content-Security-Policy de S5.6 si hace falta.`,
+      `Instala <b>Tag Assistant</b> en Chrome y confirma que funciona.`,
+    ], why:`El reglamento trata los identificadores en línea como datos personales; por eso el aviso va antes de cargar Analytics [[F14]].`,
+       done:`Sin aceptar, Analytics no carga; aceptando, Tag Assistant lo detecta.` } },
+  'S9.4': { body:{ steps:[
+      `Decide: ¿vas a reunirte en persona con clientes en Lima en horarios definidos?`,
+      `<b>Sí:</b> créalo como negocio con área de servicio, ocultando tu dirección [[F33]].`,
+      `<b>No:</b> no lo crees. Los negocios 100% online no son elegibles [[F34]].`,
+    ], done:`Tomaste la decisión por escrito.` } },
+  'S9.5': { start:{ kind:`doc`, label:`Abrir la plantilla del caso de estudio`, template:`casestudy`, file:`S9.5 · Caso de estudio TuFuente.ai`, folder:`Web · S9 Medición` },
+    body:{ steps:[
+      `Repite la ronda de 15 preguntas con el mismo método de S3.4.`,
+      `Compara con la línea base: ¿en cuántas preguntas apareces ahora?`,
+      `Escríbelo como tu primer caso de estudio, con fechas, método y limitaciones.`,
+    ], done:`Tienes el caso escrito.` } },
+  'S10.1': { body:{ steps:[
+      `Crea el widget de Turnstile [[F12]] (su gratuidad está implícita, no explícita [[F13]]).`,
+      `Agrega código de servidor que valide el token [[F43]].`,
+      `Decide cómo recibes los mensajes: enviar correos desde Cloudflare está en Beta [[F04]].`,
+      `Añade una casilla de consentimiento <b>sin marcar</b> [[F14]].`,
+    ], why:`Turnstile <b>exige</b> validar cada envío en un servidor con una clave secreta [[F43]], así que tu web deja de ser solo estática y necesita código de servidor.`,
+       extra:`<b>Cuándo hacerlo:</b> si WhatsApp y correo no alcanzan, o si recibes spam. {{criterio}}` } },
+  'S10.2': { body:{ steps:[ `Elige un proveedor para enviar correo desde tu dominio (Google Workspace, Zoho u otro). Precio: [[Q-SEND]]` ],
+       extra:`<b>Cuándo hacerlo:</b> cuando empieces a escribirle a prospectos y quieras que vean tu dominio. {{criterio}}` } },
+  'S10.3': { start:{ kind:`link`, label:`Ver planes de Otterly`, url:`https://otterly.ai/pricing`, then:`Lite: 15 prompts, 4 motores; Claude y Gemini son extras.` },
+    body:{ steps:[ `Contrata Otterly Lite: US$29/mes, 15 prompts, 4 motores; Claude y Gemini son extras [[F11]]. Duración de la prueba gratis: [[Q-OTTRL]]` ],
+       extra:`<b>Cuándo hacerlo:</b> cuando el método manual de S3.4 te quite mucho tiempo, o cuando vayas a revenderlo a clientes. {{criterio}}` } },
+  'S10.4': { body:{ steps:[ `Registra la marca en INDECOPI. Costo del registro: [[F37]]` ],
+       extra:`<b>Cuándo hacerlo:</b> antes de invertir fuerte en publicidad o cuando tengas tus primeros ingresos. {{criterio}}` } },
+};
+// "Empieza aquí" para pasos que ya tenían contenido
+WEB_CONTENT['S6.2'] = { start:{ kind:`copy`, label:`Copiar el prompt de publicación`, text:`Inicia sesión en Cloudflare con Wrangler y despliega con npx astro build && npx wrangler deploy.`, then:`Pégalo en Claude Code. Se abrirá el navegador para autorizar.` } };
+WEB_CONTENT['S7.1'] = { start:{ kind:`link`, label:`Abrir el registro de dominios de Cloudflare`, url:`https://domains.cloudflare.com/`, then:`Busca <code>tufuente.ai</code> y revisa que el total cubra 2 años. Pagas tú.` } };
+Object.keys(WEB_CONTENT).forEach(id => Object.assign(WEB_STEPS[id], WEB_CONTENT[id]));
 
 // Valida el grafo: IDs inexistentes, pasos huérfanos o repetidos, ciclos y fuentes.
 // Devuelve una lista de errores (vacía = todo bien). Lo usan la app y tests/plan-deps.test.js.
@@ -1657,23 +1943,40 @@ function goalMetToday(){ return (state.activityLog[todayKey()] || 0) >= 1; }
 // ============================================================
 function pad2(n){ n = String(n); return n.length < 2 ? '0'+n : n; }
 function escapeHtml(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-function stripTags(s){ return String(s).replace(/<[^>]+>/g,''); }
+function stripTags(s){ return String(s).replace(/<[^>]+>/g,'').replace(/\[\[[A-Za-z0-9-]+\]\]/g,'').replace(/\{\{criterio\}\}/g,'').replace(/\s+/g,' ').trim(); }
 function vibrate(ms){ try { if (navigator.vibrate) navigator.vibrate(ms); } catch(e){} }
-function getNextTask(){ for (const t of TASKS){ if (!state.completed[t.id]) return t; } return null; }
+// Pasos del plan de 21 misiones que dependen del proyecto web. Se marcan solos al cumplirse.
+const LINEAR_REQUIRES = { 'f4:1': ['S7.2'] };
+function linearBlockers(taskId, i){ const r = LINEAR_REQUIRES[taskId + ':' + i]; return r ? r.filter(x => !isWebDone(x)) : []; }
+function syncLinearFromWeb(){
+  Object.keys(LINEAR_REQUIRES).forEach(k => {
+    const [tid, idx] = k.split(':');
+    if (!LINEAR_REQUIRES[k].every(isWebDone)) return;
+    const p = getStepProgress(tid);
+    if (!p[idx]){ p[idx] = true; }
+  });
+}
+function getNextTask(){ const a = getNextAction(); return a ? a.task : null; }
 function getStepProgress(taskId){
   if (!state.stepProgress[taskId]) state.stepProgress[taskId] = {};
   return state.stepProgress[taskId];
 }
 // La unidad atómica de la app: el siguiente PASO pendiente del plan.
+// Una misión que solo tiene pendientes pasos en espera del proyecto web no frena las siguientes.
 function getNextAction(){
-  const task = getNextTask();
-  if (!task) return null;
-  const steps = task.tutorial || [];
-  const prog = getStepProgress(task.id);
-  for (let i = 0; i < steps.length; i++){
-    if (!prog[i]) return { task, stepIndex: i, kind:'step' };
+  for (const task of TASKS){
+    if (state.completed[task.id]) continue;
+    const steps = task.tutorial || [];
+    const prog = getStepProgress(task.id);
+    let waiting = false;
+    for (let i = 0; i < steps.length; i++){
+      if (prog[i]) continue;
+      if (linearBlockers(task.id, i).length){ waiting = true; continue; }
+      return { task, stepIndex: i, kind:'step' };
+    }
+    if (!waiting) return { task, stepIndex: null, kind:'close' };
   }
-  return { task, stepIndex: null, kind:'close' };
+  return null;
 }
 function pickInsight(){
   if (!INSIGHT_DECK.length) return null;
@@ -1702,15 +2005,15 @@ function showToast(msg){
 
 const COMPLIANCE_STATES = ['pendiente','enviada','aprobada'];
 const COMPLIANCE_TEXT = {
-  pendiente: 'Compliance Credicorp: pendiente — declárala antes de cobrar',
+  pendiente: 'Compliance Credicorp: pendiente — declárala antes de compartir o publicar la web',
   enviada:   'Compliance: declaración enviada — esperando aprobación',
-  aprobada:  'Compliance: aprobada — vía libre para cobrar',
+  aprobada:  'Compliance: aprobada — vía libre para publicar y cobrar',
 };
 function cycleCompliance(){
   const i = COMPLIANCE_STATES.indexOf(state.compliance);
   state.compliance = COMPLIANCE_STATES[(i+1) % COMPLIANCE_STATES.length];
   saveState();
-  if (state.compliance === 'aprobada') showToast('Compliance aprobada — vía libre para cobrar');
+  if (state.compliance === 'aprobada') showToast('Compliance aprobada — vía libre para publicar y cobrar');
   render();
 }
 
@@ -1794,7 +2097,7 @@ function renderHoy(){
   }
   if (state.compliance !== 'aprobada'){
     html += `<div class="comp-mini ${state.compliance}" data-act="compliance">
-      <span class="dot"></span><span class="txt">${COMPLIANCE_TEXT[state.compliance]}</span>
+      <span class="dot"></span><span class="txt">${COMPLIANCE_TEXT[state.compliance]}${state.compliance === 'pendiente' ? critTag() : ''}</span>
     </div>`;
   }
 
@@ -1805,6 +2108,13 @@ function renderHoy(){
     return html + '</div>';
   }
 
+  if (!action && TASKS.some(x => !state.completed[x.id])){
+    html += `<div class="now-card"><div class="all-done">
+      <div class="ad-t">Tu plan espera al proyecto web.</div>
+      <div class="ad-s">Los pasos que quedan dependen de tu web (Plan → Proyecto web). Avanza ahí y se marcarán solos.</div>
+    </div></div>`;
+    return html + '</div>';
+  }
   if (!action){
     html += `<div class="now-card"><div class="all-done">
       <div class="ad-t">Plan completado.</div>
@@ -1836,9 +2146,9 @@ function renderHoy(){
     const st = steps[action.stepIndex];
     html += `
       <div class="now-step-label"><span class="now-step-num">SIGUIENTE PASO · ${pad2(action.stepIndex+1)} DE ${pad2(steps.length)}</span></div>
-      <h1 class="now-title">${st.title}</h1>
+      <h1 class="now-title">${rich(st.title)}</h1>
       <button class="now-detail-toggle" data-act="toggle-detail">Ver por qué / cómo</button>
-      <div class="now-detail" id="nowDetail">${st.detail}${t.why && action.stepIndex === 0 ? `<br><br><span class="serif-i" style="color:var(--ink);">${t.why}</span>` : ''}</div>
+      <div class="now-detail" id="nowDetail">${rich(st.detail)}${t.why && action.stepIndex === 0 ? `<br><br><span class="serif-i" style="color:var(--ink);">${t.why}</span>` : ''}</div>
       ${startBoxHtml(t.id + ':' + action.stepIndex)}
       <button class="btn-main" data-act="step-done">Paso hecho</button>
       <div class="now-foot">
@@ -1942,12 +2252,15 @@ function openMissionDetail(taskId){
   let stepsHtml = '';
   steps.forEach((st, i) => {
     const sd = !!prog[i];
-    stepsHtml += `<div class="step-row${sd?' done':''}${(!isCurrent && !isDone)?' locked':''}${isCurrent?' tappable':''}" ${isCurrent?`data-step="${i}"`:''}>
+    const blk = linearBlockers(t.id, i);
+    const tap = isCurrent && (sd || !blk.length);
+    stepsHtml += `<div class="step-row${sd?' done':''}${(!isCurrent && !isDone) || (blk.length && !sd)?' locked':''}${tap?' tappable':''}" ${tap?`data-step="${i}"`:''}>
       <span class="s-num tnum">${pad2(i+1)}</span>
       <span class="s-check"></span>
       <div class="s-main">
-        <div class="s-title">${st.title}</div>
-        <div class="s-detail">${st.detail}</div>
+        <div class="s-title">${rich(st.title)}</div>
+        <div class="s-detail">${rich(st.detail)}</div>
+        ${blk.length && !sd ? `<div class="lin-lock">🔒 Se marca solo cuando termines ${blk.map(x => `<button type="button" class="req-link locked" data-goto-step="${x}">${x}</button>`).join(' ')} del Proyecto web.</div>` : ''}
         ${!sd ? startMiniHtml(t.id + ':' + i) : ''}
       </div>
     </div>`;
@@ -1981,6 +2294,7 @@ function openMissionDetail(taskId){
   document.body.appendChild(ov);
 
   document.getElementById('ovBack').onclick = closeOverlay;
+  ov.querySelectorAll('[data-goto-step]').forEach(b => { b.onclick = e => { e.stopPropagation(); openWebStep(b.getAttribute('data-goto-step'), () => openMissionDetail(taskId)); }; });
   if (isCurrent){
     ov.querySelectorAll('[data-step]').forEach(row => {
       row.onclick = () => {
@@ -2060,7 +2374,7 @@ function showCelebration({title, line, insight, extra}){
     <div class="sheet-title">${title}</div>
     <div class="sheet-line">${line}</div>
     ${extra ? `<div class="sheet-extra">${extra}</div>` : ''}
-    ${insight ? `<div class="insight-card"><div class="insight-l">Dato del mercado — ${insight.sec}</div><div class="insight-t">${insight.t}</div><div class="insight-d">${insight.d}</div></div>` : ''}
+    ${insight ? `<div class="insight-card"><div class="insight-l">Dato del mercado — ${insight.sec}</div><div class="insight-t">${insight.t}</div><div class="insight-d">${rich(insight.d)}</div></div>` : ''}
     <button class="btn-main" id="sheetGo">Seguir</button>
   </div>`;
   document.body.appendChild(bd);
@@ -2278,6 +2592,7 @@ function openPaySheet(id, opener, onSave){
 }
 function completeWebStep(id, extra){
   state.webSteps[id] = Object.assign({ ts: new Date().toISOString() }, extra || {});
+  syncLinearFromWeb();
   recordActivity();
   vibrate(12);
   const m = webMission(id);
@@ -2567,6 +2882,30 @@ ${FAQ_EXAMPLES.map((q, i) => `<h3>Pregunta ${i + 1}: ${q}</h3><p><b>Respuesta co
     text: () => ['06.3 · FAQ answer-first — TuFuente.ai', '', 'Cómo usar este documento: escribe cada pregunta como la haría tu cliente. Responde primero en 1 o 2 frases y después el detalle. Si das un dato, pon su fuente.', '', 'PREGUNTAS FRECUENTES', '']
       .concat(...FAQ_EXAMPLES.map((q, i) => ['Pregunta ' + (i + 1) + ': ' + q, 'Respuesta corta (1-2 frases):', 'Detalle:', 'Fuente (si das un dato):', '']))
       .concat(['DEFINICIONES CLARAS', 'AEO/GEO:', 'Citation rate (tasa de citación):', 'Share of answer:']).join('\n'),
+  },
+  compliance: {
+    html: () => `<h1>S1.1 · Correo a Compliance</h1>
+<p><i>Borrador para adaptar. Revisa en la intranet a quién se declara (Compliance o tu jefe directo) antes de enviarlo.</i></p>
+<p><b>Para:</b> [Unidad de Cumplimiento o jefe directo]</p>
+<p><b>Asunto:</b> Declaración de actividad externa: consultoría de visibilidad digital (TuFuente.ai)</p>
+<p>Hola, [nombre]:</p>
+<p>Quiero declarar una actividad externa: TuFuente.ai, una consultoría de visibilidad en buscadores de inteligencia artificial para pequeñas y medianas empresas.</p>
+<p>La realizo fuera de mi horario laboral y no atenderé entidades financieras reguladas por la SBS o la SMV. Voy a publicar una web informativa con mis servicios.</p>
+<p>¿Podrían confirmarme por escrito si puedo continuar?</p>
+<p>Gracias,<br>Abraham</p>`,
+    text: () => ['S1.1 · Correo a Compliance', '', 'Para: [Unidad de Cumplimiento o jefe directo]', 'Asunto: Declaración de actividad externa: consultoría de visibilidad digital (TuFuente.ai)', '', 'Hola, [nombre]:', '', 'Quiero declarar una actividad externa: TuFuente.ai, una consultoría de visibilidad en buscadores de inteligencia artificial para pequeñas y medianas empresas.', '', 'La realizo fuera de mi horario laboral y no atenderé entidades financieras reguladas por la SBS o la SMV. Voy a publicar una web informativa con mis servicios.', '', '¿Podrían confirmarme por escrito si puedo continuar?', '', 'Gracias,', 'Abraham'].join('\n'),
+  },
+  casestudy: {
+    html: () => `<h1>S9.5 · Caso de estudio TuFuente.ai</h1>
+<p><i>Primer caso: tu propia web. Usa los datos de tu hoja de línea base (S3.4) y de la segunda ronda.</i></p>
+<h2>Contexto</h2><p>Qué es TuFuente.ai y qué querías lograr.</p>
+<h2>Método</h2><p>15 preguntas fijas · motores: ChatGPT, Perplexity y Gemini · ventana de incógnito y conversación nueva para cada pregunta.</p>
+<h2>Línea base</h2><p><b>Fecha:</b> </p><p><b>En cuántas preguntas aparecías:</b> </p>
+<h2>Después</h2><p><b>Fecha:</b> </p><p><b>En cuántas preguntas apareces:</b> </p>
+<h2>Qué cambió</h2><p></p>
+<h2>Limitaciones</h2><p>Método manual; las respuestas de la IA varían entre consultas.</p>
+<h2>Próximos pasos</h2><p></p>`,
+    text: () => ['S9.5 · Caso de estudio TuFuente.ai', '', 'CONTEXTO', '', 'MÉTODO', '15 preguntas fijas · motores: ChatGPT, Perplexity y Gemini · ventana de incógnito y conversación nueva para cada pregunta.', '', 'LÍNEA BASE', 'Fecha:', 'En cuántas preguntas aparecías:', '', 'DESPUÉS', 'Fecha:', 'En cuántas preguntas apareces:', '', 'QUÉ CAMBIÓ', '', 'LIMITACIONES', 'Método manual; las respuestas de la IA varían entre consultas.', '', 'PRÓXIMOS PASOS'].join('\n'),
   },
   baseline: {
     csv: () => [BASELINE_HEAD].concat(baselineRows()).map(r => r.map(c => /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c).join(',')).join('\n'),
@@ -3108,7 +3447,7 @@ function renderDatos(){
     <h1 class="view-title">Datos</h1>
     <div class="view-sub">Compliance, registro e inteligencia de mercado.</div>
     <div class="comp-full ${state.compliance}" data-act="compliance">
-      <span class="cl"><span class="dot"></span><span class="txt">${COMPLIANCE_TEXT[state.compliance]}</span></span>
+      <span class="cl"><span class="dot"></span><span class="txt">${COMPLIANCE_TEXT[state.compliance]}${state.compliance === 'pendiente' ? critTag() : ''}</span></span>
       <span class="hint">cambiar</span>
     </div>
     <div class="stats-grid">
@@ -3163,7 +3502,7 @@ function renderDatos(){
   GLOSSARY.forEach(sec => {
     html += `<div class="gloss-slabel">${sec.label}</div>`;
     sec.items.forEach(it => {
-      html += `<div class="gloss-item"><span class="gloss-marker${it.neg?' neg':''}">${it.n}</span><div class="gloss-main"><h4>${it.t}</h4><p>${it.d}</p></div></div>`;
+      html += `<div class="gloss-item"><span class="gloss-marker${it.neg?' neg':''}">${it.n}</span><div class="gloss-main"><h4>${it.t}</h4><p>${rich(it.d)}</p></div></div>`;
     });
   });
   html += `</div>`;

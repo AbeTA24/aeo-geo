@@ -53,6 +53,15 @@ const s7 = Object.keys(plan.steps).filter(id => id.startsWith('S7.'));
 const notGated = s7.filter(id => !dependsOn(id, 'GATE'));
 check(notGated.length === 0, 'todos los pasos de S7 quedan detrás de la compuerta', notGated);
 
+// 4b) Fase 4: todo paso tiene instrucciones y toda plantilla de "Empieza aquí" existe
+const noBody = Object.keys(plan.steps).filter(id => !(plan.steps[id].body && plan.steps[id].body.steps && plan.steps[id].body.steps.length));
+check(noBody.length === 0, 'los 48 pasos tienen instrucciones ("Qué hacer")', noBody);
+const tplNames = new Set((html.match(/^  (\w+): \{\n    (html|csv): \(\) =>/gm) || []).map(x => x.trim().split(':')[0]));
+const missingTpl = Object.entries(plan.steps).filter(([, s]) => s.start && (s.start.kind === 'doc' || s.start.kind === 'sheet') && !tplNames.has(s.start.template)).map(([id, s]) => id + ' → ' + s.start.template);
+check(missingTpl.length === 0, 'cada documento de "Empieza aquí" tiene su plantilla (' + [...tplNames].join(', ') + ')', missingTpl);
+const badStart = Object.entries(plan.steps).filter(([, s]) => s.start && ((s.start.kind === 'link' && !/^https:\/\//.test(s.start.url || '')) || (s.start.kind === 'copy' && !s.start.text))).map(([id]) => id);
+check(badStart.length === 0, 'los enlaces son https y los "copiar" tienen texto', badStart);
+
 // 5) El validador detecta lo que debe detectar
 let p = clone(plan); p.steps['S1.2'].requires = ['S1.3'];
 check(validate(p).some(e => e.startsWith('Ciclo')), 'detecta un ciclo (S1.2 ↔ S1.3)');
