@@ -467,6 +467,62 @@ button{font-family:var(--sans);}
 .all-done{text-align:center;padding:70px 20px;}
 .all-done .ad-t{font-family:var(--serif);font-style:italic;font-size:30px;color:var(--ink);margin-bottom:10px;}
 .all-done .ad-s{font-size:14px;color:var(--muted);line-height:1.65;max-width:46ch;margin:0 auto;}
+
+/* ============================================================
+   ESCRITORIO Y PANTALLAS HORIZONTALES
+   Mismo orden y mismo look; el contenido se centra y, en pantallas
+   anchas, Hoy y Plan usan dos columnas.
+   ============================================================ */
+@media(min-width:900px){
+  :root{ --rail-w:clamp(184px,14vw,232px); --col-w:700px; --ov-w:720px; }
+  #tabbar{ width:var(--rail-w); padding:clamp(22px,4.5vh,40px) clamp(20px,2.2vw,32px); }
+  .tab-brand{ margin-bottom:clamp(20px,4.5vh,36px); }
+  #view{ margin-left:var(--rail-w); padding:clamp(20px,4.5vh,44px) clamp(28px,4vw,72px) 64px; }
+  #view .view-inner{ max-width:var(--col-w); margin:0 auto; }
+  .preview-bar{ max-width:var(--col-w); margin-left:auto; margin-right:auto; }
+  .overlay{ left:var(--rail-w); }
+  .ov-inner{ max-width:var(--ov-w); padding:clamp(18px,4.5vh,40px) clamp(24px,3vw,48px) 48px; }
+  .toast{ left:calc(50% + var(--rail-w) / 2); }
+}
+@media(min-width:900px) and (max-height:780px){
+  .tab-btn{ padding:8px 0; }
+  .hoy-top{ padding:2px 0 10px; }
+  .pulse-row, .goal-banner, .comp-mini{ margin-bottom:10px; }
+  .goal-banner{ padding:10px 16px; }
+  .now-steps li, .w-steps li{ margin-bottom:4px; line-height:1.5; }
+  .start-box{ margin-bottom:14px; }
+}
+@media(min-width:1280px){
+  :root{ --ov-w:760px; }
+  /* Hoy: el paso actual a la izquierda; contexto a la derecha */
+  #view[data-tab="hoy"]{ --col-w:1140px; }
+  #view[data-tab="hoy"] .view-inner{
+    display:grid; grid-template-columns:minmax(0,1fr) clamp(280px,25vw,340px);
+    grid-template-rows:auto auto auto auto auto auto 1fr;
+    column-gap:clamp(24px,2.4vw,40px); align-items:start;
+  }
+  #view[data-tab="hoy"] .view-inner > *{ grid-column:2; min-width:0; }
+  #view[data-tab="hoy"] .view-inner > .hoy-top{ grid-column:1 / -1; }
+  #view[data-tab="hoy"] .view-inner > .now-card{ grid-column:1; grid-row:2 / -1; margin-bottom:0; }
+  #view[data-tab="hoy"] .pulse-row{ margin-bottom:14px; }
+  #view[data-tab="hoy"] .pulse-cell{ padding:12px 12px 11px; }
+  /* Plan: tus 21 misiones a la izquierda; el proyecto web a la derecha */
+  #view[data-tab="plan"]:has(.web-sec){ --col-w:1180px; }
+  #view[data-tab="plan"]:has(.web-sec) .view-inner{
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-rows:repeat(8,auto) 1fr; column-gap:clamp(28px,3vw,56px); align-items:start;
+  }
+  #view[data-tab="plan"]:has(.web-sec) .view-inner > *{ grid-column:1; min-width:0; }
+  #view[data-tab="plan"]:has(.web-sec) .view-inner > .web-sec{ grid-column:2; grid-row:1 / -1; margin-top:10px; }
+  #view[data-tab="datos"], #view[data-tab="coach"]{ --col-w:760px; }
+  .dep-map{ max-width:520px; }
+}
+@media(min-width:1800px){
+  #view .view-inner, .preview-bar, .ov-inner, .bsheet, #tabbar > *{ zoom:1.08; }
+}
+@media(min-width:2300px){
+  #view .view-inner, .preview-bar, .ov-inner, .bsheet, #tabbar > *{ zoom:1.2; }
+}
 </style>
 </head>
 <body>
@@ -1158,6 +1214,7 @@ document.querySelectorAll('.tab-btn').forEach(b => { b.onclick = () => setTab(b.
 
 function render(){
   const v = document.getElementById('view');
+  v.setAttribute('data-tab', currentTab);
   if (currentTab === 'hoy') v.innerHTML = renderHoy();
   else if (currentTab === 'plan') v.innerHTML = renderPlan();
   else if (currentTab === 'coach') v.innerHTML = renderCoach();
