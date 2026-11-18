@@ -796,7 +796,7 @@ CLIENTES IDEALES (por claridad de ROI): (1) EXPORTADORES / empresas B2B que vend
 
 COMPLIANCE (CRÍTICO): el Código de Ética de Credicorp aplica 24/7. Debe DECLARAR la actividad externa a la Unidad de Cumplimiento ANTES de compartir o publicar su web (una web pública ofreciendo servicios ya es una actividad visible; criterio, no política pública) y en todo caso antes de cobrarle al primer cliente.
 
-WEB PROPIA (decisión): TuFuente.ai se construye con Claude Code + Astro y se publica en Cloudflare (Workers), tratándose como su propio cliente; Framer quedó descartado. El paso a paso vive en la app como "Proyecto web" (subproyectos S1 a S10), con todo lo gratis antes de cualquier gasto y una compuerta antes de comprar el dominio. EVITAR clientes regulados por SBS/SMV: bancos, financieras, cajas, cooperativas, fintech de crédito/factoring/lending, casas de cambio, AFP, seguros, SAB. Fintech solo si es NO crediticia y validada caso por caso. Por esto, para verticalizar, la EXPORTACIÓN AGRO es el terreno más limpio para Abraham (terreno abierto Y sin riesgo de compliance), mientras que fintech, aunque atractiva, exige cuidado.
+WEB PROPIA (decisión): DeRenombre se construye con Claude Code + Astro y se publica en Cloudflare (Workers), tratándose como su propio cliente; Framer quedó descartado. El paso a paso vive en la app como "Proyecto web" (subproyectos S1 a S10), con todo lo gratis antes de cualquier gasto y una compuerta antes de comprar el dominio. EVITAR clientes regulados por SBS/SMV: bancos, financieras, cajas, cooperativas, fintech de crédito/factoring/lending, casas de cambio, AFP, seguros, SAB. Fintech solo si es NO crediticia y validada caso por caso. Por esto, para verticalizar, la EXPORTACIÓN AGRO es el terreno más limpio para Abraham (terreno abierto Y sin riesgo de compliance), mientras que fintech, aunque atractiva, exige cuidado.
 
 COMPETENCIA LATAM: ya hay ~una decena de agencias hispanas en GEO/AEO (AMD —Bogotá, ofrece llevar marcas a ChatGPT/Gemini/Perplexity—, Agencia Eleven, ESBUENISIMO LABS —Chile, SEO+GEO+medios—, SEO Secreto —México, GEO/AEO—, SemanticPunch —Chile, prefiere "GSO"—, Postedin —"primera agencia AEO en español"—, Conversion —Brasil—; "Ranker Studio" no se encontró al verificar). EN PERÚ (verificado nov 2026): KOM, agencia de Lima, vende posicionamiento GEO como servicio nuevo de 2026; en una prueba de la agencia Sourcelift, el Modo IA y Perplexity nombraron 10 agencias distintas para "agencia GEO en el Perú" y coincidieron solo en 2. El mercado se está abriendo pero NO está saturado; el "first mover" puro ya no existe. CUIDADO METODOLÓGICO: mucha info competitiva viene de listicles "Top 10 agencias GEO" publicados por las mismas agencias, que se ponen primeras — investiga con escepticismo, verifica con búsquedas reales. estimado propio (no es un dato): el "GEO genérico" tiene ~12-18 meses antes de volverse commodity, como le pasó al SEO → la defensa es VERTICALIZAR (dominar un sector). TRIGGER competitivo: si 2+ competidores lanzan paquetes GEO dirigidos a Perú, adelantar la verticalización aunque no se hayan cumplido los benchmarks de calendario. Con lo encontrado en nov 2026 (KOM ya lo ofrece en Lima) el trigger podría estar cerca o activado: contar los competidores Perú-específicos antes de la Etapa 1.
 
@@ -1154,7 +1154,7 @@ const TOTAL = TASKS.length;
 
 /*WEBPLAN-START*/
 // ============================================================
-// PROYECTO WEB TuFuente.ai — plan v2 (subproyectos S1–S10)
+// PROYECTO WEB DeRenombre — plan v2 (subproyectos S1–S10)
 // Estructura: requires / cost / sources por paso. "unlocks" se deriva.
 // Fase 3: estructura completa + contenido de muestra en S1.3, S1.5, S6.2, S7.1.
 // ============================================================
@@ -1166,14 +1166,14 @@ const WEB_SUBPROJECTS = [
   { id:'S4',  title:'Diseño',                       result:'Dirección visual propia' },
   { id:'S5',  title:'Construcción local',           result:'Web completa funcionando en tu compu' },
   { id:'S6',  title:'Prueba pública gratis',        result:'Web en internet en un link de prueba' },
-  { id:'S7',  title:'Dominio, correo e indexación', result:'tufuente.ai en vivo e indexada' },
+  { id:'S7',  title:'Dominio, correo e indexación', result:'derenombre.ai en vivo e indexada' },
   { id:'S8',  title:'Formalización y legal',        result:'RUC, privacidad, libro de reclamaciones' },
   { id:'S9',  title:'Medición',                     result:'Analytics y seguimiento' },
   { id:'S10', title:'Opcionales de pago',           result:'Formulario con servidor, correo saliente, Otterly pagado, registro de marca', optional:true },
 ];
 const WEB_MISSIONS = [
   { id:'S1-A',  sp:'S1',  title:'Permiso y protección',             steps:['S1.1','S1.2','S1.3','S1.4'] },
-  { id:'S1-B',  sp:'S1',  title:'¿La marca está libre?',            steps:['S1.5'] },
+  { id:'S1-B',  sp:'S1',  title:'Tu marca, libre y presentada',     steps:['S1.5','S1.6'] },
   { id:'S2-A',  sp:'S2',  title:'Preparar tu computadora',          steps:['S2.1','S2.2','S2.3','S2.4'] },
   { id:'S3-A',  sp:'S3',  title:'Mapa de páginas',                  steps:['S3.1','S3.2','S3.3'] },
   { id:'S3-B',  sp:'S3',  title:'Punto de partida medido',          steps:['S3.4'] },
@@ -1187,7 +1187,7 @@ const WEB_MISSIONS = [
   { id:'S8-A',  sp:'S8',  title:'Poder facturar',                   steps:['S8.1'] },
   { id:'S8-B',  sp:'S8',  title:'Textos legales y datos personales',steps:['S8.2','S8.3','S8.4'] },
   { id:'S9-A',  sp:'S9',  title:'Identidad y analítica',            steps:['S9.1','S9.2','S9.3','S9.4','S9.5'] },
-  { id:'S10-A', sp:'S10', title:'Opcionales de pago',               steps:['S10.1','S10.2','S10.3','S10.4'] },
+  { id:'S10-A', sp:'S10', title:'Opcionales de pago',               steps:['S10.1','S10.2','S10.3'] },
 ];
 // La compuerta de gasto es un nodo más del grafo: S7.1 la requiere.
 const WEB_GATE = {
@@ -1195,7 +1195,7 @@ const WEB_GATE = {
   title:'Compuerta de gasto',
   items:[
     { label:'Compliance respondió que puedes seguir', ids:['S1.1'] },
-    { label:'"TuFuente" salió libre en la búsqueda fonética', ids:['S1.5'] },
+    { label:'"DeRenombre" salió libre en la búsqueda fonética', ids:['S1.5'] },
     { label:'La web funciona completa y rápida en el link de prueba', ids:['S6.2','S6.4'] },
   ],
 };
@@ -1223,12 +1223,12 @@ const WEB_STEPS = {
       done:'GitHub te pide el código al iniciar sesión.',
     } },
   'S1.4': { title:'Cuenta de Cloudflare con doble factor', requires:['S1.2'], cost:C0, sources:['Q-CF2FA'] },
-  'S1.5': { title:'Búsqueda fonética de "TuFuente" en INDECOPI', requires:[], cost:{ type:'free', status:'ok', mandatory:true, sourceIds:['F36'] }, sources:['F36'],
+  'S1.5': { title:'Búsqueda fonética de "DeRenombre" en INDECOPI', requires:[], cost:{ type:'free', status:'ok', mandatory:true, sourceIds:['F36'] }, sources:['F36'],
     start:{ kind:'link', label:'Abrir «Busca tu marca» de INDECOPI', url:'https://enlinea.indecopi.gob.pe/buscatumarca', then:'Elige <b>Búsqueda Fonética</b>, escribe solo el término principal y marca hasta 3 clases.' },
     body:{
       steps:[
         'Toca <b>Empieza aquí</b> → elige <b>Búsqueda Fonética</b> [[F36]].',
-        'Escribe <b>TuFuente</b>. En clases, marca <b>35</b> (publicidad y gestión de negocios), <b>42</b> (servicios tecnológicos) y <b>41</b> (formación) → Buscar. Repite con "Tu Fuente".',
+        'Escribe <b>renombre</b> (sin el "de": así compara el examinador). En clases, marca <b>35</b> (publicidad y gestión de negocios), <b>42</b> (servicios tecnológicos) y <b>41</b> (formación) → Buscar. Repite con <b>derenombre</b>.',
         'Revisa la lista: ¿hay alguna marca igual o que suene muy parecido en esas clases?',
         'Toma una captura del resultado: tecla Windows + Shift + S → selecciona la zona. Windows la guarda en Imágenes → Capturas de pantalla. Súbela a tu Drive, carpeta "Plan AEO-GEO (app)" → "Web · S1 Base segura".',
       ],
@@ -1236,14 +1236,15 @@ const WEB_STEPS = {
       extra:'<b>Si sale ocupada:</b> detente y vuelve a la etapa de naming. No pases la compuerta.',
       done:'Tienes la captura y el nombre salió libre.',
     } },
+  'S1.6': { title:'Presentar la marca DeRenombre en INDECOPI (clase 35)', requires:['S1.5','S1.1'], cost:{ type:'fixed', amount:534.9, currency:'PEN', status:'nuance', mandatory:true, label:'S/ 534.90 por clase (S/ 401.20 si eres mype)', note:'Lo pagas tú. Confirma el monto en la plataforma antes de pagar [[F37]].', sourceIds:['F37'] }, sources:['F37','F48'] },
   'S2.1': { title:'Confirmar que Git funciona', requires:[], cost:C0, sources:['F07'] },
   'S2.2': { title:'Instalar Node.js', requires:[], cost:C0, sources:['F08','F09'] },
   'S2.3': { title:'Crear la carpeta del proyecto', requires:[], cost:C0, sources:[] },
   'S2.4': { title:'Abrir Claude Code en esa carpeta', requires:['S2.1','S2.3'], cost:{ type:'included', status:'ok', mandatory:true, label:'Incluido en tu plan de Claude' }, sources:['F07'] },
   'S3.1': { title:'Elegir ruta de investigación de keywords', requires:['S2.4'], cost:{ type:'usage', status:'ok', mandatory:false, label:'S/ 0 o pago por uso', sourceIds:['Q-DFS'] }, sources:['F10'] },
   'S3.2': { title:'Pedir el CSV de arquitectura', requires:['S3.1'], cost:{ type:'free', status:'ok', mandatory:true, label:'S/ 0 (o créditos de DataForSEO)' }, sources:['F20','F07'],
-    start:{ kind:'copy', label:'Copiar el prompt para Claude Code', then:'Abre Claude Code en la carpeta <code>tufuente-web</code>, modo <b>Plan</b>, y pega el prompt (Ctrl+V).',
-      text:"Soy TuFuente.ai, consultoría de visibilidad en buscadores de IA para pymes de LatAm, con base en Lima. Servicios: Auditoría, Implementación, Monitoreo. Arma un CSV con columnas: página, keyword objetivo, volumen mensual, URL. Incluye home, una página por servicio, metodología, sobre mí, contacto y blog. Si no tienes datos de volumen, pon 'sin dato'. No inventes." },
+    start:{ kind:'copy', label:'Copiar el prompt para Claude Code', then:'Abre Claude Code en la carpeta <code>derenombre-web</code>, modo <b>Plan</b>, y pega el prompt (Ctrl+V).',
+      text:"Soy DeRenombre, consultoría de visibilidad en buscadores de IA para pymes de LatAm, con base en Lima. Servicios: Auditoría, Implementación, Monitoreo. Arma un CSV con columnas: página, keyword objetivo, volumen mensual, URL. Incluye home, una página por servicio, metodología, sobre mí, contacto y blog. Si no tienes datos de volumen, pon 'sin dato'. No inventes." },
     body:{
       steps:[
         'Claude Code en modo <b>Plan</b> [[F07]].',
@@ -1251,7 +1252,7 @@ const WEB_STEPS = {
         'Claude te muestra un plan. Si te parece bien, apruébalo; si no, escríbele qué cambiar.',
         'Cambia el selector de modo a <b>Accept edits</b> para que cree el archivo.',
       ],
-      done:'Existe <code>arquitectura.csv</code> en Documentos → Proyectos → tufuente-web.',
+      done:'Existe <code>arquitectura.csv</code> en Documentos → Proyectos → derenombre-web.',
     } },
   'S3.3': { title:'Revisar el CSV tú mismo', requires:['S3.2'], cost:C0, sources:['F20'] },
   'S3.4': { title:'Línea base de visibilidad en IA (ruta gratis)', requires:[], cost:C0, criterio:true, sources:['F11'],
@@ -1290,18 +1291,18 @@ const WEB_STEPS = {
   'S6.3': { title:'Decidir si compartes el link', requires:['S6.2','S1.1'], cost:C0, criterio:true, sources:[] },
   'S6.4': { title:'Velocidad', requires:['S6.2','S5.4'], cost:{ type:'free', status:'nuance', mandatory:true, sourceIds:['F45'] }, sources:['F45','F20'] },
   'S6.5': { title:'Publicación automática con cada cambio', requires:['S5.6','S6.1'], optional:true, cost:{ type:'free', status:'ok', mandatory:false, sourceIds:['Q-BUILDS'] }, sources:['F24'] },
-  'S7.1': { title:'Comprar tufuente.ai', requires:['GATE','S1.4'], cost:{ type:'fixed', amount:160, currency:'USD', status:'nuance', mandatory:true, label:'US$80/año (hasta ~US$160 si exige 2 años)', note:'Precio según fuentes secundarias [[F42]]. El mínimo de 2 años lo dice otro registrador y puede ya no aplicar [[F03]]: revisa el plazo y el total en el checkout.', sourceIds:['F42','F03'] }, sources:['F02','F03','F42','Q-LOCK'],
+  'S7.1': { title:'Comprar derenombre.ai', requires:['GATE','S1.4','S1.6'], cost:{ type:'fixed', amount:160, currency:'USD', status:'ok', mandatory:true, label:'US$160 por los 2 primeros años; luego US$80/año', note:'Visto en Cloudflare el 18 nov 2026: 2 años mínimo [[F03]], US$80/año al renovar [[F42]]. Revisa el total en el checkout.', sourceIds:['F42','F03'] }, sources:['F02','F03','F42','Q-LOCK'],
     body:{
       steps:[
-        'domains.cloudflare.com → busca <code>tufuente.ai</code>. Cloudflare cobra los .ai al costo, sin recargo [[F02]].',
+        'domains.cloudflare.com → busca <code>derenombre.ai</code>. Cloudflare cobra los .ai al costo, sin recargo [[F02]].',
         'Revisa el <b>plazo</b> y el <b>total</b> antes de pagar [[F03]].',
         'Paga tú.',
         'Activa el bloqueo de transferencia si el panel lo ofrece [[Q-LOCK]].',
       ],
-      done:'tufuente.ai aparece en tu cuenta.',
+      done:'derenombre.ai aparece en tu cuenta.',
     } },
-  'S7.2': { title:'Conectar tufuente.ai a tu web', requires:['S7.1','S6.2'], cost:{ type:'free', status:'none', mandatory:true }, sources:[] },
-  'S7.3': { title:'Recibir correo en hola@tufuente.ai', requires:['S7.1'], cost:{ type:'free', status:'ok', mandatory:false, sourceIds:['Q-EMAIL'] }, sources:['F04'] },
+  'S7.2': { title:'Conectar derenombre.ai a tu web', requires:['S7.1','S6.2'], cost:{ type:'free', status:'none', mandatory:true }, sources:[] },
+  'S7.3': { title:'Recibir correo en hola@derenombre.ai', requires:['S7.1'], cost:{ type:'free', status:'ok', mandatory:false, sourceIds:['Q-EMAIL'] }, sources:['F04'] },
   'S7.4': { title:'DMARC', requires:['S7.3'], cost:{ type:'free', status:'nuance', mandatory:true, sourceIds:['F05'] }, sources:['F05','F06'] },
   'S7.5': { title:'Google Search Console', requires:['S7.1','S7.2'], cost:{ type:'free', status:'nuance', mandatory:true }, sources:['F25'] },
   'S7.6': { title:'Bing Webmaster Tools', requires:['S7.5'], cost:{ type:'free', status:'nuance', mandatory:true }, sources:['F26','F27','F28'] },
@@ -1317,9 +1318,8 @@ const WEB_STEPS = {
   'S9.4': { title:'Google Business Profile: solo con reuniones presenciales', requires:['S7.2'], cost:{ type:'free', status:'none', mandatory:false }, sources:['F33','F34'] },
   'S9.5': { title:'Comparar antes y después', requires:['S3.4','S7.2'], condition:'Web publicada hace al menos 1-3 meses (criterio)', cost:C0, criterio:true, sources:[] },
   'S10.1': { title:'Formulario de contacto con anti-spam', requires:['S7.2','S8.2','S8.4'], optional:true, cost:{ type:'usage', status:'ok', mandatory:false, label:'S/ 0 hasta 100 mil peticiones/día; luego desde US$5/mes', sourceIds:['F40'] }, sources:['F40','F43','F04','F12','F13','F14'] },
-  'S10.2': { title:'Enviar correos desde hola@tufuente.ai', requires:['S7.3'], optional:true, cost:{ type:'unknown', status:'none', mandatory:false, sourceIds:['Q-SEND'] }, sources:[] },
+  'S10.2': { title:'Enviar correos desde hola@derenombre.ai', requires:['S7.3'], optional:true, cost:{ type:'unknown', status:'none', mandatory:false, sourceIds:['Q-SEND'] }, sources:[] },
   'S10.3': { title:'Otterly pagado', requires:[], optional:true, cost:{ type:'fixed', amount:29, currency:'USD', period:'month', status:'ok', mandatory:false, label:'US$29/mes (Lite)', sourceIds:['F11'] }, sources:['F11'] },
-  'S10.4': { title:'Registro de marca en INDECOPI', requires:['S1.5'], optional:true, cost:{ type:'fixed', amount:534.9, currency:'PEN', status:'nuance', mandatory:false, label:'S/ 534.90 por clase (S/ 401.20 si eres mype)', sourceIds:['F37'] }, sources:['F37'] },
 };
 // Fuentes del plan v2. "planStatus" es el estado que trae el plan; se reverifican en la Fase 4.
 const SOURCES = {
@@ -1367,6 +1367,7 @@ const SOURCES = {
   F42:{ claim:'Precio de .ai en Cloudflare: US$80/año', site:'Cloudflare (buscador de dominios)', status:'ok', verifiedAt:'2026-11-18', note:'Visto en el buscador de dominios de Cloudflare el 18 nov 2026: los .ai piden 2 años mínimo, US$160 al registrar y US$80/año al renovar.', url:'https://domains.cloudflare.com/' },
   F43:{ claim:'Turnstile exige validar cada token en el servidor (Siteverify)', site:'Cloudflare', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.cloudflare.com/turnstile/get-started/server-side-validation/' },
   F44:{ claim:'El Libro de Reclamaciones aplica a proveedores identificados con RUC', site:'BDO', status:'nuance', verifiedAt:'2026-11-08', note:'Fuente secundaria (BDO); no encontré los requisitos exactos de la herramienta.', url:'https://pe-www.bdo.global/getattachment/Publicaciones/Business-Services-Outsourcing/Alerta-Legal/Alerta-Legal-INDECOPI-supervisa-implementacion-del/BDO-Peru_Alerta-Legal-13-12-2021.pdf.aspx?lang=es-PE' },
+  F48:{ claim:'Registro de marca en línea: cuenta en serviciosenlinea.indecopi.gob.pe, pago en línea; resolución estimada en unos 45 días hábiles', site:'modelo.pe', status:'nuance', verifiedAt:'2026-11-18', note:'Guía de terceros; confirma pasos y tasa en la plataforma de INDECOPI.', url:'https://modelo.pe/blog/como-registrar-una-marca-en-indecopi-peru-2026/' },
   F45:{ claim:'PageSpeed Insights: herramienta gratuita de Google', site:'Google', status:'ok', verifiedAt:'2026-11-08', url:'https://developers.google.com/speed/docs/insights/v5/about' },
   F46:{ claim:'El Gestor de contraseñas de Google permite agregar una nota a cada contraseña guardada, con la misma protección que la contraseña', site:'Ayuda de Google Chrome', status:'ok', verifiedAt:'2026-11-08', url:'https://support.google.com/chrome/answer/7378684?hl=en' },
   F47:{ claim:'Microsoft Authenticator dejó de guardar y autocompletar contraseñas en 2025 (las pasó a Edge); sigue dando códigos de doble factor', site:'TechRadar', status:'ok', verifiedAt:'2026-11-08', url:'https://www.techradar.com/pro/security/microsoft-authenticator-begins-password-autofill-phase-out-this-week-so-export-now-or-you-could-lose-them-forever' },
@@ -1434,16 +1435,16 @@ const SOURCES = {
 const SOURCES_CHECKED = { by:'plan v2', at:'2026-11-07', pending:false };
 // Resumen de costos del plan (pestaña Datos).
 const COST_TABLE = [
-  { concept:'Dominio tufuente.ai', amount:'US$80/año; ~US$160 si exige 2 años', mandatory:'Sí, para publicar con tu marca', when:'S7', step:'S7.1', sources:['F42','F03'], status:'nuance' },
+  { concept:'Dominio derenombre.ai', amount:'US$160 los 2 primeros años; luego US$80/año', mandatory:'Sí, para publicar con tu marca', when:'S7', step:'S7.1', sources:['F42','F03'], status:'ok' },
   { concept:'Hosting en Cloudflare Workers', amount:'US$0 (estáticos gratis e ilimitados)', mandatory:'Sí', when:'S6', step:'S6.2', sources:['F39'], status:'ok' },
   { concept:'GitHub (repo privado)', amount:'US$0', mandatory:'Sí', when:'S5', step:'S5.6', sources:['F41'], status:'ok' },
-  { concept:'Email Routing (hola@tufuente.ai)', amount:'US$0: recibir correos es gratis', mandatory:'Recomendado', when:'S7', step:'S7.3', sources:['Q-EMAIL'], status:'ok' },
+  { concept:'Email Routing (hola@derenombre.ai)', amount:'US$0: recibir correos es gratis', mandatory:'Recomendado', when:'S7', step:'S7.3', sources:['Q-EMAIL'], status:'ok' },
   { concept:'DataForSEO', amount:'Pago por uso; US$1 de prueba, luego recarga mínima de US$50', mandatory:'No (hay ruta gratis)', when:'S3', step:'S3.1', sources:['Q-DFS'], status:'ok' },
  { concept:'Otterly Lite', amount:'US$29/mes; prueba gratis de 14 días', mandatory:'No (hay ruta gratis)', when:'S3 / S10', step:'S10.3', sources:['F11','Q-OTTRL'], status:'ok' },
   { concept:'Generador de imágenes', amount:'Depende de lo que ya pagues', mandatory:'No (puedes usar fotos propias)', when:'S4', step:'S4.3', sources:['Q-IMG'], status:'none' },
   { concept:'Workers pagado', amount:'US$5/mes mínimo', mandatory:'Solo si el formulario supera 100 mil peticiones/día', when:'S10', step:'S10.1', sources:['F40'], status:'ok' },
   { concept:'Correo para enviar desde tu dominio', amount:'En Cloudflare, Workers Paid desde US$5/mes; otros proveedores: sin dato', mandatory:'No', when:'S10', step:'S10.2', sources:['Q-SEND'], status:'nuance' },
-  { concept:'Registro de marca INDECOPI', amount:'S/ 534.90 por clase (S/ 401.20 si eres mype)', mandatory:'No para lanzar', when:'S10', step:'S10.4', sources:['F37'], status:'nuance' },
+  { concept:'Registro de marca INDECOPI', amount:'S/ 534.90 por clase (S/ 401.20 si eres mype)', mandatory:'Sí, antes de comprar el dominio', when:'S1', step:'S1.6', sources:['F37'], status:'nuance' },
   { concept:'Revisión legal de textos', amount:'Sin dato', mandatory:'Recomendado (criterio)', when:'S8', step:'S8.2', sources:['Q-LEGAL'], status:'none' },
   { concept:'RUC', amount:'Sin costo mencionado', mandatory:'Para facturar', when:'S8', step:'S8.1', sources:['F35'], status:'nuance' },
   { concept:'Inscripción de banco de datos', amount:'US$0', mandatory:'Sí, cuando guardes contactos organizados', when:'S8', step:'S8.4', sources:['F15'], status:'ok' },
@@ -1466,7 +1467,7 @@ const WEB_CONTENT = {
     body:{ steps:[
       `Instala Google Authenticator (de Google LLC) con el botón de arriba. Microsoft Authenticator (de Microsoft Corporation) también sirve. Evita otras apps parecidas, sobre todo si muestran anuncios.`,
       `Para contraseñas usa el Gestor de contraseñas de Google, el que ya trae Chrome. No uses Microsoft Authenticator para esto: desde 2025 ya no guarda contraseñas [[F47]].`,
-      `Ábrelo desde Chrome (menú ⋮ → Gestor de contraseñas de Google) o en passwords.google.com. Si quieres, deja creada una entrada "TuFuente · códigos de recuperación". Cuando GitHub y Cloudflare te den códigos de recuperación (pasos S1.3 y S1.4), pégalos en el campo <b>Nota</b> de esa cuenta: queda protegida igual que la contraseña [[F46]].`,
+      `Ábrelo desde Chrome (menú ⋮ → Gestor de contraseñas de Google) o en passwords.google.com. Si quieres, deja creada una entrada "DeRenombre · códigos de recuperación". Cuando GitHub y Cloudflare te den códigos de recuperación (pasos S1.3 y S1.4), pégalos en el campo <b>Nota</b> de esa cuenta: queda protegida igual que la contraseña [[F46]].`,
     ], done:`Tienes Google Authenticator instalado y sabes dónde guardarás los códigos de recuperación.` } },
   'S1.4': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`Crea la cuenta (o entra) y busca en tu perfil la autenticación de dos factores.` },
     body:{ steps:[
@@ -1478,6 +1479,17 @@ const WEB_CONTENT = {
       `Cloudflare te muestra códigos de respaldo (backup codes): selecciónalos y cópialos (Ctrl+C). Luego abre una pestaña nueva en Chrome, escribe <code>chrome://password-manager/passwords</code> en la barra de direcciones y presiona Enter. En el buscador de arriba escribe <b>cloudflare</b>. Si aparece, haz clic en esa fila (Windows te pide tu PIN) → <b>Editar</b>. Si no aparece, clic en <b>Agregar</b> → en Sitio escribe <code>cloudflare.com</code> y llena tu usuario y contraseña. Pega los códigos en el campo <b>Nota</b> (Ctrl+V) → <b>Guardar</b> [[F46]].`,
     ], why:`Cloudflare va a manejar tu hosting, y luego tu dominio, DNS y correo. Es la cuenta más crítica. {{criterio}}`,
        done:`Cloudflare te pide el código al iniciar sesión, o entras solo con Google y tu Google tiene verificación en dos pasos.` } },
+  'S1.6': { start:{ kind:`link`, label:`Abrir los servicios en línea de INDECOPI`, url:`https://serviciosenlinea.indecopi.gob.pe/`, then:`Crea tu cuenta con tu DNI y busca el trámite de registro de marca.` },
+    body:{ steps:[
+      `Hazlo <b>después</b> del correo a Compliance (S1.1): el registro es público y sale con tu nombre. {{criterio}}`,
+      `Opcional pero recomendado: antes de pagar, pide la opinión de un agente de marcas sobre "DeRenombre" en la clase 35. {{criterio}}`,
+      `Toca <b>Empieza aquí</b> → crea tu cuenta con tu DNI → busca el trámite de <b>registro de marca</b> [[F48]].`,
+      `Tipo de marca: <b>denominativa</b> (solo la palabra). Signo: <code>DERENOMBRE</code>. Clase: <b>35</b>. En servicios escribe, por ejemplo: publicidad; consultoría en marketing; optimización de motores de búsqueda con fines de promoción de ventas.`,
+      `Paga la tasa: S/ 534.90 por una clase, o S/ 401.20 si eres mype inscrita en el Remype [[F37]]. Revisa el monto que te muestra la plataforma antes de pagar.`,
+      `Guarda el <b>número de expediente</b> (captura con Windows + Shift + S) en tu Drive, carpeta "Plan AEO-GEO (app)" → "Web · S1 Base segura".`,
+    ], why:`Antes de pagar el dominio y construir reputación con el nombre, INDECOPI te dice si es tuyo. Si lo observan o lo rechazan, cambias de nombre habiendo perdido solo la tasa.`,
+       extra:`<b>Mientras esperas la respuesta</b> (una guía estima unos 45 días hábiles [[F48]]), sigue con S2 a S6: no dependen del nombre.`,
+       done:`Tienes el número de expediente.` } },
   'S2.1': { start:{ kind:`copy`, label:`Copiar el comando`, text:`git --version`, then:`Tecla Windows → escribe <code>PowerShell</code> → Enter, pega el comando y presiona Enter.` },
     body:{ steps:[
       `Tecla Windows → escribe <code>PowerShell</code> → Enter.`,
@@ -1492,16 +1504,16 @@ const WEB_CONTENT = {
       `Escribe <code>node -v</code> → Enter.`,
       `Confirma que sea <b>22.23.4 o mayor, y par</b> (22, 24, 26...). Astro no soporta versiones impares [[F09]].`,
     ], done:`<code>node -v</code> muestra una versión par ≥ 22.23.4.` } },
-  'S2.3': { start:{ kind:`copy`, label:`Copiar el nombre de la carpeta`, text:`tufuente-web`, then:`Explorador de archivos → Documentos → crea <code>Proyectos</code> y dentro una carpeta con este nombre.` },
+  'S2.3': { start:{ kind:`copy`, label:`Copiar el nombre de la carpeta`, text:`derenombre-web`, then:`Explorador de archivos → Documentos → crea <code>Proyectos</code> y dentro una carpeta con este nombre.` },
     body:{ steps:[
       `Abre el Explorador de archivos (tecla Windows + E) → <b>Documentos</b>.`,
       `Clic derecho en un espacio vacío → <b>Nuevo</b> → <b>Carpeta</b> → nómbrala <code>Proyectos</code> → Enter.`,
-      `Entra a <code>Proyectos</code> y crea otra carpeta igual, llamada <code>tufuente-web</code> (cópiala con el botón de arriba y pégala como nombre).`,
-    ], done:`Existe Documentos → Proyectos → tufuente-web.` } },
-  'S2.4': { start:{ kind:`copy`, label:`Copiar el primer mensaje para Claude Code`, text:`Confírmame que ves esta carpeta y que Node y Git están instalados.`, then:`App de Claude → pestaña <b>Code</b> → carpeta <code>tufuente-web</code> → modo <b>Plan</b> → pega.` },
+      `Entra a <code>Proyectos</code> y crea otra carpeta igual, llamada <code>derenombre-web</code> (cópiala con el botón de arriba y pégala como nombre).`,
+    ], done:`Existe Documentos → Proyectos → derenombre-web.` } },
+  'S2.4': { start:{ kind:`copy`, label:`Copiar el primer mensaje para Claude Code`, text:`Confírmame que ves esta carpeta y que Node y Git están instalados.`, then:`App de Claude → pestaña <b>Code</b> → carpeta <code>derenombre-web</code> → modo <b>Plan</b> → pega.` },
     body:{ steps:[
       `Abre la app de Claude de escritorio (si no la tienes: claude.ai/download) → pestaña <b>Code</b> [[F07]].`,
-      `Debajo de la caja de texto, selector de <b>carpeta del proyecto</b> → busca Documentos → Proyectos → <code>tufuente-web</code> → selecciónala.`,
+      `Debajo de la caja de texto, selector de <b>carpeta del proyecto</b> → busca Documentos → Proyectos → <code>derenombre-web</code> → selecciónala.`,
       `Selector de modo → <b>Plan</b>.`,
       `Escribe: "Confírmame que ves esta carpeta y que Node y Git están instalados."`,
     ], extra:`<b>Ojo:</b> el modo Plan y las tareas grandes consumen más uso de tu plan. Si te topas con el límite, divide las tareas en partes más chicas. {{criterio}}`,
@@ -1515,7 +1527,7 @@ const WEB_CONTENT = {
       `Revisa y aprueba el comando <code>claude mcp add ... https://mcp.dataforseo.com/http</code>.`,
     ], done:`Elegiste ruta (y, si es la de datos, Claude te devuelve un volumen real de prueba).` } },
   'S3.3': { body:{ steps:[
-      `Explorador de archivos → Documentos → Proyectos → tufuente-web → doble clic en <code>arquitectura.csv</code> (se abre en Excel).`,
+      `Explorador de archivos → Documentos → Proyectos → derenombre-web → doble clic en <code>arquitectura.csv</code> (se abre en Excel).`,
       `Lee fila por fila: ¿la keyword de cada página es algo que tu cliente escribiría? Los volúmenes de cualquier herramienta son estimaciones [[F20]].`,
       `Si cambias algo: Archivo → Guardar. Si Excel avisa algo sobre el formato, elige seguir guardando como CSV.`,
     ], done:`Estás de acuerdo con la lista.` } },
@@ -1524,7 +1536,7 @@ const WEB_CONTENT = {
       `Toca <b>Empieza aquí</b> (Dribbble) → en el buscador escribe <b>consulting website</b> o <b>agency landing</b> [[F20]].`,
       `Cuando un diseño te guste: tecla Windows + Shift + S → selecciona la zona. Windows guarda la captura en Imágenes → Capturas de pantalla. Junta 3-5.`,
       `En 21st.dev haz lo mismo con 2-3 componentes (botones, tarjetas, encabezados) que te gusten.`,
-      `En Documentos → Proyectos → tufuente-web crea una carpeta <code>inspiracion</code> y mueve ahí esas capturas.`,
+      `En Documentos → Proyectos → derenombre-web crea una carpeta <code>inspiracion</code> y mueve ahí esas capturas.`,
     ], done:`Tienes 5-8 referencias.` } },
   'S4.2': { start:{ kind:`copy`, label:`Copiar el prompt de la guía de marca`, text:`Con las referencias de inspiracion, propón 2 direcciones visuales (colores, tipografías, tono). Pregúntame lo que necesites. Que NO se vea como la típica web hecha con IA o plantilla: nada de título serif gigante con una segunda línea en cursiva gris, etiquetas pequeñas en mayúsculas espaciadas sobre cada sección, fila de cifras grandes, tabla "SEO tradicional vs GEO" ni listas numeradas 01-02-03 como recurso principal. Propón algo que solo pueda ser mío.`, then:`Pégalo en Claude Code y, al elegir, pídele que la guarde en <code>marca.md</code>.` },
     body:{ steps:[
@@ -1536,7 +1548,7 @@ const WEB_CONTENT = {
   'S4.3': { start:{ kind:`copy`, label:`Copiar el prompt de estilo de imágenes`, text:`Escríbeme un envoltorio de prompt para imágenes: cámara, lente, luz, colores fijos, y un espacio [ESCENA]. Guárdalo en estilo-imagenes.md.`, then:`Pégalo en Claude Code; luego prueba 2 escenas en tu generador.` },
     body:{ steps:[
       `En Claude Code: "Escríbeme un envoltorio de prompt para imágenes: cámara, lente, luz, colores fijos, y un espacio [ESCENA]. Guárdalo en <code>estilo-imagenes.md</code>." [[F20]]`,
-      `Abre <code>estilo-imagenes.md</code> (Documentos → Proyectos → tufuente-web, se abre con el Bloc de notas) y copia el texto.`,
+      `Abre <code>estilo-imagenes.md</code> (Documentos → Proyectos → derenombre-web, se abre con el Bloc de notas) y copia el texto.`,
       `Pégalo en el generador de imágenes que uses (por ejemplo ChatGPT o Gemini), cambiando [ESCENA] por algo concreto, como "escritorio con laptop mostrando un gráfico". Haz 2 escenas.`,
       `Si algo no te gusta (colores, luz), díselo a Claude Code para que ajuste el envoltorio y repite.`,
     ], extra:`<b>Alternativa gratis:</b> usa fotos propias tomadas con tu celular o tu DJI, con el mismo criterio de luz y encuadre. {{criterio}}`,
@@ -1556,7 +1568,7 @@ const WEB_CONTENT = {
       `Abre <code>localhost:4321</code>. Para cambiar algo, escríbele a Claude una frase concreta, por ejemplo: "el título más grande" o "cambia el verde por azul marino".`,
       `Para ver cómo se ve en celular: en Chrome, con tu página abierta, presiona F12 y luego Ctrl+Shift+M. Arriba elige un modelo de celular.`,
     ], why:`Un formulario con anti-spam exige un servidor que valide cada envío [[F43]] y una forma de mandarte los mensajes. Eso pasó a S10 como opcional. Los botones de WhatsApp y correo no necesitan nada de eso.`,
-       extra:`<b>Ojo:</b> el botón de correo funcionará recién cuando hola@tufuente.ai exista (S7.3). Mientras tanto, usa tu Gmail o solo WhatsApp.`,
+       extra:`<b>Ojo:</b> el botón de correo funcionará recién cuando hola@derenombre.ai exista (S7.3). Mientras tanto, usa tu Gmail o solo WhatsApp.`,
        done:`La home te gusta en computadora y celular.` } },
   'S5.3': { start:{ kind:`copy`, label:`Copiar el prompt del resto de páginas`, text:`Usa la home como plantilla de estilo y construye servicios (uno por página), metodología, sobre mí y contacto, según arquitectura.csv. En metodología, explica con honestidad que las métricas de IA son volátiles y cómo mido; cita las fuentes que uses.`, then:`Pégalo en Claude Code y revisa cada página en computadora y celular.` },
     body:{ steps:[
@@ -1576,11 +1588,11 @@ const WEB_CONTENT = {
       `Pide un post de ejemplo.`,
     ], done:`<code>/blog</code> y un post de ejemplo se ven bien.` } },
   'S5.6': { start:{ kind:`copy`, label:`Copiar el prompt de seguridad y repositorio`, then:`Pégalo en Claude Code. Al final, activa Dependabot en GitHub (paso 3).`,
-      text:`Crea public/_headers con cabeceras de seguridad para todo el sitio (/*): X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security y una Content-Security-Policy. Explícame cada una en una línea. Después inicializa Git, crea un .gitignore que excluya node_modules, .env y secretos, revisa que no haya claves en los archivos, y ayúdame a crear un repositorio privado tufuente-web en GitHub y subir el código.` },
+      text:`Crea public/_headers con cabeceras de seguridad para todo el sitio (/*): X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security y una Content-Security-Policy. Explícame cada una en una línea. Después inicializa Git, crea un .gitignore que excluya node_modules, .env y secretos, revisa que no haya claves en los archivos, y ayúdame a crear un repositorio privado derenombre-web en GitHub y subir el código.` },
     body:{ steps:[
       `"Crea <code>public/_headers</code> con cabeceras de seguridad para todo el sitio (<code>/*</code>): X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security y una Content-Security-Policy. Explícame cada una en una línea." [[F22]] Valores exactos de cada cabecera: [[Q-HEADERS]]`,
-      `"Inicializa Git, crea un <code>.gitignore</code> que excluya <code>node_modules</code>, <code>.env</code> y secretos, revisa que no haya claves en los archivos, y ayúdame a crear un repositorio <b>privado</b> <code>tufuente-web</code> en GitHub y subir el código." [[F41]]`,
-      `En GitHub: abre <code>github.com/TU-USUARIO/tufuente-web</code> → pestaña <b>Settings</b> (arriba) → <b>Advanced Security</b> → <b>Dependabot security updates</b> → <b>Enable</b> [[F23]].`,
+      `"Inicializa Git, crea un <code>.gitignore</code> que excluya <code>node_modules</code>, <code>.env</code> y secretos, revisa que no haya claves en los archivos, y ayúdame a crear un repositorio <b>privado</b> <code>derenombre-web</code> en GitHub y subir el código." [[F41]]`,
+      `En GitHub: abre <code>github.com/TU-USUARIO/derenombre-web</code> → pestaña <b>Settings</b> (arriba) → <b>Advanced Security</b> → <b>Dependabot security updates</b> → <b>Enable</b> [[F23]].`,
     ], extra:`El plan gratis incluye "Dependabot alerts" [[F41]]; que incluya también las "security updates" en repos privados no lo dice explícito [[Q-DEPBOT]].`,
        done:`El código está en GitHub, privado, con Dependabot activo.` } },
   'S6.1': { start:{ kind:`copy`, label:`Copiar el prompt de despliegue`, text:`Instala Wrangler como dependencia de desarrollo y crea wrangler.jsonc para un sitio Astro estático que sirva dist, con 404 propia (not_found_handling: 404-page). Fecha de compatibilidad: hoy. Luego corre npx astro build && npx wrangler dev y dame el link de vista previa local.`, then:`Pégalo en Claude Code.` },
@@ -1601,33 +1613,33 @@ const WEB_CONTENT = {
     ], done:`Carga rápido en ambas.` } },
   'S6.5': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`<b>Compute → Workers & Pages → Create application → Import a repository</b>.` },
     body:{ steps:[
-      `Cloudflare → <b>Compute → Workers & Pages → Create application → Import a repository</b> → <code>tufuente-web</code> [[F24]].`,
+      `Cloudflare → <b>Compute → Workers & Pages → Create application → Import a repository</b> → <code>derenombre-web</code> [[F24]].`,
       `Build: <code>npx astro build</code> · Deploy: <code>npx wrangler deploy</code> → <b>Save and Deploy</b>.`,
     ], extra:`Si Workers Builds tiene límites en el plan gratis: [[Q-BUILDS]]`,
        done:`Un cambio subido a GitHub aparece en la web.` } },
-  'S7.2': { start:{ kind:`copy`, label:`Copiar el prompt del dominio`, text:`Conecta el Worker a tufuente.ai como dominio personalizado. Cita la documentación de Cloudflare que uses.`, then:`Pégalo en Claude Code; después abre https://tufuente.ai.` },
+  'S7.2': { start:{ kind:`copy`, label:`Copiar el prompt del dominio`, text:`Conecta el Worker a derenombre.ai como dominio personalizado. Cita la documentación de Cloudflare que uses.`, then:`Pégalo en Claude Code; después abre https://derenombre.ai.` },
     body:{ steps:[
-      `"Conecta el Worker a tufuente.ai como dominio personalizado. Cita la documentación de Cloudflare que uses." [[Q-CUSTOMDOM]]`,
-      `Espera unos minutos y abre https://tufuente.ai.`,
-    ], done:`https://tufuente.ai muestra tu web con candado.` } },
+      `"Conecta el Worker a derenombre.ai como dominio personalizado. Cita la documentación de Cloudflare que uses." [[Q-CUSTOMDOM]]`,
+      `Espera unos minutos y abre https://derenombre.ai.`,
+    ], done:`https://derenombre.ai muestra tu web con candado.` } },
   'S7.3': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`<b>Compute → Email Service → Email Routing</b>.` },
     body:{ steps:[
       `Cloudflare → <b>Compute → Email Service → Email Routing</b> → activa tu dominio (agrega solo MX, SPF y DKIM) [[F04]].`,
       `<b>Destination Addresses</b> → agrega tu Gmail → verifícalo.`,
       `Tu dominio → <b>Routing Rules</b> → <b>Create routing rule</b> → <code>hola</code> → <b>Send to an email</b> → tu Gmail → <b>Save</b>.`,
-      `Desde otro correo (no el mismo Gmail) escribe a <code>hola@tufuente.ai</code>. Revisa la bandeja de entrada y la carpeta Spam de tu Gmail.`,
-    ], extra:`<b>Ojo:</b> solo <b>recibe y reenvía</b>. Para <b>enviar</b> desde hola@tufuente.ai necesitas un proveedor (S10.2).`,
+      `Desde otro correo (no el mismo Gmail) escribe a <code>hola@derenombre.ai</code>. Revisa la bandeja de entrada y la carpeta Spam de tu Gmail.`,
+    ], extra:`<b>Ojo:</b> solo <b>recibe y reenvía</b>. Para <b>enviar</b> desde hola@derenombre.ai necesitas un proveedor (S10.2).`,
        done:`El correo de prueba llegó.` } },
-  'S7.4': { start:{ kind:`copy`, label:`Copiar el prompt de DMARC`, text:`Ayúdame a crear en el DNS de Cloudflare un registro TXT en _dmarc.tufuente.ai con p=none y un correo para reportes. Explícame cada parte.`, then:`Pégalo en Claude Code, o crea el registro tú en el panel de DNS.` },
+  'S7.4': { start:{ kind:`copy`, label:`Copiar el prompt de DMARC`, text:`Ayúdame a crear en el DNS de Cloudflare un registro TXT en _dmarc.derenombre.ai con p=none y un correo para reportes. Explícame cada parte.`, then:`Pégalo en Claude Code, o crea el registro tú en el panel de DNS.` },
     body:{ steps:[
       `Cloudflare → DNS → confirma que existen SPF y DKIM [[F05]].`,
-      `Pide a Claude Code (o hazlo en el panel) un TXT en <code>_dmarc.tufuente.ai</code> con <code>p=none</code>, usando tu Gmail como correo para reportes.`,
+      `Pide a Claude Code (o hazlo en el panel) un TXT en <code>_dmarc.derenombre.ai</code> con <code>p=none</code>, usando tu Gmail como correo para reportes.`,
       `Revisa los reportes al menos una semana (Google lo sugiere así) y, si tu correo legítimo pasa bien, sube a <code>p=quarantine</code>, empezando con un porcentaje pequeño, y luego a <code>p=reject</code> [[F06]].`,
       `Opcional: activa <b>DMARC Management</b> [[F05]].`,
     ], done:`El registro <code>_dmarc</code> existe.` } },
-  'S7.5': { start:{ kind:`link`, label:`Abrir Search Console`, url:`https://search.google.com/search-console`, then:`<b>Agregar propiedad</b> → <b>Dominio</b> → <code>tufuente.ai</code>.` },
+  'S7.5': { start:{ kind:`link`, label:`Abrir Search Console`, url:`https://search.google.com/search-console`, then:`<b>Agregar propiedad</b> → <b>Dominio</b> → <code>derenombre.ai</code>.` },
     body:{ steps:[
-      `search.google.com/search-console → <b>Agregar propiedad</b> → <b>Dominio</b> → <code>tufuente.ai</code> [[F25]].`,
+      `search.google.com/search-console → <b>Agregar propiedad</b> → <b>Dominio</b> → <code>derenombre.ai</code> [[F25]].`,
       `Si ofrece verificación automática con tu proveedor, úsala. Si no: <b>TXT</b> → copia el texto.`,
       `Cloudflare → DNS → TXT con nombre <code>@</code> y ese valor.`,
       `<b>Verificar</b> (puede tardar hasta 3 días).`,
@@ -1636,9 +1648,9 @@ const WEB_CONTENT = {
   'S7.6': { start:{ kind:`link`, label:`Abrir Bing Webmaster Tools`, url:`https://www.bing.com/webmasters`, then:`<b>My Sites → Import</b> → inicia sesión con Google.` },
     body:{ steps:[
       `bing.com/webmasters → <b>My Sites → Import</b> → inicia sesión con Google y autoriza [[F26]].`,
-      `Selecciona tufuente.ai → <b>Import</b> (se verifica solo).`,
+      `Selecciona derenombre.ai → <b>Import</b> (se verifica solo).`,
     ], why:`ChatGPT Search se apoya en el índice de Bing como pilar importante [[F28]], aunque hoy combina también el rastreo propio de OpenAI [[F27]].`,
-       done:`tufuente.ai aparece en Bing Webmaster Tools.` } },
+       done:`derenombre.ai aparece en Bing Webmaster Tools.` } },
   'S7.7': { start:{ kind:`link`, label:`Abrir Cloudflare`, url:`https://dash.cloudflare.com/`, then:`Tu dominio → página <b>Configuration</b> (caché) → <b>Crawler Hints</b>.` },
     body:{ steps:[ `Cloudflare → tu dominio → página <b>Configuration</b> (caché) → activa <b>Crawler Hints</b> [[F30]].` ],
        why:`Crawler Hints avisa a los buscadores cuando cambias algo, gratis y con un clic [[F29]].`,
@@ -1648,7 +1660,7 @@ const WEB_CONTENT = {
     body:{ steps:[
       `"Crea <code>public/robots.txt</code> que permita a todos los buscadores, permita explícitamente <code>OAI-SearchBot</code>, <code>Claude-SearchBot</code> y <code>PerplexityBot</code>, deje permitidos <code>GPTBot</code> y <code>ClaudeBot</code> (explícame la diferencia) e incluya el sitemap." [[F31]] [[F32]] [[Q-BOTS]]`,
       `"Agrega un sitemap automático al proyecto Astro." [[Q-SITEMAP]]`,
-      `Search Console → menú izquierdo <b>Sitemaps</b> → escribe <code>sitemap-index.xml</code> → <b>Enviar</b>. En Bing Webmaster Tools → <b>Sitemaps</b> → <b>Submit sitemap</b> → <code>https://tufuente.ai/sitemap-index.xml</code>.`,
+      `Search Console → menú izquierdo <b>Sitemaps</b> → escribe <code>sitemap-index.xml</code> → <b>Enviar</b>. En Bing Webmaster Tools → <b>Sitemaps</b> → <b>Submit sitemap</b> → <code>https://derenombre.ai/sitemap-index.xml</code>.`,
     ], extra:`<b>Ojo:</b> <b>ClaudeBot es de entrenamiento</b>; el de búsqueda es <b>Claude-SearchBot</b>.`,
        done:`Ambos muestran el sitemap como leído.` } },
   'S8.1': { start:{ kind:`link`, label:`Abrir la guía de SUNAT para el RUC`, url:`https://orientacion.sunat.gob.pe/1097-0-inscribete-en-el-ruc`, then:`Sigue el trámite con la <b>APP Personas</b> de SUNAT.` },
@@ -1670,16 +1682,16 @@ const WEB_CONTENT = {
       `Escríbele a Claude Code: "Agrega en el pie de página de todas las páginas el aviso y el link a mi Libro de Reclamaciones: [pega el link que te dio INDECOPI]."`,
     ], why:`Si solo atiendes empresas, no aplica [[F18]]; pero basta un cliente persona natural consumidor final, y una web informativa también puede obligar [[F19]]. Como apuntas a pymes, conviene tenerlo. {{criterio}}`,
        done:`El link aparece en tu web.` } },
-  'S8.4': { start:{ kind:`link`, label:`Abrir el trámite en gob.pe`, url:`https://www.gob.pe/8060-inscribir-banco-de-datos-en-el-registro-nacional-de-proteccion-de-datos-personales`, then:`Descarga el formulario: nombre "Contactos TuFuente".` },
+  'S8.4': { start:{ kind:`link`, label:`Abrir el trámite en gob.pe`, url:`https://www.gob.pe/8060-inscribir-banco-de-datos-en-el-registro-nacional-de-proteccion-de-datos-personales`, then:`Descarga el formulario: nombre "Contactos DeRenombre".` },
     body:{ steps:[
       `gob.pe → "Inscribir banco de datos en el Registro Nacional de Protección de Datos Personales" [[F15]].`,
-      `Descarga el formulario. Nombre: "Contactos TuFuente". Finalidad: responder consultas comerciales. Datos: nombre, correo, teléfono, mensaje.`,
+      `Descarga el formulario. Nombre: "Contactos DeRenombre". Finalidad: responder consultas comerciales. Datos: nombre, correo, teléfono, mensaje.`,
       `Fírmalo y súbelo online.`,
       `Guarda la constancia y el código.`,
     ], why:`Datos de personas guardados de forma organizada (aunque sea en un Excel) son un banco de datos que debe inscribirse [[F16]]. Es gratis [[F15]]. Hubo una multa de 6.5 UIT por no hacerlo [[F17]].`,
        done:`Tienes la constancia.` } },
-  'S9.1': { start:{ kind:`link`, label:`Abrir LinkedIn`, url:`https://www.linkedin.com/`, then:`Menú <b>Para negocios</b> → crea una página de empresa "TuFuente.ai".` },
-    body:{ steps:[ `Crea la página "TuFuente.ai" con el mismo nombre, descripción y logo de la web.` ], done:`La página existe.` } },
+  'S9.1': { start:{ kind:`link`, label:`Abrir LinkedIn`, url:`https://www.linkedin.com/`, then:`Menú <b>Para negocios</b> → crea una página de empresa "DeRenombre".` },
+    body:{ steps:[ `Crea la página "DeRenombre" con el mismo nombre, descripción y logo de la web.` ], done:`La página existe.` } },
   'S9.2': { start:{ kind:`copy`, label:`Copiar el prompt de datos estructurados`, text:`Agrega JSON-LD Organization (nombre, URL, logo, descripción, sameAs con LinkedIn) en todas las páginas, y Person para mí como autor del blog.`, then:`Pégalo en Claude Code; después prueba en search.google.com/test/rich-results.` },
     body:{ steps:[
       `"Agrega JSON-LD <code>Organization</code> (nombre, URL, logo, descripción, <code>sameAs</code> con LinkedIn) en todas las páginas, y <code>Person</code> para mí como autor del blog." [[Q-SCHEMA]]`,
@@ -1689,7 +1701,7 @@ const WEB_CONTENT = {
   'S9.3': { start:{ kind:`copy`, label:`Copiar el prompt del aviso de cookies`, text:`Agrega un aviso de cookies con Aceptar y Rechazar igual de visibles, y que Google Analytics no cargue hasta que la persona acepte.`, then:`Pégalo en Claude Code. Después crea la propiedad en analytics.google.com.` },
     body:{ steps:[
       `"Agrega un aviso de cookies con <b>Aceptar</b> y <b>Rechazar</b> igual de visibles, y que Google Analytics no cargue hasta que la persona acepte." [[F14]]`,
-      `Crea cuenta y propiedad en analytics.google.com → flujo web con tufuente.ai → copia la etiqueta [[F20]] [[Q-GA4]].`,
+      `Crea cuenta y propiedad en analytics.google.com → flujo web con derenombre.ai → copia la etiqueta [[F20]] [[Q-GA4]].`,
       `"Instala esta etiqueta respetando el aviso de cookies, y mide clics en WhatsApp y correo." Ajusta la Content-Security-Policy de S5.6 si hace falta.`,
       `Instala <b>Tag Assistant</b> en Chrome y confirma que funciona.`,
     ], why:`El reglamento trata los identificadores en línea como datos personales; por eso el aviso va antes de cargar Analytics [[F14]].`,
@@ -1699,7 +1711,7 @@ const WEB_CONTENT = {
       `<b>Sí:</b> créalo como negocio con área de servicio, ocultando tu dirección [[F34]].`,
       `<b>No:</b> no lo crees. Google exige contacto presencial; los negocios 100% online no son elegibles [[F33]].`,
     ], done:`Tomaste la decisión: sí o no.` } },
-  'S9.5': { start:{ kind:`doc`, label:`Abrir la plantilla del caso de estudio`, template:`casestudy`, file:`S9.5 · Caso de estudio TuFuente.ai`, folder:`Web · S9 Medición` },
+  'S9.5': { start:{ kind:`doc`, label:`Abrir la plantilla del caso de estudio`, template:`casestudy`, file:`S9.5 · Caso de estudio DeRenombre`, folder:`Web · S9 Medición` },
     body:{ steps:[
       `Repite la ronda de 15 preguntas con el mismo método de S3.4.`,
       `Compara con la línea base: ¿en cuántas preguntas apareces ahora?`,
@@ -1717,12 +1729,10 @@ const WEB_CONTENT = {
   'S10.3': { start:{ kind:`link`, label:`Ver planes de Otterly`, url:`https://otterly.ai/pricing`, then:`Lite: 15 prompts, 4 motores; Claude y Gemini son extras.` },
     body:{ steps:[ `Contrata Otterly Lite: US$29/mes, 15 prompts, 4 motores; Claude y Gemini son extras [[F11]]. La prueba gratis dura 14 días y no pide tarjeta [[Q-OTTRL]].` ],
        extra:`<b>Cuándo hacerlo:</b> cuando el método manual de S3.4 te quite mucho tiempo, o cuando vayas a revenderlo a clientes. {{criterio}}` } },
-  'S10.4': { body:{ steps:[ `Registra la marca en INDECOPI: S/ 534.90 por una clase, o S/ 401.20 si eres mype inscrita en el Remype [[F37]]. Confirma el monto en Pagalo.pe antes de pagar.` ],
-       extra:`<b>Cuándo hacerlo:</b> antes de invertir fuerte en publicidad o cuando tengas tus primeros ingresos. {{criterio}}` } },
 };
 // "Empieza aquí" para pasos que ya tenían contenido
 WEB_CONTENT['S6.2'] = { start:{ kind:`copy`, label:`Copiar el prompt de publicación`, text:`Inicia sesión en Cloudflare con Wrangler y despliega con npx astro build && npx wrangler deploy.`, then:`Pégalo en Claude Code. Se abrirá el navegador para autorizar.` } };
-WEB_CONTENT['S7.1'] = { start:{ kind:`link`, label:`Abrir el registro de dominios de Cloudflare`, url:`https://domains.cloudflare.com/`, then:`Busca <code>tufuente.ai</code> y revisa que el total cubra 2 años. Pagas tú.` } };
+WEB_CONTENT['S7.1'] = { start:{ kind:`link`, label:`Abrir el registro de dominios de Cloudflare`, url:`https://domains.cloudflare.com/`, then:`Busca <code>derenombre.ai</code> (todo en minúscula; los dominios no distinguen mayúsculas). Debe decir US$160 por 2 años. Pagas tú.` } };
 Object.keys(WEB_CONTENT).forEach(id => Object.assign(WEB_STEPS[id], WEB_CONTENT[id]));
 
 // Valida el grafo: IDs inexistentes, pasos huérfanos o repetidos, ciclos y fuentes.
@@ -2838,7 +2848,7 @@ function openGate(back){
     <div class="gate-foot ${open ? 'open' : ''}">${open
       ? 'Compuerta abierta. Ya puedes comprar el dominio (S7.1).'
       : 'Compuerta cerrada: los pasos de S7 siguen bloqueados.'}<br><span class="gf-sub">Gastado en el proyecto web hasta hoy: ${spentText()}</span></div>
-    ${open ? '<button type="button" class="btn-main" data-goto="S7.1" style="margin-top:16px;">Ir a S7.1 · Comprar tufuente.ai</button>' : ''}
+    ${open ? '<button type="button" class="btn-main" data-goto="S7.1" style="margin-top:16px;">Ir a S7.1 · Comprar derenombre.ai</button>' : ''}
   </div>`;
   document.body.appendChild(ov);
   const reopen = () => openGate(back);
@@ -2922,7 +2932,7 @@ function openWebMap(){
 // ============================================================
 const LINEAR_STARTS = {
   'f4:2': { kind:'doc', label:'Abrir mi documento de FAQ', template:'faq',
-    file:'06.3 · FAQ answer-first — TuFuente.ai', folder:'06 · Posicionamiento' },
+    file:'06.3 · FAQ answer-first — DeRenombre', folder:'06 · Posicionamiento' },
 };
 function getStart(key){ return (WEB_STEPS[key] && WEB_STEPS[key].start) || LINEAR_STARTS[key] || null; }
 
@@ -2944,14 +2954,14 @@ function baselineRows(){
 }
 const TEMPLATES = {
   faq: {
-    html: () => `<h1>06.3 · FAQ answer-first — TuFuente.ai</h1>
+    html: () => `<h1>06.3 · FAQ answer-first — DeRenombre</h1>
 <p><i>Cómo usar este documento:</i> escribe cada pregunta como la haría tu cliente. Responde primero en 1 o 2 frases (la respuesta directa) y después el detalle. Si das un dato, pon su fuente.</p>
 <h2>Preguntas frecuentes</h2>
 ${FAQ_EXAMPLES.map((q, i) => `<h3>Pregunta ${i + 1}: ${q}</h3><p><b>Respuesta corta (1-2 frases):</b> </p><p><b>Detalle:</b> </p><p><b>Fuente (si das un dato):</b> </p>`).join('\n')}
 <h2>Definiciones claras</h2>
 <p><b>AEO/GEO:</b> </p><p><b>Citation rate (tasa de citación):</b> </p><p><b>Share of answer:</b> </p>
 <p><i>Después, esta FAQ irá en tu web. Datos estructurados (schema) sí, como higiene, sin obsesionarte: no es la palanca principal.</i></p>`,
-    text: () => ['06.3 · FAQ answer-first — TuFuente.ai', '', 'Cómo usar este documento: escribe cada pregunta como la haría tu cliente. Responde primero en 1 o 2 frases y después el detalle. Si das un dato, pon su fuente.', '', 'PREGUNTAS FRECUENTES', '']
+    text: () => ['06.3 · FAQ answer-first — DeRenombre', '', 'Cómo usar este documento: escribe cada pregunta como la haría tu cliente. Responde primero en 1 o 2 frases y después el detalle. Si das un dato, pon su fuente.', '', 'PREGUNTAS FRECUENTES', '']
       .concat(...FAQ_EXAMPLES.map((q, i) => ['Pregunta ' + (i + 1) + ': ' + q, 'Respuesta corta (1-2 frases):', 'Detalle:', 'Fuente (si das un dato):', '']))
       .concat(['DEFINICIONES CLARAS', 'AEO/GEO:', 'Citation rate (tasa de citación):', 'Share of answer:']).join('\n'),
   },
@@ -2959,25 +2969,25 @@ ${FAQ_EXAMPLES.map((q, i) => `<h3>Pregunta ${i + 1}: ${q}</h3><p><b>Respuesta co
     html: () => `<h1>S1.1 · Correo a Compliance</h1>
 <p><i>Borrador para adaptar. Revisa en la intranet a quién se declara (Compliance o tu jefe directo) antes de enviarlo.</i></p>
 <p><b>Para:</b> [Unidad de Cumplimiento o jefe directo]</p>
-<p><b>Asunto:</b> Declaración de actividad externa: consultoría de visibilidad digital (TuFuente.ai)</p>
+<p><b>Asunto:</b> Declaración de actividad externa: consultoría de visibilidad digital (DeRenombre)</p>
 <p>Hola, [nombre]:</p>
-<p>Quiero declarar una actividad externa: TuFuente.ai, una consultoría de visibilidad en buscadores de inteligencia artificial para pequeñas y medianas empresas.</p>
+<p>Quiero declarar una actividad externa: DeRenombre, una consultoría de visibilidad en buscadores de inteligencia artificial para pequeñas y medianas empresas.</p>
 <p>La realizo fuera de mi horario laboral y no atenderé entidades financieras reguladas por la SBS o la SMV. Voy a publicar una web informativa con mis servicios.</p>
 <p>¿Podrían confirmarme por escrito si puedo continuar?</p>
 <p>Gracias,<br>Abraham</p>`,
-    text: () => ['S1.1 · Correo a Compliance', '', 'Para: [Unidad de Cumplimiento o jefe directo]', 'Asunto: Declaración de actividad externa: consultoría de visibilidad digital (TuFuente.ai)', '', 'Hola, [nombre]:', '', 'Quiero declarar una actividad externa: TuFuente.ai, una consultoría de visibilidad en buscadores de inteligencia artificial para pequeñas y medianas empresas.', '', 'La realizo fuera de mi horario laboral y no atenderé entidades financieras reguladas por la SBS o la SMV. Voy a publicar una web informativa con mis servicios.', '', '¿Podrían confirmarme por escrito si puedo continuar?', '', 'Gracias,', 'Abraham'].join('\n'),
+    text: () => ['S1.1 · Correo a Compliance', '', 'Para: [Unidad de Cumplimiento o jefe directo]', 'Asunto: Declaración de actividad externa: consultoría de visibilidad digital (DeRenombre)', '', 'Hola, [nombre]:', '', 'Quiero declarar una actividad externa: DeRenombre, una consultoría de visibilidad en buscadores de inteligencia artificial para pequeñas y medianas empresas.', '', 'La realizo fuera de mi horario laboral y no atenderé entidades financieras reguladas por la SBS o la SMV. Voy a publicar una web informativa con mis servicios.', '', '¿Podrían confirmarme por escrito si puedo continuar?', '', 'Gracias,', 'Abraham'].join('\n'),
   },
   casestudy: {
-    html: () => `<h1>S9.5 · Caso de estudio TuFuente.ai</h1>
+    html: () => `<h1>S9.5 · Caso de estudio DeRenombre</h1>
 <p><i>Primer caso: tu propia web. Usa los datos de tu hoja de línea base (S3.4) y de la segunda ronda.</i></p>
-<h2>Contexto</h2><p>Qué es TuFuente.ai y qué querías lograr.</p>
+<h2>Contexto</h2><p>Qué es DeRenombre y qué querías lograr.</p>
 <h2>Método</h2><p>15 preguntas fijas · motores: ChatGPT, Perplexity y Gemini · ventana de incógnito y conversación nueva para cada pregunta.</p>
 <h2>Línea base</h2><p><b>Fecha:</b> </p><p><b>En cuántas preguntas aparecías:</b> </p>
 <h2>Después</h2><p><b>Fecha:</b> </p><p><b>En cuántas preguntas apareces:</b> </p>
 <h2>Qué cambió</h2><p></p>
 <h2>Limitaciones</h2><p>Método manual; las respuestas de la IA varían entre consultas.</p>
 <h2>Próximos pasos</h2><p></p>`,
-    text: () => ['S9.5 · Caso de estudio TuFuente.ai', '', 'CONTEXTO', '', 'MÉTODO', '15 preguntas fijas · motores: ChatGPT, Perplexity y Gemini · ventana de incógnito y conversación nueva para cada pregunta.', '', 'LÍNEA BASE', 'Fecha:', 'En cuántas preguntas aparecías:', '', 'DESPUÉS', 'Fecha:', 'En cuántas preguntas apareces:', '', 'QUÉ CAMBIÓ', '', 'LIMITACIONES', 'Método manual; las respuestas de la IA varían entre consultas.', '', 'PRÓXIMOS PASOS'].join('\n'),
+    text: () => ['S9.5 · Caso de estudio DeRenombre', '', 'CONTEXTO', '', 'MÉTODO', '15 preguntas fijas · motores: ChatGPT, Perplexity y Gemini · ventana de incógnito y conversación nueva para cada pregunta.', '', 'LÍNEA BASE', 'Fecha:', 'En cuántas preguntas aparecías:', '', 'DESPUÉS', 'Fecha:', 'En cuántas preguntas apareces:', '', 'QUÉ CAMBIÓ', '', 'LIMITACIONES', 'Método manual; las respuestas de la IA varían entre consultas.', '', 'PRÓXIMOS PASOS'].join('\n'),
   },
   baseline: {
     csv: () => [BASELINE_HEAD].concat(baselineRows()).map(r => r.map(c => /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c).join(',')).join('\n'),
@@ -3488,7 +3498,7 @@ function webTrackHtml(){
   const pr = webProgress(WEB_STEP_IDS);
   const pct = Math.round(pr.done / pr.total * 100);
   let html = `<section class="web-sec">
-    <div class="web-head"><span class="lbl forest">Proyecto web · TuFuente.ai</span><span class="lbl">plan ${WEB_PLAN_VERSION}</span></div>
+    <div class="web-head"><span class="lbl forest">Proyecto web · DeRenombre</span><span class="lbl">plan ${WEB_PLAN_VERSION}</span></div>
     <div class="view-sub" style="margin-bottom:12px;">Todo lo gratis antes de cualquier gasto.</div>
     <div class="plan-total"><span class="pct tnum">${pct}%</span><div class="mini-track"><div class="mini-fill" style="width:${pct}%"></div></div><span class="lbl tnum">${pr.done}/${pr.total}</span></div>
     <div class="web-tools"><button type="button" class="btn-ghost" data-web="map">Mapa de dependencias</button><button type="button" class="btn-ghost" data-web="gate">🚦 Compuerta de gasto</button></div>`;
