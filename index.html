@@ -3026,8 +3026,40 @@ function driveToken(){
   return null;
 }
 let tokenClient = null;
+// En el celular (sobre todo en la app instalada) la ventana emergente de Google no le
+// devuelve el permiso a la app. Ahí se pide en la misma pantalla y Google vuelve con
+// el permiso en la dirección (#access_token=...), que se guarda y se borra de inmediato.
+const OAUTH_STATE_KEY = 'aeogeo_oauth_state';
+function useRedirectAuth(){
+  const standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  return standalone || /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
+}
+function startRedirectAuth(){
+  const st = Math.random().toString(36).slice(2) + Date.now().toString(36);
+  try { sessionStorage.setItem(OAUTH_STATE_KEY, st); } catch(e){}
+  const q = new URLSearchParams({
+    client_id: GOOGLE_CLIENT_ID, redirect_uri: location.origin + location.pathname,
+    response_type: 'token', scope: DRIVE_SCOPE, include_granted_scopes: 'true', state: st,
+  });
+  if (!state.drive.connected) q.set('prompt', 'consent');
+  location.href = 'https://accounts.google.com/o/oauth2/v2/auth?' + q.toString();
+}
+// Al volver de Google: guarda el permiso, limpia la dirección y sincroniza.
+function handleOAuthReturn(){
+  if (!location.hash || !/access_token=|error=/.test(location.hash)) return;
+  const h = new URLSearchParams(location.hash.slice(1));
+  let expected = null; try { expected = sessionStorage.getItem(OAUTH_STATE_KEY); sessionStorage.removeItem(OAUTH_STATE_KEY); } catch(e){}
+  history.replaceState(null, '', location.pathname + location.search);
+  if (!expected || h.get('state') !== expected){ setTimeout(() => showToast('No se conectó: la respuesta de Google no coincide; toca Conectar otra vez'), 300); return; }
+  if (h.get('error') || !h.get('access_token')){ setTimeout(() => showToast('No se conectó: ' + (h.get('error') === 'access_denied' ? 'no diste el permiso' : (h.get('error') || 'sin permiso'))), 300); return; }
+  try { sessionStorage.setItem(TOKEN_KEY, JSON.stringify({ token: h.get('access_token'), exp: Date.now() + (parseInt(h.get('expires_in'), 10) || 3600) * 1000 })); } catch(e){}
+  state.drive.connected = true;
+  saveState();
+  setTimeout(() => { showToast('Google Drive conectado'); syncNow(true); }, 300);
+}
 // Debe llamarse dentro de un clic: Google exige un gesto del usuario para cada pedido de permiso.
 function requestDriveToken(){
+  if (useRedirectAuth()){ startRedirectAuth(); return new Promise(() => {}); }
   return new Promise((res, rej) => {
     if (!(window.google && google.accounts && google.accounts.oauth2)){ loadGis().catch(() => {}); rej(new Error('Google aún está cargando; toca otra vez')); return; }
     if (!tokenClient) tokenClient = google.accounts.oauth2.initTokenClient({ client_id: GOOGLE_CLIENT_ID, scope: DRIVE_SCOPE, callback: () => {} });
@@ -3980,6 +4012,7 @@ function wireView(){
 // INIT + SERVICE WORKER (offline)
 // ============================================================
 loadState();
+if (driveConfigured()) handleOAuthReturn();
 setTab('hoy');
 if (driveConfigured()) loadGis().catch(() => {});
 if (syncEnabled() && driveToken()) setTimeout(() => syncNow(), 400);
