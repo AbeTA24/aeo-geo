@@ -1526,10 +1526,11 @@ const WEB_CONTENT = {
       `En 21st.dev haz lo mismo con 2-3 componentes (botones, tarjetas, encabezados) que te gusten.`,
       `En Documentos → Proyectos → tufuente-web crea una carpeta <code>inspiracion</code> y mueve ahí esas capturas.`,
     ], done:`Tienes 5-8 referencias.` } },
-  'S4.2': { start:{ kind:`copy`, label:`Copiar el prompt de la guía de marca`, text:`Con las referencias de inspiracion, propón 2 direcciones visuales (colores, tipografías, tono). Pregúntame lo que necesites.`, then:`Pégalo en Claude Code y, al elegir, pídele que la guarde en <code>marca.md</code>.` },
+  'S4.2': { start:{ kind:`copy`, label:`Copiar el prompt de la guía de marca`, text:`Con las referencias de inspiracion, propón 2 direcciones visuales (colores, tipografías, tono). Pregúntame lo que necesites. Que NO se vea como la típica web hecha con IA o plantilla: nada de título serif gigante con una segunda línea en cursiva gris, etiquetas pequeñas en mayúsculas espaciadas sobre cada sección, fila de cifras grandes, tabla "SEO tradicional vs GEO" ni listas numeradas 01-02-03 como recurso principal. Propón algo que solo pueda ser mío.`, then:`Pégalo en Claude Code y, al elegir, pídele que la guarde en <code>marca.md</code>.` },
     body:{ steps:[
       `En Claude Code: "Con las referencias de <code>inspiracion</code>, propón 2 direcciones visuales (colores, tipografías, tono). Pregúntame lo que necesites." [[F20]]`,
-      `Elige una y escríbele, por ejemplo: "Me quedo con la opción 1. Guárdala en <code>marca.md</code>."`,
+      `Elige una y escríbele, por ejemplo: "Me quedo con la opción 1. Guárdala en <code>marca.md</code>, con una sección 'Qué evitar' que liste los clichés de las webs hechas con IA."`,
+      `Antes de seguir, pregúntate: si le quito el logo, ¿podría ser la web de cualquier agencia GEO? Si la respuesta es sí, pídele otra dirección. {{criterio}}`,
     ], extra:`Los prompts de Nico están en su comunidad; no los revisé. {{criterio}}`,
        done:`Existe <code>marca.md</code>.` } },
   'S4.3': { start:{ kind:`copy`, label:`Copiar el prompt de estilo de imágenes`, text:`Escríbeme un envoltorio de prompt para imágenes: cámara, lente, luz, colores fijos, y un espacio [ESCENA]. Guárdalo en estilo-imagenes.md.`, then:`Pégalo en Claude Code; luego prueba 2 escenas en tu generador.` },
@@ -1548,7 +1549,7 @@ const WEB_CONTENT = {
       `Haz Ctrl+clic en el link que te da (en el video era <code>localhost:4321</code>) para abrirlo en Chrome [[F20]].`,
     ], done:`Ves la página de bienvenida de Astro.` } },
   'S5.2': { start:{ kind:`copy`, label:`Copiar el prompt de la home`, then:`Claude Code en modo <b>Plan</b> → pega. Cambia el número de WhatsApp antes de aprobar.`,
-      text:`Construye la home siguiendo arquitectura.csv, marca.md y la regla de los 2 segundos. Frase principal: 'Cuando tu cliente ideal le pregunta a ChatGPT o Perplexity dónde comprar o a quién contratar, hoy aparece tu competencia — te ayudo a que aparezcas tú.' Botones de contacto: WhatsApp (https://wa.me/51XXXXXXXXX) y correo (mailto:). Contenido answer-first. No inventes testimonios, logos de clientes ni cifras.` },
+      text:`Construye la home siguiendo arquitectura.csv, marca.md y la regla de los 2 segundos. Frase principal: 'Cuando tu cliente ideal le pregunta a ChatGPT o Perplexity dónde comprar o a quién contratar, hoy aparece tu competencia — te ayudo a que aparezcas tú.' Botones de contacto: WhatsApp (https://wa.me/51XXXXXXXXX) y correo (mailto:). Contenido answer-first. No inventes testimonios, logos de clientes ni cifras. Sigue la sección 'Qué evitar' de marca.md: en lugar de cifras decorativas y tablas comparativas, muestra una captura real de una respuesta de ChatGPT o Perplexity y explícala con mis palabras.` },
     body:{ steps:[
       `Copia el prompt con <b>Empieza aquí</b> y pégalo en un bloc de notas. Reemplaza <code>51XXXXXXXXX</code> por 51 + tu número de celular, sin espacios (por ejemplo <code>51987654321</code>).`,
       `En Claude Code, modo <b>Plan</b>: pega ese prompt ya corregido [[F20]]. Aprueba el plan y cambia a <b>Accept edits</b>.`,
