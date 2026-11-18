@@ -1472,11 +1472,12 @@ const WEB_CONTENT = {
     body:{ steps:[
       `Toca <b>Empieza aquí</b> → <b>Sign up</b> → escribe tu correo y una contraseña nueva. Cuando Chrome ofrezca guardar la contraseña, clic en <b>Guardar</b>: así queda en tu Gestor de contraseñas.`,
       `Abre el correo de Cloudflare y haz clic en el link para verificar tu cuenta.`,
-      `Ya dentro: ícono de tu perfil (arriba a la derecha) → <b>Profile</b> → pestaña <b>Authentication</b> → <b>Mobile App Authentication</b> → actívala [[Q-CF2FA]].`,
+      `<b>Si entraste con "Sign in with Google"</b> (sin crear contraseña de Cloudflare): tu cuenta la protege tu cuenta de Google. Revisa que Google tenga la verificación en dos pasos activa en <code>myaccount.google.com/signinoptions/two-step-verification</code>, y entra siempre a Cloudflare con el botón de Google. Con eso puedes marcar este paso como hecho y saltarte los siguientes. Si igual quieres el código de Cloudflare, primero crea una contraseña: cierra sesión → en la página de login, <b>Forgot your password?</b> → tu Gmail → sigue el link del correo. {{criterio}}`,
+      `Ya dentro: ícono de tu perfil (arriba a la derecha) → <b>Profile</b> → pestaña <b>Authentication</b> → <b>Mobile App Authentication</b> → actívala [[Q-CF2FA]]. Cloudflare te pedirá tu contraseña de Cloudflare.`,
       `Escanea el QR con Google Authenticator (<b>+</b> → <b>Escanear un código QR</b>) y escribe en Cloudflare el número de 6 dígitos de la fila "Cloudflare".`,
       `Cloudflare te muestra códigos de respaldo (backup codes): selecciónalos y cópialos (Ctrl+C). Luego abre una pestaña nueva en Chrome, escribe <code>chrome://password-manager/passwords</code> en la barra de direcciones y presiona Enter. En el buscador de arriba escribe <b>cloudflare</b>. Si aparece, haz clic en esa fila (Windows te pide tu PIN) → <b>Editar</b>. Si no aparece, clic en <b>Agregar</b> → en Sitio escribe <code>cloudflare.com</code> y llena tu usuario y contraseña. Pega los códigos en el campo <b>Nota</b> (Ctrl+V) → <b>Guardar</b> [[F46]].`,
     ], why:`Cloudflare va a manejar tu hosting, y luego tu dominio, DNS y correo. Es la cuenta más crítica. {{criterio}}`,
-       done:`Cloudflare te pide el código al iniciar sesión.` } },
+       done:`Cloudflare te pide el código al iniciar sesión, o entras solo con Google y tu Google tiene verificación en dos pasos.` } },
   'S2.1': { start:{ kind:`copy`, label:`Copiar el comando`, text:`git --version`, then:`Tecla Windows → escribe <code>PowerShell</code> → Enter, pega el comando y presiona Enter.` },
     body:{ steps:[
       `Tecla Windows → escribe <code>PowerShell</code> → Enter.`,
