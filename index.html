@@ -3038,7 +3038,7 @@ function startRedirectAuth(){
   const st = Math.random().toString(36).slice(2) + Date.now().toString(36);
   try { sessionStorage.setItem(OAUTH_STATE_KEY, st); } catch(e){}
   const q = new URLSearchParams({
-    client_id: GOOGLE_CLIENT_ID, redirect_uri: location.origin + location.pathname,
+    client_id: GOOGLE_CLIENT_ID, redirect_uri: location.origin + location.pathname.replace(/index\.html$/, ''),
     response_type: 'token', scope: DRIVE_SCOPE, include_granted_scopes: 'true', state: st,
   });
   if (!state.drive.connected) q.set('prompt', 'consent');
