@@ -3404,6 +3404,11 @@ async function runStart(key){
     showToast(ok ? 'Prompt copiado: pégalo en Claude Code' : 'No pude copiar: ábrelo en "ver el prompt" y cópialo a mano');
     return;
   }
+  if (st.capture){
+    const ta = document.querySelector('[data-cap="' + st.capture + '"]');
+    if (ta && ta.value.trim()){ state.captures[st.capture] = ta.value.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 15); saveState(); }
+    if (!(state.captures[st.capture] || []).length && !state.drive.files[key]){ showToast('Primero escribe tus preguntas en el cuadro y toca "Guardar preguntas"'); return; }
+  }
   const existing = state.drive.files[key];
   if (existing && existing.url){ openSide(existing.url); return; }
   if (!driveConfigured()){
@@ -3441,7 +3446,7 @@ function startSub(key, st){
 function captureHtml(key, st){
   if (st.capture !== 'questions15') return '';
   const qs = state.captures.questions15 || [];
-  if (state.drive.files[key]) return `<div class="cap-done">Tus ${qs.length || 15} preguntas ya están en la hoja; si quieres cambiarlas, hazlo allí.</div>`;
+  if (state.drive.files[key]) return `<div class="cap-done">Tu hoja ya existe. Si en la columna "Pregunta" ves "Pregunta 1, Pregunta 2…", toca el botón, haz clic en la celda <b>D2</b> de la hoja y pega (Ctrl+V).${qs.length ? ` <button type="button" class="btn-ghost" data-cap-copy="questions15" style="margin-top:10px;">Copiar mis ${qs.length} preguntas para la hoja</button>` : ''}</div>`;
   return `<div class="cap">
     <label class="cap-l" for="cap-${key}">Tus 15 preguntas fijas, una por línea</label>
     <textarea id="cap-${key}" class="note-input cap-ta" data-cap="questions15" rows="5" placeholder="¿Qué agencia me ayuda a aparecer en ChatGPT en Perú?&#10;¿Quién hace auditorías de visibilidad en IA en Lima?">${escapeHtml(qs.join('\n'))}</textarea>
@@ -3491,9 +3496,16 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-start]');
   const w = e.target.closest('[data-why-start]');
   const cs = e.target.closest('[data-cap-save]');
-  if (!b && !w && !cs) return;
+  const cc = e.target.closest('[data-cap-copy]');
+  if (!b && !w && !cs && !cc) return;
   e.preventDefault();
   e.stopPropagation();
+  if (cc){
+    const qs = (state.captures[cc.getAttribute('data-cap-copy')] || []).filter(Boolean);
+    const col = []; qs.forEach(q => ENGINES.forEach(() => col.push(q)));
+    copyText(col.join('\n')).then(ok => showToast(ok ? 'Copiadas: pega en la celda D2 de la hoja (Ctrl+V)' : 'No pude copiar'));
+    return;
+  }
   if (b) runStart(b.getAttribute('data-start'));
   else if (w) openWhyStart(w);
   else saveCapture(cs.getAttribute('data-cap-save'));
