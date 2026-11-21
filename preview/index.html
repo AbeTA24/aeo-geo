@@ -1559,7 +1559,7 @@ const WEB_CONTENT = {
       `Si algo no te gusta (colores, luz), díselo a Claude Code para que ajuste el envoltorio y repite.`,
     ], extra:`<b>Alternativa gratis:</b> usa fotos propias tomadas con tu celular o tu DJI, con el mismo criterio de luz y encuadre. {{criterio}}`,
        done:`Tienes 2 imágenes coherentes.` } },
-  'S5.1': { start:{ kind:`copy`, label:`Copiar el prompt para crear el proyecto`, text:`Crea un proyecto Astro en esta misma carpeta (no en una subcarpeta) con npm create astro@latest, plantilla mínima, TypeScript. Conserva los archivos que ya están aquí (arquitectura.csv, marca.md, estilo-imagenes.md y la carpeta inspiracion). Explícame cada pregunta del instalador.`, then:`En Claude Code, revisa que la carpeta elegida sea <code>derenombre-web</code> (Documentos → Proyectos) → modo <b>Plan</b> → pega → aprueba → <b>Accept edits</b>.` },
+  'S5.1': { start:{ kind:`copy`, label:`Copiar el prompt para crear el proyecto`, text:`Crea un proyecto Astro en esta misma carpeta (no en una subcarpeta) con npm create astro@latest, plantilla mínima, TypeScript. Si ya existen arquitectura.csv, marca.md, estilo-imagenes.md o la carpeta inspiracion, consérvalos; si no existen, sigue igual. Explícame cada pregunta del instalador.`, then:`En Claude Code, revisa que la carpeta elegida sea <code>derenombre-web</code> (Documentos → Proyectos) → modo <b>Plan</b> → pega → aprueba → <b>Accept edits</b>.` },
     body:{ steps:[
       `Abre Claude Code con la carpeta <code>derenombre-web</code> (Documentos → Proyectos → derenombre-web), la misma de S2.4 donde ya están <code>arquitectura.csv</code> y <code>marca.md</code>. Debajo de la caja de texto debe decir <code>derenombre-web</code>; si dice otra, cámbiala ahí.`,
       `Modo <b>Plan</b>: pega el prompt de <b>Empieza aquí</b> [[F09]]. Pide crear el proyecto en esa misma carpeta, sin subcarpeta, y conservar tus archivos.`,
@@ -2527,7 +2527,7 @@ function costBadgeText(cost){
   let txt;
   if (cost.type === 'free') txt = 'S/ 0';
   else if (cost.type === 'included') txt = 'Incluido';
-  else if (cost.type === 'usage') txt = 'Pago por uso';
+  else if (cost.type === 'usage') txt = cost.mandatory === false ? 'S/ 0 o pago por uso' : 'Pago por uso';
   else if (cost.type === 'fixed') txt = fmtMoney(cost.amount, cost.currency) + (cost.period === 'month' ? '/mes' : '');
   else return '❓ costo';
   if (cost.status === 'nuance') txt += ' ⚠️';
@@ -3541,7 +3541,8 @@ function driveSectionHtml(){
 
 // Siguiente paso del proyecto web para "Hoy": desbloqueado, no opcional, S/ 0 primero.
 function nextWebStep(){
-  const tier = s => (s.cost.type === 'free' || s.cost.type === 'included') ? 0 : 1;
+  // Va al final solo lo que obliga a pagar; un paso con ruta gratis (como S3.1) sigue el orden del plan.
+  const tier = s => (s.cost.type === 'free' || s.cost.type === 'included' || s.cost.mandatory === false) ? 0 : 1;
   const c = WEB_STEP_IDS.filter(id => { const s = WEB_STEPS[id]; return !s.optional && !s.linked && webStatus(id) === 'available'; });
   c.sort((a, b) => tier(WEB_STEPS[a]) - tier(WEB_STEPS[b]) || WEB_STEP_IDS.indexOf(a) - WEB_STEP_IDS.indexOf(b));
   return c[0] || null;
